@@ -1,0 +1,234 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% Theorem environments in Polish
+\theoremstyle{definition}
+\newtheorem{definition}{Definicja}
+\newtheorem{notation}{Notacja}
+\newtheorem{observation}{Obserwacja}
+\newtheorem{proposition}{Propozycja}
+\newtheorem{theorem}{Twierdzenie}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Uwaga}
+
+% Shorthand commands
+\newcommand{\dG}[1]{d_{G}(#1)}
+\newcommand{\dGF}[1]{d_{G \setminus F}(#1)}
+\newcommand{\VF}{V[F]}
+\newcommand{\EE}[1]{E[#1]}
+\newcommand{\EP}{E_P}
+\newcommand{\VP}{V_P}
+
+\title{\textbf{Zbiory semi-rozcinające w grafach}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+% ============================================================
+% NOTATION 1
+% ============================================================
+\begin{notation}[Usuwanie krawędzi]\label{not:edge-removal}
+Niech $G = (V, E)$ będzie grafem oraz niech $F \subseteq E$. Przez $G \setminus F$ oznaczamy graf $(V, E \setminus F)$, tj.\ graf powstały z~$G$ przez usunięcie krawędzi ze zbioru~$F$.
+\end{notation}
+
+% ============================================================
+% NOTATION 2
+% ============================================================
+\begin{notation}[Ściąganie zbioru wierzchołków]\label{not:contraction}
+Niech $G = (V, E)$ będzie grafem oraz niech $W \subseteq V$. Przez $G / W$ oznaczamy graf $(V', E')$ powstały ze \emph{ściągnięcia} zbioru~$W$ do jednego wierzchołka~$w^*$, gdzie:
+\[
+  V' \coloneqq (V \setminus W) \cup \{w^*\},
+\]
+\[
+  E' \coloneqq \bigl\{ e \in E : e \notin \EE{W} \bigr\}
+    \;\cup\;
+    \bigl\{ w^* v : \exists\, w \in W,\; wv \in E,\; v \notin W \bigr\},
+\]
+przy czym $\EE{W}$ oznacza zbiór krawędzi o obu końcach w~$W$, a~$w^*$ jest nowym wierzchołkiem nienależącym do~$V$.
+\end{notation}
+
+% ============================================================
+% NOTATION 3
+% ============================================================
+\begin{notation}[Sąsiedztwo]\label{not:neighborhood}
+Niech $G = (V, E)$ będzie grafem oraz niech $v \in V$. Definiujemy:
+\[
+  N(v) \coloneqq \{ w \in V : vw \in E \}, \qquad
+  N[v] \coloneqq N(v) \cup \{v\}.
+\]
+\end{notation}
+
+% ============================================================
+% DEFINITION 1
+% ============================================================
+\begin{definition}[Zbiór semi-rozcinający]\label{def:semi-cutting}
+Niech $G = (V, E)$ będzie grafem. Mówimy, że zbiór krawędzi $F \subseteq E$ jest \emph{zbiorem semi-rozcinającym} (\emph{semi-cutting set}) dla zbioru wierzchołków $T \subseteq V$ w~grafie~$G$, jeśli
+\[
+  \forall\, u, w \in T,\; u \ne w \colon \quad
+  \dG{u, w} \;<\; \dGF{u, w},
+\]
+gdzie $\dG{u, w}$ oznacza odległość (długość najkrótszej ścieżki) między $u$ i~$w$ w~grafie~$G$, a~$\dGF{u, w}$ --- analogiczną odległość w~grafie $G \setminus F$.
+
+Innymi słowy, usunięcie krawędzi ze zbioru~$F$ \emph{ściśle zwiększa} odległość między każdą parą różnych wierzchołków z~$T$.
+\end{definition}
+
+% ============================================================
+% OBSERVATION 1
+% ============================================================
+\begin{observation}\label{obs:equiv}
+Niech $G = (V, E)$ będzie grafem, $T \subseteq V$ i~$F \subseteq E$. Wówczas $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$ wtedy i~tylko wtedy, gdy
+\[
+  \forall\, u, w \in T,\; u \ne w,\;
+  \forall\, P = (\VP, \EP) \text{ --- najkrótsza ścieżka } (u,w) \text{ w } G \colon
+  \quad \EP \cap F \neq \emptyset,
+\]
+tj.\ każda najkrótsza ścieżka łącząca dwa różne wierzchołki z~$T$ zawiera co najmniej jedną krawędź ze zbioru~$F$.
+\end{observation}
+
+\begin{proof}
+Wystarczy zauważyć, że warunek $\dG{u,w} < \dGF{u,w}$ jest równoważny temu, iż żadna najkrótsza ścieżka $(u,w)$-ścieżka w~$G$ nie przetrwa w~całości po usunięciu~$F$, co zachodzi dokładnie wtedy, gdy każda taka ścieżka zawiera krawędź z~$F$.
+\end{proof}
+
+% ============================================================
+% PROPOSITION 2
+% ============================================================
+\begin{proposition}\label{prop:contraction}
+Niech $G = (V, E)$ będzie grafem, $T \subseteq V$, $F \subseteq E$ i~niech $F$ będzie zbiorem semi-rozcinającym dla~$T$ w~$G$. Niech $t \in T \setminus \VF$ (tj.\ $t$ nie jest końcem żadnej krawędzi z~$F$) i~niech $t' \notin V$ będzie nowym wierzchołkiem. Rozważmy graf $G' \coloneqq G / N[t]$, w~którym zbiór $N[t]$ został ściągnięty do wierzchołka~$t'$, oraz zbiór $T' \coloneqq (T \setminus \{t\}) \cup \{t'\}$.
+
+Wówczas $F \cap E(G')$ jest zbiorem semi-rozcinającym dla~$T'$ w~$G'$.
+\end{proposition}
+
+\begin{proof}
+Rozpocznijmy od kluczowej obserwacji: żaden wierzchołek $u \in T \setminus \{t\}$ nie jest sąsiadem~$t$ w~$G$. Istotnie, gdyby $u \in T \cap N(t)$, to $\dG{t, u} = 1$ i~jedyną najkrótszą ścieżką $(t, u)$ byłaby krawędź $tu$. Z~Obserwacji~\ref{obs:equiv} wynikałoby, że $tu \in F$, co przeczy założeniu $t \notin \VF$. Stąd $T \setminus \{t\} \cap N(t) = \emptyset$, a~więc wszystkie wierzchołki $T \setminus \{t\}$ przetrwają ściągnięcie bez zmian, tj.\ $T \setminus \{t\} \subseteq V(G')$.
+
+Musimy wykazać, że dla dowolnych $u, w \in T'$ z $u \ne w$ oraz dowolnej najkrótszej ścieżki $P'$ z~$u$ do~$w$ w~$G'$ zachodzi $E_{P'} \cap F \neq \emptyset$. Rozważmy trzy przypadki.
+
+\medskip\noindent
+\textbf{Przypadek~I:} $w = t'$ \textbf{(lub symetrycznie} $u = t'$\textbf{).}
+
+Niech $u \in T' \setminus \{t'\}$ (a~więc $u \in T \setminus \{t\}$) i~niech $P' = (V_{P'}, E_{P'})$ będzie najkrótszą ścieżką z~$t'$ do~$u$ w~$G'$, o~długości
+\[
+  \|P'\| = d_{G'}(t', u).
+\]
+Ze ścieżki~$P'$ skonstruujemy ścieżkę~$P$ z~$t$ do~$u$ w~grafie~$G$. Pierwsza krawędź $P'$ prowadzi z~$t'$ do pewnego wierzchołka~$\bar{v} \notin N[t]$. W~grafie~$G$ istnieje wierzchołek $v \in N(t)$ taki, że $v\bar{v} \in E$ (z~definicji ściągnięcia). Definiujemy
+\[
+  P \coloneqq \bigl( V_{P'} \setminus \{t'\} \cup \{t, v\},\;
+    E_{P'} \setminus \{t'\bar{v}\} \cup \{tv, v\bar{v}\} \bigr).
+\]
+Ścieżka~$P$ powstaje z~$P'$ przez zastąpienie wierzchołka~$t'$ parą $t, v$ oraz krawędzi $t'\bar{v}$ parą krawędzi $tv, v\bar{v}$. Zatem
+\[
+  \|P\| = \|P'\| + 1.
+\]
+
+Wykażemy, że $P$ jest najkrótszą ścieżką z~$t$ do~$u$ w~$G$. Niech $R$ będzie dowolną ścieżką z~$t$ do~$u$ w~$G$. Ponieważ $t \in N[t]$, a~$u \notin N[t]$, ścieżka~$R$ musi opuścić~$N[t]$; pierwszy krok $R$ prowadzi z~$t$ do pewnego sąsiada w~$N(t) \subseteq N[t]$, więc co~najmniej jedna krawędź~$R$ łączy dwa wierzchołki wewnątrz~$N[t]$. Po ściągnięciu taka krawędź znika, stąd
+\[
+  \|R / N[t]\| \;\leq\; \|R\| - 1.
+\]
+Jednocześnie $R / N[t]$ jest ścieżką z~$t'$ do~$u$ w~$G'$, a~$P'$ jest najkrótszą taką ścieżką, więc $\|P'\| \leq \|R / N[t]\|$. Łącząc nierówności:
+\[
+  \|P\| = \|P'\| + 1 \;\leq\; \|R / N[t]\| + 1 \;\leq\; \|R\|.
+\]
+Ponieważ $R$ było dowolne, otrzymujemy $\|P\| = \dG{t, u}$.
+
+Skoro~$P$ jest najkrótszą ścieżką z~$t$ do~$u$ w~$G$ i~$t, u \in T$, z~Obserwacji~\ref{obs:equiv} wynika $\EP \cap F \neq \emptyset$. Ponadto krawędzie $tv$ i~$v\bar{v}$ są incydentne z~$t$ lub z~$v \in N(t)$; ponieważ $t \notin \VF$, żadna krawędź incydentna z~$t$ nie należy do~$F$. Krawędź $v\bar{v}$ natomiast leży w~$G'$ i~odpowiada krawędzi $t'\bar{v}$ z~$P'$. Zatem
+\[
+  E_{P'} \cap F \;\supseteq\; (\EP \cap F) \setminus \{tv\} \;\neq\; \emptyset.
+\]
+(Dokładniej: jedyną krawędzią z~$\EP \setminus E_{P'}$, która mogłaby \emph{nie} mieć odpowiednika w~$E_{P'}$, jest~$tv$, lecz $tv \notin F$.)
+
+\medskip\noindent
+\textbf{Przypadek~II\,a:} $t' \neq u$, $t' \neq w$ \textbf{i} $t' \notin V_{P'}$.
+
+Wówczas ścieżka~$P'$ nie przechodzi przez ściągnięty wierzchołek, a~zatem $V_{P'} \subseteq V$ i~$E_{P'} \subseteq E$, tj.\ $P'$ jest również ścieżką w~grafie~$G$.
+
+Niech $R$ będzie dowolną ścieżką z~$u$ do~$w$ w~$G$. Ściągnięcie nie wydłuża ścieżek, więc $\|R/N[t]\| \leq \|R\|$. Jednocześnie $\|P'\| \leq \|R/N[t]\|$ (bo $P'$ jest najkrótsza w~$G'$). Stąd $\|P'\| \leq \|R\|$ dla każdego~$R$, co daje $\|P'\| = \dG{u, w}$.
+
+Ponieważ $u, w \in T$ i~$P'$ jest najkrótszą ścieżką $(u, w)$ w~$G$, z~Obserwacji~\ref{obs:equiv} otrzymujemy $E_{P'} \cap F \neq \emptyset$.
+
+\medskip\noindent
+\textbf{Przypadek~II\,b:} $t' \neq u$, $t' \neq w$, \textbf{lecz} $t' \in V_{P'}$.
+
+Ścieżka~$P'$ przechodzi przez~$t'$. Podzielmy ją w~punkcie~$t'$:
+\[
+  P' = P'_a \cdot P'_b,
+\]
+gdzie $P'_a$ jest fragmentem ścieżki z~$w$ do~$t'$, a~$P'_b$ --- fragmentem z~$t'$ do~$u$ (lub odwrotnie). Ponieważ $P'$ jest najkrótszą ścieżką, oba fragmenty również są najkrótszymi ścieżkami w~$G'$:
+\[
+  \|P'_a\| = d_{G'}(w, t'), \qquad \|P'_b\| = d_{G'}(t', u).
+\]
+Fragment~$P'_a$ łączy wierzchołek $w \in T'$ z~wierzchołkiem $t' \in T'$, zatem na mocy Przypadku~I mamy $E_{P'_a} \cap F \neq \emptyset$. W~szczególności $E_{P'} \cap F \neq \emptyset$.
+
+\medskip
+We wszystkich przypadkach wykazaliśmy, że $E_{P'} \cap F \neq \emptyset$, co --- na mocy Obserwacji~\ref{obs:equiv} --- dowodzi, iż $F \cap E(G')$ jest zbiorem semi-rozcinającym dla~$T'$ w~$G'$.
+\end{proof}
+
+% ============================================================
+% THEOREM 1
+% ============================================================
+\begin{theorem}\label{thm:main}
+Niech $G = (V, E)$ będzie grafem, $T \subseteq V$ oraz $F \subseteq E$. Jeżeli $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$, to
+\[
+  |F| \;\geq\; |T| - 1.
+\]
+\end{theorem}
+
+\begin{proof}
+Dowód przeprowadzamy przez indukcję po parze $(|T|, |V|)$ z~porządkiem leksykograficznym.
+
+\medskip\noindent
+\textbf{Baza indukcji.} Jeżeli $|T| = 1$, to warunek semi-rozcinania jest spełniony w~sposób trywialny (brak par wierzchołków do rozdzielenia) i~nierówność $|F| \geq 0$ zachodzi oczywiście.
+
+\medskip\noindent
+\textbf{Krok indukcyjny.} Załóżmy, że $|T| \geq 2$. Rozróżnimy dwa przypadki.
+
+\medskip\noindent
+\textbf{Przypadek~I:} $T \cap \VF = \emptyset$ \textbf{(żaden wierzchołek z~$T$ nie jest incydentny z~krawędzią z~$F$).}
+
+Wybierzmy dowolny $t \in T$ i~niech $t' \notin V$ będzie nowym wierzchołkiem. Na mocy Propozycji~\ref{prop:contraction} zbiór $F' \coloneqq F \cap E(G')$ jest semi-rozcinający dla $T' \coloneqq (T \setminus \{t\}) \cup \{t'\}$ w~grafie $G' \coloneqq G / N[t]$.
+
+Zauważmy, że $|T'| = |T|$ (usunęliśmy~$t$ i~dodaliśmy~$t'$) oraz $|V(G')| < |V|$ (zbiór $N[t]$ zawiera co~najmniej wierzchołek~$t$, a~w~$G'$ został ściągnięty do jednego wierzchołka; ponieważ $|T| \geq 2$, istnieje sąsiad~$t$, więc $|N[t]| \geq 2$). Na mocy założenia indukcyjnego (para $(|T'|, |V(G')|)$ jest mniejsza leksykograficznie):
+\[
+  |F| \;\geq\; |F'| \;\geq\; |T'| - 1 \;=\; |T| - 1.
+\]
+
+\medskip\noindent
+\textbf{Przypadek~II:} $\exists\, t \in T \cap \VF$ \textbf{(pewien wierzchołek z~$T$ jest incydentny z~krawędzią z~$F$).}
+
+Niech $tx \in F$ będzie krawędzią incydentną z~$t$ (dla pewnego $x \in V$). Pokażemy, że $F^{-} \coloneqq F \setminus \{tx\}$ jest zbiorem semi-rozcinającym dla $T^{-} \coloneqq T \setminus \{t\}$ w~$G$.
+
+Niech $u, w \in T^{-}$ z~$u \ne w$ i~niech $P$ będzie najkrótszą ścieżką z~$u$ do~$w$ w~$G$. Ponieważ $u, w \in T$ i~$F$ jest semi-rozcinający dla~$T$, mamy $\EP \cap F \neq \emptyset$. Rozważmy dwa podprzypadki:
+\begin{itemize}
+  \item[\textbf{II\,a:}] $tx \notin \EP$. Wówczas $\EP \cap F^{-} = \EP \cap F \neq \emptyset$.
+  \item[\textbf{II\,b:}] $tx \in \EP$. Wówczas $t \in \VP$, więc ścieżkę~$P$ możemy podzielić w~punkcie~$t$:
+  \[
+    P = P_1 \cdot P_2,
+  \]
+  gdzie $P_1$ jest najkrótszą ścieżką z~$u$ do~$t$, a~$P_2$ --- z~$t$ do~$w$. Krawędź~$tx$ jest incydentna z~$t$, a~zatem $tx$ jest albo ostatnią krawędzią~$P_1$, albo pierwszą krawędzią~$P_2$ --- ale nie obie naraz (gdyż $u \ne w$, więc $P_1$ i~$P_2$ rozchodzą się z~$t$ w~różnych kierunkach).
+
+  Bez straty ogólności załóżmy, że $tx$ jest ostatnią krawędzią~$P_1$ (tj.\ $tx \in E_{P_1}$, $tx \notin E_{P_2}$). Ponieważ $t, w \in T$ i~$P_2$ jest najkrótszą ścieżką $(t, w)$ w~$G$, mamy $E_{P_2} \cap F \neq \emptyset$. Lecz $tx \notin E_{P_2}$, więc $E_{P_2} \cap F^{-} \neq \emptyset$, a~zatem $\EP \cap F^{-} \neq \emptyset$.
+\end{itemize}
+
+W~obu podprzypadkach $\EP \cap F^{-} \neq \emptyset$, co dowodzi, że $F^{-}$ jest zbiorem semi-rozcinającym dla~$T^{-}$ w~$G$. Stosując założenie indukcyjne (para $(|T^{-}|, |V|) = (|T|-1, |V|)$ jest mniejsza):
+\[
+  |F^{-}| \;\geq\; |T^{-}| - 1 \;=\; |T| - 2,
+\]
+skąd
+\[
+  |F| \;=\; |F^{-}| + 1 \;\geq\; (|T| - 2) + 1 \;=\; |T| - 1.
+\]
+
+\medskip
+W~obu przypadkach otrzymaliśmy $|F| \geq |T| - 1$, co kończy dowód.
+\end{proof}
+
+\end{document}
