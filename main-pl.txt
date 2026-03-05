@@ -47,7 +47,8 @@ W~niniejszym tekście dowodzimy, że zawsze $|F|\ge |T|-1$. Kluczowym krokiem je
 
 \section{Notacja i definicje}
 
-W całym tekście $G=(V,E)$ oznacza skończony graf nieskierowany. Nie zakładamy spójności grafu.
+W całym tekście $G=(V,E)$ oznacza skończony graf nieskierowany prosty: krawędzie utożsamiamy z~nieuporządkowanymi parami różnych
+wierzchołków. Nie zakładamy spójności grafu.
 Odległości traktujemy jako elementy zbioru $\mathbb{N}\cup\{\infty\}$ z~naturalnym porządkiem rozszerzonym o~$n<\infty$ dla
 każdego $n\in\mathbb{N}$.
 
@@ -127,8 +128,13 @@ dokładnie $\dist{G}{u}{w}$.
 
 \begin{proof}
 Weźmy dowolny spacer $P=(v_0,\dots,v_k)$ z~$u$ do~$w$. Jeżeli w~$P$ występuje powtórzenie wierzchołka, to istnieją
-indeksy $0\le i<j\le k$ takie, że $v_i=v_j$. Usuwając z~ciągu wierzchołki $(v_{i+1},\dots,v_j)$ otrzymujemy spacer z~$u$
-do~$w$ o~mniejszej długości. Powtarzając tę operację skończenie wiele razy, dostajemy spacer bez powtórzeń wierzchołków,
+indeksy $0\le i<j\le k$ takie, że $v_i=v_j$. Rozważmy ciąg
+\[
+  P'\coloneqq (v_0,\dots,v_i,v_{j+1},\dots,v_k),
+\]
+gdzie w przypadku $j=k$ ostatni fragment jest pusty. Jeżeli $j<k$, to ponieważ $v_i=v_j$ oraz $v_jv_{j+1}\in E$, mamy także
+$v_iv_{j+1}\in E$. Zatem w~każdym przypadku $P'$ jest spacerem z~$u$ do~$w$ o~mniejszej długości niż $P$.
+Powtarzając tę operację skończenie wiele razy, dostajemy spacer bez powtórzeń wierzchołków,
 czyli ścieżkę, o~długości nie większej od $\len{P}$. Druga część wynika z~definicji odległości jako minimum po długościach
 spacerów.
 \end{proof}
@@ -156,7 +162,8 @@ krawędź ze zbioru $F$.
 Ustalmy różne $u,w\in T$.
 
 (\,$\Rightarrow$\,) Z~Definicji~\ref{def:semi-cut} mamy $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}\le\infty$, a~zatem
-$\dist{G}{u}{w}<\infty$. Z~Lematu~\ref{lem:walk-to-path} wybierzmy ścieżkę $P$ z~$u$ do~$w$ o~długości $\dist{G}{u}{w}$.
+$\dist{G}{u}{w}<\infty$. Z~Lematu~\ref{lem:walk-to-path} wynika istnienie ścieżki z~$u$ do~$w$ o~długości $\dist{G}{u}{w}$; niech $P$
+będzie dowolną taką ścieżką.
 Gdyby $P$ nie zawierała żadnej krawędzi z~$F$, to byłaby również ścieżką w~$G\setminus F$ o~tej samej długości, co dawałoby
 $\dist{G\setminus F}{u}{w}\le \dist{G}{u}{w}$, sprzecznie z~Definicją~\ref{def:semi-cut}.
 
@@ -164,8 +171,8 @@ $\dist{G\setminus F}{u}{w}\le \dist{G}{u}{w}$, sprzecznie z~Definicją~\ref{def:
 zawiera krawędź z~$F$. Jeżeli w~$G\setminus F$ nie istnieje żadna ścieżka z~$u$ do~$w$, to $\dist{G\setminus F}{u}{w}=\infty$ i~
 nierówność $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ jest spełniona. W przeciwnym razie mamy $\dist{G\setminus F}{u}{w}<\infty$ i~
 z~Lematu~\ref{lem:walk-to-path} wybierzmy ścieżkę $Q$ z~$u$ do~$w$ w~$G\setminus F$ o~długości $\len{Q}=\dist{G\setminus F}{u}{w}$.
-Jest ona jednocześnie ścieżką w~$G$ i~z definicji nie zawiera krawędzi z~$F$, więc nie może mieć długości
-$\dist{G}{u}{w}$. Zatem $\len{Q}>\dist{G}{u}{w}$, a~ponieważ $\dist{G\setminus F}{u}{w}=\len{Q}$, dostajemy
+Jest ona jednocześnie ścieżką w~$G$, a~zatem $\len{Q}\ge \dist{G}{u}{w}$. Ponadto z~definicji nie zawiera krawędzi z~$F$, więc nie może
+mieć długości $\dist{G}{u}{w}$. Otrzymujemy $\len{Q}>\dist{G}{u}{w}$, a~ponieważ $\dist{G\setminus F}{u}{w}=\len{Q}$, dostajemy
 $\dist{G\setminus F}{u}{w}>\dist{G}{u}{w}$. Ponieważ $u,w$ były dowolne, $F$ spełnia Definicję~\ref{def:semi-cut}.
 \end{proof}
 
@@ -212,13 +219,14 @@ oznaczmy go przez $z$. Z~Definicji~\ref{def:semi-cut} otrzymujemy $\dist{G}{t}{z
 Stosując Lemat~\ref{lem:projection-walk} do tego spaceru dla $W=N[t]$ dostajemy spacer z~$t'$ do~$z$ w~$G'$, a~następnie z
 Lematu~\ref{lem:walk-to-path} — ścieżkę z~$t'$ do~$z$ w~$G'$. W szczególności $\dist{G'}{t'}{z}<\infty$.
 
-Ustalmy teraz różne $u,w\in T'$. Ponieważ $\dist{G'}{u}{w}<\infty$, z~Lematu~\ref{lem:walk-to-path} wybierzmy ścieżkę $P'$ z~$u$ do~$w$
-w~$G'$ o~długości $\len{P'}=\dist{G'}{u}{w}$.
+Ustalmy teraz różne $u,w\in T'$. Ponieważ $\dist{G'}{u}{w}<\infty$, z~Lematu~\ref{lem:walk-to-path} wynika istnienie ścieżki z~$u$ do~$w$
+w~$G'$ o~długości $\dist{G'}{u}{w}$; niech $P'$ będzie dowolną taką ścieżką.
 Pokażemy, że $E(P')\cap F'\neq\emptyset$.
 
 \medskip\noindent
 \textbf{Przypadek 1: $t'\notin V(P')$.}
-Wtedy $P'$ jest również ścieżką w~$G$. Gdyby w~$G$ istniał spacer $Q$ z~$u$ do~$w$ o~długości mniejszej niż $\len{P'}$,
+Wtedy $V(P')\subseteq V\setminus N[t]$, a~z definicji $E(G')$ wynika $E(P')\subseteq E$. Zatem $P'$ jest również ścieżką w~$G$.
+Gdyby w~$G$ istniał spacer $Q$ z~$u$ do~$w$ o~długości mniejszej niż $\len{P'}$,
 to na mocy Lematu~\ref{lem:projection-walk} istniałby w~$G'$ spacer z~$u$ do~$w$ o~długości nie większej niż $\len{Q}<\len{P'}$,
 co przeczyłoby wyborowi $P'$. Ponieważ $P'$ jest również spacerem w~$G$, otrzymujemy $\len{P'}=\dist{G}{u}{w}$.
 Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} wynika, że $P'$ zawiera pewną krawędź $e\in F$.
@@ -252,8 +260,9 @@ obraz w~$G'$ jest zdefiniowany. W szczególności $e/N[t]$ jest krawędzią ści
 
 Jeżeli natomiast $u\neq t'$, $w\neq t'$ oraz $t'$ jest wierzchołkiem wewnętrznym ścieżki $P'$, to $P'$ dzieli się na konkatenację
 $P'=P'_1\cdot P'_2$, gdzie $P'_1$ łączy $u$ z~$t'$, a~$P'_2$ łączy $t'$ z~$w$. Z~Lematu~\ref{lem:subpath} wynika, że obie podścieżki
-są najkrótsze między swoimi końcami. Zastosowanie poprzedniego akapitu do par $(u,t')$ i~$(t',w)$ daje $E(P'_1)\cap F'\neq\emptyset$ oraz
-$E(P'_2)\cap F'\neq\emptyset$, a~więc $E(P')\cap F'\neq\emptyset$.
+są najkrótsze między swoimi końcami. Stosujemy powyższy argument do ścieżki $P'_1$: jeżeli $P'_1$ nie zaczyna się w~$t'$, odwróćmy
+kolejność wierzchołków na $P'_1$. Otrzymujemy $E(P'_1)\cap F'\neq\emptyset$. Następnie stosujemy ten sam argument do $P'_2$ i dostajemy
+$E(P'_2)\cap F'\neq\emptyset$. W konsekwencji $E(P')\cap F'\neq\emptyset$.
 \medskip
 
 W~każdym przypadku wykazaliśmy $E(P')\cap F'\neq\emptyset$. Z~Obserwacji~\ref{obs:shortest-paths} wynika więc, że $F'$ jest zbiorem
@@ -301,12 +310,14 @@ Wybierzmy $t\in T\cap V[F]$ oraz krawędź $e\in F$ incydentną z~$t$. Zdefiniuj
 $F^-\coloneqq F\setminus\{e\}$. Pokażemy, że $F^-$ jest zbiorem semi-rozcinającym dla~$T^-$ w~$G$.
 
 Weźmy dowolne różne $u,w\in T^-$. Ponieważ $u,w\in T$, z~Definicji~\ref{def:semi-cut} otrzymujemy $\dist{G}{u}{w}<\infty$.
-Z~Lematu~\ref{lem:walk-to-path} wybierzmy dowolną ścieżkę $P$ z~$u$ do~$w$ w~$G$ o~długości $\len{P}=\dist{G}{u}{w}$.
+Z~Lematu~\ref{lem:walk-to-path} wynika istnienie ścieżki z~$u$ do~$w$ w~$G$ o~długości $\dist{G}{u}{w}$; niech $P$ będzie dowolną taką
+ścieżką.
 Z~Obserwacji~\ref{obs:shortest-paths} wynika, że $P$ zawiera pewną krawędź ze zbioru $F$.
 Jeżeli $e\notin E(P)$, to mamy od razu $E(P)\cap F^-\neq\emptyset$. Załóżmy więc, że $e\in E(P)$. Wtedy $t$ leży na~$P$ i~ścieżka
 $P$ rozkłada się na konkatenację $P=P_u\cdot P_w$, gdzie $P_u$ łączy $u$ z~$t$, a~$P_w$ łączy $t$ z~$w$. Z~Lematu~\ref{lem:subpath}
-wynika, że $\len{P_u}=\dist{G}{u}{t}$ oraz $\len{P_w}=\dist{G}{t}{w}$. Krawędź $e$ jest incydentna z~$t$, więc należy dokładnie do jednej z
-podścieżek $P_u$ i~$P_w$, a~ponadto $E(P)=E(P_u)\,\dot\cup\,E(P_w)$. Jeżeli $e\notin E(P_w)$, to ponieważ $t,w\in T$, z~Obserwacji~\ref{obs:shortest-paths}
+wynika, że $\len{P_u}=\dist{G}{u}{t}$ oraz $\len{P_w}=\dist{G}{t}{w}$. Ponieważ $P$ jest ścieżką, podścieżki $P_u$ i~$P_w$ mają wspólny
+jedynie wierzchołek $t$, a~zatem $E(P_u)\cap E(P_w)=\emptyset$ oraz $E(P)=E(P_u)\,\dot\cup\,E(P_w)$. Krawędź $e$ jest incydentna z~$t$,
+więc należy dokładnie do jednej z~podścieżek $P_u$ i~$P_w$. Jeżeli $e\notin E(P_w)$, to ponieważ $t,w\in T$, z~Obserwacji~\ref{obs:shortest-paths}
 wynika $E(P_w)\cap F\neq\emptyset$, a~zatem $E(P_w)\cap F^-\neq\emptyset$, co implikuje $E(P)\cap F^-\neq\emptyset$. Jeżeli natomiast
 $e\notin E(P_u)$, to ponieważ $u,t\in T$, dostajemy $E(P_u)\cap F^-\neq\emptyset$, więc $E(P)\cap F^-\neq\emptyset$.
 
