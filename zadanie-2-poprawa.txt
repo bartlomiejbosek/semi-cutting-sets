@@ -1,0 +1,90 @@
+Przeczytaj uważnie `main-pl.tex` w formacie LaTeX. Plik ten powinien prezentować formalny dowód strukturalny z teorii grafów dotyczący zbiorów na wpół-tnących (semi-cutting sets), a w szczególności dowód głównego twierdzenia wykazującego, że dla dowolnego grafu, jeśli $F$ jest zbiorem na wpół-tnącym dla zbioru wierzchołków $T$, to zachodzi nierówność $|F| \ge |T| - 1$.
+
+**Nazwa problemu:** Własności strukturalne zbiorów na wpół-tnących (Semi-cutting sets properties).
+
+1. Pojęcia i Definicje 
+
+* 
+**Graf bazowy:** Operujemy na statycznym grafie $G = (V,E)$.
+
+
+* 
+**Zbiór na wpół-tnący:** Zbiór krawędzi $F \subseteq E$ dla zbioru wierzchołków $T \subseteq V$, zdefiniowany poprzez ścisłe własności dystansów w grafie.
+
+
+* 
+**Operacje na grafie:** Formalnie zdefiniowane operacje usuwania krawędzi $G \setminus F$ oraz ściągania otoczenia wierzchołka $G/N[t] \to t'$.
+
+
+
+2. Główne Twierdzenia i Lematy 
+
+Dowód musi zawierać w pełni poprawną strukturę logiczną następujących elementów:
+
+* 
+**Obserwacja:** Alternatywna definicja oparta na przecinaniu najkrótszych ścieżek.
+
+
+* 
+**Propozycja:** Udowodnienie, że właściwość zbioru na wpół-tnącego zostaje zachowana po operacji ściągnięcia.
+
+
+* **Twierdzenie:** Wykazanie ograniczenia dolnego $|F| \ge |T| - 1$ poprzez poprawnie sformułowaną indukcję.
+
+
+
+---
+
+Popraw plik `main-pl.tex`, tak aby nowa poprawiona wersja artykułu spełniała poniższe wytyczne:
+
+1. formalizm matematyczny 
+
+
+2. kompletność dowodów 
+
+
+3. przejrzystość prezentacji 
+
+
+4. nie pisanie o zbędnych rzeczach.
+
+
+5. Praca nie powinna odwoływać się do starszych wersji tego tekstu! 
+
+
+6. W pracy absolutnie nie powinno być odwołań bez jasnych cytowań. Sformułowania "oczywiste jest", "zakładamy, że z własności ścieżek wynika..." są absolutnie zabronione. Albo powinna być kompletna referencja do podręcznika, albo zaprezentowany pełen argument.
+
+
+7. Praca powinna mieć konkretną strukturę:
+A) Ścisłe wprowadzenie notacji: definicje zbioru, operacji na grafach.
+B) Lematy i propozycje pomocnicze wraz z ich kompletnymi dowodami.
+C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem indukcyjnym.
+
+
+8. Praca powinna być czytelna i przejrzysta.
+
+
+9. To ma wyglądać jak profesjonalny artykuł podobny do tych, które są publikowane na poważnych konferencjach matematycznych. A nie jak jakiś chaotyczny raport!!!!! 
+
+
+10. Niewolno nadmiernie używać wylistowań.
+
+
+11. ABSOLUTNIE NIE WOLNO DOKŁADAĆ DODATKOWYCH ZAŁOŻEŃ DOTYCZĄCYCH STRUKTURY GRAFU (np. spójność grafu, planarność)!!!!!!!!!!!!!!!! NIEDOPUSZCZALNE JEST NA PRZYKŁAD: "zakładamy bez straty ogólności, że $G$ jest spójny, co ułatwia analizę ścieżek".
+
+
+12. Nie wprowadzamy absolutnie żadnych pojęć algorytmicznych ani struktur danych. To ma być czysty dowód matematyczny.
+
+
+13. Nie wolno prezentować żadnych tabelek.
+
+
+14. Tekst powinien być po polsku (aby zachować spójność ze źródłowymi notatkami i wcześniejszymi ustaleniami).
+
+
+15. Dla pomocy w plikach dowod-1.jpg oraz dowod-2.jpg jest rozpisany cały dowód w pełni formalnie.
+
+
+16. Dla pomocy w pliku main-lluis.pdf jest zaprezentowany troche inny dowód tego samego.
+
+---
