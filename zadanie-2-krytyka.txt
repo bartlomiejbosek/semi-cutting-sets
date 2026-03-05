@@ -1,0 +1,78 @@
+Przeczytaj uważnie zaimportowany dołączony plik proof-en.tex w formacie LaTeX. Plik proof-en.tex powinien prezentować formalny dowód strukturalny z teorii grafów dotyczący zbiorów na wpół-tnących (semi-cutting sets), a w szczególności dowód głównego twierdzenia wykazującego, że dla dowolnego grafu, jeśli $F$ jest zbiorem na wpół-tnącym dla zbioru wierzchołków $T$, to zachodzi nierówność $|F| \ge |T| - 1$.
+Dla pełnego zrozumienia podaję także starsze wersje tego dowodu (inne pliki LaTeX) jak i przytaczaną literaturę (plik PDF) oraz inne pomocne pliki (format txt).
+
+-----------------------------------------------------------------------------------------
+
+**Nazwa problemu:** Własności strukturalne zbiorów na wpół-tnących (Semi-cutting sets properties).
+
+### 1. Pojęcia i Definicje
+
+* **Graf bazowy:** Operujemy na statycznym grafie $G = (V,E)$.
+* **Zbiór na wpół-tnący:** Zbiór krawędzi $F \subseteq E$ dla zbioru wierzchołków $T \subseteq V$, zdefiniowany poprzez ścisłe własności dystansów $d_G(w,u)$ w grafie po usunięciu $F$.
+* **Operacje na grafie:** Formalnie zdefiniowane operacje usuwania krawędzi $G \setminus F$ oraz ściągania otoczenia wierzchołka $G/N[t] \to t'$.
+
+### 2. Główne Twierdzenia i Lematy
+
+Dowód musi zawierać w pełni poprawną strukturę logiczną następujących elementów:
+
+* **Obserwacja:** Alternatywna definicja oparta na przecinaniu najkrótszych ścieżek w grafie.
+* **Propozycja:** Udowodnienie, że właściwość zbioru na wpół-tnącego zostaje zachowana po operacji ściągnięcia otoczenia wierzchołka.
+* **Twierdzenie:** Wykazanie ograniczenia dolnego $|F| \ge |T| - 1$ poprzez poprawnie sformułowaną i rygorystycznie przeprowadzoną indukcję matematyczną ze względu na parametry $(|T|, |V|)$, ze szczegółowym podziałem na przypadki.
+
+-----------------------------------------------------------------------------------------------------------
+
+Oceń plik main-pl.tex, czy jest najlepiej spisanym artykułem pod względem:
+
+1. formalizm matematyczny 
+
+
+2. kompletność dowodów (szczególnie ciągłość logiczna w rozgałęzieniach i przypadkach w dowodzie Propozycji 2 i Twierdzenia 1) 
+
+
+3. przejrzystość prezentacji 
+
+
+4. nie pisanie o zbędnych rzeczach.
+
+
+5. Praca nie powinna odwoływać się do starszych wersji tego tekstu! 
+
+
+6. W pracy absolutnie nie powinno być odwołań bez jasnych cytowań. Sformułowania "oczywiste jest", "zakładamy, że z własności ścieżek wynika...". To jest absolutnie zabronione. Albo powinna być kompletna referencja do istniejącego podręcznika/artykułu albo zaprezentowany pełen argument (np. przy szacowaniu długości ścieżki w rzucie na graf ściągnięty).
+
+
+7. Praca powinna mieć konkretną strukturę:
+A) Ścisłe wprowadzenie notacji: definicje zbioru, operacji na grafach (ściąganie, otoczenia).
+B) Lematy i propozycje pomocnicze wraz z ich kompletnymi, sformalizowanymi dowodami.
+C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem indukcyjnym.
+
+
+8. Praca powinna być czytelna i przejrzysta 
+
+
+9. To ma wyglądać jak profesjonalny artykuł matematyczny podobny do tych, które są publikowane na takich konferencjach jak "Symposium on Foundations of Computer Science", "Symposium on Theory of Computing", "Symposium on Discrete Algorithms". A nie jak jakiś chaotyczny raport!!!!! 
+
+
+10. Niewolno nadmiernie używać wylistowań.
+
+
+11. ABSOLUTNIE NIE WOLNO DOKŁADAĆ DODATKOWYCH ZAŁOŻEŃ DOTYCZĄCYCH STRUKTURY GRAFU (np. spójność grafu, planarność)!!!!!!!!!!!!!!!! NIEDOPUSZCZALNE JEST NA PRZYKŁAD: "zakładamy bez straty ogólności, że $G$ jest spójny, co ułatwia analizę ścieżek".
+
+
+12. Nie wprowadzamy absolutnie żadnych pojęć algorytmicznych ani struktur danych. To ma być czysty dowód matematyczny, bez wzmianek o złożoności czasowej, amortyzacji czy procedurach.
+13. Nie wolno prezentować żadnych tabelek.
+
+
+14. Tekst powinien być po angielsku.
+
+
+15. Nie musisz szczegółowo wyprowadzać najbardziej elementarnych własności rzutowania ścieżek przy operacji ściągania wierzchołków - wystarczy precyzyjne stwierdzenie odpowiedniego wniosku logicznego z odwołaniem.
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+Oceń go bardzo ostro.
+Znajdź wszystkie błędy, niedoróbki, braki, nieścisłości i luki logiczne w przejściach matematycznych.
+
+Absolutnie nie prezentuj nowej wersji!!!
