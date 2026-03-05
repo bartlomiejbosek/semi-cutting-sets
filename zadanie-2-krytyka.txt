@@ -1,7 +1,7 @@
 Przeczytaj uważnie zaimportowany dołączony plik main-pl.txt w formacie LaTeX. Plik main-pl.txt powinien prezentować formalny dowód strukturalny z teorii grafów dotyczący zbiorów na wpół-tnących (semi-cutting sets), a w szczególności dowód głównego twierdzenia wykazującego, że dla dowolnego grafu, jeśli $F$ jest zbiorem na wpół-tnącym dla zbioru wierzchołków $T$, to zachodzi nierówność $|F| \ge |T| - 1$.
 Dla pełnego zrozumienia podaję także starsze wersje tego dowodu (inne pliki LaTeX) jak i przytaczaną literaturę (plik PDF) oraz inne pomocne pliki (format txt).
 
------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 **Nazwa problemu:** Własności strukturalne zbiorów na wpół-tnących (Semi-cutting sets properties).
 
