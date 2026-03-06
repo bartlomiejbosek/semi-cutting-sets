@@ -24,7 +24,7 @@
 \newcommand{\len}[1]{\lVert #1 \rVert}
 \newcommand{\dist}[3]{d_{#1}(#2,#3)}
 
-\title{\textbf{O rozmiarze zbiorów semi-rozcinających w grafach}}
+\title{\textbf{O rozmiarze zbiorów na wpół-tnących w grafach}}
 \author{}
 \date{}
 
@@ -33,10 +33,10 @@
 
 \begin{abstract}
 Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym, $T\subseteq V$ oraz $F\subseteq E$. Zakładamy, że po usunięciu
-krawędzi z~$F$ odległość między każdą parą różnych wierzchołków z~$T$ ściśle rośnie. W pracy podajemy samowystarczalny dowód
-nierówności $|F|\ge |T|-1$. Dowód składa się z~trzech kroków. Najpierw zapisujemy warunek semi-rozcinania w~języku przecinania
-najkrótszych ścieżek. Następnie dowodzimy, że własność ta zachowuje się przy ściąganiu domkniętego sąsiedztwa terminala
-nieincydentnego z~$F$. Na końcu stosujemy indukcję po parze $(|T|,|V|)$ w~porządku leksykograficznym.
+krawędzi z~$F$ odległość między każdą parą różnych wierzchołków z~$T$ ściśle rośnie. Udowadniamy, że wówczas
+$|F|\ge |T|-1$. Argument jest samowystarczalny: opiera się na charakteryzacji zbiorów na wpół-tnących przez przecinanie
+wszystkich ścieżek najkrótszych, na lemacie zachowującym tę własność przy ściąganiu domkniętego sąsiedztwa odpowiedniego
+terminala oraz na indukcji leksykograficznej po parze $(|T|,|V|)$.
 \end{abstract}
 
 \section{Wprowadzenie}
@@ -45,16 +45,19 @@ Rozpatrujemy następujący problem strukturalny. Dany jest graf $G=(V,E)$, zbió
 zbiór krawędzi $F\subseteq E$. Interesuje nas sytuacja, w~której usunięcie $F$ powoduje ścisły wzrost odległości między każdą
 parą różnych wierzchołków z~$T$. Celem jest wyznaczenie uniwersalnego dolnego ograniczenia na rozmiar takiego zbioru krawędzi.
 Główny wynik stwierdza, że zawsze zachodzi nierówność $|F|\ge |T|-1$. Dowód nie zakłada żadnych dodatkowych własności grafu,
-w~szczególności nie zakładamy spójności. Rdzeń argumentu stanowią dwa fakty: charakteryzacja własności semi-rozcinania przez
-przecinanie wszystkich ścieżek najkrótszych oraz zachowanie tej własności przy ściąganiu domkniętego sąsiedztwa terminala
-nieincydentnego z~rozważanym zbiorem krawędzi.
+w~szczególności nie zakładamy spójności. Rdzeń argumentu stanowią dwa fakty: charakteryzacja własności bycia zbiorem na
+wpół-tnącym przez przecinanie wszystkich ścieżek najkrótszych oraz zachowanie tej własności przy ściąganiu domkniętego sąsiedztwa terminala
+nieincydentnego z~rozważanym zbiorem krawędzi. Standardowe pojęcia teorii grafów stosujemy w~znaczeniu klasycznym; dla wygody
+czytelnika zapisujemy jednak wszystkie definicje używane później. Jako ogólne tło można przyjąć na przykład podręcznik
+\cite{diestel}. W~Sekcji~2 ustalamy notację i~operacje na grafach, w~Sekcji~3 dowodzimy lematy pomocnicze, a~w~Sekcji~4
+przeprowadzamy dowód twierdzenia głównego.
 
 \section{Notacja i definicje}
 
-Od tego miejsca $G=(V,E)$ oznacza skończony graf nieskierowany prosty. Każdą krawędź utożsamiamy z~dwuelementowym podzbiorem
-zbioru $V$. Jeżeli $e\in E$ oraz $v\in e$, to mówimy, że $v$ jest końcem krawędzi $e$. Odległości traktujemy jako elementy zbioru
-$\mathbb{N}_0\cup\{\infty\}$, gdzie $\mathbb{N}_0=\{0,1,2,\dots\}$, z~naturalnym porządkiem rozszerzonym o~relacje
-$n<\infty$ dla każdego $n\in\mathbb{N}_0$.
+Od tego miejsca, z~wyjątkiem osobno oznaczonych redukcji, przez $G=(V,E)$ będziemy rozumieli skończony graf nieskierowany
+prosty. Każdą krawędź utożsamiamy z~dwuelementowym podzbiorem zbioru $V$. Jeżeli $e\in E$ oraz $v\in e$, to mówimy, że $v$
+jest końcem krawędzi $e$. Odległości traktujemy jako elementy zbioru $\mathbb{N}_0\cup\{\infty\}$, gdzie
+$\mathbb{N}_0=\{0,1,2,\dots\}$, z~naturalnym porządkiem rozszerzonym o~relacje $n<\infty$ dla każdego $n\in\mathbb{N}_0$.
 
 \begin{definition}[Spacery, ścieżki i odległość]\label{def:paths-distance}
 Niech $u,w\in V$. Spacerem z~$u$ do~$w$ nazywamy ciąg wierzchołków
@@ -70,6 +73,11 @@ $P=(v_0,\dots,v_k)$ oznaczamy
   V(P)\coloneqq \{v_0,\dots,v_k\},
   \qquad
   E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: i=1,\dots,k\bigr\}.
+\]
+
+Jeżeli $P=(v_0,\dots,v_k)$ oraz $Q=(w_0,\dots,w_\ell)$ są spacerami takimi, że $v_k=w_0$, to ich konkatenację definiujemy przez
+\[
+  P\cdot Q\coloneqq (v_0,\dots,v_k,w_1,\dots,w_\ell).
 \]
 
 Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje; w przeciwnym
@@ -88,23 +96,6 @@ Jeżeli $v\in V$, to jego otoczenie i~domknięte otoczenie oznaczamy odpowiednio
   N[v]\coloneqq N(v)\cup\{v\}.
 \]
 \end{notation}
-
-Choć od tego miejsca pracujemy na grafach prostych, nie tracimy w~ten sposób ogólności. Jeżeli $H$ jest dowolnym skończonym
-grafem nieskierowanym, również z~pętlami i~krawędziami równoległymi, to oznaczmy przez $H^{\mathrm s}$ graf prosty otrzymany
-z~$H$ przez usunięcie wszystkich pętli i~zastąpienie każdej niepustej klasy krawędzi równoległych pojedynczą krawędzią.
-Dla $F\subseteq E(H)$ definiujemy $F^{\mathrm s}\subseteq E(H^{\mathrm s})$ jako zbiór tych krawędzi $uv\in E(H^{\mathrm s})$,
-dla których każda krawędź grafu $H$ o~końcach $u$ i~$v$ należy do~$F$. Wtedy dla każdych wierzchołków $u,w$ zachodzi
-\[
-  \dist{H}{u}{w}=\dist{H^{\mathrm s}}{u}{w}
-  \qquad\text{oraz}\qquad
-  \dist{H\setminus F}{u}{w}=\dist{H^{\mathrm s}\setminus F^{\mathrm s}}{u}{w},
-\]
-ponieważ pętle nie występują na ścieżkach między różnymi wierzchołkami, a klasa krawędzi równoległych wpływa na odległości wyłącznie
-przez informację, czy po usunięciu $F$ pozostaje w~niej przynajmniej jedna krawędź. W~szczególności, jeśli $F$ jest zbiorem
-semi-rozcinającym dla~$T$ w~$H$, to $F^{\mathrm s}$ jest zbiorem semi-rozcinającym dla~$T$ w~$H^{\mathrm s}$. Ponadto
-$|F^{\mathrm s}|\le |F|$, gdyż z~każdej krawędzi $uv\in F^{\mathrm s}$ można wybrać jedną krawędź grafu $H$ o~końcach $u$ i~$v$;
-otrzymujemy w~ten sposób injekcję $F^{\mathrm s}\to F$. Zatem dowód przeprowadzony poniżej dla grafów prostych implikuje twierdzenie
-dla wszystkich grafów skończonych.
 
 \begin{definition}[Ściąganie zbioru wierzchołków]\label{def:contraction}
 Niech $W\subseteq V$ oraz niech $w^\ast\notin V$ będzie nowym wierzchołkiem. Definiujemy odwzorowanie
@@ -129,22 +120,61 @@ Jeżeli $e=\{x,y\}\in E$ oraz $\pi_W(x)\neq \pi_W(y)$, to obraz tej krawędzi oz
 \]
 Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
 \[
-  F/W\coloneqq \{e/W:\ e\in F,\ e/W\in E'\}\subseteq E'.
+  F/W\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in F,\ \pi_W(x)\neq \pi_W(y)\bigr\}\subseteq E'.
 \]
-Odwzorowanie $e\mapsto e/W$, określone na zbiorze tych krawędzi z~$F$, które mają co najwyżej jeden koniec w~$W$, jest surjekcją
-na $F/W$. W~szczególności
+Niech
+\[
+  F_{\mathrm{ext}}\coloneqq \{e\in F:\ e \text{ ma co najwyżej jeden koniec w } W\}.
+\]
+Odwzorowanie $e\mapsto e/W$ jest dobrze określone na zbiorze $F_{\mathrm{ext}}$ i~jest surjekcją na $F/W$. W~szczególności
 \[
   |F/W|\le |F|.
 \]
 \end{definition}
 
-\begin{definition}[Zbiór semi-rozcinający]\label{def:semi-cut}
-Niech $T\subseteq V$. Mówimy, że $F\subseteq E$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$, jeżeli dla każdej pary różnych
+\begin{definition}[Zbiór na wpół-tnący]\label{def:semi-cut}
+Niech $T\subseteq V$. Mówimy, że $F\subseteq E$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, jeżeli dla każdej pary różnych
 wierzchołków $u,w\in T$ zachodzi
 \[
   \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}.
 \]
 \end{definition}
+
+\begin{lemma}[Redukcja do grafów prostych]\label{lem:simple-reduction}
+Niech $H$ będzie dowolnym skończonym grafem nieskierowanym, również z~pętlami i~krawędziami równoległymi, oraz niech
+$T\subseteq V(H)$ i~$F\subseteq E(H)$. Oznaczmy przez $H^{\mathrm s}$ graf prosty otrzymany z~$H$ przez usunięcie wszystkich pętli
+i~zastąpienie każdej niepustej klasy krawędzi równoległych pojedynczą krawędzią. Dla $F\subseteq E(H)$ definiujemy
+$F^{\mathrm s}\subseteq E(H^{\mathrm s})$ jako zbiór tych krawędzi $uv\in E(H^{\mathrm s})$, dla których każda krawędź grafu $H$
+o~końcach $u$ i~$v$ należy do~$F$. Wtedy zachodzą następujące własności:
+\begin{enumerate}
+  \item dla każdych wierzchołków $u,w\in V(H)$ mamy
+  \[
+    \dist{H}{u}{w}=\dist{H^{\mathrm s}}{u}{w}
+    \qquad\text{oraz}\qquad
+    \dist{H\setminus F}{u}{w}=\dist{H^{\mathrm s}\setminus F^{\mathrm s}}{u}{w};
+  \]
+  \item jeżeli $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$H$, to $F^{\mathrm s}$ jest zbiorem na wpół-tnącym dla~$T$ w~$H^{\mathrm s}$;
+  \item zachodzi nierówność $|F^{\mathrm s}|\le |F|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Pętle nie należą do żadnej ścieżki między różnymi wierzchołkami, a więc ich obecność nie wpływa na odległości. Jeżeli
+$u\neq w$, to każda ścieżka z~$u$ do~$w$ w~$H$ może używać co najwyżej jednej krawędzi z~każdej klasy krawędzi równoległych o~tych
+samych końcach; po zastąpieniu takiej krawędzi reprezentantem tej klasy otrzymujemy ścieżkę tej samej długości w~$H^{\mathrm s}$.
+Analogicznie każda ścieżka w~$H^{\mathrm s}$ podnosi się do ścieżki tej samej długości w~$H$. To daje pierwszą równość
+$\dist{H}{u}{w}=\dist{H^{\mathrm s}}{u}{w}$.
+
+Po usunięciu zbioru $F$ sytuacja jest identyczna: dla ustalonych końców $u$ i~$v$ krawędź $uv$ pozostaje w~$H^{\mathrm s}\setminus
+F^{\mathrm s}$ wtedy i~tylko wtedy, gdy w~$H\setminus F$ pozostaje przynajmniej jedna krawędź o~końcach $u$ i~$v$. Zatem każda
+ścieżka w~$H\setminus F$ odpowiada ścieżce tej samej długości w~$H^{\mathrm s}\setminus F^{\mathrm s}$ i~odwrotnie, skąd
+\[
+  \dist{H\setminus F}{u}{w}=\dist{H^{\mathrm s}\setminus F^{\mathrm s}}{u}{w}.
+\]
+Punkt (2) wynika teraz bezpośrednio z~Definicji~\ref{def:semi-cut}. Dla dowodu punktu (3) zauważmy, że z~każdej krawędzi
+$uv\in F^{\mathrm s}$ można wybrać jedną krawędź grafu $H$ o~końcach $u$ i~$v$; ponieważ różne krawędzie grafu $H^{\mathrm s}$
+mają różne pary końców, wybory te wyznaczają injekcję $F^{\mathrm s}\to F$. Stąd $|F^{\mathrm s}|\le |F|$.
+\end{proof}
 
 \section{Lematy o najkrótszych ścieżkach}
 
@@ -155,7 +185,7 @@ spaceru.
 
 \begin{proof}
 Niech $Q$ będzie ustalonym spacerem z~$u$ do~$w$ w~$G$. Wśród wszystkich spacerów z~$u$ do~$w$ o~długości nie większej niż $\len{Q}$
-wybierzmy spacer $P=(v_0,\dots,v_k)$ o~najmniejszej długości. Wystarczy wykazać, że $P$ jest ścieżką.
+wybierzmy spacer $P=(v_0,\dots,v_k)$ o~najmniejszej długości. Pokażemy, że $P$ jest ścieżką.
 
 Przypuśćmy przeciwnie, że istnieją indeksy $0\le i<j\le k$ takie, że $v_i=v_j$. Jeżeli $j<k$, to z~$\{v_j,v_{j+1}\}\in E$ oraz
 $v_i=v_j$ wynika $\{v_i,v_{j+1}\}\in E$, więc ciąg
@@ -206,7 +236,7 @@ co przeczy definicji odległości. Zatem podścieżka $P[v_i,v_j]$ jest ścieżk
 \end{proof}
 
 \begin{observation}\label{obs:shortest-paths}
-Niech $T\subseteq V$ oraz $F\subseteq E$. Wówczas $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$ wtedy i~tylko wtedy, gdy dla
+Niech $T\subseteq V$ oraz $F\subseteq E$. Wówczas $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$ wtedy i~tylko wtedy, gdy dla
 każdych różnych $u,w\in T$ zachodzi $\dist{G}{u}{w}<\infty$ oraz każda ścieżka $P$ z~$u$ do~$w$ o~długości
 $\len{P}=\dist{G}{u}{w}$ spełnia $E(P)\cap F\neq\emptyset$.
 \end{observation}
@@ -214,7 +244,7 @@ $\len{P}=\dist{G}{u}{w}$ spełnia $E(P)\cap F\neq\emptyset$.
 \begin{proof}
 Ustalmy różne wierzchołki $u,w\in T$.
 
-Załóżmy najpierw, że $F$ jest zbiorem semi-rozcinającym dla~$T$. Wtedy
+Załóżmy najpierw, że $F$ jest zbiorem na wpół-tnącym dla~$T$. Wtedy
 \[
   \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}\le \infty,
 \]
@@ -227,7 +257,11 @@ co przeczy założeniu.
 
 Załóżmy teraz, że $\dist{G}{u}{w}<\infty$ oraz każda ścieżka z~$u$ do~$w$ o~długości $\dist{G}{u}{w}$ przecina zbiór $F$.
 Jeżeli w~$G\setminus F$ nie istnieje ścieżka z~$u$ do~$w$, to
-$\dist{G\setminus F}{u}{w}=\infty$ i~teza jest natychmiastowa. Pozostaje przypadek $\dist{G\setminus F}{u}{w}<\infty$.
+$\dist{G\setminus F}{u}{w}=\infty$, a~więc
+\[
+  \dist{G}{u}{w}<\infty=\dist{G\setminus F}{u}{w}.
+\]
+Pozostaje przypadek $\dist{G\setminus F}{u}{w}<\infty$.
 Niech $Q$ będzie ścieżką z~$u$ do~$w$ w~$G\setminus F$ o~długości
 \[
   \len{Q}=\dist{G\setminus F}{u}{w}.
@@ -237,7 +271,7 @@ najkrótszą w~$G$ nieprzecinającą zbioru $F$, wbrew przyjętemu założeniu. 
 \[
   \dist{G\setminus F}{u}{w}=\len{Q}>\dist{G}{u}{w}.
 \]
-Ponieważ para $u,w$ była dowolna, zbiór $F$ jest semi-rozcinający dla~$T$.
+Ponieważ para $u,w$ była dowolna, zbiór $F$ jest zbiorem na wpół-tnącym dla~$T$.
 \end{proof}
 
 \begin{lemma}\label{lem:projection-walk}
@@ -348,7 +382,7 @@ czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 \end{proof}
 
 \begin{proposition}\label{prop:contraction}
-Niech $T\subseteq V$ oraz $F\subseteq E$. Załóżmy, że $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$. Niech
+Niech $T\subseteq V$ oraz $F\subseteq E$. Załóżmy, że $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$. Niech
 $t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkiem. Oznaczmy
 \[
   G^\prime\coloneqq G/N[t],
@@ -357,7 +391,7 @@ $t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkie
   \qquad
   F^\prime\coloneqq F/N[t].
 \]
-Wówczas $F^\prime$ jest zbiorem semi-rozcinającym dla~$T^\prime$ w~$G^\prime$.
+Wówczas $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proposition}
 
 \begin{proof}
@@ -446,25 +480,37 @@ Ponieważ $e\in F$, dostajemy także $e/N[t]\in F^\prime$. Stąd ponownie
 \]
 
 W obu przypadkach każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^\prime$ przecina zbiór $F^\prime$. Z~Obserwacji
-\ref{obs:shortest-paths} wynika, że $F^\prime$ jest zbiorem semi-rozcinającym dla~$T^\prime$ w~$G^\prime$.
+\ref{obs:shortest-paths} wynika, że $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proof}
 
 \section{Główne twierdzenie}
 
 \begin{theorem}\label{thm:main}
-Niech $G=(V,E)$ będzie grafem, niech $T\subseteq V$ oraz $F\subseteq E$. Jeżeli $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$, to
+Niech $H$ będzie skończonym grafem nieskierowanym, niech $T\subseteq V(H)$ oraz $F\subseteq E(H)$. Jeżeli $F$ jest zbiorem
+na wpół-tnącym dla~$T$ w~$H$, to
 \[
   |F|\ge |T|-1.
 \]
 \end{theorem}
 
 \begin{proof}
+Na mocy Lematu~\ref{lem:simple-reduction} wystarczy udowodnić tezę dla grafów prostych. Zakładamy więc od tej chwili, że
+$H$ jest grafem prostym, i oznaczamy go przez $G=(V,E)$.
+
 Dla par liczb całkowitych nieujemnych $(k,n)$ oznaczmy przez $\mathcal{P}(k,n)$ następujące zdanie:
 \begin{quote}
-dla każdego grafu $H$ o~$n$ wierzchołkach, każdego zbioru $X\subseteq V(H)$ o~mocy $k$ oraz każdego zbioru krawędzi
-$M\subseteq E(H)$, jeżeli $M$ jest zbiorem semi-rozcinającym dla~$X$ w~$H$, to $|M|\ge k-1$.
+dla każdego grafu prostego $H$ o~$n$ wierzchołkach, każdego zbioru $X\subseteq V(H)$ o~mocy $k$ oraz każdego zbioru krawędzi
+$M\subseteq E(H)$, jeżeli $M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$, to $|M|\ge k-1$.
 \end{quote}
-Udowodnimy prawdziwość wszystkich zdań $\mathcal{P}(k,n)$ przez indukcję względem porządku leksykograficznego na parach $(k,n)$.
+Udowodnimy prawdziwość wszystkich zdań $\mathcal{P}(k,n)$ przez indukcję względem porządku leksykograficznego na parach $(k,n)$,
+to znaczy przyjmujemy, że
+\[
+  (k_1,n_1)\prec (k_2,n_2)
+  \quad\Longleftrightarrow\quad
+  k_1<k_2
+  \ \text{lub}\ 
+  \bigl(k_1=k_2 \ \text{i}\ n_1<n_2\bigr).
+\]
 
 \medskip\noindent
 \textbf{Baza indukcji.} Niech $k\le 1$. Wtedy dla dowolnego grafu $H$, dowolnego $X\subseteq V(H)$ o~mocy $k$ oraz dowolnego
@@ -477,8 +523,8 @@ Zatem $\mathcal{P}(k,n)$ jest prawdziwe dla każdego $n$.
 
 \medskip\noindent
 \textbf{Krok indukcyjny.} Ustalmy parę $(k,n)$ z~$k\ge 2$ i~załóżmy, że $\mathcal{P}(k',n')$ jest prawdziwe dla każdej pary
-$(k',n')$ mniejszej leksykograficznie od~$(k,n)$. Rozważmy graf $G=(V,E)$ o~$n$ wierzchołkach, zbiór $T\subseteq V$ o~mocy $k$
-oraz zbiór $F\subseteq E$, który jest semi-rozcinający dla~$T$ w~$G$. Pokażemy, że $|F|\ge k-1$.
+$(k',n')$ spełniającej $(k',n')\prec (k,n)$. Rozważmy graf $G=(V,E)$ o~$n$ wierzchołkach, zbiór $T\subseteq V$ o~mocy $k$
+oraz zbiór $F\subseteq E$, który jest na wpół-tnący dla~$T$ w~$G$. Pokażemy, że $|F|\ge k-1$.
 
 Rozpatrzymy dwa przypadki.
 
@@ -498,13 +544,14 @@ Niech
   \qquad
   F^\prime\coloneqq F/N[t].
 \]
-Na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$ jest semi-rozcinający dla~$T^\prime$ w~$G^\prime$. Ponadto
+Na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$ jest na wpół-tnący dla~$T^\prime$ w~$G^\prime$. Ponadto
 \[
   |T^\prime|=|T|=k
   \qquad\text{oraz}\qquad
   |V(G^\prime)|=|V|-|N[t]|+1<n.
 \]
-Para odpowiadająca trójce $(G^\prime,T^\prime,F^\prime)$ jest więc równa $(k,n')$ dla pewnego $n'<n$. Z~założenia indukcyjnego
+Para odpowiadająca trójce $(G^\prime,T^\prime,F^\prime)$ jest więc równa $(k,n')$ dla pewnego $n'<n$, a~więc spełnia
+$(k,n')\prec (k,n)$. Z~założenia indukcyjnego
 otrzymujemy
 \[
   |F^\prime|\ge |T^\prime|-1=k-1.
@@ -522,7 +569,7 @@ Wybierzmy wierzchołek $t\in T\cap V[F]$ oraz krawędź $e\in F$ taką, że $t\i
   \qquad
   F^-\coloneqq F\setminus\{e\}.
 \]
-Pokażemy, że $F^-$ jest zbiorem semi-rozcinającym dla~$T^-$ w~$G$.
+Pokażemy, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
 
 Weźmy dowolne różne wierzchołki $u,w\in T^-$. Z~Definicji~\ref{def:semi-cut} wynika, że $\dist{G}{u}{w}<\infty$. Niech $P$ będzie
 dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths} dostajemy
@@ -567,10 +614,10 @@ Ponieważ $e\notin E(P_u)$, każda krawędź z~$E(P_u)\cap F$ należy do~$F^-$. 
 \]
 
 Wykazaliśmy, że każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^-$ przecina zbiór $F^-$. Ponadto dla takich wierzchołków
-odległość w~$G$ jest skończona, gdyż $T^-\subseteq T$ i~zbiór $F$ był semi-rozcinający dla~$T$. Z~Obserwacji~\ref{obs:shortest-paths} wynika zatem,
-że $F^-$ jest zbiorem semi-rozcinającym dla~$T^-$ w~$G$.
+odległość w~$G$ jest skończona, gdyż $T^-\subseteq T$ i~zbiór $F$ był na wpół-tnący dla~$T$. Z~Obserwacji~\ref{obs:shortest-paths}
+wynika zatem, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
 
-Para odpowiadająca trójce $(G,T^-,F^-)$ jest równa $(k-1,n)$, a więc jest mniejsza leksykograficznie od~$(k,n)$. Z~założenia
+Para odpowiadająca trójce $(G,T^-,F^-)$ jest równa $(k-1,n)$, a~więc spełnia $(k-1,n)\prec (k,n)$. Z~założenia
 indukcyjnego otrzymujemy
 \[
   |F^-|\ge |T^-|-1=(k-1)-1=k-2.
@@ -586,5 +633,14 @@ Krok indukcyjny jest zakończony, a tym samym prawdziwe jest zdanie $\mathcal{P}
 Oszacowanie z~Twierdzenia~\ref{thm:main} jest ostre. Jeżeli $G$ jest ścieżką oraz $T=V(G)$, to dla $F=E(G)$ zachodzi
 $|F|=|V(G)|-1=|T|-1$, a~po usunięciu wszystkich krawędzi każda para różnych wierzchołków ma odległość równą $\infty$.
 \end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{diestel}
+R.~Diestel,
+\emph{Graph Theory},
+Springer.
+
+\end{thebibliography}
 
 \end{document}
