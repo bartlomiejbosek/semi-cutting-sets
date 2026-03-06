@@ -24,7 +24,7 @@
 \newcommand{\len}[1]{\lVert #1 \rVert}
 \newcommand{\dist}[3]{d_{#1}(#2,#3)}
 
-\title{\textbf{Zbiory semi-rozcinające w grafach}}
+\title{\textbf{O rozmiarze zbiorów semi-rozcinających w grafach}}
 \author{}
 \date{}
 
@@ -32,306 +32,505 @@
 \maketitle
 
 \begin{abstract}
-Udowadniamy, że dla dowolnego grafu $G=(V,E)$ oraz dowolnych zbiorów $T\subseteq V$ i~$F\subseteq E$, jeżeli usunięcie krawędzi ze zbioru
-$F$ ściśle zwiększa odległość między każdą parą różnych wierzchołków z~$T$, to zachodzi nierówność $|F|\ge |T|-1$. Dowód opiera się na
-charakteryzacji poprzez przecinanie najkrótszych ścieżek, własności zachowania tej własności przy ściąganiu domkniętego sąsiedztwa wierzchołka
-nieincydentnego z~$F$, oraz na indukcji po parze $(|T|,|V|)$.
+Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym, $T\subseteq V$ oraz $F\subseteq E$. Zakładamy, że po usunięciu
+krawędzi z~$F$ odległość między każdą parą różnych wierzchołków z~$T$ ściśle rośnie. W pracy podajemy samowystarczalny dowód
+nierówności $|F|\ge |T|-1$. Dowód składa się z~trzech kroków. Najpierw zapisujemy warunek semi-rozcinania w~języku przecinania
+najkrótszych ścieżek. Następnie dowodzimy, że własność ta zachowuje się przy ściąganiu domkniętego sąsiedztwa terminala
+nieincydentnego z~$F$. Na końcu stosujemy indukcję po parze $(|T|,|V|)$ w~porządku leksykograficznym.
 \end{abstract}
 
-\section{Wstęp}
+\section{Wprowadzenie}
 
-Niech $G=(V,E)$ będzie grafem, a~$T\subseteq V$ zbiorem \emph{terminali}. Interesuje nas, jak mały może być zbiór krawędzi
-$F\subseteq E$ o~własności, że po jego usunięciu odległość między każdą parą różnych wierzchołków z~$T$ ulega ścisłemu zwiększeniu.
-W~niniejszym tekście dowodzimy, że zawsze $|F|\ge |T|-1$. Kluczowym krokiem jest Propozycja~\ref{prop:contraction}, która pozwala
-„ściskać” domknięte sąsiedztwo wierzchołka $t\in T$ nieincydentnego z~$F$ bez utraty własności semi-rozcinania; następnie stosujemy indukcję.
+Rozpatrujemy następujący problem strukturalny. Dany jest graf $G=(V,E)$, zbiór wyróżnionych wierzchołków $T\subseteq V$ oraz
+zbiór krawędzi $F\subseteq E$. Interesuje nas sytuacja, w~której usunięcie $F$ powoduje ścisły wzrost odległości między każdą
+parą różnych wierzchołków z~$T$. Celem jest wyznaczenie uniwersalnego dolnego ograniczenia na rozmiar takiego zbioru krawędzi.
+Główny wynik stwierdza, że zawsze zachodzi nierówność $|F|\ge |T|-1$. Dowód nie zakłada żadnych dodatkowych własności grafu,
+w~szczególności nie zakładamy spójności.
 
 \section{Notacja i definicje}
 
-W całym tekście $G=(V,E)$ oznacza skończony graf nieskierowany prosty: krawędzie utożsamiamy z~nieuporządkowanymi parami różnych
-wierzchołków. Nie zakładamy spójności grafu.
-Odległości traktujemy jako elementy zbioru $\mathbb{N}\cup\{\infty\}$ z~naturalnym porządkiem rozszerzonym o~$n<\infty$ dla
-każdego $n\in\mathbb{N}$.
+W całym tekście $G=(V,E)$ oznacza skończony graf nieskierowany prosty. Każdą krawędź utożsamiamy z~dwuelementowym podzbiorem
+zbioru $V$. Jeżeli $e\in E$ oraz $v\in e$, to mówimy, że $v$ jest końcem krawędzi $e$. Odległości traktujemy jako elementy
+zbioru $\mathbb{N}_0\cup\{\infty\}$ z~naturalnym porządkiem rozszerzonym o~relacje $n<\infty$ dla każdego $n\in\mathbb{N}_0$.
 
-\begin{definition}[Ścieżki i odległość]\label{def:paths-distance}
-Spacerem z~$u$ do~$w$ nazywamy ciąg wierzchołków $(v_0,v_1,\dots,v_k)$ taki, że $v_0=u$, $v_k=w$ oraz
-$v_{i-1}v_i\in E$ dla $i=1,\dots,k$. Długość takiego spaceru wynosi $\len{(v_0,\dots,v_k)}\coloneqq k$.
-Ścieżką nazywamy spacer bez powtórzeń wierzchołków.
+\begin{definition}[Spacery, ścieżki i odległość]\label{def:paths-distance}
+Niech $u,w\in V$. Spacerem z~$u$ do~$w$ nazywamy ciąg wierzchołków
+\[
+  P=(v_0,v_1,\dots,v_k),
+\]
+taki że $v_0=u$, $v_k=w$ oraz $\{v_{i-1},v_i\}\in E$ dla każdego $i\in\{1,\dots,k\}$. Długość spaceru $P$ definiujemy przez
+$\len{P}\coloneqq k$.
 
-Odległość $\dist{G}{u}{w}$ definiujemy jako najmniejszą długość spaceru z~$u$ do~$w$ w~$G$, o~ile taki spacer
-istnieje; w~przeciwnym razie $\dist{G}{u}{w}\coloneqq\infty$.
-\end{definition}
-
-\begin{notation}[Wierzchołki i krawędzie ścieżki]\label{not:path-sets}
-Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem w~$G$, to oznaczamy
+Ścieżką nazywamy spacer $P=(v_0,\dots,v_k)$, dla którego wierzchołki $v_0,\dots,v_k$ są parami różne. Dla ścieżki
+$P=(v_0,\dots,v_k)$ oznaczamy
 \[
   V(P)\coloneqq \{v_0,\dots,v_k\},
   \qquad
-  E(P)\coloneqq \{v_{i-1}v_i:\ i=1,\dots,k\}.
+  E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: i=1,\dots,k\bigr\}.
+\]
+
+Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje; w przeciwnym
+razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$.
+\end{definition}
+
+\begin{notation}[Podstawowe operacje na grafie]\label{not:basic-operations}
+Jeżeli $F\subseteq E$, to przez $G\setminus F$ oznaczamy graf $(V,E\setminus F)$. Dla $F\subseteq E$ piszemy
+\[
+  V[F]\coloneqq \{v\in V:\ \exists\, e\in F\ \text{ takie, że }\ v\in e\}.
+\]
+Jeżeli $v\in V$, to jego otoczenie i~domknięte otoczenie oznaczamy odpowiednio przez
+\[
+  N(v)\coloneqq \{w\in V:\ \{v,w\}\in E\},
+  \qquad
+  N[v]\coloneqq N(v)\cup\{v\}.
 \]
 \end{notation}
 
-\begin{notation}[Usuwanie krawędzi]\label{not:edge-removal}
-Jeżeli $F\subseteq E$, to $G\setminus F$ oznacza graf $(V,E\setminus F)$.
-\end{notation}
-
-\begin{notation}[Końce krawędzi]\label{not:VF}
-Dla $F\subseteq E$ przez $V[F]$ oznaczamy zbiór wierzchołków incydentnych z~krawędziami z~$F$, tj.
+\begin{definition}[Ściąganie zbioru wierzchołków]\label{def:contraction}
+Niech $W\subseteq V$ oraz niech $w^\ast\notin V$ będzie nowym wierzchołkiem. Definiujemy odwzorowanie
 \[
-  V[F]\coloneqq \{v\in V:\ \exists\, e\in F\ \text{takie, że $e$ jest incydentna z~$v$}\}.
-\]
-\end{notation}
-
-\begin{notation}[Sąsiedztwo]\label{not:neighborhood}
-Jeżeli $v\in V$, to $N(v)\coloneqq\{w\in V:\ vw\in E\}$ oraz $N[v]\coloneqq N(v)\cup\{v\}$.
-\end{notation}
-
-\begin{notation}[Ściąganie zbioru wierzchołków]\label{not:contraction}
-Niech $W\subseteq V$ i~niech $w^\star\notin V$ będzie nowym wierzchołkiem. Definiujemy odwzorowanie
-$\pi_W\colon V\to (V\setminus W)\cup\{w^\star\}$ dane wzorem
-\[
+  \pi_W\colon V\to (V\setminus W)\cup\{w^\ast\},
+  \qquad
   \pi_W(v)\coloneqq
   \begin{cases}
-    w^\star & \text{gdy } v\in W,\\
-    v & \text{gdy } v\notin W.
+    w^\ast & \text{dla } v\in W,\\
+    v & \text{dla } v\notin W.
   \end{cases}
 \]
-Graf $G/W$ definiujemy jako $G/W\coloneqq (V',E')$, gdzie
+Przez $G/W$ oznaczamy graf $(V',E')$, gdzie
 \[
-  V'\coloneqq (V\setminus W)\cup\{w^\star\},
+  V'\coloneqq (V\setminus W)\cup\{w^\ast\},
   \qquad
-  E'\coloneqq \{\pi_W(u)\pi_W(v):\ uv\in E,\ \pi_W(u)\neq \pi_W(v)\}.
+  E'\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
 \]
-Krawędzie o obu końcach w~$W$ znikają (po ściągnięciu dawałyby pętle). Dla krawędzi $uv\in E$ z~co najwyżej
-jednym końcem w~$W$ jej obraz w~$G/W$ oznaczamy przez $uv/W\coloneqq \pi_W(u)\pi_W(v)\in E'$.
-Dla zbioru krawędzi $F\subseteq E$ definiujemy jego obraz
+Jeżeli $e=\{x,y\}\in E$ oraz $\pi_W(x)\neq \pi_W(y)$, to obraz tej krawędzi oznaczamy przez
 \[
-  F/W\coloneqq \{\, \pi_W(u)\pi_W(v):\ uv\in F,\ \pi_W(u)\neq \pi_W(v)\,\}\subseteq E'.
+  e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E'.
 \]
-Ponieważ $E'$ i~$F/W$ są zbiorami, jeżeli różne krawędzie z~$F$ mają ten sam obraz w~$G/W$, to w~$F/W$ pojawia się on jednokrotnie.
-\end{notation}
-
-\begin{definition}[Zbiór semi-rozcinający]\label{def:semi-cut}
-Niech $G=(V,E)$ będzie grafem. Mówimy, że $F\subseteq E$ jest zbiorem semi-rozcinającym dla $T\subseteq V$ w~$G$,
-jeżeli dla każdej pary różnych wierzchołków $u,w\in T$ zachodzi
+Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
 \[
-  \dist{G}{u}{w} \;<\; \dist{G\setminus F}{u}{w}.
+  F/W\coloneqq \{e/W:\ e\in F,\ e/W\in E'\}\subseteq E'.
+\]
+Odwzorowanie $e\mapsto e/W$, określone na zbiorze tych krawędzi z~$F$, które mają co najwyżej jeden koniec w~$W$, jest surjekcją
+na $F/W$. W~szczególności
+\[
+  |F/W|\le |F|.
 \]
 \end{definition}
 
-\section{Lematy i propozycje pomocnicze}
+\begin{definition}[Zbiór semi-rozcinający]\label{def:semi-cut}
+Niech $T\subseteq V$. Mówimy, że $F\subseteq E$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$, jeżeli dla każdej pary różnych
+wierzchołków $u,w\in T$ zachodzi
+\[
+  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}.
+\]
+\end{definition}
+
+\section{Lematy o najkrótszych ścieżkach}
 
 \begin{lemma}\label{lem:walk-to-path}
-Jeżeli istnieje spacer z~$u$ do~$w$ w~$G$, to istnieje również ścieżka z~$u$ do~$w$ w~$G$ o~długości nie większej niż
-długość tego spaceru. W~szczególności, jeżeli $\dist{G}{u}{w}<\infty$, to istnieje ścieżka z~$u$ do~$w$ o~długości
-dokładnie $\dist{G}{u}{w}$.
+Jeżeli istnieje spacer z~$u$ do~$w$ w~$G$, to istnieje również ścieżka z~$u$ do~$w$ w~$G$ o~długości nie większej niż długość tego
+spaceru.
 \end{lemma}
 
 \begin{proof}
-Weźmy dowolny spacer $P=(v_0,\dots,v_k)$ z~$u$ do~$w$. Jeżeli w~$P$ występuje powtórzenie wierzchołka, to istnieją
-indeksy $0\le i<j\le k$ takie, że $v_i=v_j$. Rozważmy ciąg
+Niech $Q$ będzie ustalonym spacerem z~$u$ do~$w$ w~$G$. Wśród wszystkich spacerów z~$u$ do~$w$ o~długości nie większej niż $\len{Q}$
+wybierzmy spacer $P=(v_0,\dots,v_k)$ o~najmniejszej długości. Wystarczy wykazać, że $P$ jest ścieżką.
+
+Przypuśćmy przeciwnie, że istnieją indeksy $0\le i<j\le k$ takie, że $v_i=v_j$. Jeżeli $j<k$, to z~$\{v_j,v_{j+1}\}\in E$ oraz
+$v_i=v_j$ wynika $\{v_i,v_{j+1}\}\in E$. W~obu przypadkach, to znaczy zarówno dla $j<k$, jak i~dla $j=k$, ciąg
 \[
-  P'\coloneqq (v_0,\dots,v_i,v_{j+1},\dots,v_k),
+  P'=(v_0,\dots,v_i,v_{j+1},\dots,v_k)
 \]
-gdzie w przypadku $j=k$ ostatni fragment jest pusty. Jeżeli $j<k$, to ponieważ $v_i=v_j$ oraz $v_jv_{j+1}\in E$, mamy także
-$v_iv_{j+1}\in E$. Zatem w~każdym przypadku $P'$ jest spacerem z~$u$ do~$w$ o~mniejszej długości niż $P$.
-Powtarzając tę operację skończenie wiele razy, dostajemy spacer bez powtórzeń wierzchołków,
-czyli ścieżkę, o~długości nie większej od $\len{P}$. Druga część wynika z~definicji odległości jako minimum po długościach
-spacerów.
+jest spacerem z~$u$ do~$w$ o~długości mniejszej niż $\len{P}$. Otrzymujemy sprzeczność z~minimalnością wyboru spaceru $P$.
+Zatem $P$ nie ma powtórzeń wierzchołków, czyli jest ścieżką.
 \end{proof}
 
 \begin{lemma}\label{lem:subpath}
-Niech $u,w\in V$ oraz niech $P=(v_0,\dots,v_k)$ będzie ścieżką z~$u$ do~$w$ w~$G$, tj.\ $v_0=u$ i~$v_k=w$. Załóżmy, że
-$\len{P}=\dist{G}{u}{w}$. Niech $x=v_i$ i~$y=v_j$ dla pewnych $0\le i\le j\le k$ i~niech $P[x,y]\coloneqq (v_i,\dots,v_j)$ będzie
-odpowiadającą podścieżką $P$ łączącą $x$ i~$y$. Wówczas $\len{P[x,y]}=\dist{G}{x}{y}$.
+Niech $P=(v_0,\dots,v_k)$ będzie ścieżką z~$u$ do~$w$ w~$G$ o~długości $\len{P}=\dist{G}{u}{w}$. Dla indeksów
+$0\le i\le j\le k$ oznaczmy przez
+\[
+  P[v_i,v_j]\coloneqq (v_i,\dots,v_j)
+\]
+podścieżkę $P$ między wierzchołkami $v_i$ i~$v_j$. Wówczas
+\[
+  \len{P[v_i,v_j]}=\dist{G}{v_i}{v_j}.
+\]
 \end{lemma}
 
 \begin{proof}
-Niech $\len{P[x,y]}=L$. Gdyby istniała ścieżka $Q$ z~$x$ do~$y$ o~długości mniejszej niż $L$, to podmieniając w~$P$ odcinek
-$P[x,y]$ na $Q$ otrzymalibyśmy spacer z~$u$ do~$w$ o~długości mniejszej niż $\len{P}=\dist{G}{u}{w}$, co jest sprzeczne z~definicją
-odległości.
+Załóżmy przeciwnie, że istnieje ścieżka $Q$ z~$v_i$ do~$v_j$ taka, że
+\[
+  \len{Q}<\len{P[v_i,v_j]}.
+\]
+Wtedy ciąg
+\[
+  (v_0,\dots,v_i)\cdot Q\cdot (v_j,\dots,v_k)
+\]
+jest spacerem z~$u$ do~$w$ w~$G$ o~długości
+\[
+  i+\len{Q}+(k-j)
+  <
+  i+\len{P[v_i,v_j]}+(k-j)
+  =
+  \len{P}
+  =
+  \dist{G}{u}{w},
+\]
+co przeczy definicji odległości. Zatem podścieżka $P[v_i,v_j]$ jest ścieżką najkrótszą między swoimi końcami.
 \end{proof}
 
 \begin{observation}\label{obs:shortest-paths}
-Niech $G=(V,E)$ będzie grafem oraz niech $F\subseteq E$ i~$T\subseteq V$. Wówczas $F$ jest zbiorem semi-rozcinającym dla~$T$
-w~$G$ wtedy i~tylko wtedy, gdy dla każdych różnych $u,w\in T$ spełnione są łącznie następujące warunki:
-$\dist{G}{u}{w}<\infty$ oraz każda ścieżka $P$ z~$u$ do~$w$ o~długości $\len{P}=\dist{G}{u}{w}$ zawiera co najmniej jedną
-krawędź ze zbioru $F$.
+Niech $T\subseteq V$ oraz $F\subseteq E$. Wówczas $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$ wtedy i~tylko wtedy, gdy dla
+każdych różnych $u,w\in T$ zachodzą jednocześnie następujące warunki:
+\begin{enumerate}
+  \item $\dist{G}{u}{w}<\infty$;
+  \item każda ścieżka $P$ z~$u$ do~$w$ o~długości $\len{P}=\dist{G}{u}{w}$ spełnia $E(P)\cap F\neq\emptyset$.
+\end{enumerate}
 \end{observation}
 
 \begin{proof}
-Ustalmy różne $u,w\in T$.
+Ustalmy różne wierzchołki $u,w\in T$.
 
-(\,$\Rightarrow$\,) Z~Definicji~\ref{def:semi-cut} mamy $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}\le\infty$, a~zatem
-$\dist{G}{u}{w}<\infty$. Z~Lematu~\ref{lem:walk-to-path} wynika istnienie ścieżki z~$u$ do~$w$ o~długości $\dist{G}{u}{w}$; niech $P$
-będzie dowolną taką ścieżką.
-Gdyby $P$ nie zawierała żadnej krawędzi z~$F$, to byłaby również ścieżką w~$G\setminus F$ o~tej samej długości, co dawałoby
-$\dist{G\setminus F}{u}{w}\le \dist{G}{u}{w}$, sprzecznie z~Definicją~\ref{def:semi-cut}.
+Załóżmy najpierw, że $F$ jest zbiorem semi-rozcinającym dla~$T$. Wtedy
+\[
+  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}\le \infty,
+\]
+więc $\dist{G}{u}{w}<\infty$. Niech $P$ będzie dowolną ścieżką z~$u$ do~$w$ o~długości $\dist{G}{u}{w}$. Gdyby
+$E(P)\cap F=\emptyset$, to $P$ byłaby także ścieżką w~$G\setminus F$, a~zatem
+\[
+  \dist{G\setminus F}{u}{w}\le \len{P}=\dist{G}{u}{w},
+\]
+co przeczy założeniu.
 
-(\,$\Leftarrow$\,) Załóżmy, że $\dist{G}{u}{w}<\infty$ oraz każda ścieżka $P$ z~$u$ do~$w$ o~długości $\dist{G}{u}{w}$
-zawiera krawędź z~$F$. Jeżeli w~$G\setminus F$ nie istnieje żadna ścieżka z~$u$ do~$w$, to $\dist{G\setminus F}{u}{w}=\infty$ i~
-nierówność $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ jest spełniona. W przeciwnym razie mamy $\dist{G\setminus F}{u}{w}<\infty$ i~
-z~Lematu~\ref{lem:walk-to-path} wybierzmy ścieżkę $Q$ z~$u$ do~$w$ w~$G\setminus F$ o~długości $\len{Q}=\dist{G\setminus F}{u}{w}$.
-Jest ona jednocześnie ścieżką w~$G$, a~zatem $\len{Q}\ge \dist{G}{u}{w}$. Ponadto z~definicji nie zawiera krawędzi z~$F$, więc nie może
-mieć długości $\dist{G}{u}{w}$. Otrzymujemy $\len{Q}>\dist{G}{u}{w}$, a~ponieważ $\dist{G\setminus F}{u}{w}=\len{Q}$, dostajemy
-$\dist{G\setminus F}{u}{w}>\dist{G}{u}{w}$. Ponieważ $u,w$ były dowolne, $F$ spełnia Definicję~\ref{def:semi-cut}.
+Załóżmy teraz, że spełnione są warunki (1) i~(2). Jeżeli w~$G\setminus F$ nie istnieje ścieżka z~$u$ do~$w$, to
+$\dist{G\setminus F}{u}{w}=\infty$ i~teza jest natychmiastowa. Pozostaje przypadek $\dist{G\setminus F}{u}{w}<\infty$.
+Niech $Q$ będzie ścieżką z~$u$ do~$w$ w~$G\setminus F$ o~długości
+\[
+  \len{Q}=\dist{G\setminus F}{u}{w}.
+\]
+Ponieważ $Q$ jest także ścieżką w~$G$, mamy $\len{Q}\ge \dist{G}{u}{w}$. Równość nie może zachodzić, gdyż wtedy $Q$ byłaby ścieżką
+najkrótszą w~$G$ nieprzecinającą zbioru $F$, wbrew warunkowi (2). Dostajemy więc
+\[
+  \dist{G\setminus F}{u}{w}=\len{Q}>\dist{G}{u}{w}.
+\]
+Ponieważ para $u,w$ była dowolna, zbiór $F$ jest semi-rozcinający dla~$T$.
 \end{proof}
 
 \begin{lemma}\label{lem:projection-walk}
-Niech $G=(V,E)$ będzie grafem, $W\subseteq V$, a~$G/W$ zdefiniowany jak w~Notacji~\ref{not:contraction}.
-Jeżeli $(v_0,\dots,v_k)$ jest spacerem w~$G$, to istnieje spacer $(w_0,\dots,w_m)$ w~$G/W$ taki, że
-$w_0=\pi_W(v_0)$, $w_m=\pi_W(v_k)$ oraz $m\le k$.
+Niech $W\subseteq V$. Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem w~$G$, to w~$G/W$ istnieje spacer
+\[
+  P'=(w_0,\dots,w_m)
+\]
+taki, że $w_0=\pi_W(v_0)$, $w_m=\pi_W(v_k)$ oraz $m\le k$.
 \end{lemma}
 
 \begin{proof}
-Niech $a_i\coloneqq \pi_W(v_i)$ dla $i=0,\dots,k$. Zdefiniujemy indeksy $0=i_0<i_1<\dots<i_m\le k$ tak, aby
-$(a_{i_0},a_{i_1},\dots,a_{i_m})$ było ciągiem otrzymanym z~$(a_0,\dots,a_k)$ przez usunięcie kolejnych powtórzeń.
-Kładziemy $i_0\coloneqq 0$ oraz, jeżeli $i_r$ jest już zdefiniowany, a~$a_{i_r}\neq a_k$, to definiujemy
+Niech $a_i\coloneqq \pi_W(v_i)$ dla $i=0,\dots,k$. Niech
 \[
-  i_{r+1}\coloneqq \min\{j\in\{i_r+1,\dots,k\}:\ a_j\neq a_{i_r}\}.
+  0=i_0<i_1<\dots<i_m\le k
 \]
-Konstrukcja kończy się, gdy $a_{i_m}=a_k$. Wtedy $w_r\coloneqq a_{i_r}$ dla $r=0,\dots,m$.
-Z definicji mamy $w_0=a_0=\pi_W(v_0)$ oraz $w_m=a_k=\pi_W(v_k)$, a~ponieważ $i_0<i_1<\dots<i_m$, otrzymujemy $m\le k$.
+będą pierwszymi indeksami kolejnych maksymalnych bloków stałych w~ciągu $(a_0,\dots,a_k)$. Innymi słowy, dla każdego
+$r\in\{0,\dots,m-1\}$ zachodzi
+\[
+  a_{i_r}=a_{i_r+1}=\dots=a_{i_{r+1}-1}
+  \qquad\text{oraz}\qquad
+  a_{i_r}\neq a_{i_{r+1}},
+\]
+a ponadto $a_{i_m}=a_k$. Definiujemy
+\[
+  w_r\coloneqq a_{i_r}
+  \qquad\text{dla } r=0,\dots,m.
+\]
+Wtedy $w_0=a_0=\pi_W(v_0)$, $w_m=a_k=\pi_W(v_k)$ oraz oczywiście $m\le k$.
 
-Pozostaje sprawdzić, że $(w_0,\dots,w_m)$ jest spacerem w~$G/W$. Weźmy $r\in\{1,\dots,m\}$. Z definicji $i_r$ mamy
-$a_{i_r}\neq a_{i_{r-1}}$ oraz $a_{i_r-1}=a_{i_{r-1}}$. Ponieważ $v_{i_r-1}v_{i_r}\in E$ i~$\pi_W(v_{i_r-1})\neq \pi_W(v_{i_r})$,
-z definicji $E'$ wynika $w_{r-1}w_r=a_{i_{r-1}}a_{i_r}\in E'$. Zatem kolejne wierzchołki $w_{r-1},w_r$ są połączone krawędzią w~$G/W$,
-więc $(w_0,\dots,w_m)$ jest spacerem.
+Pozostaje sprawdzić, że kolejne wierzchołki $w_r,w_{r+1}$ są połączone krawędzią w~$G/W$. Dla
+$r\in\{0,\dots,m-1\}$ mamy
+\[
+  a_{i_{r+1}-1}=a_{i_r}
+  \qquad\text{oraz}\qquad
+  a_{i_{r+1}-1}\neq a_{i_{r+1}}.
+\]
+Ponieważ $\{v_{i_{r+1}-1},v_{i_{r+1}}\}\in E$, z~Definicji~\ref{def:contraction} wynika, że
+\[
+  \{w_r,w_{r+1}\}
+  =
+  \{\pi_W(v_{i_{r+1}-1}),\pi_W(v_{i_{r+1}})\}
+  \in E(G/W).
+\]
+Zatem $P'$ jest spacerem w~$G/W$.
+\end{proof}
+
+\section{Zachowanie własności przy ściąganiu}
+
+\begin{lemma}\label{lem:lifting-endpoint}
+Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech $G^\prime\coloneqq G/N[t]$, gdzie zbiór $N[t]$ został
+ściągnięty do~$t^\prime$. Niech $z\in V\setminus N[t]$ i~niech
+\[
+  P^\prime=(t^\prime,x_1,\dots,x_k)
+\]
+będzie ścieżką najkrótszą z~$t^\prime$ do~$z$ w~$G^\prime$. Wówczas istnieje wierzchołek $v\in N(t)$ taki, że ciąg
+\[
+  P=(t,v,x_1,\dots,x_k)
+\]
+jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
+\end{lemma}
+
+\begin{proof}
+Ponieważ $z\neq t^\prime$, mamy $k\ge 1$. Krawędź $\{t^\prime,x_1\}$ należy do~$E(G^\prime)$, więc z~Definicji~\ref{def:contraction}
+wynika istnienie krawędzi $\{v,x_1\}\in E(G)$ takiej, że $v\in N[t]$ oraz $\{v,x_1\}/N[t]=\{t^\prime,x_1\}$. Z~założenia
+$x_1\notin N[t]$, a~zatem $v\neq t$; w~konsekwencji $v\in N(t)$.
+
+Pokażemy, że
+\[
+  P=(t,v,x_1,\dots,x_k)
+\]
+jest ścieżką w~$G$. Wierzchołek $v$ jest sąsiadem $t$, więc $\{t,v\}\in E$. Dla każdego $i\in\{1,\dots,k\}$ mamy
+$x_i\notin N[t]$, zatem $x_i\neq t$ oraz $x_i\neq v$. Ponieważ $P^\prime$ jest ścieżką, wierzchołki $x_1,\dots,x_k$ są parami różne.
+Wobec tego $P$ jest ścieżką i~spełnia
+\[
+  \len{P}=\len{P^\prime}+1.
+\]
+
+Niech teraz $Q=(q_0,\dots,q_\ell)$ będzie dowolną ścieżką z~$t$ do~$z$ w~$G$. Ponieważ $z\notin N[t]$ oraz $q_0=t$, mamy $\ell\ge 2$
+i~$q_1\in N(t)$. W szczególności
+\[
+  \pi_{N[t]}(q_0)=\pi_{N[t]}(q_1)=t^\prime.
+\]
+Stosując Lemat~\ref{lem:projection-walk} do ścieżki $Q$, otrzymujemy w~$G^\prime$ spacer z~$t^\prime$ do~$z$ o~długości co najwyżej
+$\ell-1$. Z definicji odległości dostajemy
+\[
+  \dist{G^\prime}{t^\prime}{z}\le \ell-1=\len{Q}-1.
+\]
+Ponieważ $Q$ było dowolną ścieżką z~$t$ do~$z$, z ostatniej nierówności wynika
+\[
+  \dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1.
+\]
+Z drugiej strony $P$ jest ścieżką z~$t$ do~$z$, więc
+\[
+  \dist{G}{t}{z}\le \len{P}=\len{P^\prime}+1=\dist{G^\prime}{t^\prime}{z}+1.
+\]
+Obie nierówności dają równość
+\[
+  \dist{G}{t}{z}=\len{P},
+\]
+czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 \end{proof}
 
 \begin{proposition}\label{prop:contraction}
-Niech $G=(V,E)$ będzie grafem, $T\subseteq V$, $F\subseteq E$ i~niech $F$ będzie zbiorem semi-rozcinającym dla~$T$ w~$G$.
-Niech $t\in T\setminus V[F]$ oraz niech $t'\notin V$ będzie nowym wierzchołkiem. Rozważmy graf $G'\coloneqq G/N[t]$, gdzie
-$N[t]$ zostało ściągnięte do wierzchołka~$t'$, zbiór wierzchołków $T'\coloneqq (T\setminus\{t\})\cup\{t'\}$ oraz zbiór krawędzi
-$F'\coloneqq F/N[t]\subseteq E(G')$. Wówczas $F'$ jest zbiorem semi-rozcinającym dla~$T'$ w~$G'$.
+Niech $T\subseteq V$ oraz $F\subseteq E$. Załóżmy, że $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$. Niech
+$t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkiem. Oznaczmy
+\[
+  G^\prime\coloneqq G/N[t],
+  \qquad
+  T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\},
+  \qquad
+  F^\prime\coloneqq F/N[t].
+\]
+Wówczas $F^\prime$ jest zbiorem semi-rozcinającym dla~$T^\prime$ w~$G^\prime$.
 \end{proposition}
 
 \begin{proof}
-Najpierw pokażemy, że żaden wierzchołek z~$T\setminus\{t\}$ nie leży w~$N(t)$. Weźmy $u\in T\setminus\{t\}$.
-Jeżeli $u\in N(t)$, to $\dist{G}{t}{u}=1$, a~każda ścieżka z~$t$ do~$u$ o~długości $1$ składa się z jednej krawędzi $tu$.
-Z~Obserwacji~\ref{obs:shortest-paths} wynikałoby $tu\in F$, czyli $t\in V[F]$, sprzecznie z~założeniem.
-Zatem $T\setminus\{t\}\subseteq V\setminus N[t]$ i~w szczególności $T'\subseteq V(G')$.
+Najpierw pokażemy, że
+\[
+  T\setminus\{t\}\subseteq V\setminus N[t].
+\]
+Weźmy dowolne $u\in T\setminus\{t\}$ i~przypuśćmy, że $u\in N(t)$. Wtedy $\dist{G}{t}{u}=1$, a~jedyna ścieżka długości $1$ z~$t$
+do~$u$ jest równa $(t,u)$. Z~Obserwacji~\ref{obs:shortest-paths} wynikałoby, że krawędź $\{t,u\}$ należy do~$F$, co przeczy
+założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi, że żaden terminal różny od~$t$ nie należy do~$N[t]$. W szczególności
+$T^\prime\subseteq V(G^\prime)$.
 
-Pokażemy najpierw, że dla każdych różnych $u,w\in T'$ zachodzi $\dist{G'}{u}{w}<\infty$. Jeżeli $u,w\in T\setminus\{t\}$, to z
-Definicji~\ref{def:semi-cut} otrzymujemy $\dist{G}{u}{w}<\infty$, a~więc istnieje spacer $Q$ z~$u$ do~$w$ w~$G$.
-Z~Lematu~\ref{lem:projection-walk} wynika, że w~$G'$ istnieje spacer z~$u$ do~$w$, a~z Lematu~\ref{lem:walk-to-path} — że istnieje
-również ścieżka z~$u$ do~$w$ w~$G'$. Jeżeli natomiast jeden z~wierzchołków $u,w$ jest równy $t'$, to drugi należy do $T\setminus\{t\}$;
-oznaczmy go przez $z$. Z~Definicji~\ref{def:semi-cut} otrzymujemy $\dist{G}{t}{z}<\infty$, a~więc istnieje spacer z~$t$ do~$z$ w~$G$.
-Stosując Lemat~\ref{lem:projection-walk} do tego spaceru dla $W=N[t]$ dostajemy spacer z~$t'$ do~$z$ w~$G'$, a~następnie z
-Lematu~\ref{lem:walk-to-path} — ścieżkę z~$t'$ do~$z$ w~$G'$. W szczególności $\dist{G'}{t'}{z}<\infty$.
+Pokażemy teraz, że dla każdych różnych $u,w\in T^\prime$ zachodzi $\dist{G^\prime}{u}{w}<\infty$. Jeżeli
+$u,w\in T\setminus\{t\}$, to z~Definicji~\ref{def:semi-cut} wynika $\dist{G}{u}{w}<\infty$, więc w~$G$ istnieje ścieżka
+z~$u$ do~$w$. Z~Lematu~\ref{lem:projection-walk} otrzymujemy spacer z~$u$ do~$w$ w~$G^\prime$, a następnie z~Lematu~\ref{lem:walk-to-path}
+ścieżkę z~$u$ do~$w$ w~$G^\prime$. Jeżeli jeden z~wierzchołków $u,w$ jest równy $t^\prime$, to drugi należy do~$T\setminus\{t\}$;
+oznaczmy go przez $z$. Wtedy z~Definicji~\ref{def:semi-cut} mamy $\dist{G}{t}{z}<\infty$, więc w~$G$ istnieje ścieżka z~$t$ do~$z$.
+Jej obraz daje, po użyciu lematów \ref{lem:projection-walk} i~\ref{lem:walk-to-path}, ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$.
 
-Ustalmy teraz różne $u,w\in T'$. Ponieważ $\dist{G'}{u}{w}<\infty$, z~Lematu~\ref{lem:walk-to-path} wynika istnienie ścieżki z~$u$ do~$w$
-w~$G'$ o~długości $\dist{G'}{u}{w}$; niech $P'$ będzie dowolną taką ścieżką.
-Pokażemy, że $E(P')\cap F'\neq\emptyset$.
-
-\medskip\noindent
-\textbf{Przypadek 1: $t'\notin V(P')$.}
-Wtedy $V(P')\subseteq V\setminus N[t]$, a~z definicji $E(G')$ wynika $E(P')\subseteq E$. Zatem $P'$ jest również ścieżką w~$G$.
-Gdyby w~$G$ istniał spacer $Q$ z~$u$ do~$w$ o~długości mniejszej niż $\len{P'}$,
-to na mocy Lematu~\ref{lem:projection-walk} istniałby w~$G'$ spacer z~$u$ do~$w$ o~długości nie większej niż $\len{Q}<\len{P'}$,
-co przeczyłoby wyborowi $P'$. Ponieważ $P'$ jest również spacerem w~$G$, otrzymujemy $\len{P'}=\dist{G}{u}{w}$.
-Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} wynika, że $P'$ zawiera pewną krawędź $e\in F$.
-Krawędź $e$ ma oba końce poza $N[t]$, więc $e/N[t]=e$ i~w szczególności $e\in F'$. Stąd $E(P')\cap F'\neq\emptyset$.
+Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$. Zgodnie
+z~Obserwacją~\ref{obs:shortest-paths} wystarczy wykazać, że
+\[
+  E(P^\prime)\cap F^\prime\neq\emptyset.
+\]
+Rozpatrzymy dwa przypadki.
 
 \medskip\noindent
-\textbf{Przypadek 2: $t'\in V(P')$.}
-Rozważmy najpierw podprzypadek, w~którym $t'$ jest jednym z~końców ścieżki $P'$. Niech $z$ będzie drugim końcem, tj.\
-$\{z\}=\{u,w\}\setminus\{t'\}$. Jeżeli $P'$ nie zaczyna się w~$t'$, to odwróćmy kolejność wierzchołków na $P'$; otrzymujemy ścieżkę tej
-samej długości i~o~tym samym zbiorze krawędzi, łączącą $t'$ z~$z$. Nadal oznaczamy ją przez $P'$. Zatem możemy zapisać
-$P'$ w postaci $(t',x_1,\dots,x_k)$, gdzie $x_k=z$.
-Z~definicji ściągania wynika, że krawędź $t'x_1$ w~$G'$ pochodzi od pewnej krawędzi $vx_1$ w~$G$ z~wierzchołkiem $v\in N[t]$.
-Ponieważ $x_1\notin N[t]$, nie może zachodzić $v=t$ (wtedy $tx_1\in E$, więc $x_1\in N(t)\subseteq N[t]$). Zatem $v\in N(t)$, a~więc
-$tv\in E(G)$.
-Rozważmy ciąg wierzchołków $(t,v,x_1,\dots,x_k)$. Jest to ścieżka $P$ w~$G$: wierzchołek $v$ jest sąsiadem $t$, natomiast
-$x_1,\dots,x_k$ nie należą do $N[t]$, więc są różne od $t$ i~$v$, a~ponieważ $P'$ jest ścieżką, wierzchołki $x_1,\dots,x_k$ są parami
-różne. Mamy $\len{P}=\len{P'}+1$.
+\textbf{Przypadek 1: $t^\prime\notin V(P^\prime)$.}
+Wszystkie wierzchołki ścieżki $P^\prime$ należą wtedy do~$V\setminus N[t]$. Każda krawędź ścieżki $P^\prime$ ma więc oba końce
+poza $N[t]$, a~z definicji ściągania wynika, że jest to zarazem krawędź grafu $G$. W konsekwencji $P^\prime$ jest ścieżką z~$u$ do~$w$
+w~$G$.
 
-Niech $Q=(q_0,\dots,q_\ell)$ będzie dowolną ścieżką z~$t$ do~$z$ w~$G$, tj.\ $q_0=t$ oraz $q_\ell=z$. Ponieważ $z\notin N[t]$, mamy
-$\ell\ge 2$, a~w szczególności $q_1\in N(t)$. Stąd $\pi_{N[t]}(q_0)=\pi_{N[t]}(q_1)=t'$. W dowodzie Lematu~\ref{lem:projection-walk}
-konstruujemy indeksy $0=i_0<i_1<\dots<i_m=\ell$ odpowiadające usuwaniu kolejnych powtórzeń w~ciągu
-$(\pi_{N[t]}(q_0),\dots,\pi_{N[t]}(q_\ell))$. Z równości $\pi_{N[t]}(q_0)=\pi_{N[t]}(q_1)$ wynika $i_1\ge 2$, a~zatem $m\le \ell-1$.
-Otrzymujemy więc spacer z~$t'$ do~$z$ w~$G'$ o~długości nie większej niż $\ell-1=\len{Q}-1$. Stąd
-$\dist{G'}{t'}{z}\le \len{Q}-1$, czyli $\len{Q}\ge \dist{G'}{t'}{z}+1=\len{P'}+1=\len{P}$. Otrzymujemy $\dist{G}{t}{z}=\len{P}$, a~zatem
-$P$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
+Pokażemy, że $P^\prime$ jest najkrótsza również w~$G$. Gdyby istniała w~$G$ ścieżka $Q$ z~$u$ do~$w$ o~długości
+$\len{Q}<\len{P^\prime}$, to na mocy Lematu~\ref{lem:projection-walk} w~$G^\prime$ istniałby spacer z~$u$ do~$w$ o~długości
+co najwyżej $\len{Q}$. Z~Lematu~\ref{lem:walk-to-path} wynikałoby więc, że w~$G^\prime$ istnieje ścieżka z~$u$ do~$w$ o~długości
+co najwyżej $\len{Q}<\len{P^\prime}$, sprzecznie z~wyborem $P^\prime$. Otrzymujemy
+\[
+  \len{P^\prime}=\dist{G}{u}{w}.
+\]
+Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} dostajemy krawędź $e\in E(P^\prime)\cap F$. Oba końce $e$
+leżą poza $N[t]$, więc $e/N[t]=e$ oraz $e\in F^\prime$. Zatem $E(P^\prime)\cap F^\prime\neq\emptyset$.
 
-Z~Obserwacji~\ref{obs:shortest-paths} ścieżka $P$ zawiera pewną krawędź $e\in F$. Pierwsza krawędź $tv$ ścieżki $P$ jest
-incydentna z~$t$, więc nie należy do $F$ (bo $t\notin V[F]$). Zatem $e$ leży na odcinku $(v,x_1,\dots,x_k)$, który po ściągnięciu
-$N[t]$ przechodzi w~odcinek $(t',x_1,\dots,x_k)$ ścieżki $P'$. Każda krawędź na tym odcinku ma co najwyżej jeden koniec w~$N[t]$, więc jej
-obraz w~$G'$ jest zdefiniowany. W szczególności $e/N[t]$ jest krawędzią ścieżki $P'$ i~należy do $F'$, więc $E(P')\cap F'\neq\emptyset$.
+\medskip\noindent
+\textbf{Przypadek 2: $t^\prime\in V(P^\prime)$.}
+Jeżeli $t^\prime$ jest ostatnim wierzchołkiem ścieżki $P^\prime$, zastępujemy $P^\prime$ ścieżką przeciwną. Nie zmienia to ani długości,
+ani zbioru krawędzi. Możemy więc zapisać
+\[
+  P^\prime=(y_0,\dots,y_r,y_{r+1},\dots,y_m),
+  \qquad
+  y_r=t^\prime,
+\]
+gdzie $r<m$. Oznaczmy przez
+\[
+  Q^\prime\coloneqq (t^\prime,y_{r+1},\dots,y_m)
+\]
+sufiks ścieżki $P^\prime$ zaczynający się w~$t^\prime$, oraz połóżmy $z\coloneqq y_m$. Wierzchołek $z$ należy do
+$T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$, a~więc $z\notin N[t]$.
 
-Jeżeli natomiast $u\neq t'$, $w\neq t'$ oraz $t'$ jest wierzchołkiem wewnętrznym ścieżki $P'$, to $P'$ dzieli się na konkatenację
-$P'=P'_1\cdot P'_2$, gdzie $P'_1$ łączy $u$ z~$t'$, a~$P'_2$ łączy $t'$ z~$w$. Z~Lematu~\ref{lem:subpath} wynika, że obie podścieżki
-są najkrótsze między swoimi końcami. Stosujemy powyższy argument do ścieżki $P'_1$: jeżeli $P'_1$ nie zaczyna się w~$t'$, odwróćmy
-kolejność wierzchołków na $P'_1$. Otrzymujemy $E(P'_1)\cap F'\neq\emptyset$. Następnie stosujemy ten sam argument do $P'_2$ i dostajemy
-$E(P'_2)\cap F'\neq\emptyset$. W konsekwencji $E(P')\cap F'\neq\emptyset$.
-\medskip
+Jeżeli $r=0$, to $Q^\prime=P^\prime$, więc $Q^\prime$ jest ścieżką najkrótszą z~$t^\prime$ do~$z$ w~$G^\prime$. Jeżeli $r>0$, to
+z~Lematu~\ref{lem:subpath} wynika, że $Q^\prime$ jest ścieżką najkrótszą między swoimi końcami. W~obu sytuacjach możemy zastosować
+Lemat~\ref{lem:lifting-endpoint}. Dostajemy wierzchołek $v\in N(t)$ taki, że
+\[
+  Q=(t,v,y_{r+1},\dots,y_m)
+\]
+jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 
-W~każdym przypadku wykazaliśmy $E(P')\cap F'\neq\emptyset$. Z~Obserwacji~\ref{obs:shortest-paths} wynika więc, że $F'$ jest zbiorem
-semi-rozcinającym dla~$T'$ w~$G'$.
+Z~Obserwacji~\ref{obs:shortest-paths} wynika, że $E(Q)\cap F\neq\emptyset$. Pierwsza krawędź ścieżki $Q$ jest równa $\{t,v\}$, więc
+nie należy do~$F$, gdyż $t\notin V[F]$. Zatem istnieje krawędź $e\in E(Q)\cap F$ różna od~$\{t,v\}$. Taka krawędź leży na odcinku
+$(v,y_{r+1},\dots,y_m)$, a~jej obraz po ściągnięciu $N[t]$ należy do~$E(Q^\prime)\subseteq E(P^\prime)$. Ponieważ $e\in F$, mamy także
+$e/N[t]\in F^\prime$. Stąd ponownie
+\[
+  E(P^\prime)\cap F^\prime\neq\emptyset.
+\]
+
+W obu przypadkach każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^\prime$ przecina zbiór $F^\prime$. Z~Obserwacji
+\ref{obs:shortest-paths} wynika, że $F^\prime$ jest zbiorem semi-rozcinającym dla~$T^\prime$ w~$G^\prime$.
 \end{proof}
 
 \section{Główne twierdzenie}
 
 \begin{theorem}\label{thm:main}
-Niech $G=(V,E)$ będzie grafem, $T\subseteq V$ oraz $F\subseteq E$. Jeżeli $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$, to
+Niech $G=(V,E)$ będzie grafem, niech $T\subseteq V$ oraz $F\subseteq E$. Jeżeli $F$ jest zbiorem semi-rozcinającym dla~$T$ w~$G$, to
 \[
   |F|\ge |T|-1.
 \]
 \end{theorem}
 
 \begin{proof}
-Dowodzimy tezy przez indukcję po parze $(|T|,|V|)$ w~porządku leksykograficznym, tj.\ $(a,b)\prec (c,d)$ wtedy i~tylko wtedy, gdy
-$a<c$ lub $(a=c\ \text{i}\ b<d)$.
+Dla par liczb całkowitych nieujemnych $(k,n)$ oznaczmy przez $\mathcal{P}(k,n)$ następujące zdanie:
+\begin{quote}
+dla każdego grafu $H$ o~$n$ wierzchołkach, każdego zbioru $X\subseteq V(H)$ o~mocy $k$ oraz każdego zbioru krawędzi
+$M\subseteq E(H)$, jeżeli $M$ jest zbiorem semi-rozcinającym dla~$X$ w~$H$, to $|M|\ge k-1$.
+\end{quote}
+Udowodnimy prawdziwość wszystkich zdań $\mathcal{P}(k,n)$ przez indukcję względem porządku leksykograficznego na parach $(k,n)$.
 
 \medskip\noindent
-\textbf{Baza indukcji.} Jeżeli $|T|\le 1$, to w~$T$ nie ma par różnych wierzchołków, więc warunek z~Definicji~\ref{def:semi-cut} jest
-spełniony dla dowolnego $F$. W~takim przypadku $|F|\ge 0\ge |T|-1$.
+\textbf{Baza indukcji.} Niech $k\le 1$. Wtedy dla dowolnego grafu $H$, dowolnego $X\subseteq V(H)$ o~mocy $k$ oraz dowolnego
+$M\subseteq E(H)$ zachodzi nierówność
+\[
+  |M|\ge 0\ge k-1.
+\]
+Zatem $\mathcal{P}(k,n)$ jest prawdziwe dla każdego $n$.
 
 \medskip\noindent
-\textbf{Krok indukcyjny.} Niech $|T|\ge 2$ i~załóżmy, że twierdzenie jest prawdziwe dla wszystkich trójek $(G_0,T_0,F_0)$ z~parą
-$(|T_0|,|V(G_0)|)$ mniejszą leksykograficznie od $(|T|,|V|)$. Rozróżnimy dwa przypadki.
+\textbf{Krok indukcyjny.} Ustalmy parę $(k,n)$ z~$k\ge 2$ i~załóżmy, że $\mathcal{P}(k',n')$ jest prawdziwe dla każdej pary
+$(k',n')$ mniejszej leksykograficznie od~$(k,n)$. Rozważmy graf $G=(V,E)$ o~$n$ wierzchołkach, zbiór $T\subseteq V$ o~mocy $k$
+oraz zbiór $F\subseteq E$, który jest semi-rozcinający dla~$T$ w~$G$. Pokażemy, że $|F|\ge k-1$.
+
+Rozpatrzymy dwa przypadki.
 
 \medskip\noindent
 \textbf{Przypadek 1: $T\cap V[F]=\emptyset$.}
-Wybierzmy dowolny $t\in T$ oraz dowolny $u\in T\setminus\{t\}$. Z~Definicji~\ref{def:semi-cut} wynika
-$\dist{G}{t}{u}<\dist{G\setminus F}{t}{u}\le\infty$, a~zatem $\dist{G}{t}{u}<\infty$. Istnieje więc spacer $(v_0,\dots,v_k)$ z~$v_0=t$
-do~$v_k=u$. Ponieważ $u\neq t$, mamy $k\ge 1$, więc $v_1\in N(t)$ i~$|N[t]|\ge 2$.
-
-Niech $G'\coloneqq G/N[t]$, $T'\coloneqq (T\setminus\{t\})\cup\{t'\}$ oraz $F'\coloneqq F/N[t]$ jak w~Propozycji~\ref{prop:contraction}.
-Na mocy tej propozycji $F'$ jest zbiorem semi-rozcinającym dla~$T'$ w~$G'$. Ponadto $|T'|=|T|$ oraz, ponieważ $|N[t]|\ge 2$,
-zachodzi $|V(G')|=|V|-|N[t]|+1<|V|$. Zatem z~założenia indukcyjnego otrzymujemy
+Wybierzmy $t\in T$ oraz $u\in T\setminus\{t\}$. Z~Definicji~\ref{def:semi-cut} wynika, że $\dist{G}{t}{u}<\infty$. Istnieje więc
+ścieżka z~$t$ do~$u$ o~dodatniej długości, a~zatem $N(t)\neq\emptyset$ i~w szczególności
 \[
-  |F'|\ge |T'|-1=|T|-1.
+  |N[t]|\ge 2.
 \]
-Z~definicji obrazu zbioru krawędzi przy ściąganiu mamy $|F'|\le |F|$, a~więc $|F|\ge |T|-1$.
+
+Niech
+\[
+  G^\prime\coloneqq G/N[t],
+  \qquad
+  T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\},
+  \qquad
+  F^\prime\coloneqq F/N[t].
+\]
+Na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$ jest semi-rozcinający dla~$T^\prime$ w~$G^\prime$. Ponadto
+\[
+  |T^\prime|=|T|=k
+  \qquad\text{oraz}\qquad
+  |V(G^\prime)|=|V|-|N[t]|+1<n.
+\]
+Para odpowiadająca trójce $(G^\prime,T^\prime,F^\prime)$ jest więc równa $(k,n')$ dla pewnego $n'<n$. Z~założenia indukcyjnego
+otrzymujemy
+\[
+  |F^\prime|\ge |T^\prime|-1=k-1.
+\]
+Z~Definicji~\ref{def:contraction} wiemy, że $|F^\prime|\le |F|$, a~więc
+\[
+  |F|\ge k-1.
+\]
 
 \medskip\noindent
 \textbf{Przypadek 2: $T\cap V[F]\neq\emptyset$.}
-Wybierzmy $t\in T\cap V[F]$ oraz krawędź $e\in F$ incydentną z~$t$. Zdefiniujmy $T^-\coloneqq T\setminus\{t\}$ oraz
-$F^-\coloneqq F\setminus\{e\}$. Pokażemy, że $F^-$ jest zbiorem semi-rozcinającym dla~$T^-$ w~$G$.
-
-Weźmy dowolne różne $u,w\in T^-$. Ponieważ $u,w\in T$, z~Definicji~\ref{def:semi-cut} otrzymujemy $\dist{G}{u}{w}<\infty$.
-Z~Lematu~\ref{lem:walk-to-path} wynika istnienie ścieżki z~$u$ do~$w$ w~$G$ o~długości $\dist{G}{u}{w}$; niech $P$ będzie dowolną taką
-ścieżką.
-Z~Obserwacji~\ref{obs:shortest-paths} wynika, że $P$ zawiera pewną krawędź ze zbioru $F$.
-Jeżeli $e\notin E(P)$, to mamy od razu $E(P)\cap F^-\neq\emptyset$. Załóżmy więc, że $e\in E(P)$. Wtedy $t$ leży na~$P$ i~ścieżka
-$P$ rozkłada się na konkatenację $P=P_u\cdot P_w$, gdzie $P_u$ łączy $u$ z~$t$, a~$P_w$ łączy $t$ z~$w$. Z~Lematu~\ref{lem:subpath}
-wynika, że $\len{P_u}=\dist{G}{u}{t}$ oraz $\len{P_w}=\dist{G}{t}{w}$. Ponieważ $P$ jest ścieżką, podścieżki $P_u$ i~$P_w$ mają wspólny
-jedynie wierzchołek $t$, a~zatem $E(P_u)\cap E(P_w)=\emptyset$ oraz $E(P)=E(P_u)\,\dot\cup\,E(P_w)$. Krawędź $e$ jest incydentna z~$t$,
-więc należy dokładnie do jednej z~podścieżek $P_u$ i~$P_w$. Jeżeli $e\notin E(P_w)$, to ponieważ $t,w\in T$, z~Obserwacji~\ref{obs:shortest-paths}
-wynika $E(P_w)\cap F\neq\emptyset$, a~zatem $E(P_w)\cap F^-\neq\emptyset$, co implikuje $E(P)\cap F^-\neq\emptyset$. Jeżeli natomiast
-$e\notin E(P_u)$, to ponieważ $u,t\in T$, dostajemy $E(P_u)\cap F^-\neq\emptyset$, więc $E(P)\cap F^-\neq\emptyset$.
-
-Ponieważ $u,w$ były dowolne, z~Obserwacji~\ref{obs:shortest-paths} wynika, że $F^-$ jest zbiorem semi-rozcinającym dla~$T^-$ w~$G$.
-Teraz para $(|T^-|,|V|)=(|T|-1,|V|)$ jest mniejsza leksykograficznie niż $(|T|,|V|)$, więc z~założenia indukcyjnego
+Wybierzmy wierzchołek $t\in T\cap V[F]$ oraz krawędź $e\in F$ taką, że $t\in e$. Oznaczmy
 \[
-  |F^-|\ge |T^-|-1=|T|-2.
+  T^-\coloneqq T\setminus\{t\},
+  \qquad
+  F^-\coloneqq F\setminus\{e\}.
 \]
-W konsekwencji $|F|=|F^-|+1\ge |T|-1$, co kończy dowód.
+Pokażemy, że $F^-$ jest zbiorem semi-rozcinającym dla~$T^-$ w~$G$.
+
+Weźmy dowolne różne wierzchołki $u,w\in T^-$. Z~Definicji~\ref{def:semi-cut} wynika, że $\dist{G}{u}{w}<\infty$. Niech $P$ będzie
+dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths} dostajemy
+\[
+  E(P)\cap F\neq\emptyset.
+\]
+Jeżeli $e\notin E(P)$, to natychmiast
+\[
+  E(P)\cap F^-\neq\emptyset.
+\]
+Pozostaje przypadek $e\in E(P)$. Ponieważ $t\in e$, wierzchołek $t$ należy do~$V(P)$. Zapiszmy $P$ w~postaci
+\[
+  P=P_u\cdot P_w,
+\]
+gdzie $P_u$ jest podścieżką od~$u$ do~$t$, a~$P_w$ podścieżką od~$t$ do~$w$. Z~Lematu~\ref{lem:subpath} wynika, że
+$P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$.
+
+Ponieważ $P$ jest ścieżką, podścieżki $P_u$ i~$P_w$ mają wspólny tylko wierzchołek $t$. Każda krawędź należy więc do~co najwyżej
+jednej z~tych dwóch podścieżek. Krawędź $e$ jest incydentna z~$t$, zatem należy dokładnie do~jednej z~nich. Jeśli
+$e\notin E(P_w)$, to z~Obserwacji~\ref{obs:shortest-paths}, zastosowanej do pary $t,w\in T$, wynika
+\[
+  E(P_w)\cap F\neq\emptyset.
+\]
+Ponieważ $e\notin E(P_w)$, każda krawędź z~$E(P_w)\cap F$ należy w~rzeczywistości do~$F^-$. Otrzymujemy
+\[
+  E(P)\cap F^-\neq\emptyset.
+\]
+Analogicznie, jeśli $e\notin E(P_u)$, to z~Obserwacji~\ref{obs:shortest-paths} dla pary $u,t\in T$ dostajemy
+\[
+  E(P_u)\cap F^-\neq\emptyset,
+\]
+a więc ponownie $E(P)\cap F^-\neq\emptyset$.
+
+Wykazaliśmy, że każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^-$ przecina zbiór $F^-$. Ponadto dla takich wierzchołków
+odległość w~$G$ jest skończona, ponieważ były one już terminalami w~zbiorze $T$. Z~Obserwacji~\ref{obs:shortest-paths} wynika zatem,
+że $F^-$ jest zbiorem semi-rozcinającym dla~$T^-$ w~$G$.
+
+Para odpowiadająca trójce $(G,T^-,F^-)$ jest równa $(k-1,n)$, a więc jest mniejsza leksykograficznie od~$(k,n)$. Z~założenia
+indukcyjnego otrzymujemy
+\[
+  |F^-|\ge |T^-|-1=(k-1)-1=k-2.
+\]
+Wobec tego
+\[
+  |F|=|F^-|+1\ge k-1.
+\]
+Krok indukcyjny jest zakończony, a tym samym prawdziwe jest zdanie $\mathcal{P}(k,n)$ dla każdej pary $(k,n)$.
 \end{proof}
 
 \begin{remark}
-Nierówność z~Twierdzenia~\ref{thm:main} jest ostra. Dla ścieżki $G$ o~zbiorze wierzchołków $V$ i~$T=V$ możemy wziąć $F=E$; wówczas
-$|F|=|V|-1=|T|-1$, a~po usunięciu $F$ odległości między różnymi wierzchołkami stają się równe $\infty$.
+Oszacowanie z~Twierdzenia~\ref{thm:main} jest ostre. Jeżeli $G$ jest ścieżką oraz $T=V(G)$, to dla $F=E(G)$ zachodzi
+$|F|=|V(G)|-1=|T|-1$, a~po usunięciu wszystkich krawędzi każda para różnych wierzchołków ma odległość równą $\infty$.
 \end{remark}
 
 \end{document}
