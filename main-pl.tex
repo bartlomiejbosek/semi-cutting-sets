@@ -56,13 +56,14 @@ Argument ma trzy składniki. Najpierw zapisujemy równoważną postać definicji
 Następnie wykazujemy, że własność ta zachowuje się po ściągnięciu domkniętego sąsiedztwa terminala nieincydentnego z~$F$.
 Na końcu przeprowadzamy indukcję leksykograficzną względem pary $(|T|,|V(H)|)$. Dla wygody czytelnika cały wywód, łącznie
 z~lematami elementarnymi, zapisujemy w~sposób samodzielny.
+Terminologia dotycząca podstawowych pojęć teorii grafów jest zgodna ze standardową terminologią podręcznikową, por.~\cite[rozdz.~1]{diestel}.
 
 W~Sekcji~2 ustalamy notację. Sekcja~3 zawiera lematy pomocnicze o~ścieżkach najkrótszych. W~Sekcji~4 dowodzimy
 niezmienniczości własności pół-tnącej przy ściąganiu, a~w~Sekcji~5 przeprowadzamy dowód twierdzenia głównego.
 
 \section{Notacja i definicje}
 
-O~ile jawnie nie zaznaczono inaczej, przez graf rozumiemy skończony graf nieskierowany prosty, to znaczy graf bez pętli
+O~ile jawnie nie zaznaczono inaczej, przez $G=(V,E)$ oznaczamy skończony graf nieskierowany prosty, to znaczy graf bez pętli
 i~bez krawędzi równoległych. W~takim grafie każdą krawędź utożsamiamy z~dwuelementowym podzbiorem zbioru wierzchołków.
 Jeżeli $e\in E$ oraz $v\in e$, to mówimy, że $v$ jest końcem krawędzi $e$. Odległości traktujemy jako elementy zbioru
 $\mathbb{N}_0\cup\{\infty\}$, gdzie $\mathbb{N}_0=\{0,1,2,\dots\}$, z~naturalnym porządkiem rozszerzonym o~relacje
@@ -121,7 +122,7 @@ Niech $W\subseteq V$ oraz niech $w^\ast\notin V$ będzie nowym wierzchołkiem. D
     v & \text{dla } v\notin W.
   \end{cases}
 \]
-Przez $G/W$ oznaczamy graf $(V',E')$, gdzie
+Przez $G/W$ oznaczamy prosty graf $(V',E')$, gdzie
 \[
   V'\coloneqq (V\setminus W)\cup\{w^\ast\},
   \qquad
@@ -170,7 +171,7 @@ wierzchołków $u,w\in T$ zachodzi
 Niech $H$ będzie dowolnym skończonym grafem nieskierowanym, również z~pętlami i~krawędziami równoległymi, oraz niech
 $T\subseteq V(H)$ i~$F\subseteq E(H)$. Oznaczmy przez $H^{\mathrm s}$ graf prosty otrzymany z~$H$ przez usunięcie wszystkich pętli
 i~zastąpienie każdej niepustej klasy krawędzi równoległych pojedynczą krawędzią. Dla $F\subseteq E(H)$ definiujemy
-$F^{\mathrm s}\subseteq E(H^{\mathrm s})$ jako zbiór tych krawędzi $uv\in E(H^{\mathrm s})$, dla których każda krawędź grafu $H$
+$F^{\mathrm s}\subseteq E(H^{\mathrm s})$ jako zbiór tych krawędzi $\{u,v\}\in E(H^{\mathrm s})$, dla których każda krawędź grafu $H$
 o~końcach $u$ i~$v$ należy do~$F$. Wtedy dla każdych wierzchołków $u,w\in V(H)$ zachodzą równości
 \[
   \dist{H}{u}{w}=\dist{H^{\mathrm s}}{u}{w}
@@ -194,19 +195,19 @@ dowolnego reprezentanta każdej użytej klasy. Stąd
   \dist{H}{u}{w}=\dist{H^{\mathrm s}}{u}{w}.
 \]
 
-Po usunięciu zbioru $F$ sytuacja jest analogiczna. Dla ustalonych końców $u$ i~$v$ krawędź $uv$ należy do
+Po usunięciu zbioru $F$ sytuacja jest analogiczna. Dla ustalonych końców $u$ i~$v$ krawędź $\{u,v\}$ należy do
 $E(H^{\mathrm s}\setminus F^{\mathrm s})$ wtedy i~tylko wtedy, gdy w~$H\setminus F$ pozostaje przynajmniej jedna krawędź o~końcach
-$u$ i~$v$. Rzeczywiście, jeżeli $uv\notin F^{\mathrm s}$, to z~definicji $F^{\mathrm s}$ wynika istnienie krawędzi o~końcach $u$ i~$v$,
-która nie należy do~$F$; odwrotnie, jeżeli taka krawędź istnieje w~$H\setminus F$, to nie wszystkie krawędzie o~końcach $u$ i~$v$
-leżą w~$F$, więc $uv\notin F^{\mathrm s}$. Zatem ścieżki w~$H\setminus F$ i~$H^{\mathrm s}\setminus F^{\mathrm s}$ również
+$u$ i~$v$. Rzeczywiście, jeżeli $\{u,v\}\notin F^{\mathrm s}$, to z~definicji $F^{\mathrm s}$ wynika istnienie krawędzi o~końcach
+$u$ i~$v$, która nie należy do~$F$; odwrotnie, jeżeli taka krawędź istnieje w~$H\setminus F$, to nie wszystkie krawędzie o~końcach
+$u$ i~$v$ leżą w~$F$, więc $\{u,v\}\notin F^{\mathrm s}$. Zatem ścieżki w~$H\setminus F$ i~$H^{\mathrm s}\setminus F^{\mathrm s}$ również
 odpowiadają sobie z zachowaniem długości, skąd
 \[
   \dist{H\setminus F}{u}{w}=\dist{H^{\mathrm s}\setminus F^{\mathrm s}}{u}{w}.
 \]
 Te dwie równości odległości dają natychmiast wniosek o~zachowaniu własności pół-tnącej. Dla oszacowania liczności zauważmy, że
-jeżeli $uv\in F^{\mathrm s}$, to z~definicji $F^{\mathrm s}$ każda krawędź grafu $H$ o~końcach $u$ i~$v$ należy do~$F$. Wybierzmy
-jedną z~nich i~oznaczmy ją przez $e_{uv}$. Różne krawędzie grafu $H^{\mathrm s}$ mają różne pary końców, więc odwzorowanie
-$uv\mapsto e_{uv}$ jest injekcją $F^{\mathrm s}\to F$. Otrzymujemy $|F^{\mathrm s}|\le |F|$.
+jeżeli $\{u,v\}\in F^{\mathrm s}$, to z~definicji $F^{\mathrm s}$ każda krawędź grafu $H$ o~końcach $u$ i~$v$ należy do~$F$.
+Wybierzmy jedną z~nich i~oznaczmy ją przez $e_{\{u,v\}}$. Różne krawędzie grafu $H^{\mathrm s}$ mają różne pary końców, więc
+odwzorowanie $\{u,v\}\mapsto e_{\{u,v\}}$ jest injekcją $F^{\mathrm s}\to F$. Otrzymujemy $|F^{\mathrm s}|\le |F|$.
 \end{proof}
 
 \section{Lematy pomocnicze}
@@ -460,7 +461,7 @@ z~założenia $t^\prime\notin V(P^\prime)$ wynika
 \[
   V(P^\prime)\subseteq V\setminus N[t].
 \]
-Jeżeli $f=\{x,y\}\in E(P^\prime)$, to $x,y\notin N[t]$. Mamy więc $\pi_{N[t]}(x)=x$ oraz $\pi_{N[t]}(y)=y$, a zatem z~Definicji
+Jeżeli $f=\{x,y\}\in E(P^\prime)$, to $x,y\notin N[t]$. Mamy więc $\pi_{N[t]}(x)=x$ oraz $\pi_{N[t]}(y)=y$, a~zatem z~Definicji
 \ref{def:contraction} wynika $f=\{x,y\}\in E(G)$. Każda krawędź ścieżki $P^\prime$ jest więc zarazem krawędzią grafu $G$, a~tym
 samym $P^\prime$ jest ścieżką z~$u$ do~$w$ w~$G$.
 
@@ -565,7 +566,7 @@ Porządek ten jest dobrze ufundowany na~$\mathbb{N}_0^2$, więc taka indukcja je
 
 \medskip\noindent
 \textbf{Baza indukcji.} Niech $k\le 1$. Wtedy dla dowolnego grafu $H$, dowolnego $X\subseteq V(H)$ o~mocy $k$ oraz dowolnego
-$M\subseteq E(H)$ warunek z~Definicji~\ref{def:semi-cut} jest spełniony w~sposób pusty, ponieważ w~$X$ nie ma par różnych
+$M\subseteq E(H)$ warunek z~Definicji~\ref{def:semi-cut} jest spełniony trywialnie, ponieważ w~$X$ nie ma par różnych
 wierzchołków. W~szczególności zachodzi nierówność
 \[
   |M|\ge 0\ge k-1.
@@ -684,8 +685,19 @@ Krok indukcyjny jest zakończony, a tym samym prawdziwe jest zdanie $\mathcal{P}
 \end{proof}
 
 \begin{remark}
-Oszacowanie z~Twierdzenia~\ref{thm:main} jest ostre. Jeżeli $G$ jest grafem będącym ścieżką oraz $T=V(G)$, to dla $F=E(G)$ zachodzi
+Oszacowanie z~Twierdzenia~\ref{thm:main} jest ostre. Jeżeli $G$ jest drzewem oraz $T=V(G)$, to dla $F=E(G)$ zachodzi
 $|F|=|V(G)|-1=|T|-1$, a~po usunięciu wszystkich krawędzi każda para różnych wierzchołków ma odległość równą $\infty$.
 \end{remark}
+
+\begin{thebibliography}{1}
+
+\bibitem{diestel}
+R.~Diestel,
+\emph{Graph Theory},
+5th ed.,
+Graduate Texts in Mathematics 173,
+Springer, 2017.
+
+\end{thebibliography}
 
 \end{document}
