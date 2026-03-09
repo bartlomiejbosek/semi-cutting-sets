@@ -85,6 +85,11 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 15. Dla pomocy w plikach dowod-1.jpg oraz dowod-2.jpg jest rozpisany cały dowód w pełni formalnie.
 
 
-16. Dla pomocy w pliku main-lluis.pdf jest zaprezentowany troche inny dowód tego samego.
+16. Praca powinna mieć obrazki w Tikz, które jak najtrafniej - albo jako konkretne przykłady albo schematycznie pokazujące graf - pokazując ideę dowodu
+
+
+17. Dla pomocy w pliku main-lluis.pdf jest zaprezentowany troche inny dowód tego samego.
+
+
 
 ---

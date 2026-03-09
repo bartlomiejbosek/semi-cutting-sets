@@ -74,6 +74,10 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 15. Nie musisz szczegółowo wyprowadzać najbardziej elementarnych własności rzutowania ścieżek przy operacji ściągania wierzchołków - wystarczy precyzyjne stwierdzenie odpowiedniego wniosku logicznego z odwołaniem.
 
 
+16. Praca powinna mieć obrazki w Tikz, które jak najtrafniej - albo jako konkretne przykłady albo schematycznie pokazujące graf - pokazując ideę dowodu
+
+
+17. Dla pomocy w pliku main-lluis.pdf jest zaprezentowany troche inny dowód tego samego.
 
 -----------------------------------------------------------------------------------------------------------
 
