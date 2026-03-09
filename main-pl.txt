@@ -58,10 +58,15 @@ Na końcu przeprowadzamy indukcję leksykograficzną względem pary $(|T|,|V(H)|
 z~lematami elementarnymi, zapisujemy w~sposób samodzielny.
 Terminologia dotycząca podstawowych pojęć teorii grafów jest zgodna ze standardową terminologią podręcznikową, por.~\cite[rozdz.~1]{diestel}.
 
+Sam krok indukcyjny opiera się na dwóch rozłącznych sytuacjach. Jeżeli pewien terminal nie jest incydentny z~żadną krawędzią
+ze zbioru $F$, to ściągamy jego domknięte otoczenie i~zmniejszamy liczbę wierzchołków, nie zmieniając liczby terminali.
+Jeżeli natomiast rozważany terminal jest incydentny z~krawędzią z~$F$, to usuwamy jedną taką krawędź oraz sam terminal,
+co zmniejsza liczbę terminali.
+
 W~Sekcji~2 ustalamy notację. Sekcja~3 zawiera lematy pomocnicze o~ścieżkach najkrótszych. W~Sekcji~4 dowodzimy
 niezmienniczości własności pół-tnącej przy ściąganiu, a~w~Sekcji~5 przeprowadzamy dowód twierdzenia głównego.
 
-\section{Notacja i definicje}
+\section{Notacja, definicje i redukcja wstępna}
 
 O~ile jawnie nie zaznaczono inaczej, przez $G=(V,E)$ oznaczamy skończony graf nieskierowany prosty, to znaczy graf bez pętli
 i~bez krawędzi równoległych. W~takim grafie każdą krawędź utożsamiamy z~dwuelementowym podzbiorem zbioru wierzchołków.
@@ -128,6 +133,8 @@ Przez $G/W$ oznaczamy prosty graf $(V',E')$, gdzie
   \qquad
   E'\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
 \]
+Warunek $\pi_W(x)\neq \pi_W(y)$ usuwa pętle, a opis zbiorowy krawędzi utożsamia ewentualne krawędzie równoległe. W~szczególności
+graf $G/W$ jest grafem prostym.
 Jeżeli $e=\{x,y\}\in E$ oraz $\pi_W(x)\neq \pi_W(y)$, to obraz tej krawędzi oznaczamy przez
 \[
   e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E'.
@@ -165,7 +172,10 @@ wierzchołków $u,w\in T$ zachodzi
 \[
   \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}.
 \]
+Wierzchołki ze zbioru $T$ nazywamy terminalami.
 \end{definition}
+
+\section{Lematy pomocnicze}
 
 \begin{lemma}[Redukcja do grafów prostych]\label{lem:simple-reduction}
 Niech $H$ będzie dowolnym skończonym grafem nieskierowanym, również z~pętlami i~krawędziami równoległymi, oraz niech
@@ -209,8 +219,6 @@ jeżeli $\{u,v\}\in F^{\mathrm s}$, to z~definicji $F^{\mathrm s}$ każda krawę
 Wybierzmy jedną z~nich i~oznaczmy ją przez $e_{\{u,v\}}$. Różne krawędzie grafu $H^{\mathrm s}$ mają różne pary końców, więc
 odwzorowanie $\{u,v\}\mapsto e_{\{u,v\}}$ jest injekcją $F^{\mathrm s}\to F$. Otrzymujemy $|F^{\mathrm s}|\le |F|$.
 \end{proof}
-
-\section{Lematy pomocnicze}
 
 \begin{lemma}\label{lem:walk-to-path}
 Niech $H$ będzie grafem prostym. Jeżeli w~$H$ istnieje spacer z~$u$ do~$w$, to istnieje również ścieżka z~$u$ do~$w$ w~$H$
@@ -437,6 +445,8 @@ do~$u$ jest równa $(t,u)$, ponieważ w~grafie prostym istnieje dokładnie jedna
 sprzeczność dowodzi, że żaden terminal różny od~$t$ nie należy do~$N[t]$. W~szczególności
 $T^\prime\subseteq V(G^\prime)$.
 
+Z~Definicji~\ref{def:contraction} wiemy ponadto, że $G^\prime$ jest grafem prostym.
+
 Pokażemy teraz, że dla każdych różnych $u,w\in T^\prime$ zachodzi $\dist{G^\prime}{u}{w}<\infty$. Jeżeli
 $u,w\in T\setminus\{t\}$, to z~Definicji~\ref{def:semi-cut} wynika $\dist{G}{u}{w}<\infty$, więc w~$G$ istnieje ścieżka
 z~$u$ do~$w$. Z~Lematu~\ref{lem:projection-walk} otrzymujemy spacer z~$u$ do~$w$ w~$G^\prime$, a następnie z~Lematu~\ref{lem:walk-to-path}
@@ -602,6 +612,8 @@ Na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$ jest na wpół-tnąc
   \qquad\text{oraz}\qquad
   |V(G^\prime)|=|V|-|N[t]|+1\le n-1<n.
 \]
+Na mocy Definicji~\ref{def:contraction} graf $G^\prime$ jest prosty, a~zatem do trójki $(G^\prime,T^\prime,F^\prime)$ można
+zastosować hipotezę indukcyjną.
 Para odpowiadająca trójce $(G^\prime,T^\prime,F^\prime)$ jest więc równa $(k,n')$ dla pewnego $n'<n$, a~więc spełnia
 $(k,n')\prec (k,n)$. Z~założenia indukcyjnego
 otrzymujemy
