@@ -34,3 +34,5 @@ cp -v "${OWNPATH}/main-pl.txt" "${OWNPATH}/input/main-pl.txt"
 
 pdflatex main-pl.tex
 pdflatex main-pl.tex
+
+rm *.aux *.out *.toc
