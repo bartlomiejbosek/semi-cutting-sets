@@ -16,3 +16,8 @@
 **/*.ps
 **/*.pdf
 **/*.gz
+**/*.txt
+
+!zadanie-2-krytyka.txt
+!zadanie-2-poprawa.txt
+!**/main-lluis.pdf
