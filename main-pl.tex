@@ -5,7 +5,9 @@
 \usepackage[polish]{babel}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
+\usepackage{tikz}
 \usepackage{geometry}
+\usetikzlibrary{arrows.meta,calc,fit,positioning}
 \geometry{margin=2.5cm}
 
 \theoremstyle{definition}
@@ -50,7 +52,8 @@ Po jednorazowej redukcji do grafów prostych dalszy argument jest czysto struktu
 terminal $t$ nie jest incydentny z~żadną krawędzią zbioru $F$, to po ściągnięciu zbioru $N[t]$ do nowego wierzchołka własność
 na wpół-tnąca przechodzi na obraz zbioru $F$. W przeciwnym razie każdy terminal jest incydentny z~co najmniej jedną krawędzią
 z~$F$, co pozwala usunąć jeden terminal i~jedną krawędź, nie tracąc własności dla pozostałych terminali. Terminologia
-dotycząca podstawowych pojęć teorii grafów jest zgodna z~terminologią podręcznikową, por.~\cite[rozdz.~1]{diestel}.
+dotycząca podstawowych pojęć teorii grafów jest zgodna z~terminologią podręcznikową, por.~\cite[rozdz.~1]{diestel}. Dwa ruchy
+techniczne, które napędzają cały dowód, ilustrują Rysunki~\ref{fig:contraction} i~\ref{fig:split-path}.
 
 \section{Notacja i definicje}
 
@@ -406,6 +409,48 @@ Obie nierówności dają
 czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
 \end{proof}
 
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  \begin{scope}[xshift=0cm]
+    \node[circle,draw,inner sep=1.5pt,fill=white] (a) at (-0.2,1.1) {};
+    \node[circle,draw,inner sep=1.5pt,fill=white] (b) at (-0.4,-1.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$t$] (t) at (1.0,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$v$] (v) at (2.2,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$y_{r+1}$] (y1) at (4.0,0.0) {};
+    \node[circle,draw,inner sep=1.5pt,fill=white] (y2) at (5.2,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$z$] (z) at (6.5,0.0) {};
+    \draw[gray!70] (a)--(t) (b)--(t) (t)--(v);
+    \draw[very thick,blue!70!black] (t)--(v)--(y1)--(y2)--(z);
+    \draw[very thick,red!70!black] (v)--(y1);
+    \node[draw,dashed,rounded corners,fit=(a)(b)(t)(v),inner sep=6pt] {};
+    \node at (0.9,1.8) {$N[t]$};
+    \node at (3.2,-1.0) {$Q=(t,v,y_{r+1},\dots,z)$};
+    \node at (3.2,-1.7) {$e=\{v,y_{r+1}\}$};
+    \node at (3.2,1.75) {$G$};
+  \end{scope}
+
+  \draw[-{Latex[length=3mm]},thick] (7.4,0) -- (8.8,0);
+  \node at (8.1,0.45) {\small ściągnięcie $N[t]$};
+
+  \begin{scope}[xshift=9.8cm]
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$t^\prime$] (tp) at (0.0,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$y_{r+1}$] (yp1) at (2.0,0.0) {};
+    \node[circle,draw,inner sep=1.5pt,fill=white] (yp2) at (3.2,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$z$] (zp) at (4.5,0.0) {};
+    \draw[very thick,blue!70!black] (tp)--(yp1)--(yp2)--(zp);
+    \draw[very thick,red!70!black] (tp)--(yp1);
+    \node at (2.25,-1.0) {$Q^\prime=(t^\prime,y_{r+1},\dots,z)$};
+    \node at (2.25,-1.7) {$e/N[t]=\{t^\prime,y_{r+1}\}$};
+    \node at (2.25,1.75) {$G/N[t]$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Schemat ruchu używanego w~Lemacie~\ref{lem:lifting-endpoint} i~w~Przypadku~2 Propozycji~\ref{prop:contraction}. Ścieżka
+$Q^\prime$ w~grafie po ściągnięciu odpowiada ścieżce $Q$ w~grafie wyjściowym, a~krawędź z~$F$ leżąca na~$Q$ daje po ściągnięciu
+krawędź należącą do~$F^\prime$.}
+\label{fig:contraction}
+\end{figure}
+
 \begin{proposition}\label{prop:contraction}
 Niech $T\subseteq V$ oraz $F\subseteq E$. Załóżmy, że $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$. Niech
 $t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkiem. Oznaczmy
@@ -436,10 +481,11 @@ $u,w\in T\setminus\{t\}$, to z~Definicji~\ref{def:semi-cut} mamy $\dist{G}{u}{w}
 w~$G$, której obraz w~$G^\prime$, po zastosowaniu Lematów~\ref{lem:projection-walk} i~\ref{lem:walk-to-path}, daje ścieżkę
 z~$u$ do~$w$ w~$G^\prime$. Jeżeli jeden z~wierzchołków $u,w$ jest równy $t^\prime$, to drugi należy do~$T\setminus\{t\}$;
 oznaczmy go przez $z$. Z~Definicji~\ref{def:semi-cut} mamy $\dist{G}{t}{z}<\infty$, więc w~$G$ istnieje ścieżka z~$t$ do~$z$.
-Jej obraz daje ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$. Tym samym każda para różnych terminali z~$T^\prime$ ma w~$G^\prime$
-skończoną odległość.
+Jej obraz daje w~$G^\prime$ spacer z~$t^\prime$ do~$z$, a~po zastosowaniu Lematów~\ref{lem:projection-walk}
+i~\ref{lem:walk-to-path} otrzymujemy ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$. Tym samym każda para różnych terminali z~$T^\prime$
+ma w~$G^\prime$ skończoną odległość.
 
-Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$. Na mocy
+Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$. Na mocy
 Obserwacji~\ref{obs:shortest-paths} wystarczy wykazać, że
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
@@ -535,6 +581,28 @@ na wpół-tnącym dla~$T$ w~$G$, to
   |F|\ge |T|-1.
 \]
 \end{theorem}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$u$] (u) at (0,0) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white] (x) at (1.6,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$t$] (t) at (3.2,0) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white] (y) at (4.8,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$w$] (w) at (6.4,0) {};
+  \draw[very thick,blue!70!black] (u)--(x)--(t)--(y)--(w);
+  \draw[very thick,red!70!black] (x)--(t);
+  \draw[very thick,green!50!black] (t)--(y);
+  \node at (1.6,0.6) {$P_u$};
+  \node at (4.8,0.6) {$P_w$};
+  \node at (2.4,-0.65) {$e$};
+  \node at (4.0,-0.65) {$f$};
+\end{tikzpicture}
+\caption{Sytuacja z~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Po rozcięciu ścieżki najkrótszej $P$ w~wierzchołku $t$ dostajemy
+podścieżki $P_u$ i~$P_w$. Na rysunku pokazano podprzypadek $e\in E(P_u)$; wtedy z~najkrótszości $P_w$ wynika istnienie krawędzi
+$f\in E(P_w)\cap F$, a~więc $f\neq e$ i~$f\in F^-$. Przypadek symetryczny jest analogiczny.}
+\label{fig:split-path}
+\end{figure}
 
 \begin{proof}
 Niech $G^{\mathrm s}$ oraz $F^{\mathrm s}$ będą obiektami z~Lematu~\ref{lem:simple-reduction}. Jeżeli teza zachodzi dla
@@ -635,7 +703,7 @@ Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$
 \[
   \dist{G}{u}{w}<\infty.
 \]
-Niech $P$ będzie ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths} dostajemy
+Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths} dostajemy
 \[
   E(P)\cap F\neq\emptyset.
 \]
@@ -649,7 +717,8 @@ w~wierzchołku $t$ i~piszemy
   P=P_u\cdot P_w,
 \]
 gdzie $P_u$ jest podścieżką od~$u$ do~$t$, a~$P_w$ podścieżką od~$t$ do~$w$. Na mocy Lematu~\ref{lem:subpath}
-$P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$.
+$P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$. Sytuację tę ilustruje
+Rysunek~\ref{fig:split-path}.
 Ponieważ $u,w\in T^-=T\setminus\{t\}$, obie te podścieżki mają dodatnią długość.
 
 Ponieważ $P$ jest ścieżką, wierzchołki jej prefiksu i~sufiksu rozciętych w~$t$ mogą mieć wspólny tylko wierzchołek $t$. Zatem
