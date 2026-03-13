@@ -79,6 +79,8 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 
 17. Dla pomocy w pliku main-lluis.pdf jest zaprezentowany troche inny dowód tego samego.
 
+18. Problem dotyczy tylko i wyłącznie grafów prostyc bez pętli. Ma to być jasno napisane. Dowody absolutnie nie amj się tyczyć grafów z wielokrotnymi krawędziami czy też z pętlami!!!!!
+
 -----------------------------------------------------------------------------------------------------------
 
 Oceń go bardzo ostro.
