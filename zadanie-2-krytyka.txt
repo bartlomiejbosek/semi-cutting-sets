@@ -53,7 +53,7 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 8. Praca powinna być czytelna i przejrzysta 
 
 
-9. To ma wyglądać jak profesjonalny artykuł matematyczny podobny do tych, które są publikowane na takich konferencjach jak "Symposium on Foundations of Computer Science", "Symposium on Theory of Computing", "Symposium on Discrete Algorithms". A nie jak jakiś chaotyczny raport!!!!! 
+9. To ma wyglądać jak profesjonalny artykuł matematyczny podobny do tych, które są publikowane w topowych czasopismach teorii grafów, takich jak "Journal of Combinatorial Theory, Series B", "Journal of Graph Theory" czy "Combinatorica". A nie jak jakiś chaotyczny raport!!!!! 
 
 
 10. Niewolno nadmiernie używać wylistowań.
