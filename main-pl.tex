@@ -136,6 +136,49 @@ Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
 \]
 \end{definition}
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+  %% Lewa strona: graf G z wyróżnionym W = {a,b,c}
+  \begin{scope}[xshift=0cm]
+    \node at (2.2,3.0) {$G$};
+    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]    (x)  at (0,1.5)   {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]   (y)  at (4.4,2.2)  {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]   (z)  at (4.4,0.8)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$a$] (a)  at (1.5,2.3)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=right:$b$] (b)  at (2.8,1.5)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$c$] (c)  at (1.5,0.7)  {};
+    %% Krawędzie wewnątrz W (staną się pętlami — znikną)
+    \draw[gray!50] (a)--(b)--(c)--(a);
+    %% Krawędzie między W a resztą grafu
+    \draw (x)--(a)  (x)--(c);
+    \draw (b)--(y)  (b)--(z);
+    \draw (y)--(z);
+    %% Obrys zbioru W
+    \node[draw,dashed,rounded corners,fit=(a)(b)(c),inner sep=7pt,
+          label={[font=\small]above right:$W$}] {};
+  \end{scope}
+  %% Strzałka ściągania
+  \draw[-{Latex[length=3mm]},thick] (5.4,1.5) -- (6.8,1.5)
+    node[midway,above,font=\small] {$/W$};
+  %% Prawa strona: G/W
+  \begin{scope}[xshift=7.4cm]
+    \node at (1.8,3.0) {$G/W$};
+    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]       (xp) at (0,1.5)   {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]      (yp) at (3.6,2.2)  {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]      (zp) at (3.6,0.8)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!50,label=above:$w^*$]  (wp) at (1.8,1.5)  {};
+    \draw (xp)--(wp)  (wp)--(yp)  (wp)--(zp)  (yp)--(zp);
+  \end{scope}
+\end{tikzpicture}
+\caption{Ściąganie $W=\{a,b,c\}$ do wierzchołka $w^*$ (Definicja~\ref{def:contraction}).
+Krawędzie wewnętrzne zbioru $W$ znikają (stają się pętlami).
+Dwie krawędzie $\{a,x\}$ i~$\{c,x\}$ dają po ściągnięciu jedną krawędź $\{w^*,x\}$;
+krawędzie $\{b,y\}$ i~$\{b,z\}$ przechodzą odpowiednio na $\{w^*,y\}$ i~$\{w^*,z\}$.
+Krawędź $\{y,z\}$ pozostaje niezmieniona.}
+\label{fig:contraction-def}
+\end{figure}
+
 \begin{lemma}\label{lem:contraction-image-size}
 Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas
 \[
@@ -257,6 +300,7 @@ spełnia
 \[
   E(P)\cap M\neq\emptyset.
 \]
+Sytuację tę ilustruje Rysunek~\ref{fig:shortest-path-condition}.
 \end{observation}
 
 \begin{proof}
@@ -289,6 +333,37 @@ Ponieważ $Q$ jest także ścieżką w~$H$, mamy $\len{Q}\ge \dist{H}{u}{w}$. R�
 \]
 Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$.
 \end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+  %% Terminale
+  \node[circle,draw,inner sep=3pt,fill=gray!30,label=left:$u$]  (u) at (0,0)   {};
+  \node[circle,draw,inner sep=3pt,fill=gray!30,label=right:$w$] (w) at (7.2,0) {};
+  %% Ścieżka najkrótsza (długość 3): u--p--q--w, z krawędzią z F
+  \node[circle,draw,inner sep=2pt,fill=white,label=above:$p$] (p) at (2.2,1.1) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=above:$q$] (q) at (5.0,1.1) {};
+  \draw[thick,blue!70!black] (u)--(p);
+  \draw[very thick,red!70!black] (p)--node[above]{$e\in F$}(q);
+  \draw[thick,blue!70!black] (q)--(w);
+  \node[blue!70!black] at (3.6,2.1) {każda ścieżka najkrótsza ($\ell=3$) musi zawierać krawędź z~$F$};
+  %% Dłuższa ścieżka (długość 4): u--a--b--c--w, omijająca F
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$a$] (a) at (1.8,-1.1) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$b$] (b) at (3.6,-1.1) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$c$] (c) at (5.4,-1.1) {};
+  \draw[thick,black!35] (u)--(a)--(b)--(c)--(w);
+  \node[black!45] at (3.6,-2.1) {ścieżka dłuższa ($\ell=4$) może ominąć $F$
+    --- to właśnie podnosi $d_{G\setminus F}(u,w)$};
+  %% Adnotacja odległości
+  \node[align=center] at (3.6,0)
+    {$d_G(u,w)=3$\\$d_{G\setminus F}(u,w)=4$};
+\end{tikzpicture}
+\caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: $F=\{e\}$ jest zbiorem na wpół-tnącym
+dla~$\{u,w\}$, bo każda ścieżka najkrótsza długości~3 (niebieska) zawiera krawędź $e\in F$.
+Dłuższe ścieżki (szare) mogą $F$ ominąć -- ich istnienie gwarantuje, że
+$d_{G\setminus F}(u,w)=4>3=d_G(u,w)$.}
+\label{fig:shortest-path-condition}
+\end{figure}
 
 \begin{figure}[ht]
 \centering
@@ -656,7 +731,54 @@ krawędzi $F\subseteq E$, który jest na wpół-tnący dla~$T$ w~$G$. Pokażemy,
 \[
   |F|\ge k-1.
 \]
-Rozpatrujemy dwa przypadki.
+Rozpatrujemy dwa przypadki; Rysunek~\ref{fig:induction-scheme} ilustruje ich strukturę schematycznie.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw,rounded corners=4pt,align=center,inner sep=8pt,font=\small},
+  arr/.style={-{Latex[length=3mm]},thick},
+  every node/.style={font=\small}
+]
+  %% Wejście -- wyjściowa trójka
+  \node[box,fill=blue!8,text width=5.4cm] (start) at (0,0)
+    {$(G,\;T,\;F)$\\[3pt]
+     $|T|=k$,\quad $|V(G)|=n$\\[2pt]
+     $F$ na wpół-tnący dla~$T$ w~$G$};
+  %% Przypadek 1
+  \node[box,fill=green!8,text width=5.4cm] (c1) at (-4.6,-4.0)
+    {\textbf{Przypadek 1:}\\$\exists\,t\in T\setminus V[F]$\\[3pt]
+     ściągnij $N[t]$ do~$t'$\\\smallskip
+     $(G',T',F')$\\
+     $|T'|=k$,\quad $|V(G')|<n$\\[3pt]
+     $(k,\,n')\prec(k,\,n)$};
+  %% Przypadek 2
+  \node[box,fill=orange!8,text width=5.4cm] (c2) at (4.6,-4.0)
+    {\textbf{Przypadek 2:}\\$T\subseteq V[F]$\\[3pt]
+     usuń $t\in T$ i krawędź $e\in F$\\\smallskip
+     $(G,\,T^-,\,F^-)$\\
+     $|T^-|=k-1$,\quad $|V(G)|=n$\\[3pt]
+     $(k{-}1,\,n)\prec(k,\,n)$};
+  %% Wnioski
+  \node[box,fill=green!18,text width=5.4cm] (r1) at (-4.6,-7.8)
+    {ZI: $|F'|\ge k-1$\\[2pt]
+     $|F|\ge|F'|\ge k-1$\quad $\checkmark$};
+  \node[box,fill=orange!18,text width=5.4cm] (r2) at (4.6,-7.8)
+    {ZI: $|F^-|\ge k-2$\\[2pt]
+     $|F|=|F^-|+1\ge k-1$\quad $\checkmark$};
+  %% Strzałki
+  \draw[arr] (start.south) -- ++(0,-0.6) -| (c1.north);
+  \draw[arr] (start.south) -- ++(0,-0.6) -| (c2.north);
+  \draw[arr] (c1) -- (r1);
+  \draw[arr] (c2) -- (r2);
+\end{tikzpicture}
+\caption{Schemat kroku indukcyjnego w~dowodzie Twierdzenia~\ref{thm:main}.
+Przypadek~1 zmniejsza liczbę wierzchołków przy niezmienionej liczbie terminali;
+Przypadek~2 zmniejsza liczbę terminali.
+W~obu sytuacjach otrzymana trójka jest $\prec$-mniejsza, co uzasadnia
+zastosowanie założenia indukcyjnego (ZI).}
+\label{fig:induction-scheme}
+\end{figure}
 
 \medskip\noindent
 \textbf{Przypadek 1: istnieje terminal $t\in T\setminus V[F]$.}
@@ -678,7 +800,8 @@ Niech $t^\prime\notin V$ będzie nowym wierzchołkiem i~niech
   \qquad
   F^\prime\coloneqq F/N[t].
 \]
-Na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$. Ponieważ
+Na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$
+(Rysunek~\ref{fig:case1-contraction}). Ponieważ
 $t^\prime\notin V$ oraz $T\subseteq V$, mamy $t^\prime\notin T$, a~więc
 \[
   |T^\prime|=|T|=k.
@@ -699,6 +822,53 @@ Lemat~\ref{lem:contraction-image-size} daje $|F^\prime|\le |F|$, a~zatem
 \[
   |F|\ge k-1.
 \]
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+  %% Lewa strona: G z terminalem t nieincydentnym z F
+  \begin{scope}[xshift=0cm]
+    \node at (2.5,3.3) {$G$};
+    %% Terminal t i jego sąsiedztwo N(t) = {v1, v2}
+    \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=above:$t$]  (t)  at (2.2,1.5)  {};
+    \node[circle,draw,inner sep=2pt, fill=white,   label=above:$v_1$](v1) at (0.6,2.5)  {};
+    \node[circle,draw,inner sep=2pt, fill=white,   label=below:$v_2$](v2) at (0.6,0.5)  {};
+    %% Pozostałe terminale u, w (szare = terminale)
+    \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=right:$u$]  (u)  at (4.4,2.5)  {};
+    \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=right:$w$]  (w)  at (4.4,0.5)  {};
+    %% Krawędź z F (czerwona) -- NIEINCYDENTNA z t
+    \draw[very thick,red!70!black] (u) -- node[right]{$e\in F$} (w);
+    %% Krawędzie grafu (szare i normalne)
+    \draw (t)--(v1)  (t)--(v2)  (v1)--(u)  (v2)--(w)  (t)--(u);
+    %% Obrys N[t]
+    \node[draw,dashed,rounded corners,fit=(t)(v1)(v2),inner sep=7pt,
+          label={[font=\small]above left:$N[t]$}] {};
+    \node[font=\scriptsize,gray!60] at (2.2,0.2) {$t\notin V[F]$};
+  \end{scope}
+  %% Strzałka
+  \draw[-{Latex[length=3mm]},thick] (5.5,1.5) -- (6.9,1.5)
+    node[midway,above,font=\small] {$/N[t]$};
+  %% Prawa strona: G' = G/N[t]
+  \begin{scope}[xshift=7.6cm]
+    \node at (2.0,3.3) {$G'=G/N[t]$};
+    %% t' = ściągnięty N[t]
+    \node[circle,draw,inner sep=2.5pt,fill=gray!50,label=above:$t'$] (tp) at (0.0,1.5) {};
+    %% Terminale u, w pozostają
+    \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=right:$u$]  (up) at (2.5,2.5) {};
+    \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=right:$w$]  (wp) at (2.5,0.5) {};
+    %% F' = F/N[t] -- ta sama krawędź (u,w poza N[t])
+    \draw[very thick,red!70!black] (up) -- node[right]{$e\in F'$} (wp);
+    \draw (tp)--(up)  (tp)--(wp);
+    \node[font=\scriptsize] at (1.25,-0.5)
+      {$T'=\{t',u,w\}$,\quad $|V(G')|=|V(G)|-2$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Przypadek~1 dowodu Twierdzenia~\ref{thm:main}: terminal $t$ nie jest incydentny
+z~żadną krawędzią $F$, więc ściągamy $N[t]=\{t,v_1,v_2\}$ do nowego wierzchołka~$t'$.
+Krawędź $e\in F$ łączy wierzchołki spoza $N[t]$, więc przechodzi do $F'$ bez zmian.
+Zbiór terminali $T'=\{t',u,w\}$ ma tę samą moc~$k$, ale $|V(G')|<|V(G)|$.}
+\label{fig:case1-contraction}
+\end{figure}
 
 \medskip\noindent
 \textbf{Przypadek 2: $T\subseteq V[F]$.}
@@ -764,8 +934,57 @@ Z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ dostajemy $f\neq e$, a~więc $f\i
 \]
 
 Wykazaliśmy, że dla każdych różnych $u,w\in T^-$ odległość $\dist{G}{u}{w}$ jest skończona i~każda ścieżka najkrótsza między
-$u$ i~$w$ przecina zbiór $F^-$. Z~Obserwacji~\ref{obs:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
+$u$ i~$w$ przecina zbiór $F^-$. Rysunek~\ref{fig:case2-paths} ilustruje oba podprzypadki.
+Z~Obserwacji~\ref{obs:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
 w~$G$.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.95, every node/.style={font=\small}]
+  %% ====== Górny wiersz: e ∉ E(P) ======
+  \node[font=\small\itshape] at (-1.2,1.2) {(i)};
+  \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=above:$u$] (u1) at (0,1.2) {};
+  \node[circle,draw,inner sep=2pt, fill=white] (m1a) at (1.4,1.2) {};
+  \node[circle,draw,inner sep=2pt, fill=white] (m1b) at (2.8,1.2) {};
+  \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=above:$w$] (w1) at (4.2,1.2) {};
+  \draw[very thick,green!50!black] (u1)--(m1a);
+  \draw[very thick,red!70!black]   (m1a)--node[above]{$f\!\in\! F$}(m1b);
+  \draw[very thick,green!50!black] (m1b)--(w1);
+  \node[font=\scriptsize,align=center] at (2.1,0.4)
+    {$e\notin E(P)$\;$\Rightarrow$\;$f\in E(P)\cap F^-$};
+
+  %% ====== Dolny wiersz: e ∈ E(P_u), f ∈ E(P_w) ======
+  \node[font=\small\itshape] at (-1.2,-1.0) {(ii)};
+  \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=below:$u$] (u2) at (0,-1.0) {};
+  \node[circle,draw,inner sep=2pt, fill=white] (pu)  at (1.2,-1.0) {};
+  \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=below:$t$] (t2) at (2.4,-1.0) {};
+  \node[circle,draw,inner sep=2pt, fill=white] (pw)  at (3.6,-1.0) {};
+  \node[circle,draw,inner sep=2.5pt,fill=gray!30,label=below:$w$] (w2) at (4.8,-1.0) {};
+  \draw[thick] (u2)--(pu);
+  \draw[very thick,red!70!black]    (pu)--node[above]{$e\in F$}(t2);
+  \draw[thick] (t2)--(pw);
+  \draw[very thick,orange!80!black] (pw)--node[above]{$f\in F^-$}(w2);
+  %% Nawiasy klamrowe dla P_u i P_w
+  \draw[decorate,decoration={brace,amplitude=5pt,mirror}]
+    (u2.south west) -- (t2.south east)
+    node[midway,below=6pt] {$P_u$\; (ścieżka najkrótsza $u$--$t$)};
+  \draw[decorate,decoration={brace,amplitude=5pt,mirror}]
+    (t2.south west) -- (w2.south east)
+    node[midway,below=6pt] {$P_w$\; (ścieżka najkrótsza $t$--$w$)};
+  \node[font=\scriptsize,align=center] at (2.4,-2.6)
+    {$e\in E(P_u)$,\; $e\notin E(P_w)$\;$\Rightarrow$\;$f\in E(P_w)\cap F$,\; $f\neq e$,\; $f\in F^-$};
+
+  %% Separator między (i) a (ii)
+  \draw[gray!40,dashed] (-1.5,0.0) -- (6.0,0.0);
+\end{tikzpicture}
+\caption{Przypadek~2 dowodu Twierdzenia~\ref{thm:main}: dowolna ścieżka najkrótsza $P$
+z~$u$ do~$w$ (terminale z~$T^-$) musi zawierać krawędź z~$F^-=F\setminus\{e\}$.
+(i) Jeżeli $e\notin E(P)$, to dowolna krawędź $f\in E(P)\cap F$ już należy do~$F^-$.
+(ii) Jeżeli $e\in E(P)$, to $t\in V(P)$; rozcinamy $P$ na $P_u$ i~$P_w$.
+Ponieważ $t,w\in T$, ścieżka $P_w$ zawiera krawędź $f\in F$; z~rozłączności $E(P_u)\cap E(P_w)=\emptyset$
+wynika $f\neq e$, więc $f\in F^-$.}
+\label{fig:case2-paths}
+\end{figure}
 
 Para odpowiadająca trójce $(G,T^-,F^-)$ jest równa $(k-1,n)$, a~więc spełnia
 \[
