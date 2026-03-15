@@ -238,8 +238,8 @@ Wierzchołki ze zbioru $T$ nazywamy terminalami.
   %% Krawędzie: te należące do F w kolorze czerwonym
   \draw[very thick,red!70!black] (u) -- node[above]{$e_1$} (a);
   \draw (a) -- (v);
-  \draw (v) -- (b);
-  \draw[very thick,red!70!black] (b) -- node[above]{$e_2$} (w);
+  \draw[very thick,red!70!black] (v) -- node[above]{$e_2$} (b);
+  \draw (b) -- (w);
   %% Legenda odległości
   \node[align=center] at (3.6,-1.3)
     {$\dist{G}{u}{v}=2,\quad \dist{G\setminus F}{u}{v}=\infty$\\[2pt]
@@ -257,21 +257,8 @@ przy czym $|F|=2=|T|-1$.}
 
 \begin{lemma}\label{lem:walk-to-path}
 Niech $H$ będzie skończonym grafem prostym. Jeżeli w~$H$ istnieje spacer z~$u$ do~$w$, to istnieje również ścieżka z~$u$ do~$w$
-o~długości nie większej niż długość tego spaceru.
+o~długości nie większej niż długość tego spaceru; por.~\cite[rozdz.~1]{diestel}.
 \end{lemma}
-
-\begin{proof}
-Wybierzmy wśród wszystkich spacerów z~$u$ do~$w$ o~długości nie większej od długości ustalonego spaceru taki, którego długość jest
-najmniejsza. Niech będzie to $P=(v_0,\dots,v_k)$. Gdyby istniały indeksy $0\le i<j\le k$ z~$v_i=v_j$, to ciąg
-\[
-  P'\coloneqq (v_0,\dots,v_i)\cdot(v_j,\dots,v_k)
-\]
-byłby spacerem z~$u$ do~$w$ o~długości
-\[
-  \len{P'}=k-(j-i)<k=\len{P},
-\]
-sprzeczny z~minimalnością wyboru. Zatem wierzchołki $v_0,\dots,v_k$ są parami różne, czyli $P$ jest ścieżką.
-\end{proof}
 
 \begin{lemma}\label{lem:subpath}
 Niech $H$ będzie skończonym grafem prostym oraz niech $P=(v_0,\dots,v_k)$ będzie ścieżką z~$u$ do~$w$ w~$H$ o~długości
@@ -279,20 +266,8 @@ $\len{P}=\dist{H}{u}{w}$. Wówczas dla każdych indeksów $0\le i\le j\le k$ zac
 \[
   \len{P[v_i,v_j]}=\dist{H}{v_i}{v_j}.
 \]
+Por.~\cite[rozdz.~1]{diestel}.
 \end{lemma}
-
-\begin{proof}
-Załóżmy przeciwnie, że istnieje ścieżka $Q$ z~$v_i$ do~$v_j$ taka, że
-\[
-  \len{Q}<\len{P[v_i,v_j]}.
-\]
-Wtedy
-\[
-  (v_0,\dots,v_i)\cdot Q\cdot (v_j,\dots,v_k)
-\]
-jest spacerem z~$u$ do~$w$ w~$H$ o~długości mniejszej niż $\len{P}$. Na mocy Lematu~\ref{lem:walk-to-path} istnieje więc ścieżka
-z~$u$ do~$w$ krótsza niż $P$, co przeczy równości $\len{P}=\dist{H}{u}{w}$.
-\end{proof}
 
 \begin{observation}\label{obs:shortest-paths}
 Niech $H$ będzie skończonym grafem prostym, niech $X\subseteq V(H)$ oraz niech $M\subseteq E(H)$. Wówczas $M$ jest zbiorem
@@ -856,7 +831,8 @@ należałyby do~$\{t\}$, a~więc krawędź ta byłaby pętlą, co jest niemożli
 Krawędź $e$ należy dokładnie do jednej z~tych dwóch podścieżek.
 
 Jeżeli $e\in E(P_w)$, to rozważamy tę samą ścieżkę $P$ czytaną w~przeciwnym porządku. Wtedy role wierzchołków $u$ i~$w$ oraz role
-podścieżek $P_u$ i~$P_w$ zamieniają się, natomiast zbiór krawędzi $E(P)$ pozostaje ten sam. Możemy więc założyć, że
+podścieżek $P_u$ i~$P_w$ zamieniają się, natomiast zbiór krawędzi $E(P)$ pozostaje ten sam; oba końce ścieżki nadal należą też
+do~$T^-$. Możemy więc założyć, że
 \[
   e\in E(P_u).
 \]
