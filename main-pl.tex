@@ -60,10 +60,13 @@ i~jedną krawędź, nie tracąc własności dla pozostałych terminali. Terminol
 zgodna z~terminologią podręcznikową, por.~\cite[rozdz.~1]{diestel}. Oszacowanie jest ostre; przykład z~Rysunku
 \ref{fig:semi-cut-example} spełnia równość $|F|=|T|-1$. Dwie główne konstrukcje użyte w~dowodzie ilustrują
 Rysunki~\ref{fig:contraction} i~\ref{fig:split-path}.
+Sam warunek z~Definicji~\ref{def:semi-cut} wymusza przy tym, że dla każdych różnych terminali $u,w\in T$ zachodzi
+$\dist{G}{u}{w}<\infty$, a~więc wszystkie terminale leżą w~jednej składowej spójności; jest to jednak konsekwencja definicji,
+a~nie dodatkowe założenie o~strukturze grafu.
 
 \section{Notacja i definicje}
 
-W~całej pracy pracujemy na ustalonym skończonym grafie nieskierowanym prostym $G=(V,E)$. Każdą krawędź utożsamiamy zatem
+W~tej sekcji i~w dalszych sformułowaniach przez $G=(V,E)$ oznaczamy dowolny skończony graf nieskierowany prosty. Każdą krawędź utożsamiamy zatem
 z~dwuelementowym podzbiorem zbioru wierzchołków. Odległości traktujemy jako elementy zbioru $\mathbb{N}_0\cup\{\infty\}$, gdzie
 $\mathbb{N}_0=\{0,1,2,\dots\}$, z~porządkiem rozszerzonym przez relacje $n<\infty$ dla każdego $n\in\mathbb{N}_0$.
 
@@ -485,7 +488,8 @@ $z\in N(t)\subseteq N[t]$, wbrew założeniu $z\notin N[t]$. Zastosowanie Lematu
 \[
   (q_1,\dots,q_\ell)
 \]
-daje spacer z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$, gdyż $\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z$.
+będącego końcowym fragmentem ścieżki $Q$ daje spacer z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$, gdyż
+$\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z$.
 Z~Lematu~\ref{lem:walk-to-path} otrzymujemy więc ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$.
 Wobec tego
 \[
@@ -726,13 +730,13 @@ Udowodnimy prawdziwość wszystkich zdań $\mathcal{P}(k,n)$ przez indukcję wzg
   \ \text{lub}\
   \bigl(k_1=k_2\ \text{i}\ n_1<n_2\bigr).
 \]
-Porządek ten jest dobrze ufundowany na~$\mathbb{N}_0^2$: jeżeli $A\subseteq \mathbb{N}_0^2$ jest niepusty, to zbiór pierwszych
-współrzędnych elementów $A$ ma element najmniejszy, a~po jego ustaleniu zbiór odpowiadających mu drugich współrzędnych również ma
-element najmniejszy. Otrzymana para jest elementem $\prec$-minimalnym zbioru $A$.
+Porządek ten jest dobrze ufundowany na~$\mathbb{N}_0^2$, gdyż w~każdym niepustym zbiorze par można najpierw wybrać najmniejszą
+pierwszą współrzędną, a~następnie najmniejszą drugą współrzędną dla tej pierwszej.
 
 \medskip\noindent
 \textbf{Baza indukcji.} Niech $k\le 1$. Wtedy dla dowolnego grafu prostego $H$, dowolnego $X\subseteq V(H)$ o~mocy $k$ oraz
-dowolnego $M\subseteq E(H)$ warunek z~Definicji~\ref{def:semi-cut} jest pusty, ponieważ w~$X$ nie ma dwóch różnych wierzchołków.
+dowolnego $M\subseteq E(H)$ warunek z~Definicji~\ref{def:semi-cut} jest spełniony w~sposób pusty, ponieważ w~$X$ nie ma dwóch
+różnych wierzchołków.
 Zatem
 \[
   |M|\ge 0\ge k-1,
@@ -776,6 +780,10 @@ $t^\prime\notin V$ oraz $T\subseteq V$, mamy $t^\prime\notin T$, a~więc
 Ponadto
 \[
   |V(G^\prime)|=|V|-|N[t]|+1\le n-1<n.
+\]
+Z~inkluzji $T^\prime\subseteq V(G^\prime)$ wynika także
+\[
+  |T^\prime|=k\le |V(G^\prime)|.
 \]
 Zatem para odpowiadająca trójce $(G^\prime,T^\prime,F^\prime)$ ma postać $(k,n')$ dla pewnego $n'<n$, czyli spełnia
 \[
