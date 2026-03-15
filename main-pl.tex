@@ -229,9 +229,9 @@ Wierzchołki ze zbioru $T$ nazywamy terminalami.
   \draw[very thick,red!70!black] (b) -- node[above]{$e_2$} (w);
   %% Legenda odległości
   \node[align=center] at (3.6,-1.3)
-    {$d_G(u,v)=2,\quad d_{G\setminus F}(u,v)=\infty$\\[2pt]
-     $d_G(v,w)=2,\quad d_{G\setminus F}(v,w)=\infty$\\[2pt]
-     $d_G(u,w)=4,\quad d_{G\setminus F}(u,w)=\infty$};
+    {$\dist{G}{u}{v}=2,\quad \dist{G\setminus F}{u}{v}=\infty$\\[2pt]
+     $\dist{G}{v}{w}=2,\quad \dist{G\setminus F}{v}{w}=\infty$\\[2pt]
+     $\dist{G}{u}{w}=4,\quad \dist{G\setminus F}{u}{w}=\infty$};
 \end{tikzpicture}
 \caption{Przykład zbioru na wpół-tnącego. Graf $G$ to ścieżka $u$–$a$–$v$–$b$–$w$;
 zbiór terminali $T=\{u,v,w\}$ (wierzchołki szare); $F=\{e_1,e_2\}$ (krawędzie czerwone).
@@ -239,21 +239,6 @@ Każda odległość między różnymi terminalami ściśle rośnie po usunięciu
 przy czym $|F|=2=|T|-1$.}
 \label{fig:semi-cut-example}
 \end{figure}
-
-\begin{observation}\label{obs:finite-distances}
-Jeżeli $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, to dla każdej pary różnych wierzchołków $u,w\in T$ zachodzi
-\[
-  \dist{G}{u}{w}<\infty.
-\]
-\end{observation}
-
-\begin{proof}
-Niech $u,w\in T$ będą różne. Z~Definicji~\ref{def:semi-cut} mamy
-\[
-  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}\le \infty.
-\]
-W~szczególności $\dist{G}{u}{w}<\infty$.
-\end{proof}
 
 \section{Lematy pomocnicze}
 
@@ -264,9 +249,15 @@ o~długości nie większej niż długość tego spaceru.
 
 \begin{proof}
 Wybierzmy wśród wszystkich spacerów z~$u$ do~$w$ o~długości nie większej od długości ustalonego spaceru taki, którego długość jest
-najmniejsza. Niech będzie to $P=(v_0,\dots,v_k)$. Gdyby istniały indeksy $0\le i<j\le k$ z~$v_i=v_j$, to po usunięciu fragmentu
-$(v_{i+1},\dots,v_j)$ otrzymalibyśmy krótszy spacer z~$u$ do~$w$, sprzeczny z~minimalnością wyboru. Zatem wierzchołki
-$v_0,\dots,v_k$ są parami różne, czyli $P$ jest ścieżką.
+najmniejsza. Niech będzie to $P=(v_0,\dots,v_k)$. Gdyby istniały indeksy $0\le i<j\le k$ z~$v_i=v_j$, to ciąg
+\[
+  P'\coloneqq (v_0,\dots,v_i)\cdot(v_j,\dots,v_k)
+\]
+byłby spacerem z~$u$ do~$w$ o~długości
+\[
+  \len{P'}=k-(j-i)<k=\len{P},
+\]
+sprzeczny z~minimalnością wyboru. Zatem wierzchołki $v_0,\dots,v_k$ są parami różne, czyli $P$ jest ścieżką.
 \end{proof}
 
 \begin{lemma}\label{lem:subpath}
@@ -354,15 +345,15 @@ Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dl
   \node[circle,draw,inner sep=2pt,fill=white,label=below:$c$] (c) at (5.4,-1.1) {};
   \draw[thick,black!35] (u)--(a)--(b)--(c)--(w);
   \node[black!45] at (3.6,-2.1) {ścieżka dłuższa ($\ell=4$) może ominąć $F$
-    --- to właśnie podnosi $d_{G\setminus F}(u,w)$};
+    --- to właśnie podnosi $\dist{G\setminus F}{u}{w}$};
   %% Adnotacja odległości
   \node[align=center] at (3.6,0)
-    {$d_G(u,w)=3$\\$d_{G\setminus F}(u,w)=4$};
+    {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
 \end{tikzpicture}
 \caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: $F=\{e\}$ jest zbiorem na wpół-tnącym
 dla~$\{u,w\}$, bo każda ścieżka najkrótsza długości~3 (niebieska) zawiera krawędź $e\in F$.
 Dłuższe ścieżki (szare) mogą $F$ ominąć -- ich istnienie gwarantuje, że
-$d_{G\setminus F}(u,w)=4>3=d_G(u,w)$.}
+$\dist{G\setminus F}{u}{w}=4>3=\dist{G}{u}{w}$.}
 \label{fig:shortest-path-condition}
 \end{figure}
 
@@ -545,7 +536,7 @@ czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
     \node at (2.25,1.75) {$G/N[t]$};
   \end{scope}
 \end{tikzpicture}
-\caption{Schemat ruchu używanego w~Lemacie~\ref{lem:lifting-endpoint} i~w~Przypadku~2 Propozycji~\ref{prop:contraction}. Ścieżka
+\caption{Schemat zależności używanej w~Lemacie~\ref{lem:lifting-endpoint} i~w~Przypadku~2 Propozycji~\ref{prop:contraction}. Ścieżka
 $Q^\prime$ w~grafie po ściągnięciu odpowiada ścieżce $Q$ w~grafie wyjściowym, a~krawędź z~$F$ leżąca na~$Q$ daje po ściągnięciu
 krawędź należącą do~$F^\prime$.}
 \label{fig:contraction}
