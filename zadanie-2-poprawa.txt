@@ -94,6 +94,9 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 18. Problem dotyczy tylko i wyłącznie grafów prostyc bez pętli. Ma to być jasno napisane. Dowody absolutnie nie amj się tyczyć grafów z wielokrotnymi krawędziami czy też z pętlami!!!!!
 
 
+19. Absolutnie nie dawaj referencji do lokalnych plików ani manuskryptów!!!!!!!!!!!!!!1
+
+
 ---
 
 
