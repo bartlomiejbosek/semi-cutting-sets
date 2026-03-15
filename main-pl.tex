@@ -56,8 +56,8 @@ planarność.
 Dowód jest czysto strukturalny. Kluczowym krokiem jest pokazanie, że jeżeli terminal $t$ nie jest incydentny z~żadną krawędzią
 zbioru $F$, to po ściągnięciu zbioru $N[t]$ do nowego wierzchołka własność na wpół-tnąca przechodzi na obraz zbioru $F$.
 W~przeciwnym razie każdy terminal jest incydentny z~co najmniej jedną krawędzią z~$F$, co pozwala usunąć jeden terminal
-i~jedną krawędź, nie tracąc własności dla pozostałych terminali. Terminologia dotycząca podstawowych pojęć teorii grafów jest
-zgodna z~terminologią podręcznikową, por.~\cite[rozdz.~1]{diestel}. Oszacowanie jest ostre; przykład z~Rysunku
+i~jedną krawędź, nie tracąc własności dla pozostałych terminali. Wszystkie pojęcia potrzebne w~dowodzie definiujemy jawnie
+poniżej. Oszacowanie jest ostre; przykład z~Rysunku
 \ref{fig:semi-cut-example} spełnia równość $|F|=|T|-1$. Dokładniej, dla każdego $k\ge 2$ ścieżka
 $v_0v_1\dots v_{2k-2}$ wraz ze zbiorem terminali
 \[
@@ -67,7 +67,9 @@ oraz zbiorem krawędzi
 \[
   F=\bigl\{\{v_{2i},v_{2i+1}\}: i=0,\dots,k-2\bigr\}
 \]
-jest zbiorem na wpół-tnącym i~spełnia równość $|F|=|T|-1$. Dwie główne konstrukcje użyte w~dowodzie ilustrują
+jest zbiorem na wpół-tnącym i~spełnia równość $|F|=|T|-1$, gdyż każda składowa grafu $G\setminus F$ zawiera dokładnie
+jeden terminal, a~więc odległość między dowolnymi dwoma różnymi terminalami rośnie z~wartości skończonej do~$\infty$.
+Dwie główne konstrukcje użyte w~dowodzie ilustrują
 Rysunki~\ref{fig:contraction} i~\ref{fig:split-path}.
 Sam warunek z~Definicji~\ref{def:semi-cut} wymusza przy tym, że dla każdych różnych terminali $u,w\in T$ zachodzi
 $\dist{G}{u}{w}<\infty$, a~więc wszystkie terminale leżą w~jednej składowej spójności; jest to jednak konsekwencja definicji,
@@ -100,9 +102,11 @@ Jeżeli $P=(v_0,\dots,v_k)$ oraz $Q=(w_0,\dots,w_\ell)$ są spacerami takimi, ż
 \[
   P\cdot Q\coloneqq (v_0,\dots,v_k,w_1,\dots,w_\ell).
 \]
+Jest to ponownie spacer, tym razem z~$v_0$ do~$w_\ell$.
 
 Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje; w~przeciwnym
-razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$.
+razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$. Ponieważ $G$ jest skończony, każda ścieżka w~$G$ ma długość co najwyżej
+$|V|-1$, a~więc jeżeli choć jedna ścieżka z~$u$ do~$w$ istnieje, to wspomniane minimum jest dobrze określone.
 \end{definition}
 
 \begin{notation}[Podstawowe operacje na grafie]\label{not:basic-operations}
@@ -120,6 +124,12 @@ Jeżeli $P=(v_0,\dots,v_k)$ jest ścieżką i~$0\le i\le j\le k$, to oznaczamy
 \[
   P[v_i,v_j]\coloneqq (v_i,\dots,v_j).
 \]
+Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem, to przez
+\[
+  \overleftarrow{P}\coloneqq (v_k,\dots,v_0)
+\]
+oznaczamy spacer otrzymany przez odwrócenie kolejności wierzchołków. Ponieważ graf jest nieskierowany, zachodzi
+$\len{\overleftarrow{P}}=\len{P}$; jeżeli $P$ jest ścieżką, to $\overleftarrow{P}$ jest ścieżką i~$E(\overleftarrow{P})=E(P)$.
 \end{notation}
 
 \begin{definition}[Ściąganie niepustego zbioru wierzchołków]\label{def:contraction}
@@ -630,9 +640,9 @@ końce leżą poza $N[t]$, więc $e/N[t]=e$ oraz $e\in F^\prime$. Otrzymujemy
 \medskip\noindent
 \textbf{Przypadek 2: $t^\prime\in V(P^\prime)$.}
 Ponieważ $P^\prime$ jest ścieżką, wierzchołek $t^\prime$ występuje w~niej dokładnie raz. Jeżeli $t^\prime$ jest ostatnim
-wierzchołkiem ścieżki $P^\prime$, to ścieżka czytana w~przeciwnym porządku ma ten sam zbiór krawędzi i~tę samą długość, a~więc
-jest również ścieżką najkrótszą. Wykazanie przecięcia z~$F^\prime$ dla jednej z~tych dwóch orientacji daje zatem ten sam
-wniosek dla drugiej. Możemy więc założyć, że
+wierzchołkiem ścieżki $P^\prime$, to zastępujemy $P^\prime$ ścieżką $\overleftarrow{P^\prime}$. Na mocy Notacji~\ref{not:basic-operations}
+otrzymujemy znów ścieżkę najkrótszą o~tym samym zbiorze krawędzi. Wykazanie przecięcia z~$F^\prime$ dla otrzymanej ścieżki
+daje więc ten sam wniosek dla ścieżki wyjściowej. Możemy zatem założyć, że
 \[
   P^\prime=(y_0,\dots,y_r,\dots,y_m),
   \qquad
@@ -680,7 +690,8 @@ W~obu podprzypadkach
 \[
   f/N[t]\in E(Q^\prime)\subseteq E(P^\prime).
 \]
-Ponieważ $f\in F$, z~Definicji~\ref{def:contraction} otrzymujemy również $f/N[t]\in F^\prime$. Stąd
+W~obu podprzypadkach końce krawędzi $f$ mają różne obrazy przez odwzorowanie $\pi_{N[t]}$, więc z~Definicji~\ref{def:contraction}
+wynika, że $f/N[t]$ jest krawędzią grafu $G^\prime$. Ponieważ ponadto $f\in F$, otrzymujemy $f/N[t]\in F^\prime$. Stąd
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
 \]
@@ -741,7 +752,8 @@ Porządek ten jest dobrze ufundowany na~$\mathbb{N}_0^2$.
 \medskip\noindent
 \textbf{Baza indukcji.} Niech $k\le 1$. Wtedy dla dowolnego grafu prostego $H$, dowolnego $X\subseteq V(H)$ o~mocy $k$ oraz
 dowolnego $M\subseteq E(H)$ warunek z~Definicji~\ref{def:semi-cut} jest spełniony w~sposób pusty, ponieważ w~$X$ nie ma dwóch
-różnych wierzchołków.
+różnych wierzchołków. Innymi słowy, rozważana kwantyfikacja „dla każdej pary różnych wierzchołków z~$X$” przebiega po zbiorze
+pustym, a~więc jest prawdziwa. 
 Zatem
 \[
   |M|\ge 0\ge k-1,
@@ -851,22 +863,17 @@ należałyby do~$\{t\}$, a~więc krawędź ta byłaby pętlą, co jest niemożli
 \]
 Krawędź $e$ należy dokładnie do jednej z~tych dwóch podścieżek.
 
-Jeżeli $e\in E(P_w)$, to rozważamy tę samą ścieżkę $P$ czytaną w~przeciwnym porządku. Wtedy role wierzchołków $u$ i~$w$ oraz role
-podścieżek $P_u$ i~$P_w$ zamieniają się, natomiast zbiór krawędzi $E(P)$ pozostaje ten sam; oba końce ścieżki nadal należą też
-do~$T^-$. Możemy więc założyć, że
-\[
-  e\in E(P_u).
-\]
-Wtedy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$ jest ścieżką najkrótszą z~$t$ do~$w$, z~Lematu
-\ref{lem:shortest-paths} wynika
-\[
-  E(P_w)\cap F\neq\emptyset.
-\]
-Wybierzmy
+Jeżeli $e\in E(P_u)$, to z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ mamy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$
+jest ścieżką najkrótszą z~$t$ do~$w$, z~Lematu~\ref{lem:shortest-paths} wynika istnienie krawędzi
 \[
   f\in E(P_w)\cap F.
 \]
-Z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ dostajemy $f\neq e$, a~więc $f\in F^-$. W szczególności
+Wtedy $f\neq e$, a~więc $f\in F^-$. Jeżeli natomiast $e\in E(P_w)$, to analogicznie, korzystając z~tego, że $u,t\in T$ oraz
+$P_u$ jest ścieżką najkrótszą z~$u$ do~$t$, otrzymujemy krawędź
+\[
+  f\in E(P_u)\cap F.
+\]
+Znów zachodzi $f\neq e$, a~więc $f\in F^-$. W~obu podprzypadkach dostajemy
 \[
   E(P)\cap F^-\neq\emptyset.
 \]
@@ -890,15 +897,11 @@ Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy
 To kończy krok indukcyjny, a~więc i~dowód twierdzenia.
 \end{proof}
 
-\begin{thebibliography}{1}
+\section{Uwagi końcowe}
 
-\bibitem{diestel}
-R.~Diestel,
-\emph{Graph Theory},
-5th ed.,
-Graduate Texts in Mathematics 173,
-Springer, 2017.
-
-\end{thebibliography}
+Rodzina przykładów opisana we Wprowadzeniu pokazuje, że oszacowanie z~Twierdzenia~\ref{thm:main} jest ostre dla każdego
+$k\ge 2$. Cały argument ma przy tym charakter czysto strukturalny: wykorzystuje jedynie własności ścieżek najkrótszych,
+operację ściągania oraz indukcję leksykograficzną względem pary $(|T|,|V(G)|)$, bez dodatkowych założeń o~spójności,
+planarności czy innej szczególnej strukturze grafu.
 
 \end{document}

@@ -95,3 +95,6 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 
 
 ---
+
+
+UWAGI KTORE MASZ WZIAC POD UWAGE ZNAJDUJA SIE W PLIKU komentarze.txt
