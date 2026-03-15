@@ -300,7 +300,7 @@ Wtedy spacer
 łączyłby $u$ z~$w$ i~miałby długość mniejszą niż $\len{P}$, co przeczy równości $\len{P}=\dist{H}{u}{w}$.
 \end{proof}
 
-\begin{observation}\label{lem:shortest-paths}
+\begin{observation}\label{obs:shortest-paths}
 Niech $H$ będzie skończonym grafem prostym, niech $X\subseteq V(H)$ oraz niech $M\subseteq E(H)$. Wówczas $M$ jest zbiorem
 na wpół-tnącym dla~$X$ w~$H$ wtedy i~tylko wtedy, gdy dla każdych różnych $u,w\in X$ zachodzi $\dist{H}{u}{w}<\infty$ oraz każda
 ścieżka $P$ z~$u$ do~$w$ o~długości
@@ -369,7 +369,7 @@ Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dl
   \node[align=center] at (3.6,0)
     {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
 \end{tikzpicture}
-\caption{Ilustracja Obserwacji~\ref{lem:shortest-paths}: $F=\{e\}$ jest zbiorem na wpół-tnącym
+\caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: $F=\{e\}$ jest zbiorem na wpół-tnącym
 dla~$\{u,w\}$, bo każda ścieżka najkrótsza długości~3 (niebieska) zawiera krawędź $e\in F$.
 Dłuższe ścieżki (szare) mogą $F$ ominąć -- ich istnienie gwarantuje, że
 $\dist{G\setminus F}{u}{w}=4>3=\dist{G}{u}{w}$.}
@@ -586,7 +586,7 @@ Najpierw pokażemy, że
   T\setminus\{t\}\subseteq V\setminus N[t].
 \]
 Weźmy dowolne $u\in T\setminus\{t\}$ i~przypuśćmy, że $u\in N(t)$. Wtedy $\dist{G}{t}{u}=1$, a~jedyna ścieżka długości $1$
-z~$t$ do~$u$ jest równa $(t,u)$. Z~Obserwacji~\ref{lem:shortest-paths} wynikałoby więc, że krawędź $\{t,u\}$ należy do~$F$,
+z~$t$ do~$u$ jest równa $(t,u)$. Z~Obserwacji~\ref{obs:shortest-paths} wynikałoby więc, że krawędź $\{t,u\}$ należy do~$F$,
 co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi żądanej inkluzji. W~szczególności
 \[
   T^\prime\subseteq V(G^\prime).
@@ -603,7 +603,7 @@ w~$G^\prime$. Tym samym każda para różnych terminali z~$T^\prime$
 ma w~$G^\prime$ skończoną odległość.
 
 Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$. Na mocy
-Obserwacji~\ref{lem:shortest-paths} wystarczy wykazać, że
+Obserwacji~\ref{obs:shortest-paths} wystarczy wykazać, że
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
 \]
@@ -631,7 +631,7 @@ Stąd
 \[
   \len{P^\prime}=\dist{G}{u}{w}.
 \]
-Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{lem:shortest-paths} dostajemy krawędź $e\in E(P^\prime)\cap F$. Jej oba
+Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} dostajemy krawędź $e\in E(P^\prime)\cap F$. Jej oba
 końce leżą poza $N[t]$, więc $e/N[t]=e$ oraz $e\in F^\prime$. Otrzymujemy
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
@@ -670,7 +670,7 @@ Możemy zatem zastosować Lemat~\ref{lem:lifting-endpoint}. Dostajemy wierzchoł
 \]
 jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 
-Ponieważ $t,z\in T$, z~Obserwacji~\ref{lem:shortest-paths} otrzymujemy
+Ponieważ $t,z\in T$, z~Obserwacji~\ref{obs:shortest-paths} otrzymujemy
 \[
   E(Q)\cap F\neq\emptyset.
 \]
@@ -697,7 +697,7 @@ wynika, że $f/N[t]$ jest krawędzią grafu $G^\prime$. Ponieważ ponadto $f\in 
 \]
 
 Wykazaliśmy, że każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^\prime$ przecina zbiór $F^\prime$. Wraz ze
-skończonością odpowiednich odległości daje to, na mocy Obserwacji~\ref{lem:shortest-paths}, że $F^\prime$ jest zbiorem
+skończonością odpowiednich odległości daje to, na mocy Obserwacji~\ref{obs:shortest-paths}, że $F^\prime$ jest zbiorem
 na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proof}
 
@@ -830,7 +830,7 @@ Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$
 \[
   \dist{G}{u}{w}<\infty.
 \]
-Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{lem:shortest-paths} dostajemy
+Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths} dostajemy
 \[
   E(P)\cap F\neq\emptyset.
 \]
@@ -866,7 +866,7 @@ należałyby do~$\{t\}$, a~więc krawędź ta byłaby pętlą, co jest niemożli
 Krawędź $e$ należy dokładnie do jednej z~tych dwóch podścieżek.
 
 Jeżeli $e\in E(P_u)$, to z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ mamy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$
-jest ścieżką najkrótszą z~$t$ do~$w$, z~Obserwacji~\ref{lem:shortest-paths} wynika istnienie krawędzi
+jest ścieżką najkrótszą z~$t$ do~$w$, z~Obserwacji~\ref{obs:shortest-paths} wynika istnienie krawędzi
 \[
   f\in E(P_w)\cap F.
 \]
@@ -881,7 +881,7 @@ Znów zachodzi $f\neq e$, a~więc $f\in F^-$. W~obu podprzypadkach dostajemy
 \]
 
 Wykazaliśmy, że dla każdych różnych $u,w\in T^-$ odległość $\dist{G}{u}{w}$ jest skończona i~każda ścieżka najkrótsza między
-$u$ i~$w$ przecina zbiór $F^-$. Z~Obserwacji~\ref{lem:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
+$u$ i~$w$ przecina zbiór $F^-$. Z~Obserwacji~\ref{obs:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
 w~$G$.
 
 Para odpowiadająca trójce $(G,T^-,F^-)$ jest równa $(k-1,n)$, a~więc spełnia
