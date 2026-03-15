@@ -203,30 +203,6 @@ Krawędź $\{y,z\}$ pozostaje niezmieniona.}
 \label{fig:contraction-def}
 \end{figure}
 
-\begin{lemma}\label{lem:contraction-image-size}
-Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas
-\[
-  |F/W|\le |F|.
-\]
-\end{lemma}
-
-\begin{proof}
-Niech
-\[
-  D\coloneqq \bigl\{\{x,y\}\in F:\ \pi_W(x)\neq \pi_W(y)\bigr\}.
-\]
-Z~Definicji~\ref{def:contraction} wynika, że odwzorowanie
-\[
-  \varphi\colon D\to F/W,
-  \qquad
-  \varphi(\{x,y\})\coloneqq \{\pi_W(x),\pi_W(y)\},
-\]
-jest surjekcją. Zatem
-\[
-  |F/W|\le |D|\le |F|.
-\]
-\end{proof}
-
 \begin{definition}[Zbiór na wpół-tnący]\label{def:semi-cut}
 Niech $T\subseteq V$. Mówimy, że $F\subseteq E$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, jeżeli dla każdej pary różnych
 wierzchołków $u,w\in T$ zachodzi
@@ -265,6 +241,30 @@ przy czym $|F|=2=|T|-1$.}
 
 \section{Lematy pomocnicze}
 
+\begin{lemma}\label{lem:contraction-image-size}
+Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas
+\[
+  |F/W|\le |F|.
+\]
+\end{lemma}
+
+\begin{proof}
+Niech
+\[
+  D\coloneqq \bigl\{\{x,y\}\in F:\ \pi_W(x)\neq \pi_W(y)\bigr\}.
+\]
+Z~Definicji~\ref{def:contraction} wynika, że odwzorowanie
+\[
+  \varphi\colon D\to F/W,
+  \qquad
+  \varphi(\{x,y\})\coloneqq \{\pi_W(x),\pi_W(y)\},
+\]
+jest surjekcją. Zatem
+\[
+  |F/W|\le |D|\le |F|.
+\]
+\end{proof}
+
 \begin{lemma}\label{lem:walk-to-path}
 Niech $H$ będzie skończonym grafem prostym. Jeżeli w~$H$ istnieje spacer z~$u$ do~$w$, to istnieje również ścieżka z~$u$ do~$w$
 o~długości nie większej niż długość tego spaceru.
@@ -300,7 +300,7 @@ Wtedy spacer
 łączyłby $u$ z~$w$ i~miałby długość mniejszą niż $\len{P}$, co przeczy równości $\len{P}=\dist{H}{u}{w}$.
 \end{proof}
 
-\begin{lemma}\label{lem:shortest-paths}
+\begin{observation}\label{lem:shortest-paths}
 Niech $H$ będzie skończonym grafem prostym, niech $X\subseteq V(H)$ oraz niech $M\subseteq E(H)$. Wówczas $M$ jest zbiorem
 na wpół-tnącym dla~$X$ w~$H$ wtedy i~tylko wtedy, gdy dla każdych różnych $u,w\in X$ zachodzi $\dist{H}{u}{w}<\infty$ oraz każda
 ścieżka $P$ z~$u$ do~$w$ o~długości
@@ -312,7 +312,7 @@ spełnia
   E(P)\cap M\neq\emptyset.
 \]
 Sytuację tę ilustruje Rysunek~\ref{fig:shortest-path-condition}.
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 Ustalmy różne wierzchołki $u,w\in X$.
@@ -369,7 +369,7 @@ Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dl
   \node[align=center] at (3.6,0)
     {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
 \end{tikzpicture}
-\caption{Ilustracja Lematu~\ref{lem:shortest-paths}: $F=\{e\}$ jest zbiorem na wpół-tnącym
+\caption{Ilustracja Obserwacji~\ref{lem:shortest-paths}: $F=\{e\}$ jest zbiorem na wpół-tnącym
 dla~$\{u,w\}$, bo każda ścieżka najkrótsza długości~3 (niebieska) zawiera krawędź $e\in F$.
 Dłuższe ścieżki (szare) mogą $F$ ominąć -- ich istnienie gwarantuje, że
 $\dist{G\setminus F}{u}{w}=4>3=\dist{G}{u}{w}$.}
@@ -586,7 +586,7 @@ Najpierw pokażemy, że
   T\setminus\{t\}\subseteq V\setminus N[t].
 \]
 Weźmy dowolne $u\in T\setminus\{t\}$ i~przypuśćmy, że $u\in N(t)$. Wtedy $\dist{G}{t}{u}=1$, a~jedyna ścieżka długości $1$
-z~$t$ do~$u$ jest równa $(t,u)$. Z~Lematu~\ref{lem:shortest-paths} wynikałoby więc, że krawędź $\{t,u\}$ należy do~$F$,
+z~$t$ do~$u$ jest równa $(t,u)$. Z~Obserwacji~\ref{lem:shortest-paths} wynikałoby więc, że krawędź $\{t,u\}$ należy do~$F$,
 co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi żądanej inkluzji. W~szczególności
 \[
   T^\prime\subseteq V(G^\prime).
@@ -603,7 +603,7 @@ w~$G^\prime$. Tym samym każda para różnych terminali z~$T^\prime$
 ma w~$G^\prime$ skończoną odległość.
 
 Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$. Na mocy
-Lematu~\ref{lem:shortest-paths} wystarczy wykazać, że
+Obserwacji~\ref{lem:shortest-paths} wystarczy wykazać, że
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
 \]
@@ -631,7 +631,7 @@ Stąd
 \[
   \len{P^\prime}=\dist{G}{u}{w}.
 \]
-Ponieważ $u,w\in T\setminus\{t\}$, z~Lematu~\ref{lem:shortest-paths} dostajemy krawędź $e\in E(P^\prime)\cap F$. Jej oba
+Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{lem:shortest-paths} dostajemy krawędź $e\in E(P^\prime)\cap F$. Jej oba
 końce leżą poza $N[t]$, więc $e/N[t]=e$ oraz $e\in F^\prime$. Otrzymujemy
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
@@ -670,7 +670,7 @@ Możemy zatem zastosować Lemat~\ref{lem:lifting-endpoint}. Dostajemy wierzchoł
 \]
 jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 
-Ponieważ $t,z\in T$, z~Lematu~\ref{lem:shortest-paths} otrzymujemy
+Ponieważ $t,z\in T$, z~Obserwacji~\ref{lem:shortest-paths} otrzymujemy
 \[
   E(Q)\cap F\neq\emptyset.
 \]
@@ -697,7 +697,7 @@ wynika, że $f/N[t]$ jest krawędzią grafu $G^\prime$. Ponieważ ponadto $f\in 
 \]
 
 Wykazaliśmy, że każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^\prime$ przecina zbiór $F^\prime$. Wraz ze
-skończonością odpowiednich odległości daje to, na mocy Lematu~\ref{lem:shortest-paths}, że $F^\prime$ jest zbiorem
+skończonością odpowiednich odległości daje to, na mocy Obserwacji~\ref{lem:shortest-paths}, że $F^\prime$ jest zbiorem
 na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proof}
 
@@ -727,10 +727,11 @@ zbiorem na wpół-tnącym dla~$T$ w~$G$, to
   \node at (2.4,-0.65) {$e$};
   \node at (4.0,-0.65) {$f$};
 \end{tikzpicture}
-\caption{Sytuacja z~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Niebieska ścieżka przedstawia najkrótszą ścieżkę $P$, czerwona
+\caption{Sytuacja z~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Niebieska ścieżka przedstawia wyróżnioną ścieżkę najkrótszą $P$, czerwona
 krawędź oznacza krawędź $e\in F$, a~zielona krawędź oznacza krawędź $f\in F^-$. Po rozcięciu $P$ w~wierzchołku $t$ dostajemy
 podścieżki $P_u$ i~$P_w$. Na rysunku pokazano podprzypadek $e\in E(P_u)$; wtedy z~najkrótszości $P_w$ wynika istnienie krawędzi
-$f\in E(P_w)\cap F$, a~więc $f\neq e$ i~$f\in F^-$.}
+$f\in E(P_w)\cap F$, a~więc $f\neq e$ i~$f\in F^-$. Pozostałe krawędzie grafu $G$ nie są rysowane, gdyż nie wpływają na sam
+argument o~rozcięciu ścieżki.}
 \label{fig:split-path}
 \end{figure}
 
@@ -829,7 +830,7 @@ Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$
 \[
   \dist{G}{u}{w}<\infty.
 \]
-Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Lematu~\ref{lem:shortest-paths} dostajemy
+Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{lem:shortest-paths} dostajemy
 \[
   E(P)\cap F\neq\emptyset.
 \]
@@ -847,7 +848,8 @@ $P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i
 Rysunek~\ref{fig:split-path}.
 Ponieważ $u,w\in T^-=T\setminus\{t\}$, obie te podścieżki mają dodatnią długość.
 
-Jeżeli $P=(v_0,\dots,v_k)$ oraz $v_j=t$, to $P_u=(v_0,\dots,v_j)$ i~$P_w=(v_j,\dots,v_k)$. Ponieważ $P$ jest ścieżką, wierzchołki
+Jeżeli $P=(v_0,\dots,v_k)$ oraz $v_j=t$, to indeks $j$ jest wyznaczony jednoznacznie, gdyż wierzchołek $t$ występuje na ścieżce
+$P$ dokładnie raz. Wtedy $P_u=(v_0,\dots,v_j)$ i~$P_w=(v_j,\dots,v_k)$. Ponieważ $P$ jest ścieżką, wierzchołki
 $v_0,\dots,v_k$ są parami różne, więc oba ciągi mają wspólny dokładnie jeden wierzchołek, mianowicie $t$. Zatem
 \[
   V(P_u)\cap V(P_w)=\{t\}.
@@ -864,7 +866,7 @@ należałyby do~$\{t\}$, a~więc krawędź ta byłaby pętlą, co jest niemożli
 Krawędź $e$ należy dokładnie do jednej z~tych dwóch podścieżek.
 
 Jeżeli $e\in E(P_u)$, to z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ mamy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$
-jest ścieżką najkrótszą z~$t$ do~$w$, z~Lematu~\ref{lem:shortest-paths} wynika istnienie krawędzi
+jest ścieżką najkrótszą z~$t$ do~$w$, z~Obserwacji~\ref{lem:shortest-paths} wynika istnienie krawędzi
 \[
   f\in E(P_w)\cap F.
 \]
@@ -879,7 +881,7 @@ Znów zachodzi $f\neq e$, a~więc $f\in F^-$. W~obu podprzypadkach dostajemy
 \]
 
 Wykazaliśmy, że dla każdych różnych $u,w\in T^-$ odległość $\dist{G}{u}{w}$ jest skończona i~każda ścieżka najkrótsza między
-$u$ i~$w$ przecina zbiór $F^-$. Z~Lematu~\ref{lem:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
+$u$ i~$w$ przecina zbiór $F^-$. Z~Obserwacji~\ref{lem:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
 w~$G$.
 
 Para odpowiadająca trójce $(G,T^-,F^-)$ jest równa $(k-1,n)$, a~więc spełnia
