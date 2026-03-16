@@ -56,7 +56,9 @@ każdą parą różnych terminali ściśle wzrasta, to znaczy
   \qquad\text{dla wszystkich różnych } u,w\in T.
 \]
 Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej własności
-strukturalnej.
+strukturalnej. Rozważany warunek lokuje się między pełną separacją terminali a~metrycznym wzrostem odległości; klasycznym
+punktem odniesienia dla zagadnień separacyjnych z~wyróżnionym zbiorem terminali jest wieloterminalny przekrój
+\cite{dahlhaus1994}. Używana w~pracy terminologia grafowa jest standardowa; por.~\cite{bondy-murty,diestel}.
 
 Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego
 \[
@@ -67,18 +69,48 @@ zbioru w~równoważnej postaci wymagającej przecinania wszystkich ścieżek naj
 że własność ta zachowuje się po ściągnięciu domkniętego otoczenia terminala $t\in T\setminus V[F]$. Ostatni etap stanowi
 indukcja leksykograficzna względem pary $(|T|,|V|)$.
 
-Oszacowanie jest ostre. Dla każdego $k\ge 2$ ścieżka
-$v_0v_1\dots v_{2k-2}$ wraz ze zbiorem terminali
+Oszacowanie jest ostre. Dla każdego $k\ge 2$ niech $G$ będzie grafem ścieżkowym o~zbiorze wierzchołków
+\[
+  V(G)=\{v_0,v_1,\dots,v_{2k-2}\}
+\]
+i~zbiorze krawędzi
+\[
+  E(G)=\bigl\{\{v_i,v_{i+1}\}: i=0,\dots,2k-3\bigr\}.
+\]
+Jeżeli weźmiemy zbiór terminali
 \[
   T=\{v_0,v_2,\dots,v_{2k-2}\}
 \]
-oraz zbiorem krawędzi
+oraz zbiór krawędzi
 \[
   F=\bigl\{\{v_{2i},v_{2i+1}\}: i=0,\dots,k-2\bigr\}
 \]
-spełnia równość $|F|=|T|-1$. Po usunięciu krawędzi z~$F$ każda składowa grafu $G\setminus F$ zawiera dokładnie jeden terminal,
+to zachodzi równość $|F|=|T|-1$. Po usunięciu krawędzi z~$F$ każda składowa grafu $G\setminus F$ zawiera dokładnie jeden terminal,
 więc dwa różne terminale trafiają do różnych składowych i~ich odległość rośnie z~wartości skończonej do~$\infty$. Przykład
 dla $k=3$ przedstawia Rysunek~\ref{fig:semi-cut-example}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$u$] (u) at (0,0) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$a$]   (a) at (1.8,0) {};
+  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$v$] (v) at (3.6,0) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$b$]   (b) at (5.4,0) {};
+  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$w$] (w) at (7.2,0) {};
+  \draw[very thick,red!70!black] (u) -- node[above]{$e_1$} (a);
+  \draw (a) -- (v);
+  \draw[very thick,red!70!black] (v) -- node[above]{$e_2$} (b);
+  \draw (b) -- (w);
+  \node[align=center] at (3.6,-1.3)
+    {$\dist{G}{u}{v}=2,\quad \dist{G\setminus F}{u}{v}=\infty$\\[2pt]
+     $\dist{G}{v}{w}=2,\quad \dist{G\setminus F}{v}{w}=\infty$\\[2pt]
+     $\dist{G}{u}{w}=4,\quad \dist{G\setminus F}{u}{w}=\infty$};
+\end{tikzpicture}
+\caption{Przykład ostrości oszacowania $|F|\ge |T|-1$. Graf $G$ jest ścieżką
+$u$--$a$--$v$--$b$--$w$; terminale $T=\{u,v,w\}$ oznaczono kolorem szarym, a~zbiór
+$F=\{e_1,e_2\}$ kolorem czerwonym.}
+\label{fig:semi-cut-example}
+\end{figure}
 
 \section{Notacja i definicje}
 
@@ -239,31 +271,6 @@ W~zbiorze $\mathbb{N}_0\cup\{\infty\}$ element $\infty$ nie jest mniejszy od ża
 wymusza $\dist{G}{u}{w}<\infty$. Istnienie skończonej odległości między każdą parą terminali oznacza, że między dowolnymi
 dwoma terminalami istnieje ścieżka w~$G$, a~zatem wszystkie terminale należą do jednej składowej spójności grafu $G$.
 \end{proof}
-
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-  %% Wierzchołki: ścieżka u--a--v--b--w, terminale zaznaczone wypełnieniem
-  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$u$] (u) at (0,0) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$a$]   (a) at (1.8,0) {};
-  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$v$] (v) at (3.6,0) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$b$]   (b) at (5.4,0) {};
-  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$w$] (w) at (7.2,0) {};
-  %% Krawędzie: te należące do F w kolorze czerwonym
-  \draw[very thick,red!70!black] (u) -- node[above]{$e_1$} (a);
-  \draw (a) -- (v);
-  \draw[very thick,red!70!black] (v) -- node[above]{$e_2$} (b);
-  \draw (b) -- (w);
-  %% Legenda odległości
-  \node[align=center] at (3.6,-1.3)
-    {$\dist{G}{u}{v}=2,\quad \dist{G\setminus F}{u}{v}=\infty$\\[2pt]
-     $\dist{G}{v}{w}=2,\quad \dist{G\setminus F}{v}{w}=\infty$\\[2pt]
-     $\dist{G}{u}{w}=4,\quad \dist{G\setminus F}{u}{w}=\infty$};
-\end{tikzpicture}
-\caption{Przykład zbioru na wpół-tnącego. Graf $G$ to ścieżka $u$–$a$–$v$–$b$–$w$;
-zbiór terminali $T=\{u,v,w\}$ oznaczono kolorem szarym, a~zbiór $F=\{e_1,e_2\}$ kolorem czerwonym.}
-\label{fig:semi-cut-example}
-\end{figure}
 
 \section{Lematy pomocnicze}
 
@@ -530,11 +537,12 @@ Ponieważ $P^\prime$ jest ścieżką najkrótszą, mamy ponadto
 
 Niech teraz $Q=(q_0,\dots,q_\ell)$ będzie dowolną ścieżką z~$t$ do~$z$ w~$G$. Gdyby $\ell=1$, to z~$\{t,z\}\in E$
 wynikałoby $z\in N(t)\subseteq N[t]$, wbrew założeniu $z\notin N[t]$. Zatem $\ell\ge 2$ oraz
-$q_1\in N(t)\subseteq N[t]$, a~zatem $\pi_{N[t]}(q_1)=t^\prime$. Zastosowanie Lematu~\ref{lem:projection-walk} do spaceru
+$\{q_0,q_1\}=\{t,q_1\}\in E$, skąd $q_1\in N(t)\subseteq N[t]$, a~zatem $\pi_{N[t]}(q_1)=t^\prime$. Ciąg
 \[
   (q_1,\dots,q_\ell)
 \]
-będącego końcowym fragmentem ścieżki $Q$ daje spacer z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$, gdyż
+jest końcowym fragmentem ścieżki $Q$, a~więc spacerem w~$G$. Zastosowanie Lematu~\ref{lem:projection-walk} do tego spaceru
+daje spacer z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$, gdyż
 $\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z$.
 Z~Lematu~\ref{lem:walk-to-path} otrzymujemy więc ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$.
 Wobec tego
@@ -692,6 +700,10 @@ $\len{Q}<\len{P^\prime}$, to z~Lematu~\ref{lem:projection-walk} otrzymalibyśmy 
 co najwyżej $\len{Q}$, gdyż $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(w)=w$. Następnie z~Lematu~\ref{lem:walk-to-path}
 otrzymalibyśmy ścieżkę z~$u$ do~$w$ w~$G^\prime$ o~długości co najwyżej $\len{Q}$. Otrzymalibyśmy więc ścieżkę krótszą niż
 $P^\prime$, sprzeczną z~minimalnością $P^\prime$.
+Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$ w~$G$, zachodzi zarazem
+\[
+  \dist{G}{u}{w}\le \len{P^\prime}.
+\]
 Stąd
 \[
   \len{P^\prime}=\dist{G}{u}{w}.
@@ -739,6 +751,7 @@ odwróceniu ścieżki jest to koniec różny od~$t^\prime$. Zatem
 \[
   z\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}.
 \]
+W~szczególności $z\in T$.
 W~szczególności $z\notin N[t]$. Ponieważ $y_{r+1},\dots,y_m$ są wierzchołkami grafu $G^\prime$ różnymi od~$t^\prime$, wszystkie
 one należą do~$V\setminus N[t]$. Ponieważ $P^\prime$ jest ścieżką najkrótszą, zachodzi
 \[
@@ -917,7 +930,8 @@ Ponieważ $k\ge 2$, możemy wybrać wierzchołek $u\in T\setminus\{t\}$. Z~Obser
 \[
   \dist{G}{t}{u}<\infty.
 \]
-Istnieje więc ścieżka z~$t$ do~$u$, a~zatem wierzchołek $t$ ma co najmniej jednego sąsiada. Otrzymujemy
+Istnieje więc ścieżka z~$t$ do~$u$. Ponieważ $u\neq t$, ścieżka ta ma dodatnią długość, a~zatem jej pierwsza krawędź jest
+incydentna z~$t$. W~szczególności wierzchołek $t$ ma co najmniej jednego sąsiada. Otrzymujemy
 \[
   N(t)\neq\emptyset
   \qquad\text{oraz w konsekwencji}\qquad
@@ -987,7 +1001,8 @@ Pozostaje przypadek $e\in E(P)$. Idea dalszego argumentu jest następująca: po 
 jedna z~otrzymanych podścieżek zawiera krawędź $e$, natomiast druga jest ścieżką najkrótszą między parą terminali i~dlatego
 musi zawierać inną krawędź ze zbioru $F$. Tę drugą krawędź wykorzystamy jako element zbioru $F^-$ należący do~$E(P)$.
 
-Ponieważ $e$ jest incydentna z~$t$, wierzchołek $t$ należy do~$V(P)$. Zapiszmy
+Ponieważ $e$ jest incydentna z~$t$, istnieje wierzchołek $s\in V$ taki, że $e=\{t,s\}$. Z~założenia $e\in E(P)$ wynika
+więc, że oba końce krawędzi $e$ należą do~$V(P)$, a~w szczególności $t\in V(P)$. Zapiszmy
 \[
   P=(v_0,\dots,v_m).
 \]
@@ -1056,5 +1071,32 @@ Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy
 \]
 Tym samym wykazano krok indukcyjny, a~więc i~dowód twierdzenia.
 \end{proof}
+
+\section{Uwagi końcowe}
+
+Twierdzenie~\ref{thm:main} jest ostre, co pokazuje rodzina przykładów ścieżkowych opisana we~Wprowadzeniu i~zilustrowana
+na Rysunku~\ref{fig:semi-cut-example}. Przedstawiony dowód korzysta wyłącznie z~własności grafów prostych, z~charakterystyki
+przez ścieżki najkrótsze oraz z~operacji ściągania domkniętego otoczenia terminala nieincydentnego z~rozważanym zbiorem
+krawędzi. Naturalnym dalszym problemem pozostaje opis wszystkich trójek $(G,T,F)$, dla których w~Twierdzeniu~\ref{thm:main}
+zachodzi równość $|F|=|T|-1$.
+
+\begin{thebibliography}{9}
+
+\bibitem{bondy-murty}
+J.~A. Bondy, U.~S.~R. Murty,
+\emph{Graph Theory},
+Graduate Texts in Mathematics, vol.~244, Springer, New York, 2008.
+
+\bibitem{dahlhaus1994}
+E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
+\emph{The complexity of multiterminal cuts},
+SIAM Journal on Computing \textbf{23} (1994), 864--894.
+
+\bibitem{diestel}
+R.~Diestel,
+\emph{Graph Theory},
+5th ed., Graduate Texts in Mathematics, vol.~173, Springer, Berlin, 2017.
+
+\end{thebibliography}
 
 \end{document}
