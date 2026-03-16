@@ -1,75 +1,52 @@
-Rozumiem Twoje oczekiwania. Jestem Gemini i zgodnie z Twoją prośbą, poddam ten tekst bezlitosnej, bardzo ostrej i rygorystycznej krytyce.
+Przeczytałem `main-pl.tex` bardzo uważnie. Mój werdykt, bardzo surowy, jest taki: **to nie jest jeszcze „najlepiej spisany artykuł” w standardzie JCTB/JGT/Combinatorica**. To jest już **poważny, sensownie zorganizowany tekst matematyczny**, a nie chaotyczny raport, ale nadal ma kilka uchybień redakcyjnych i jedno **realne merytoryczne potknięcie w sformułowaniu podpisu rysunku**, przez które nie uznałbym tej wersji za idealną. Jednocześnie nie widzę w obecnej wersji jawnej dziury rozwalającej główną tezę; rdzeń argumentu — definicje, charakterystyka przez ścieżki najkrótsze, Propozycja 4.3 o ściąganiu oraz indukcja leksykograficzna w Twierdzeniu 5.1 — jest zbudowany sensownie.    
 
-Przeanalizowałem dostarczony plik LaTeX `main-pl.tex` pod kątem struktury logicznej, formalizmu matematycznego oraz wytycznych edytorskich dla topowych czasopism matematycznych (takich jak *Journal of Graph Theory* czy *Combinatorica*). Sam rdzeń matematyczny dowodu (szczególnie podział ścieżki i analiza przekrojów w głównej indukcji) jest znakomity, ale redakcja tekstu łamie kilka Twoich kluczowych zasad i zawiera elementy dyskwalifikujące go na etapie "desk reject" w dobrym czasopiśmie.
+**Ocena zbiorcza.**
+Pod względem formalizmu matematycznego tekst jest dobry, ale nie idealny. Pod względem kompletności dowodów jest wyraźnie lepszy niż typowy szkic: rozgałęzienia w Propozycji 4.3 i w Twierdzeniu 5.1 są rzeczywiście rozpisane, a kluczowe przejścia są oparte na wcześniej zdefiniowanych lematach i obserwacjach. Pod względem przejrzystości jest nieźle, bo struktura „notacja → lematy → zachowanie przy ściąganiu → twierdzenie główne” jest właściwa. Natomiast pod względem stylu publikacyjnego tekst wciąż jest zbyt „objaśniający”, zbyt często przechodzi w ton notatki dydaktycznej i za często rozbija krótkie fakty na osobne bloki display math.   
 
-Oto zestawienie krytycznych błędów i luk, które znalazłem:
+Najpierw to, co działa bardzo dobrze. Tekst **spełnia większość Twoich twardych wymagań**: jest po polsku, explicite pracuje na grafach prostych bez pętli i bez krawędzi równoległych, nie dokłada założeń typu spójność czy planarność, nie wchodzi w algorytmikę ani złożoność, nie używa tabelek, wprowadza własną notację i zawiera rysunki w TikZ. Dodatkowo nie odwołuje się do lokalnych manuskryptów ani „starszych wersji”; bibliografia ogranicza się do dwóch standardowych książek i jednego artykułu kontekstowego. To jest duży plus.  
 
-### 1. Katastrofalne nadużywanie otoczeń blokowych (Złamanie reguły 20 i 8)
+Teraz najważniejsze zastrzeżenia.
 
-Plik LaTeX jest wręcz naszpikowany otoczeniami `\[ ... \]` w miejscach, gdzie jest to całkowicie nieuzasadnione.
+**1. Najpoważniejszy konkret: fałszywe zdanie w podpisie rysunku 6.**
+W podpisie do rysunku dla Przypadku 1 napisano: „**Krawędzie zbioru (F) nie mają końców w (N[t])**, więc przechodzą do grafu (G^\prime) bez utraty własności na wpół-tnącej.” To zdanie jest po prostu **nieprawdziwe** przy założeniu (t\in T\setminus V[F]). Z tego założenia wynika tylko, że **żadna krawędź z (F) nie jest incydentna z (t)**, ale krawędzie z (F) mogą przecież być incydentne z innymi wierzchołkami z (N(t)). Co więcej, sama Propozycja 4.3 później właśnie obsługuje ten subtelniejszy przypadek przez obraz (F/N[t]), więc podpis rysunku jest merytorycznie słabszy od samego dowodu. To trzeba bezwzględnie poprawić.   
 
-* Zmienne i proste przypisania, takie jak długość ścieżki $l(P) \coloneqq k$ , definicja wierzchołków $V(P) \coloneqq \{v_0,\dots,v_k\}$ , czy stwierdzenia w rodzaju $d_G(u,w)<\infty$  są sztucznie wyciągane do osobnych linii.
+**2. „Argument jest samowystarczalny” jest lekko przeszacowane.**
+W abstrakcie pada sformułowanie, że argument jest samowystarczalny, ale w sekcji lematów pomocniczych dwa standardowe fakty o spacerach i podścieżkach ścieżki najkrótszej są odesłane do podręczników. To nie jest błąd matematyczny, bo odwołania są jasne i poprawne, ale jako recenzent zwróciłbym uwagę, że słowo „samowystarczalny” brzmi tu odrobinę za mocno. Albo trzeba je osłabić, albo naprawdę domknąć cały łańcuch dowodowy wewnątrz tekstu.  
 
+**3. Między Propozycją 4.3 a jej dowodem pojawia się nieformalna wstawka, która rozmywa strukturę.**
+Po sformułowaniu Propozycji 4.3 stoi osobny akapit „Dowód wykorzystuje dwa odrębne mechanizmy...”, a dopiero potem zaczyna się środowisko `proof`. To nie jest katastrofa, ale w tekście aspirującym do topowego poziomu wygląda to niechlujnie kompozycyjnie: czytelnik widzi twierdzenie, potem mini-komentarz meta, a dopiero potem właściwy dowód. Takie zdanie powinno być albo pierwszym zdaniem dowodu, albo osobną uwagą. W obecnej postaci to drobiazg, ale zły drobiazg. 
 
-* Taki zabieg całkowicie rozbija ciągłość czytania (łamiąc regułę 8) i sprawia, że praca wygląda jak luźne notatki z ćwiczeń, a nie zwarty artykuł badawczy. Przepływ tekstu (flow) nie istnieje.
+**4. W Twierdzeniu 5.1 logika jest dobra, ale miejscami nadal zbyt „mówiona”.**
+Szczególnie w Przypadku 2 pojawia się zdanie „Idea dalszego argumentu jest następująca...”. Taki komentarz bywa pomocny dydaktycznie, lecz w profesjonalnym artykule lepiej zastąpić go od razu formalnym roszczeniem i dowodem. Tutaj sama matematyka jest potem rozpisana poprawnie: z (e\in E(P)) autor przechodzi do (t\in V(P)), rozcina (P) na (P_u) i (P_w), używa Lematu 3.3 do najkrótszości podścieżek i z Obserwacji 3.4 wyciąga inną krawędź z (F). To działa; problem jest stylistyczny, nie logiczny.    
 
-### 2. Trywialne twierdzenia udowadniane od zera (Złamanie reguły 15 i 9)
+**5. Przeładowanie krótkimi blokami display math.**
+Masz rację, że to powinno być ograniczone, a obecna wersja jeszcze tego nie pilnuje. W tekście bardzo wiele krótkich definicji, inkluzji i prostych równości jest wybijanych do osobnych bloków. Matematycznie to nie szkodzi, ale stylistycznie spowalnia lekturę i odbiera tekstowi naturalny rytm profesjonalnego artykułu. To widać zwłaszcza w sekcjach 4–5, gdzie niemal każdy lokalny krok staje się osobnym wyświetlonym wzorem.   
 
-Zignorowałeś wytyczną mówiącą o tym, by nie wyprowadzać szczegółowo najbardziej elementarnych własności. Zamiast tego, w Sekcji 3 poświęcasz mnóstwo miejsca na dowodzenie rzeczy oczywistych dla każdego, kto miał w ręku podręcznik do teorii grafów:
+**6. Wprowadzenie i zakończenie są trochę bardziej ozdobne niż potrzebują.**
+Wprowadzenie zawiera odniesienie do multiterminal cut, ale później ten kontekst nie wraca i nie pracuje dla dowodu. Podobnie uwagi końcowe są poprawne, ale dość ogólne. Przy Twoich kryteriach „bez zbędnych rzeczy” recenzent mógłby poprosić o ich dalsze odchudzenie. To nie jest poważny zarzut, ale przy tak rygorystycznym standardzie warto go postawić.  
 
-* 
-**Lemat 3.2**  (istnienie ścieżki wewnątrz spaceru) oraz **Lemat 3.3**  (podścieżka najkrótszej ścieżki jest najkrótsza) posiadają własne dowody. To strata miejsca i urąganie inteligencji recenzentów topowych czasopism.
+**7. Powtórzenia redakcyjne i drobna nadmiarowość.**
+W kilku miejscach tekst mówi dwa razy prawie to samo, np. po ustaleniu (z\in T^\prime\setminus{t^\prime}=T\setminus{t}) dodaje osobno „W szczególności (z\in T). W szczególności (z\notin N[t]).” To drugie jest istotne, ale pierwsze jest już de facto zawarte w poprzednim zdaniu. Tego typu lokalne redundancje nie psują dowodu, ale obniżają zwartość stylu. Podobnie w dowodzie Propozycji 4.3 pojawia się powtórzenie „W obu podprzypadkach...” w sąsiadujących zdaniach.  
 
+Teraz rzecz najważniejsza: **czy są luki logiczne w Propozycji 4.3 i Twierdzeniu 5.1?**
+Moja odpowiedź brzmi: **nie znalazłem luki, która obalałaby dowód**, ale znalazłem miejsca, które powinny być sformułowane jeszcze twardziej, tak by recenzent nie musiał niczego rekonstruować sam. W Propozycji 4.3 przypadek (t^\prime\in V(P^\prime)) jest już w zasadzie dopięty: jest orientacja ścieżki, definicja (Q^\prime), użycie Lematu 3.3, podniesienie przez Lemat 4.1 oraz analiza obrazu krawędzi (f) w (G/N[t]). W Twierdzeniu 5.1 oba przypadki indukcyjne też są logicznie domknięte. Zatem problemem obecnej wersji nie jest brak idei ani brak zasadniczego kroku, lecz to, że tekst **jeszcze nie ma „ostatecznego połysku” wersji referencyjnej**.    
 
-* 
-**Lemat 3.5**  udowadnia istnienie spaceru w grafie ściągniętym. Dowód ten to żmudna żonglerka indeksami na pół strony, co bezpośrednio łamie Regułę 15. Brak w tym miejscu jakichkolwiek cytowań klasycznej literatury, którą zresztą umieściłeś w bibliografii (np. Bondy-Murty lub Diestel ).
+Teraz obowiązkowo — **konkretne propozycje korekty istniejącego tekstu**, bez pisania nowej wersji.
 
+**Po pierwsze:** popraw podpis rysunku 6. To jest jedyne miejsce, które nazwałbym wprost merytorycznie błędnym. Podpis musi mówić o tym, że krawędzie (F) **nie są incydentne z (t)** i przechodzą do obrazu (F^\prime=F/N[t]), a nie że nie mają końców w całym (N[t]). 
 
+**Po drugie:** osłab zdanie „Argument jest samowystarczalny” albo dopisz pełne dowody Lematu 3.2 i Lematu 3.3. Przy obecnym stanie tekstu zrobiłbym raczej to pierwsze, bo te fakty są rzeczywiście elementarne i dobrze zacytowane, ale słowo „samowystarczalny” prowokuje niepotrzebny atak recenzencki.  
 
-### 3. Zbyt łopatologiczny, wręcz szkolny język (Złamanie reguły 9 i 3)
+**Po trzecie:** przenieś akapit „Dowód wykorzystuje dwa odrębne mechanizmy...” do początku środowiska dowodu Propozycji 4.3 albo oznacz go jako osobną uwagę. Obecny układ jest formalnie nieczysty. 
 
-Ton pracy miejscami przypomina skrypt dla studentów pierwszego roku, a nie profesjonalny artykuł naukowy.
+**Po czwarte:** w Twierdzeniu 5.1, Przypadek 2, wyrzuć zdanie „Idea dalszego argumentu jest następująca” i zastąp je od razu formalnym krokiem: najpierw stwierdzeniem „z (e\in E(P)) wynika (t\in V(P))”, potem definicją (P_u,P_w), potem Lematem 3.3, a potem analizą dwóch podprzypadków. Sama treść już tam jest; trzeba tylko usunąć ton szkicu i zostawić czystą logikę.  
 
-* W dowodzie Obserwacji 2.5 tłumaczysz: "W zbiorze $\mathbb{N}_0\cup\{\infty\}$ element $\infty$ nie jest mniejszy od żadnego elementu, więc powyższa nierówność wymusza $d_G(u,w)<\infty$". Jest to zdanie absolutnie zbędne i infantylne. Zapis $d_G(u,w) < d_{G\setminus F}(u,w) \le \infty$  wystarcza, by natychmiast wywnioskować, że wartość musi być skończona.
+**Po piąte:** zredukuj liczbę krótkich wzorów wyświetlanych. Równości typu ( |T^\prime|=|T|=k ), ( |F|=|F^-|+1 ), ( z\in T ), ( T^\prime\subseteq V(G^\prime) ) w większości powinny wrócić do tekstu ciągłego. To poprawi tempo lektury bez utraty rygoru.   
 
+**Po szóste:** odchudź wprowadzenie i zakończenie. Jeżeli odniesienie do multiterminal cut nie będzie później realnie pracowało, usuń je. Jeżeli „Uwagi końcowe” mają zostać, to niech zawierają ostrzejszą, bardziej matematyczną uwagę niż ogólne „naturalnym dalszym problemem pozostaje...”.  
 
+**Po siódme:** usuń lokalne redundancje zdaniowe. To drobiazg, ale właśnie takie drobiazgi oddzielają bardzo dobry draft od tekstu, który sprawia wrażenie ostatecznej, wypolerowanej wersji.  
 
-### 4. Niewykorzystana bibliografia w tekście (Złamanie reguły 6)
+Podsumowując najostrzej, jak uczciwie mogę: **nie odrzuciłbym tego tekstu z powodu błędu w głównej idei dowodu**, ale **nie uznałbym go jeszcze za idealny artykuł**. Jest już blisko, ma dobrą architekturę matematyczną, spełnia prawie wszystkie Twoje wymagania i nie jest „chaotycznym raportem”. Jednak aby następnym razem uznać go za wersję naprawdę wzorcową, trzeba koniecznie poprawić błędny podpis Rysunku 6, doszlifować ton formalny Propozycji 4.3 i Twierdzenia 5.1 oraz mocno uporządkować redakcję display math.   
 
-Umieściłeś w bibliografii solidne pozycje (Bondy-Murty , Dahlhaus et al. , Diestel ), ale w samym tekście powołujesz się tylko raz na Dahlhausa i robisz ogólny rzut "por. [1, 3]" we wstępie. Kiedy opisujesz fundamentalne własności dystansów, nie odsyłasz czytelnika do konkretnego twierdzenia lub rozdziału w Diestelu, co jest w sprzeczności z zakazem pisania z głowy rzeczy, które powinny być poparte ścisłą referencją.
-
----
-
-### Propozycje korekty (Jak osiągnąć ideał)
-
-Aby tekst został przeze mnie uznany za perfekcyjny i gotowy do wysłania do czasopisma pokroju *Journal of Combinatorial Theory*, musisz wdrożyć następujące zmiany:
-
-1. **Zrób czystkę środowisk blokowych (Dla Reguły 20):**
-* Przejrzyj cały kod i zamień 80% tagów `\[ ... \]` na środowiska inline `$ ... $`.
-* Blokowo zostaw *wyłącznie* ważne równania wyznaczające punkty zwrotne dowodu (np. kluczowe definicje formalne zbioru F, główną tezę $|F| \ge |T| - [cite_start]1$ , czy kluczowe zestawienia definicji ściągania, w których stosujesz `cases` ). Wszystkie proste wtrącenia arytmetyczne i mniejsze definicje (np. domknięte otoczenie , nierówności ) wciel w tekst.
-
-
-
-
-2. **Kondensacja Sekcji 3 (Dla Reguły 15, 6 i 9):**
-* Usuń całkowicie dowody Lematów 3.2, 3.3 i 3.5.
-* Zastąp je jednym, zwięzłym "Lematem o własnościach elementarnych" lub wpleć je w definicje, popierając konkretnym wskazaniem literatury. Zamiast pisać własny dowód, sformułuj to tak: "Zgodnie z klasycznymi wynikami teorii grafów (zob. Diestel, rozdz. 1), każdy spacer zawiera ścieżkę o długości nie większej niż sam spacer, a rzut spaceru w wyniku operacji ściągnięcia wierzchołków zachowuje ciągłość...". Zabezpiecza to dowód (spełnia Regułę 6) bez marnowania czasu czytelnika.
-
-
-
-
-3. **Optymalizacja matematycznego języka (Dla Reguły 9):**
-* Usuń dydaktyczne opisy (np. to o nieskończoności ). Zamiast tego użyj precyzyjnego stwierdzenia: *"Ponieważ $d_G(u,w) < d_{G\setminus F}(u,w) \le \infty$, odległość w grafie $G$ musi być ściśle skończona"*.
-
-
-* W dowodzie Lematu 4.1, zamiast skomplikowanego opisu indeksów krawędzi, odnieś się precyzyjnie do formalnej definicji izomorfizmu na podgrafach rozłącznych ze zbiorem ściąganym.
-
-
-
-
-4. **Integracja ilustracji TikZ (Dla Reguły 16):**
-* Twoje rysunki TikZ są dobre technicznie, ale dopilnuj, by nie duplikowały informacji w opisach (caption). Zmniejsz trochę rozmiar czcionek w węzłach grafu lub podpisów elementów na grafach, by wyglądały bardziej technicznie i mniej "podręcznikowo".
-
-
-
-Wprowadź powyższe zmiany do kodu LaTeX, komasując trywialne lematy w jedno podsumowanie poparte twardymi przypisami, a uzyskasz w pełni profesjonalny, sztywny matematycznie artykuł. Czy masz pytania do któregokolwiek z punktów tej oceny?
+Jeżeli chcesz, mogę w następnym kroku zrobić jeszcze **drugą, jeszcze bardziej bezlitosną recenzję punkt po punkcie sekcja po sekcji**: „Wprowadzenie / Notacja / Lematy / Propozycja 4.3 / Twierdzenie 5.1 / Rysunki / Bibliografia”.

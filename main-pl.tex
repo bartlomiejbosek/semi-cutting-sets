@@ -35,7 +35,7 @@
 Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym. Dla $T\subseteq V$ oraz $F\subseteq E$ nazywamy $F$
 zbiorem na wpół-tnącym dla~$T$, jeżeli $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla każdej pary różnych terminali
 $u,w\in T$. W pracy dowodzimy, że każdy taki zbiór spełnia nierówność $|F|\ge |T|-1$.
-Argument jest samowystarczalny: opiera się na charakterystyce przez ścieżki najkrótsze, na trwałości własności
+Dowód opiera się na charakterystyce przez ścieżki najkrótsze, na trwałości własności
 na wpół-tnącej przy ściąganiu domkniętego sąsiedztwa terminala nieincydentnego z~$F$ oraz na indukcji leksykograficznej
 względem pary $(|T|,|V|)$.
 \end{abstract}
@@ -52,7 +52,7 @@ punktem odniesienia dla zagadnień separacyjnych z~wyróżnionym zbiorem termina
 \cite{dahlhaus1994}. Używana w~pracy terminologia grafowa jest standardowa; por.~\cite{bondy-murty,diestel}.
 
 Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego $|F|\ge |T|-1$ obowiązującego dla każdego zbioru
-na wpół-tnącego. Dowód jest samowystarczalny. Najpierw zapisujemy definicję tego
+na wpół-tnącego. Najpierw zapisujemy definicję tego
 zbioru w~równoważnej postaci wymagającej przecinania wszystkich ścieżek najkrótszych między terminalami. Następnie dowodzimy,
 że własność ta zachowuje się po ściągnięciu domkniętego otoczenia terminala $t\in T\setminus V[F]$. Ostatni etap stanowi
 indukcja leksykograficzna względem pary $(|T|,|V|)$.
@@ -521,22 +521,14 @@ $t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkie
 Wówczas $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proposition}
 
-Dowód wykorzystuje dwa odrębne mechanizmy. Po pierwsze, na mocy Obserwacji~\ref{obs:outside-edges} krawędzie o~obu końcach
-poza zbiorem $N[t]$ przechodzą do grafu $G^\prime$ bez zmiany. Po drugie, jeżeli ścieżka najkrótsza w~$G^\prime$ przechodzi
-przez $t^\prime$, to jej końcowy fragment wychodzący z~$t^\prime$ można, na mocy Lematu~\ref{lem:lifting-endpoint}, podnieść
-do najkrótszej ścieżki wychodzącej z~$t$ w~grafie $G$.
-
 \begin{proof}
-Najpierw pokażemy, że
-\[
-  T\setminus\{t\}\subseteq V\setminus N[t].
-\]
+Dowód opiera się na dwóch mechanizmach. Krawędzie o~obu końcach poza $N[t]$ przechodzą do $G^\prime$ bez zmiany
+na mocy Obserwacji~\ref{obs:outside-edges}. Jeżeli natomiast ścieżka najkrótsza w~$G^\prime$ przechodzi przez $t^\prime$,
+to jej końcowy fragment wychodzący z~$t^\prime$ można, na mocy Lematu~\ref{lem:lifting-endpoint}, podnieść do ścieżki
+najkrótszej wychodzącej z~$t$ w~grafie $G$. Najpierw pokażemy, że $T\setminus\{t\}\subseteq V\setminus N[t]$.
 Weźmy dowolne $u\in T\setminus\{t\}$ i~przypuśćmy, że $u\in N(t)$. Wtedy $\dist{G}{t}{u}=1$, a~jedyna ścieżka długości $1$
 z~$t$ do~$u$ jest równa $(t,u)$. Z~Obserwacji~\ref{obs:shortest-paths} wynikałoby więc, że krawędź $\{t,u\}$ należy do~$F$,
-co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi żądanej inkluzji. W~szczególności
-\[
-  T^\prime\subseteq V(G^\prime).
-\]
+co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi żądanej inkluzji. W~szczególności $T^\prime\subseteq V(G^\prime)$.
 
 W~następnym kroku pokażemy, że dla każdych różnych $u,w\in T^\prime$ zachodzi $\dist{G^\prime}{u}{w}<\infty$. Jeżeli
 $u,w\in T\setminus\{t\}$, to z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{u}{w}<\infty$. Istnieje więc ścieżka z~$u$ do~$w$
@@ -551,64 +543,35 @@ ma w~$G^\prime$ skończoną odległość.
 
 Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$.
 Ponieważ na mocy Definicji~\ref{def:contraction} graf $G^\prime$ jest grafem prostym, możemy zastosować do niego
-Obserwację~\ref{obs:shortest-paths}. Wystarczy więc wykazać, że
-\[
-  E(P^\prime)\cap F^\prime\neq\emptyset.
-\]
+Obserwację~\ref{obs:shortest-paths}. Wystarczy więc wykazać, że $E(P^\prime)\cap F^\prime\neq\emptyset$.
 Rozpatrujemy dwa przypadki.
 
 \medskip\noindent
 \textbf{Przypadek 1: $t^\prime\notin V(P^\prime)$.}
-Wtedy
-\[
-  V(P^\prime)\subseteq V\setminus N[t],
-\]
+Wtedy $V(P^\prime)\subseteq V\setminus N[t]$,
 bo jedynym wierzchołkiem grafu $G^\prime$ spoza zbioru $V\setminus N[t]$ jest właśnie $t^\prime$. Każda krawędź ścieżki
 $P^\prime$ ma więc oba końce poza $N[t]$, a~zatem na mocy Obserwacji~\ref{obs:outside-edges} jest zarazem krawędzią grafu
 $G$. Wynika stąd, że $P^\prime$ jest ścieżką z~$u$ do~$w$ również w~$G$. Ponieważ końce ścieżki należą do~$V(P^\prime)$,
-mamy także $u,w\neq t^\prime$, a~zatem
-\[
-  u,w\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}.
-\]
+mamy także $u,w\neq t^\prime$, a~zatem $u,w\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$.
 
 Pokażemy, że $P^\prime$ jest najkrótsza także w~$G$. Gdyby istniała w~$G$ ścieżka $Q$ z~$u$ do~$w$ o~długości
 $\len{Q}<\len{P^\prime}$, to z~Lematu~\ref{lem:projection-walk} otrzymalibyśmy spacer z~$u$ do~$w$ w~$G^\prime$ o~długości
 co najwyżej $\len{Q}$, gdyż $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(w)=w$. Następnie z~Lematu~\ref{lem:walk-to-path}
 otrzymalibyśmy ścieżkę z~$u$ do~$w$ w~$G^\prime$ o~długości co najwyżej $\len{Q}$. Otrzymalibyśmy więc ścieżkę krótszą niż
 $P^\prime$, sprzeczną z~minimalnością $P^\prime$.
-Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$ w~$G$, zachodzi zarazem
-\[
-  \dist{G}{u}{w}\le \len{P^\prime}.
-\]
-Stąd
-\[
-  \len{P^\prime}=\dist{G}{u}{w}.
-\]
-Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} dostajemy krawędź
-\[
-  g\in E(P^\prime)\cap F.
-\]
+Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$ w~$G$, zachodzi zarazem $\dist{G}{u}{w}\le \len{P^\prime}$, skąd
+$\len{P^\prime}=\dist{G}{u}{w}$. Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} dostajemy krawędź
+$g\in E(P^\prime)\cap F$.
 Na mocy Obserwacji~\ref{obs:outside-edges} mamy $g/N[t]=g$, a~zatem $g\in F^\prime$. Otrzymujemy
-\[
-  E(P^\prime)\cap F^\prime\neq\emptyset.
-\]
+$E(P^\prime)\cap F^\prime\neq\emptyset$.
 
 \medskip\noindent
 \textbf{Przypadek 2: $t^\prime\in V(P^\prime)$.}
 Ponieważ $P^\prime$ jest ścieżką, wierzchołek $t^\prime$ występuje w~niej dokładnie raz. Jeżeli $t^\prime$ jest ostatnim
 wierzchołkiem ścieżki $P^\prime$, to zastępujemy $P^\prime$ ścieżką $\overleftarrow{P^\prime}$. Na mocy Notacji~\ref{not:basic-operations}
 otrzymujemy znów ścieżkę najkrótszą o~tym samym zbiorze krawędzi. Ponieważ
-\[
-  E(\overleftarrow{P^\prime})=E(P^\prime),
-\]
-warunek
-\[
-  E(P^\prime)\cap F^\prime\neq\emptyset
-\]
-jest równoważny warunkowi
-\[
-  E(\overleftarrow{P^\prime})\cap F^\prime\neq\emptyset.
-\]
+$E(\overleftarrow{P^\prime})=E(P^\prime)$, warunek $E(P^\prime)\cap F^\prime\neq\emptyset$ jest równoważny warunkowi
+$E(\overleftarrow{P^\prime})\cap F^\prime\neq\emptyset$.
 Wystarczy więc rozpatrzyć tę nową ścieżkę. Możemy zatem
 założyć, że
 \[
@@ -627,7 +590,6 @@ odwróceniu ścieżki jest to koniec różny od~$t^\prime$. Zatem
 \[
   z\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}.
 \]
-W~szczególności $z\in T$.
 W~szczególności $z\notin N[t]$. Ponieważ $y_{r+1},\dots,y_m$ są wierzchołkami grafu $G^\prime$ różnymi od~$t^\prime$, wszystkie
 one należą do~$V\setminus N[t]$. Ponieważ $P^\prime$ jest ścieżką najkrótszą, zachodzi
 \[
@@ -735,8 +697,8 @@ zbiorem na wpół-tnącym dla~$T$ w~$G$, to
   \end{scope}
 \end{tikzpicture}
 \caption{Przypadek~1 w~dowodzie Twierdzenia~\ref{thm:main}: ściągnięcie domkniętego otoczenia terminala
-$t\in T\setminus V[F]$. Krawędzie zbioru $F$ nie mają końców w~$N[t]$, więc przechodzą do grafu $G^\prime$
-bez utraty własności na wpół-tnącej.}
+$t\in T\setminus V[F]$. Ponieważ żadne krawędzie ze zbioru $F$ nie są incydentne z~$t$, po ściągnięciu przechodzą one
+do obrazu $F^\prime=F/N[t]$, a~własność na wpół-tnąca zostaje zachowana na mocy Propozycji~\ref{prop:contraction}.}
 \label{fig:main-contraction}
 \end{figure}
 
@@ -784,18 +746,13 @@ wierzchołków.
 
 \medskip\noindent
 \textbf{Baza indukcji.} Niech $k\le 1$. Wtedy zbiór par różnych wierzchołków z~$X$ jest pusty, więc
-\[
-  |M|\ge 0\ge k-1,
-\]
-co kończy bazę indukcji.
+$|M|\ge 0\ge k-1$, co kończy bazę indukcji.
 
 \medskip\noindent
 \textbf{Krok indukcyjny.} Ustalmy parę $(k,n)$ z~$k\ge 2$ i~załóżmy, że rozważana teza jest prawdziwa dla każdej pary
 $(k',n')\prec (k,n)$. Rozważmy graf prosty $G=(V,E)$ o~$n$ wierzchołkach, zbiór terminali $T\subseteq V$ o~mocy $k$ oraz zbiór
 krawędzi $F\subseteq E$, który jest na wpół-tnący dla~$T$ w~$G$. Pokażemy, że
-\[
-  |F|\ge k-1.
-\]
+$|F|\ge k-1$.
 Jeżeli znajdziemy terminal należący do~$T\setminus V[F]$, przejdziemy do mniejszego grafu przez ściągnięcie jego
 domkniętego otoczenia. Jeżeli natomiast $T\subseteq V[F]$, zachowamy graf, lecz usuniemy jeden terminal i~jedną krawędź
 ze zbioru $F$. Rozpatrujemy więc dwa przypadki.
@@ -803,16 +760,9 @@ ze zbioru $F$. Rozpatrujemy więc dwa przypadki.
 \medskip\noindent
 \textbf{Przypadek 1: istnieje terminal $t\in T\setminus V[F]$.}
 Ponieważ $k\ge 2$, możemy wybrać wierzchołek $u\in T\setminus\{t\}$. Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
-\[
-  \dist{G}{t}{u}<\infty.
-\]
-Istnieje więc ścieżka z~$t$ do~$u$. Ponieważ $u\neq t$, ścieżka ta ma dodatnią długość, a~zatem jej pierwsza krawędź jest
-incydentna z~$t$. W~szczególności wierzchołek $t$ ma co najmniej jednego sąsiada. Otrzymujemy
-\[
-  N(t)\neq\emptyset
-  \qquad\text{oraz w konsekwencji}\qquad
-  |N[t]|\ge 2.
-\]
+$\dist{G}{t}{u}<\infty$. Istnieje więc ścieżka z~$t$ do~$u$. Ponieważ $u\neq t$, ścieżka ta ma dodatnią długość, a~zatem jej
+pierwsza krawędź jest incydentna z~$t$. W~szczególności wierzchołek $t$ ma co najmniej jednego sąsiada, czyli
+$N(t)\neq\emptyset$ oraz $|N[t]|\ge 2$.
 
 Niech $t^\prime\notin V$ będzie nowym wierzchołkiem i~niech
 \[
@@ -825,30 +775,11 @@ Niech $t^\prime\notin V$ będzie nowym wierzchołkiem i~niech
 Sytuację tę ilustruje Rysunek~\ref{fig:main-contraction}.
 Ponieważ z~założenia tego przypadku mamy $t\in T\setminus V[F]$, na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$
 jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$. Ponieważ
-$t^\prime\notin V$ oraz $T\subseteq V$, mamy $t^\prime\notin T$, a~więc
-\[
-  |T^\prime|=|T|=k.
-\]
-Ponadto
-\[
-  |V(G^\prime)|=|V|-|N[t]|+1\le n-1<n.
-\]
-Z~inkluzji $T^\prime\subseteq V(G^\prime)$ wynika także
-\[
-  |T^\prime|=k\le |V(G^\prime)|.
-\]
-Skoro $|T^\prime|=k$ oraz $|V(G^\prime)|<n$, zachodzi zatem ostra nierówność leksykograficzna
-\[
-  (|T^\prime|,|V(G^\prime)|)\prec (k,n).
-\]
-Z~założenia indukcyjnego otrzymujemy
-\[
-  |F^\prime|\ge |T^\prime|-1=k-1.
-\]
-Lemat~\ref{lem:contraction-image-size} daje $|F^\prime|\le |F|$, a~zatem
-\[
-  |F|\ge k-1.
-\]
+$t^\prime\notin V$ oraz $T\subseteq V$, mamy $t^\prime\notin T$, a~więc $|T^\prime|=|T|=k$. Ponadto
+$|V(G^\prime)|=|V|-|N[t]|+1\le n-1<n$. Z~inkluzji $T^\prime\subseteq V(G^\prime)$ wynika także
+$|T^\prime|=k\le |V(G^\prime)|$. Skoro $|T^\prime|=k$ oraz $|V(G^\prime)|<n$, zachodzi zatem ostra nierówność leksykograficzna
+$(|T^\prime|,|V(G^\prime)|)\prec (k,n)$. Z~założenia indukcyjnego otrzymujemy
+$|F^\prime|\ge |T^\prime|-1=k-1$. Lemat~\ref{lem:contraction-image-size} daje $|F^\prime|\le |F|$, a~zatem $|F|\ge k-1$.
 
 \medskip\noindent
 \textbf{Przypadek 2: $T\subseteq V[F]$.}
@@ -873,9 +804,7 @@ Jeżeli $e\notin E(P)$, to
 \[
   E(P)\cap F^-\neq\emptyset.
 \]
-Pozostaje przypadek $e\in E(P)$. Idea dalszego argumentu jest następująca: po rozcięciu ścieżki $P$ w~wierzchołku $t$
-jedna z~otrzymanych podścieżek zawiera krawędź $e$, natomiast druga jest ścieżką najkrótszą między parą terminali i~dlatego
-musi zawierać inną krawędź ze zbioru $F$. Tę drugą krawędź wykorzystamy jako element zbioru $F^-$ należący do~$E(P)$.
+Pozostaje przypadek $e\in E(P)$.
 
 Ponieważ $e$ jest incydentna z~$t$, istnieje wierzchołek $s\in V$ taki, że $e=\{t,s\}$. Z~założenia $e\in E(P)$ wynika
 więc, że oba końce krawędzi $e$ należą do~$V(P)$, a~w szczególności $t\in V(P)$. Zapiszmy
