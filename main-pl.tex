@@ -216,9 +216,8 @@ Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
   \end{scope}
 \end{tikzpicture}
 \caption{Ściąganie $W=\{a,b,c\}$ do wierzchołka $w^*$ (Definicja~\ref{def:contraction}).
-Krawędzie wewnętrzne zbioru $W$ są usuwane, a~krawędzie wychodzące z~$W$ przechodzą
-na krawędzie incydentne z~$w^*$; ewentualne wielokrotności utożsamiamy, aby pozostać
-w~klasie grafów prostych.}
+Krawędzie wewnętrzne zbioru $W$ znikają, a~krawędzie wychodzące z~$W$ przechodzą
+na krawędzie incydentne z~$w^*$.}
 \label{fig:contraction-def}
 \end{figure}
 
@@ -271,9 +270,7 @@ dwoma terminalami istnieje ścieżka w~$G$, a~zatem wszystkie terminale należą
      $\dist{G}{u}{w}=4,\quad \dist{G\setminus F}{u}{w}=\infty$};
 \end{tikzpicture}
 \caption{Przykład zbioru na wpół-tnącego. Graf $G$ to ścieżka $u$–$a$–$v$–$b$–$w$;
-zbiór terminali $T=\{u,v,w\}$ (wierzchołki szare); $F=\{e_1,e_2\}$ (krawędzie czerwone).
-Każda odległość między różnymi terminalami ściśle rośnie po usunięciu~$F$,
-przy czym $|F|=2=|T|-1$.}
+zbiór terminali $T=\{u,v,w\}$ oznaczono kolorem szarym, a~zbiór $F=\{e_1,e_2\}$ kolorem czerwonym.}
 \label{fig:semi-cut-example}
 \end{figure}
 
@@ -484,9 +481,8 @@ Zatem $P'=(w_0,\dots,w_m)$ jest spacerem o~żądanych własnościach.
     \node at (1.8,1.9) {$G/W$};
   \end{scope}
 \end{tikzpicture}
-\caption{Ilustracja Lematu~\ref{lem:projection-walk}: spacer $P$ długości~4 w~$G$
-przechodzący przez zbiór $W=\{a,t,b\}$ daje po ściągnięciu $W$ do~$w^*$
-spacer $P'$ długości~2 w~$G/W$. Blok stały $a,t,b$ redukuje się do jednego kroku.}
+\caption{Ilustracja Lematu~\ref{lem:projection-walk}: po ściągnięciu zbioru $W=\{a,t,b\}$
+spacer $P$ w~$G$ przechodzi w~spacer $P'$ w~$G/W$ o~nie większej długości.}
 \label{fig:projection-walk}
 \end{figure}
 
@@ -570,6 +566,34 @@ Obie nierówności dają
 czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
 \end{proof}
 
+\begin{observation}\label{obs:outside-edges}
+Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech
+\[
+  G^\prime\coloneqq G/N[t].
+\]
+Jeżeli $x,y\in V\setminus N[t]$ są różne, to
+\[
+  \{x,y\}\in E(G^\prime)
+  \quad\Longleftrightarrow\quad
+  \{x,y\}\in E(G),
+\]
+a~w tym przypadku
+\[
+  \{x,y\}/N[t]=\{x,y\}.
+\]
+\end{observation}
+
+\begin{proof}
+Ponieważ $x,y\notin N[t]$, mamy $\pi_{N[t]}(x)=x$ oraz $\pi_{N[t]}(y)=y$. Jeżeli $\{x,y\}\in E(G)$, to z~Definicji~\ref{def:contraction}
+wynika, że $\{x,y\}\in E(G^\prime)$ oraz $\{x,y\}/N[t]=\{x,y\}$. Odwrotnie, jeżeli $\{x,y\}\in E(G^\prime)$, to z~tej samej
+definicji istnieje krawędź $\{u,v\}\in E(G)$ taka, że
+\[
+  \{\pi_{N[t]}(u),\pi_{N[t]}(v)\}=\{x,y\}.
+\]
+Ponieważ jedynym wierzchołkiem grafu $G^\prime$ leżącym poza zbiorem $V\setminus N[t]$ jest $t^\prime$, z~równości obrazów
+wynika, że $u,v\notin N[t]$. Stąd $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(v)=v$, a~zatem $\{u,v\}=\{x,y\}\in E(G)$.
+\end{proof}
+
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
@@ -606,9 +630,7 @@ czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
     \node at (2.25,1.75) {$G/N[t]$};
   \end{scope}
 \end{tikzpicture}
-\caption{Schemat zależności wykorzystywanej w~Lemacie~\ref{lem:lifting-endpoint} i~w~dowodzie
-Propozycji~\ref{prop:contraction}. Ścieżka $Q^\prime$ w~grafie po ściągnięciu odpowiada ścieżce $Q$
-w~grafie wyjściowym.}
+\caption{Podniesienie końcowego fragmentu ścieżki z~$G/N[t]$ do~$G$.}
 \label{fig:contraction}
 \end{figure}
 
@@ -625,10 +647,10 @@ $t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkie
 Wówczas $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proposition}
 
-Dowód wykorzystuje dwa odrębne mechanizmy. Jeżeli ścieżka najkrótsza w~$G^\prime$ omija wierzchołek $t^\prime$, to jest ona
-zarazem ścieżką najkrótszą w~$G$ między tymi samymi końcami. Jeżeli natomiast przechodzi przez $t^\prime$, to jej końcowy
-fragment wychodzący z~$t^\prime$ można, na mocy Lematu~\ref{lem:lifting-endpoint}, podnieść do najkrótszej ścieżki
-wychodzącej z~$t$ w~grafie $G$.
+Dowód wykorzystuje dwa odrębne mechanizmy. Po pierwsze, na mocy Obserwacji~\ref{obs:outside-edges} krawędzie o~obu końcach
+poza zbiorem $N[t]$ przechodzą do grafu $G^\prime$ bez zmiany. Po drugie, jeżeli ścieżka najkrótsza w~$G^\prime$ przechodzi
+przez $t^\prime$, to jej końcowy fragment wychodzący z~$t^\prime$ można, na mocy Lematu~\ref{lem:lifting-endpoint}, podnieść
+do najkrótszej ścieżki wychodzącej z~$t$ w~grafie $G$.
 
 \begin{proof}
 Najpierw pokażemy, że
@@ -667,8 +689,9 @@ Wtedy
   V(P^\prime)\subseteq V\setminus N[t],
 \]
 bo jedynym wierzchołkiem grafu $G^\prime$ spoza zbioru $V\setminus N[t]$ jest właśnie $t^\prime$. Każda krawędź ścieżki
-$P^\prime$ ma więc oba końce poza $N[t]$, a~zatem jest zarazem krawędzią grafu $G$. Wynika stąd, że $P^\prime$ jest ścieżką
-z~$u$ do~$w$ również w~$G$. Ponieważ końce ścieżki należą do~$V(P^\prime)$, mamy także $u,w\neq t^\prime$, a~zatem
+$P^\prime$ ma więc oba końce poza $N[t]$, a~zatem na mocy Obserwacji~\ref{obs:outside-edges} jest zarazem krawędzią grafu
+$G$. Wynika stąd, że $P^\prime$ jest ścieżką z~$u$ do~$w$ również w~$G$. Ponieważ końce ścieżki należą do~$V(P^\prime)$,
+mamy także $u,w\neq t^\prime$, a~zatem
 \[
   u,w\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}.
 \]
@@ -686,7 +709,7 @@ Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} dostaj
 \[
   g\in E(P^\prime)\cap F.
 \]
-Jej oba końce leżą poza $N[t]$, więc $g/N[t]=g$ oraz $g\in F^\prime$. Otrzymujemy
+Na mocy Obserwacji~\ref{obs:outside-edges} mamy $g/N[t]=g$, a~zatem $g\in F^\prime$. Otrzymujemy
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
 \]
@@ -745,7 +768,8 @@ $f=\{v,y_{r+1}\}$, to
 gdyż $v\in N[t]$ oraz $y_{r+1}\in V\setminus N[t]$, a~więc obrazy końców tej krawędzi są różne. Zatem $f/N[t]$ jest pierwszą
 krawędzią ścieżki $Q^\prime$. Jeżeli natomiast
 $f=\{y_i,y_{i+1}\}$ dla pewnego
-$i\in\{r+1,\dots,m-1\}$, to oba końce krawędzi $f$ leżą poza $N[t]$, więc $f/N[t]=f$ i~wtedy $f/N[t]\in E(Q^\prime)$.
+$i\in\{r+1,\dots,m-1\}$, to oba końce krawędzi $f$ leżą poza $N[t]$, więc na mocy Obserwacji~\ref{obs:outside-edges}
+zachodzi $f/N[t]=f\in E(Q^\prime)$.
 W~obu podprzypadkach
 \[
   f/N[t]\in E(Q^\prime)\subseteq E(P^\prime).
@@ -929,20 +953,14 @@ Sytuację tę ilustruje
 Rysunek~\ref{fig:split-path}.
 Ponieważ $u,w\in T^-=T\setminus\{t\}$, obie te podścieżki mają dodatnią długość.
 
-Ponieważ $P$ jest ścieżką, oba ciągi mają wspólny dokładnie jeden wierzchołek, mianowicie $t$. Zatem
+Ponieważ $P$ jest ścieżką, podścieżki $P_u$ i~$P_w$ mają wspólny jedynie wierzchołek $t$. W~szczególności
 \[
-  V(P_u)\cap V(P_w)=\{t\}.
+  E(P)=E(P_u)\cup E(P_w)
+  \qquad\text{oraz}\qquad
+  E(P_u)\cap E(P_w)=\emptyset,
 \]
-Z~definicji konkatenacji otrzymujemy
-\[
-  E(P)=E(P_u)\cup E(P_w).
-\]
-Gdyby jakaś krawędź należała jednocześnie do obu zbiorów $E(P_u)$ i~$E(P_w)$, to oba jej końce należałyby do
-$V(P_u)\cap V(P_w)=\{t\}$, a~więc byłaby to pętla przy~$t$, sprzeczna z~tym, że $G$ jest grafem prostym. Otrzymujemy więc
-\[
-  E(P_u)\cap E(P_w)=\emptyset.
-\]
-Krawędź $e$ należy dokładnie do jednej z~tych dwóch podścieżek.
+gdyż wspólna krawędź dawałaby pętlę przy~$t$, niemożliwą w~grafie prostym. Krawędź $e$ należy więc dokładnie do jednej
+z~tych dwóch podścieżek.
 
 Jeżeli $e\in E(P_u)$, to z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ mamy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$
 jest ścieżką najkrótszą z~$t$ do~$w$ w~$G$, z~Obserwacji~\ref{obs:shortest-paths} wynika istnienie krawędzi
