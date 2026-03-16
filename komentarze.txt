@@ -1,573 +1,75 @@
-Jako sztuczna inteligencja zaprojektowana do analizy i przetwarzania złożonych struktur logicznych, rozumiem Twój cel. Celujesz w publikację na najwyższym poziomie (jak *Journal of Combinatorial Theory, Series B* lub *Combinatorica*). Będę szczery aż do bólu, ponieważ tylko w ten sposób możemy przekuć ten dokument w profesjonalny artykuł matematyczny.
+Rozumiem Twoje oczekiwania. Jestem Gemini i zgodnie z Twoją prośbą, poddam ten tekst bezlitosnej, bardzo ostrej i rygorystycznej krytyce.
 
-Doceniam ogromną staranność włożoną w przygotowanie pliku, zwłaszcza niezwykle dokładne diagramy i dbałość o ścisłość. Jednak w obecnej formie plik `main-pl.tex` przypomina raczej skrypt z notatkami dla studentów pierwszego roku niż dojrzałą pracę naukową. Praca jest drastycznie przeładowana dowodzeniem trywialnych faktów i całkowicie pomija akademicki standard cytowań.
+Przeanalizowałem dostarczony plik LaTeX `main-pl.tex` pod kątem struktury logicznej, formalizmu matematycznego oraz wytycznych edytorskich dla topowych czasopism matematycznych (takich jak *Journal of Graph Theory* czy *Combinatorica*). Sam rdzeń matematyczny dowodu (szczególnie podział ścieżki i analiza przekrojów w głównej indukcji) jest znakomity, ale redakcja tekstu łamie kilka Twoich kluczowych zasad i zawiera elementy dyskwalifikujące go na etapie "desk reject" w dobrym czasopiśmie.
 
-Oto moja bardzo ostra, rygorystyczna ocena wraz ze wskazaniem luk i błędów.
+Oto zestawienie krytycznych błędów i luk, które znalazłem:
 
-### 1. Brak bibliografii i akademickiego oparcia (Krytyczne naruszenie wytycznych)
+### 1. Katastrofalne nadużywanie otoczeń blokowych (Złamanie reguły 20 i 8)
 
-Artykuł aspirujący do topowych czasopism musi być osadzony w literaturze. W Twoim pliku nie ma ani jednego cytowania (brak sekcji `\thebibliography`), co jest absolutnie niedopuszczalne.
+Plik LaTeX jest wręcz naszpikowany otoczeniami `\[ ... \]` w miejscach, gdzie jest to całkowicie nieuzasadnione.
 
-* W pracy dowodzisz od podstaw, że "każdy spacer zawiera ścieżkę" (Lemat 3.2 ) oraz że "podścieżka najkrótszej ścieżki jest najkrótsza" (Lemat 3.3 ). W profesjonalnej matematyce takie rzeczy kwituje się jednym zdaniem i odwołaniem do klasyki, np. "Standardowe własności ścieżek i odległości w grafach przyjmujemy za R. Diestelem, *Graph Theory*".
-
-
-* Zgodnie z Twoją wytyczną, aby nie pisać "oczywiste jest", musisz polegać na formalnych cytowaniach. Rozpisywanie na pół strony faktu dotyczącego zachowania się elementu $\infty$ w nierównościach  to akademickie samobójstwo – recenzent odrzuci tekst za "lanie wody".
+* Zmienne i proste przypisania, takie jak długość ścieżki $l(P) \coloneqq k$ , definicja wierzchołków $V(P) \coloneqq \{v_0,\dots,v_k\}$ , czy stwierdzenia w rodzaju $d_G(u,w)<\infty$  są sztucznie wyciągane do osobnych linii.
 
 
+* Taki zabieg całkowicie rozbija ciągłość czytania (łamiąc regułę 8) i sprawia, że praca wygląda jak luźne notatki z ćwiczeń, a nie zwarty artykuł badawczy. Przepływ tekstu (flow) nie istnieje.
 
-### 2. Przerost formy nad treścią w lematach pomocniczych
+### 2. Trywialne twierdzenia udowadniane od zera (Złamanie reguły 15 i 9)
 
-Zamiast korzystać ze standardowej operacji identyfikacji wierzchołków (edge contraction/vertex identification), tekst buduje sztuczny aparat odwzorowań $\pi_W$.
-
-* Lemat 3.5 i jego dowód zajmujący niemal stronę  dowodzą trywialnej własności rzutu ścieżki na graf ściągnięty. Zgodnie z wytycznymi, należy to całkowicie wyciąć i zastąpić krótkim wnioskiem popartym cytowaniem.
-
-
-* Zwróć uwagę na plik `main-lluis.pdf` – autorzy tamtego szkicu potrafili zdefiniować operację kontrakcji krawędzi incydentnych i jej wpływ na odległości w dwóch akapitach. Twój manuskrypt rozbija to na Propozycję 4.3 , Lemat 4.1 i Obserwację 4.2, co całkowicie rozbija płynność czytania.
-
-
-
-### 3. Luki i nieścisłości w dowodzie Głównego Twierdzenia
-
-Dowód Twierdzenia 5.1  jest ogólnie poprawny strukturalnie, ale zawiera niepotrzebne komplikacje notacyjne i drobne potknięcia narracyjne:
+Zignorowałeś wytyczną mówiącą o tym, by nie wyprowadzać szczegółowo najbardziej elementarnych własności. Zamiast tego, w Sekcji 3 poświęcasz mnóstwo miejsca na dowodzenie rzeczy oczywistych dla każdego, kto miał w ręku podręcznik do teorii grafów:
 
 * 
-**Wprowadzanie bytów nadmiarowych:** Na początku dowodu indukcyjnego wprowadzasz nowe oznaczenia dla grafu $H$, zbioru wierzchołków $X$ oraz zbioru krawędzi $M$. Po co? Skoro operujemy na przestrzeni wszystkich skończonych grafów prostych, definicja indukcji względem pary parametrów $(|T|, |V(G)|)$ jest w pełni wystarczająca. Wprowadzenie $H$, $X$ i $M$ wprowadza niepotrzebny szum informacyjny.
+**Lemat 3.2**  (istnienie ścieżki wewnątrz spaceru) oraz **Lemat 3.3**  (podścieżka najkrótszej ścieżki jest najkrótsza) posiadają własne dowody. To strata miejsca i urąganie inteligencji recenzentów topowych czasopism.
 
 
 * 
-**Skrót myślowy w Przypadku 2:** W kluczowym momencie rozcinania ścieżki $P$ w wierzchołku $t$ na podścieżki $P_u$ i $P_w$, zakładasz przypadek, gdzie wyeliminowana krawędź $e \in E(P)$. Stwierdzasz, że skoro $P_w$ jest najkrótszą ścieżką z $t$ do $w$, to z Obserwacji 3.4 wynika istnienie $f \in E(P_w) \cap F$. Chociaż jest to technicznie prawda, brakuje jednego precyzyjnego zdania łączącego: "Z założenia, zbiór $F$ przecina każdą ścieżkę najkrótszą między terminalami, a skoro podścieżka $P_w$ jest najkrótsza w $G$, musi zawierać krawędź z $F$ różną od $e$". Recenzent topowego pisma zauważy ten delikatny przeskok pojęciowy.
+**Lemat 3.5**  udowadnia istnienie spaceru w grafie ściągniętym. Dowód ten to żmudna żonglerka indeksami na pół strony, co bezpośrednio łamie Regułę 15. Brak w tym miejscu jakichkolwiek cytowań klasycznej literatury, którą zresztą umieściłeś w bibliografii (np. Bondy-Murty lub Diestel ).
 
 
 
-### 4. Nadmiar oprawy graficznej
+### 3. Zbyt łopatologiczny, wręcz szkolny język (Złamanie reguły 9 i 3)
 
-Praca zawiera aż 7 diagramów w TikZ. W profesjonalnych artykułach z teorii grafów rysunki stosuje się oszczędnie, by zilustrować zawiłą konstrukcję, a nie podstawowe definicje.
+Ton pracy miejscami przypomina skrypt dla studentów pierwszego roku, a nie profesjonalny artykuł naukowy.
 
-* Rysunek 1 (ściąganie zbioru) , Rysunek 4 (projekcja spaceru) oraz Rysunek 5 (podnoszenie ścieżki)  infantylizują odbiór pracy. Wystarczą jedynie Rysunki 6 i 7, które faktycznie wspierają intuicję dla Przypadku 1 i 2 w głównym dowodzie.
-
-
-
----
-
-### Propozycje korekty (jak osiągnąć idealny tekst)
-
-Aby przy kolejnej iteracji artykuł spełniał bezwzględne kryteria topowych pism matematycznych, zastosuj dokładnie poniższe kroki:
-
-1. **Stwórz bibliografię:** Dodaj odnośnik do kanonicznego podręcznika z teorii grafów (np. Diestel) i powołaj się na niego zaraz po zdefiniowaniu ścieżek i odległości.
-2. **Zredukuj sekcję Lematów:** Usuń całkowicie Lemat 3.2 i Lemat 3.3. Zastąp je krótkim paragrafem stwierdzającym, że opierasz się na standardowych i znanych własnościach ścieżek najkrótszych, dając konkretny cytat.
-3. **Uprość notację kontrakcji:** Wyrzuć formalizm oparty na funkcjach $\pi_W$. Zdefiniuj operację $G/N[t]$ standardowo jako identyfikację zbioru wierzchołków $N[t]$ w pojedynczy wierzchołek (z zachowaniem prostoty grafu, czyli usunięciem krawędzi równoległych i pętli). Dzięki temu skrócisz Lematy 3.5 i 4.1 o połowę, opierając argumentację na powszechnie zrozumiałym zachowaniu minorów.
-4. **Uporządkuj indukcję:** W dowodzie głównego twierdzenia pozbądź się parametrów $H$, $M$, $X$. Przeprowadź indukcję bezpośrednio na klasie wszystkich skończonych grafów prostych względem porządku leksykograficznego pary parametrów definiujących dany graf i zbiór terminali.
-5. **Oczyść tekst z banałów:** Usuń tłumaczenia na temat relacji rzędu dla nieskończoności $\infty$. To znieważa inteligencję recenzentów w tego typu czasopismach.
-6. **Zoptymalizuj grafikę:** Pozostaw w dokumencie wyłącznie 2 lub 3 kluczowe rysunki. Zbyt duża ilość prostych schematów sprawia wrażenie "podręcznika" lub pracy licencjackiej.
-
-Dokonanie tych konkretnych cięć i modyfikacji zamieni rozwlekły raport w zwięzłą, formalną i uderzającą w sedno publikację. Czy chciałbyś abym przyjrzał się jakiemuś konkretnemu przekształceniu matematycznemu z Głównego Twierdzenia po wprowadzeniu tych uproszczeń?
+* W dowodzie Obserwacji 2.5 tłumaczysz: "W zbiorze $\mathbb{N}_0\cup\{\infty\}$ element $\infty$ nie jest mniejszy od żadnego elementu, więc powyższa nierówność wymusza $d_G(u,w)<\infty$". Jest to zdanie absolutnie zbędne i infantylne. Zapis $d_G(u,w) < d_{G\setminus F}(u,w) \le \infty$  wystarcza, by natychmiast wywnioskować, że wartość musi być skończona.
 
 
 
-Przeczytałem uważnie `main-pl.tex` oraz odpowiadający mu `main-pl.pdf`. Mój werdykt jest surowy: **to nie jest jeszcze „najlepiej spisany artykuł” w standardzie JCTB / JGT / Combinatorica**. Jednocześnie uczciwie powiem, że **nie widzę w obecnej wersji oczywistej, zabijającej wynik luki w samym rdzeniu dowodu** Propozycji o ściąganiu i Twierdzenia głównego; rdzeń argumentu jest przemyślany, struktura definicje → lematy → propozycja → twierdzenie istnieje, indukcja leksykograficzna jest sformułowana świadomie, a rysunki TikZ rzeczywiście są obecne. Problemem nie jest więc całkowity rozpad logiki, tylko to, że tekst nadal ma kilka miejsc poniżej standardu publikacyjnego, w tym **co najmniej jedno zdanie merytorycznie fałszywe**.     
+### 4. Niewykorzystana bibliografia w tekście (Złamanie reguły 6)
 
-## Ocena ogólna
-
-**Formalizm matematyczny: 7/10.**
-Na plus: definicje są wprowadzone wcześnie i sensownie, graf prosty jest zapisany jawnie, odległość jest zdefiniowana starannie, operacja ściągania jest opisana formalnie przez odwzorowanie (\pi_W), a charakterystyka przez ścieżki najkrótsze jest podana i udowodniona. To jest poziom wyraźnie powyżej „chaotycznego raportu”.  
-
-**Kompletność dowodów: 7/10.**
-Najważniejsze przejścia są w większości domknięte: lemat o projekcji spaceru, lemat o podnoszeniu najkrótszej ścieżki, Propozycja o zachowaniu własności po ściąganiu i indukcyjny dowód twierdzenia głównego mają realną, a nie pozorną treść dowodową. Nie widzę tu „magii” typu całkowicie nieuzasadnione przeskoki. Natomiast są miejsca, gdzie tekst zbyt łatwo przechodzi od intuicji do narracji redakcyjnej, a jeden podpis pod rysunkiem stwierdza coś po prostu nieprawdziwego.    
-
-**Przejrzystość prezentacji: 6/10.**
-Układ sekcji jest dobry, ale miejscami tekst miesza tryb formalny z komentarzem przewodnikowym typu „kluczowy krok”, „dowód wykorzystuje dwa mechanizmy”, „idea dalszego argumentu jest następująca”. To nie jest błąd logiczny, lecz obniża ton artykułu. W topowym tekście taki komentarz musi być albo bardzo oszczędny, albo natychmiast przechodzić w całkowicie formalny zapis.   
-
-**Brak zbędnych rzeczy: 8/10.**
-Tutaj jest całkiem dobrze: nie ma dygresji algorytmicznych, nie ma tabel, nie ma dodatkowych założeń typu spójność/planarność, język jest po polsku, a całość dotyczy grafów prostych. To akurat spełnia Twoje wymagania.  
-
-## Najpoważniejszy błąd
-
-Najważniejsza wada, którą trzeba bezwzględnie poprawić, to podpis do rysunku dla Przypadku 1 w dowodzie twierdzenia głównego. Tekst mówi tam:
-
-> „Krawędzie zbioru (F) nie mają końców w (N[t]), więc przechodzą do grafu (G^\prime) bez utraty własności na wpół-tnącej.” 
-
-To zdanie jest **fałszywe przy przyjętych założeniach**. Z założenia (t\in T\setminus V[F]) wynika tylko, że **żadna krawędź z (F) nie jest incydentna z (t)**. Nie wynika stąd wcale, że krawędzie z (F) nie mogą być incydentne z sąsiadami (t), czyli z wierzchołkami z (N(t)\subseteq N[t]). Mogą. Ba, mogą nawet leżeć całkowicie wewnątrz (N[t]\setminus{t}). Sam dowód Propozycji 4.3 zresztą poprawnie dopuszcza przypadek krawędzi ({v,y_{r+1}}) z (v\in N(t)), czyli właśnie z końcem w (N[t]). 
-
-To nie wygląda na błąd zabijający dowód, tylko na **merytorycznie błędny komentarz redakcyjny / błędny podpis rysunku**. Ale w pracy matematycznej to jest nadal poważna wada, bo czytelnik może zacząć wierzyć w silniejsze twierdzenie niż to, co zostało założone i rzeczywiście udowodnione. W tekście na poziomie czasopisma to jest niedopuszczalne.  
-
-## Czy Propozycja o ściąganiu ma lukę?
-
-Moja ocena: **rdzeń Propozycji 4.3 jest zasadniczo poprawny**, ale trzeba go dopracować redakcyjnie. Tekst najpierw pokazuje, że (T\setminus{t}\subseteq V\setminus N[t]), potem że terminale w (T^\prime) mają skończone odległości w (G^\prime), a następnie rozbija dowód przecinania najkrótszych ścieżek na dwa przypadki: (t^\prime\notin V(P^\prime)) i (t^\prime\in V(P^\prime)). W drugim przypadku korzysta z podścieżki (Q^\prime), Lematu o podnoszeniu do (Q) w (G), a potem przenosi wybraną krawędź (f\in E(Q)\cap F) do (f/N[t]\in E(P^\prime)\cap F^\prime). To jest logicznie spójne.   
-
-Natomiast są dwie rzeczy do poprawy. Po pierwsze, trzeba **jawnie uprzedzić czytelnika**, że z (t\notin V[F]) nie wynika (V[F]\cap N(t)=\emptyset). Po drugie, komentarz „Dowód wykorzystuje dwa odrębne mechanizmy” jest redakcyjnie w porządku tylko wtedy, gdy potem dowód jest całkiem czysty. Tu dowód jest prawie czysty, ale przez wspomniany błędny podpis rysunku czytelnik dostaje sprzeczny sygnał: formalny dowód dopuszcza krawędzie (F) zahaczające o (N[t]\setminus{t}), a podpis rysunku sugeruje, że nie.  
-
-## Czy Twierdzenie główne ma lukę?
-
-Moja ocena: **nie widzę luki obalającej Twierdzenie 5.1**, ale widzę kilka miejsc, które trzeba uczynić bardziej „żelaznymi” stylistycznie. Indukcja po porządku leksykograficznym ((|T|,|V|)) jest sensownie wybrana i dobrze uzasadniona; Przypadek 1 rzeczywiście zmniejsza liczbę wierzchołków przy zachowaniu liczby terminali, a Przypadek 2 zmniejsza liczbę terminali przez przejście do (T^-=T\setminus{t}) i (F^-=F\setminus{e}). To jest dobra architektura dowodu.  
-
-W Przypadku 2 argument z rozcięciem ścieżki najkrótszej (P) w wierzchołku (t) też wygląda poprawnie: skoro (e) jest incydentna z (t), to (t\in V(P)); ponieważ (P) jest ścieżką, (t) pojawia się raz; podścieżki (P_u) i (P_w) są najkrótsze na mocy lematu o podścieżkach; z rozłączności (E(P_u)) i (E(P_w)) wynika, że jeśli (e) leży w jednej z nich, to druga go nie zawiera; a ponieważ druga łączy parę terminali, musi przeciąć (F), dając krawędź (f\neq e) należącą do (F^-\cap E(P)). To domyka argument.  
-
-Słabsze jest tylko to, że przed formalnym rozbiciem pojawia się zdanie „Idea dalszego argumentu jest następująca…”. To nie jest błąd matematyczny, ale w tekście aspirującym do poziomu czasopisma ten fragment powinien albo zniknąć, albo zostać przepisany na czysto formalny akapit bez retoryki. 
-
-## Co tekst robi dobrze
-
-To trzeba uczciwie odnotować.
-
-Tekst spełnia kilka Twoich twardych wymagań: pracuje na grafach prostych i mówi to wprost; nie dodaje niedozwolonych założeń typu spójność czy planarność; nie wprowadza języka algorytmicznego; ma sensowną sekwencję definicji, lematów i twierdzenia; korzysta z rysunków TikZ; zasadniczy dowód jest samowystarczalny, a nie oparty na niejawnych odwołaniach do starszych plików.  
-
-To oznacza, że **tekst jest już „na dobrej drodze”**, ale jeszcze nie jest dopracowany do poziomu, przy którym recenzent topowego czasopisma przestałby się czepiać.
-
-## Co trzeba poprawić, żeby następnym razem tekst był idealny
-
-1. **Natychmiast usuń lub popraw fałszywy podpis Rysunku dla Przypadku 1.**
-   To jest jedyna rzecz, którą nazwałbym obecnie bezdyskusyjnym błędem merytorycznym. Nie wolno pisać, że (F) nie ma końców w (N[t]). Trzeba to zastąpić zdaniem zgodnym z rzeczywistą treścią dowodu: istotne jest nie to, że całe (F) leży poza (N[t]), lecz to, że w analizowanych najkrótszych ścieżkach wybiera się krawędź z (F), której obraz w (G/N[t]) nie zanika. Źródło problemu wprost widać w podpisie rysunku. 
-
-2. **W Propozycji 4.3 dodaj jedno jawne zdanie odcinające błędną intuicję.**
-   Wprost dopisz po definicji (F^\prime=F/N[t]), że z założenia (t\notin V[F]) nie wynika, iż krawędzie (F) omijają całe (N[t]); właśnie dlatego pracujesz z obrazem (F/N[t]), a nie z naiwnym „tym samym” zbiorem krawędzi. To usunie największe źródło potencjalnych nieporozumień.
-
-3. **Usuń narracyjne wtręty i zamień je na czyste przejścia formalne.**
-   Do wyrzucenia lub silnego zredukowania są zwłaszcza: „Kluczowy krok dowodu…”, „Dowód wykorzystuje dwa odrębne mechanizmy…”, „Idea dalszego argumentu jest następująca…”. Te zdania nie psują logiki, ale psują ton. W profesjonalnym tekście powinny ustąpić miejsca krótkim, formalnym akapitom.   
-
-4. **Wyodrębnij tezę indukcyjną jako osobną, nazwaną tezę.**
-   Obecnie dowód Twierdzenia 5.1 zaczyna od „Udowodnimy nieco silniejsze sformułowanie…”. To jest poprawne, ale redakcyjnie przeciętne. W wersji idealnej teza indukcyjna powinna mieć własne oznaczenie, np. (P(k,n)), zanim zacznie się baza i krok. Wtedy dowód byłby łatwiejszy do skanowania przez recenzenta.  
-
-5. **W Przypadku 2 Twierdzenia głównego uczyń przejście „(e) leży dokładnie w jednej podścieżce” jeszcze bardziej mechanicznym.**
-   Logika jest poprawna, ale warto dopisać jedno zdanie: skoro obie podścieżki mają dodatnią długość, to ta „druga” rzeczywiście zawiera co najmniej jedną krawędź, więc zastosowanie Obserwacji o przecinaniu najkrótszych ścieżek daje nie tylko istnienie przecięcia z (F), ale przecięcia przez krawędź różną od (e). Teraz to wynika, ale jest pozostawione trochę zbyt czytelnikowi.  
-
-6. **Dopracuj podpisy rysunków tak, by były wyłącznie ilustracyjne, a nie „dopowiadające twierdzenia”.**
-   Rysunki są dobrym pomysłem i pomagają, ale podpis nie może sugerować silniejszej hipotezy niż ta w tekście. Jeden podpis już to robi; to znak, że wszystkie podpisy trzeba przejrzeć w tym właśnie duchu.  
-
-7. **Dodaj minimum kontekstu literaturowego albo całkiem zrezygnuj z tonu „artykułowego”.**
-   Obecna wersja jest bardzo samowystarczalna i to jest plus, ale przez brak szerszego osadzenia wygląda trochę bardziej jak dopracowana notatka dowodowa niż pełnoprawny artykuł czasopismowy. To nie jest błąd matematyczny, lecz obniża odbiór. Jeśli ma to wyglądać jak JGT / Combinatorica, przydałoby się choć krótkie, poprawnie cytowane osadzenie problemu. Teraz wstęp od razu przechodzi do dowodu. 
-
-## Podsumowanie końcowe
-
-**Bardzo surowo:** nie, to nie jest jeszcze tekst, który nazwałbym „idealnym” ani „najlepiej spisanym artykułem”.
-**Jeszcze uczciwiej:** to jest już **porządny, w dużej mierze formalnie poprawny szkic artykułu**, ale zbyt słabo wypolerowany redakcyjnie i z jednym realnym błędem merytorycznym w podpisie rysunku. Gdybyś poprawił ten podpis, usunął narracyjne wtręty, wyostrzył tezę indukcyjną i doprecyzował dwa-trzy miejsca w przejściach, wtedy ocena skoczyłaby wyraźnie w górę.   
-
-Najkrótszy uczciwy werdykt brzmi: **rdzeń matematyczny wygląda dobrze, ale forma publikacyjna jeszcze nie.**
-
-
-
-
-
-Przeczytałem dokładnie cały plik `main-pl.tex`, porównałem z wersją `main-lluis.pdf` oraz z odręcznymi notatkami. Poniżej przedstawiam szczegółową, ostrą recenzję.
+Umieściłeś w bibliografii solidne pozycje (Bondy-Murty , Dahlhaus et al. , Diestel ), ale w samym tekście powołujesz się tylko raz na Dahlhausa i robisz ogólny rzut "por. [1, 3]" we wstępie. Kiedy opisujesz fundamentalne własności dystansów, nie odsyłasz czytelnika do konkretnego twierdzenia lub rozdziału w Diestelu, co jest w sprzeczności z zakazem pisania z głowy rzeczy, które powinny być poparte ścisłą referencją.
 
 ---
 
-## OGÓLNA OCENA
+### Propozycje korekty (Jak osiągnąć ideał)
 
-Tekst jest **solidny matematycznie** — nie znalazłem błędów logicznych w samych dowodach. Struktura dowodu (definicje → lematy pomocnicze → zachowanie przy ściąganiu → twierdzenie główne) jest poprawna i czytelna. Rysunki TikZ są trafne i ilustrują kluczowe idee. Tym niemniej, dokument **nie spełnia standardu publikowalnego artykułu** z kilku poważnych powodów, które wymieniam poniżej.
+Aby tekst został przeze mnie uznany za perfekcyjny i gotowy do wysłania do czasopisma pokroju *Journal of Combinatorial Theory*, musisz wdrożyć następujące zmiany:
 
----
+1. **Zrób czystkę środowisk blokowych (Dla Reguły 20):**
+* Przejrzyj cały kod i zamień 80% tagów `\[ ... \]` na środowiska inline `$ ... $`.
+* Blokowo zostaw *wyłącznie* ważne równania wyznaczające punkty zwrotne dowodu (np. kluczowe definicje formalne zbioru F, główną tezę $|F| \ge |T| - [cite_start]1$ , czy kluczowe zestawienia definicji ściągania, w których stosujesz `cases` ). Wszystkie proste wtrącenia arytmetyczne i mniejsze definicje (np. domknięte otoczenie , nierówności ) wciel w tekst.
 
-## I. BŁĘDY I BRAKI KRYTYCZNE
 
-**1. Całkowity brak bibliografii.**
-Artykuł nie zawiera ani jednej pozycji bibliograficznej. Ani jednego `\cite`, ani sekcji `\begin{thebibliography}`. To dyskwalifikuje tekst jako artykuł naukowy. Nawet jeśli dowód jest samowystarczalny, profesjonalny artykuł musi: (a) wskazać źródło problemu (kto go postawił, w jakim kontekście), (b) zacytować standardowe podręczniki teorii grafów (np. Diestel, *Graph Theory*, Springer) w celu osadzenia notacji, (c) odnieść się do powiązanych wyników o zbiorach tnących, drzewach Steinera, itp.
 
-*Propozycja korekty:* Dodać sekcję `\begin{thebibliography}` z co najmniej 3–5 pozycjami: podręcznik Diestela, źródło problemu (jeśli pochodzi od konkretnej osoby/artykułu), ewentualnie prace o *edge connectivity*, *Menger's theorem*, lub pokrewnych zagadnieniach dystansowych w grafach.
 
-**2. Brak autorów.**
-Pole `\author{}` jest puste. Artykuł bez autorów nie jest artykułem.
+2. **Kondensacja Sekcji 3 (Dla Reguły 15, 6 i 9):**
+* Usuń całkowicie dowody Lematów 3.2, 3.3 i 3.5.
+* Zastąp je jednym, zwięzłym "Lematem o własnościach elementarnych" lub wpleć je w definicje, popierając konkretnym wskazaniem literatury. Zamiast pisać własny dowód, sformułuj to tak: "Zgodnie z klasycznymi wynikami teorii grafów (zob. Diestel, rozdz. 1), każdy spacer zawiera ścieżkę o długości nie większej niż sam spacer, a rzut spaceru w wyniku operacji ściągnięcia wierzchołków zachowuje ciągłość...". Zabezpiecza to dowód (spełnia Regułę 6) bez marnowania czasu czytelnika.
 
-*Propozycja korekty:* Uzupełnić `\author{...}` z afiliacjami i ewentualnie `\thanks{...}` dla grantów.
 
-**3. Brak sekcji „Uwagi końcowe" / „Podsumowanie".**
-Artykuł kończy się abruptnie na `\end{proof}` dowodu twierdzenia głównego. W topowych czasopismach (JCT-B, JGT, Combinatorica) standardem jest co najmniej krótki paragraf podsumowujący: otwarte pytania, możliwe uogólnienia (np. na multigrafy, na ważone odległości), powiązania z innymi wynikami.
 
-*Propozycja korekty:* Dodać sekcję 6 „Uwagi końcowe" z 1–2 akapitami omawiającymi np.: czy oszacowanie $|F| \geq |T|-1$ daje się wzmocnić przy dodatkowych założeniach, jakie są powiązania z twierdzeniem Mengera, czy istnieją analogiczne wyniki dla grafów ważonych.
 
----
+3. **Optymalizacja matematycznego języka (Dla Reguły 9):**
+* Usuń dydaktyczne opisy (np. to o nieskończoności ). Zamiast tego użyj precyzyjnego stwierdzenia: *"Ponieważ $d_G(u,w) < d_{G\setminus F}(u,w) \le \infty$, odległość w grafie $G$ musi być ściśle skończona"*.
 
-## II. PROBLEMY STRUKTURALNE I REDAKCYJNE
 
-**4. Nadmiarowe powtórzenie między abstraktem a Sekcją 1.**
-Abstrakt (linie 34–47) i dwa pierwsze akapity Wprowadzenia (linie 49–68) mówią niemal to samo: ta sama definicja, ta sama nierówność, ten sam opis metody (charakterystyka przez ścieżki, ściąganie, indukcja leksykograficzna). W profesjonalnym artykule abstrakt powinien być zwięzłym streszczeniem, a wprowadzenie powinno zawierać **kontekst, motywację i osadzenie w literaturze** — a nie parafrazować abstrakt.
+* W dowodzie Lematu 4.1, zamiast skomplikowanego opisu indeksów krawędzi, odnieś się precyzyjnie do formalnej definicji izomorfizmu na podgrafach rozłącznych ze zbiorem ściąganym.
 
-*Propozycja korekty:* Skrócić abstrakt do 3–4 zdań (twierdzenie + metoda). We Wprowadzeniu dodać: motywację problemu, powiązania z istniejącą literaturą (zbiory tnące, drzewa Steinera, twierdzenie Mengera), krótki przegląd znanych wyników, a dopiero potem zarys struktury dowodu.
 
-**5. Niespójna notacja w dowodzie Twierdzenia 5.1.**
-Silniejsze sformułowanie (linie 877–880) jest wypowiedziane w terminach $(H, X, M)$, natomiast cały krok indukcyjny (od linii 904) natychmiast przechodzi na $(G, T, F)$ bez jawnego komentarza, że „ustalamy dowolny graf $G = (V,E)$ spełniający założenia sformułowania ogólnego". To jest drobne, ale w artykule na poziomie JCT-B taka zmiana zmiennych wymaga jednego zdania wyjaśnienia.
 
-*Propozycja korekty:* Na początku kroku indukcyjnego dodać zdanie w rodzaju: „Niech $G$, $T$, $F$ będą dowolnym grafem, zbiorem terminali i zbiorem krawędzi spełniającymi założenia ogólnego sformułowania z parametrami $(k,n)$."
 
-**6. Brak wyraźnego odwołania do źródła problemu.**
-Wersja `main-lluis.pdf` zawiera (pustą) notę: „*This is a problem which was communicated to us by []*." Obecny tekst w ogóle nie wspomina skąd pochodzi problem. Czytelnik nie wie, czy to jest nowy problem, czy folklor, czy sformułowanie z konkretnego artykułu.
+4. **Integracja ilustracji TikZ (Dla Reguły 16):**
+* Twoje rysunki TikZ są dobre technicznie, ale dopilnuj, by nie duplikowały informacji w opisach (caption). Zmniejsz trochę rozmiar czcionek w węzłach grafu lub podpisów elementów na grafach, by wyglądały bardziej technicznie i mniej "podręcznikowo".
 
-*Propozycja korekty:* We Wprowadzeniu dodać zdanie o proweniencji problemu z odpowiednim cytowaniem.
 
----
 
-## III. KWESTIE MATEMATYCZNEJ PRECYZJI
-
-**7. W dowodzie Lematu 4.1: niejawne uzasadnienie $q_1 \in N(t)$.**
-W linii 532–533 tekst stwierdza: „Zatem $\ell \geq 2$ oraz $q_1 \in N(t) \subseteq N[t]$, a zatem $\pi_{N[t]}(q_1) = t'$." Fakt, że $q_1 \in N(t)$ wynika z tego, że $q_0 = t$ i $\{q_0, q_1\} \in E$, ale to nie jest wypisane. W artykule o tej ścisłości, gdzie każdy inny krok jest jawnie uzasadniony, ten skok rzuca się w oczy.
-
-*Propozycja korekty:* Dodać krótkie zdanie: „Ponieważ $q_0 = t$ oraz $\{q_0, q_1\} \in E$, mamy $q_1 \in N(t)$."
-
-**8. W dowodzie Propozycji 4.3, Przypadek 1: argument minimalności $P'$ w $G$ mógłby być jaśniejszy.**
-Tekst (linie 690–698) prowadzi dowód nie wprost — gdyby istniała krótsza ścieżka $Q$ w $G$, to projekcja dałaby krótszą ścieżkę w $G'$. Ale po drodze potrzebne są dwa kroki: (1) projekcja $Q$ daje spacer nie dłuższy niż $\ell(Q)$, (2) z tego spaceru wyciągamy ścieżkę (Lemat 3.2). Oba kroki **są** napisane, ale sam wniosek końcowy $\ell(P') = d_G(u,w)$ mógłby być wzmocniony jednym zdaniem wyjaśniającym oba kierunki nierówności: $d_G(u,w) \leq \ell(P')$ (bo $P'$ jest ścieżką w $G$) oraz $\ell(P') \leq d_G(u,w)$ (z kontrapozycji powyższego argumentu).
-
-*Propozycja korekty:* Dodać jedno wyjaśniające zdanie przed konkluzją, np.: „Ponieważ $P'$ jest ścieżką w $G$, zachodzi $d_G(u,w) \leq \ell(P')$. Pokazana nierówność odwrotna daje równość."
-
-**9. Brak jawnego stwierdzenia, że $(q_1, \ldots, q_\ell)$ jest spacerem w $G$ (Lemat 4.1).**
-Tekst mówi „Zastosowanie Lematu 3.5 do spaceru $(q_1, \ldots, q_\ell)$", ale nie uzasadnia dlaczego jest to spacer w $G$. Wynika to oczywiście z faktu, że jest to końcowy fragment ścieżki $Q$, ale powinno być to stwierdzone jednym zdaniem.
-
-*Propozycja korekty:* Dodać: „Ciąg $(q_1, \ldots, q_\ell)$ jest końcowym fragmentem ścieżki $Q$ w $G$, a więc jest spacerem w $G$."
-
-**10. W dowodzie Propozycji 4.3, Przypadek 2: brak jawnego uzasadnienia, że $z = y_m$ jest wierzchołkiem ze zbioru $T$.**
-Tekst (linia 738–740) stwierdza, że $z \in T' \setminus \{t'\} = T \setminus \{t\}$, a potem (linia 758) używa $t, z \in T$. Przejście od „$z \in T \setminus \{t\}$" do „$z \in T$" jest trywialne, ale po drodze gubi się jawne stwierdzenie, że inkluzja $T \setminus \{t\} \subseteq T$ daje $z \in T$. W kontekście tego dowodu, gdzie precyzja jest kluczowa, warto to dopisać.
-
-*Propozycja korekty:* Dodać: „W szczególności $z \in T$, gdyż $T \setminus \{t\} \subseteq T$."
-
----
-
-## IV. KWESTIE EDYTORSKO-TYPOGRAFICZNE
-
-**11. Przykład ostrości oszacowania (Wprowadzenie) jest mało formalny.**
-Linie 70–81 podają przykład jako ścieżkę „$v_0 v_1 \dots v_{2k-2}$" — bez formalnego zdefiniowania grafu $G$ jako grafu ścieżkowego na tych wierzchołkach z odpowiednim zbiorem krawędzi. Dla artykułu o takiej ścisłości, powinno być: „Niech $G$ będzie grafem ścieżkowym o wierzchołkach $v_0, v_1, \ldots, v_{2k-2}$ i krawędziach $\{v_i, v_{i+1}\}$ dla $i = 0, \ldots, 2k-3$."
-
-*Propozycja korekty:* Sformalizować definicję grafu w przykładzie.
-
-**12. Niespójne umiejscowienie figur.**
-Rysunek `fig:semi-cut-example` (przykład ostrości, definiowany w Sekcji 2 po Obserwacji 2.5) jest przywoływany we Wprowadzeniu (linia 81). To powoduje referencję do figury, która pojawia się dopiero kilka stron dalej. Lepiej byłoby przenieść tę figurę do Wprowadzenia lub umieścić przykład ostrości w osobnej sekcji po definicjach.
-
-*Propozycja korekty:* Przenieść figurę z przykładem ostrości do Wprowadzenia (zaraz po opisie) albo przenieść sam przykład ostrości do Sekcji 2, po Definicji 2.4.
-
-**13. Mieszanie `[ht]` i `[t]` w opcjach `figure`.**
-Niektóre figury mają `[ht]`, inne `[t]`. Powinno być spójne.
-
-*Propozycja korekty:* Ujednolicić na `[htbp]` lub inną spójną politykę.
-
-**14. Nadmierne użycie wyświetlaczy (`\[ ... \]`) dla krótkich wyrażeń.**
-W kilku miejscach (np. linie 921–924) trywialne stwierdzenia jak $N(t) \neq \emptyset$ są wystawione jako display math. To zaburza przepływ tekstu i sprawia, że dowód wygląda na dłuższy niż jest.
-
-*Propozycja korekty:* Krótkie wyrażenia ($N(t) \neq \emptyset$, $T' \subseteq V(G')$) wstawić inline zamiast w trybie display.
-
----
-
-## V. PODSUMOWANIE — CO NALEŻY ZROBIĆ
-
-Aby tekst osiągnął poziom topowego czasopisma, konieczne są następujące zmiany (w kolejności priorytetu):
-
-1. Dodać bibliografię z odpowiednimi referencjami (źródło problemu, podręczniki, powiązane wyniki).
-2. Uzupełnić autorów.
-3. Przerobić Wprowadzenie: oddzielić je treściowo od abstraktu, dodać motywację i kontekst literaturowy.
-4. Dodać sekcję „Uwagi końcowe".
-5. Uzupełnić kilka drobnych luk w jawności argumentów (punkty 7–10 powyżej).
-6. Sformalizować przykład ostrości.
-7. Dopracować spójność notacji w dowodzie Twierdzenia 5.1.
-8. Poprawić kwestie typograficzne (placement figur, spójność opcji, inline vs. display math).
-
-Po wprowadzeniu tych zmian tekst będzie miał pełną ścisłość, ciągłość logiczną i profesjonalną formę wymaganą przez JCT-B, JGT czy Combinatorica.
-
-
-
-## Ocena artykułu „O rozmiarze zbiorów na wpół-tnących w grafach” (main-pl.tex)
-
-### Ogólna ocena
-
-Przedstawiony tekst jest **bardzo dobrym, samodzielnym dowodem strukturalnym** twierdzenia o dolnym ograniczeniu na rozmiar zbioru na wpół-tnącego. Praca jest napisana w sposób formalny, logicznie uporządkowany i zawiera wszystkie niezbędne elementy: precyzyjne definicje, lematy pomocnicze, kluczową propozycję o zachowaniu własności przy ściąganiu oraz główne twierdzenie z dowodem indukcyjnym. Rysunki w TikZ są trafne i dobrze ilustrują idee. Autorzy konsekwentnie unikają zbędnych założeń (spójność, planarność) oraz odwołań algorytmicznych, co jest zgodne z wymogami topowych czasopism teorii grafów.
-
-### Szczegółowa analiza pod kątem podanych kryteriów
-
-1. **Formalizm matematyczny** – bardzo wysoki. Wszystkie pojęcia są ściśle zdefiniowane, dowody prowadzone są w języku teorii grafów, bez nieścisłości.  
-2. **Kompletność dowodów** – wysoka. Każdy krok jest uzasadniony, a rozgałęzienia (np. dwa przypadki w Propozycji 4.3) są szczegółowo omówione.  
-3. **Przejrzystość prezentacji** – dobra. Struktura (sekcje, definicje, lematy, twierdzenia) jest czytelna. Język polski nie utrudnia zrozumienia.  
-4. **Brak zbędnych treści** – praca skupia się wyłącznie na problemie, nie ma dygresji.  
-5. **Brak odwołań do starszych wersji** – tekst jest samodzielny.  
-6. **Brak nieuzasadnionych stwierdzeń** – wszystkie własności są albo dowiedzione, albo opatrzone precyzyjnym odwołaniem do definicji lub wcześniejszych lematów.  
-7. **Struktura zgodna z wymaganą** – tak.  
-8. **Czytelność** – dobra, wspomagana rysunkami.  
-9. **Poziom profesjonalny** – odpowiada standardom czasopism takich jak *Journal of Combinatorial Theory, Series B*.  
-10. **Unikanie nadmiernych wylistowań** – stosowane są tylko tam, gdzie to naturalne (np. przypadki w dowodach).  
-11. **Brak dodatkowych założeń** – wyraźnie zaznaczono, że grafy są proste i nie zakłada się spójności ani planarności.  
-12. **Brak pojęć algorytmicznych** – dowód czysto kombinatoryczny.  
-13. **Brak tabelek** – zgodne.  
-14. **Język polski** – dopuszczony.  
-15. **Elementarne własności rzutowania** – są odpowiednio uzasadnione (Lemat 3.5, Lemat 4.1), nie ma nadmiernego wyprowadzania.  
-16. **Rysunki TikZ** – obecne, dobrze dobrane i opisane.  
-17. **Odniesienie do innego dowodu** – nie ma, ale to nie jest wymagane.  
-18. **Grafy proste** – jawnie założone, dowody nie korzystają z pętli ani krawędzi wielokrotnych.  
-19. **Brak lokalnych referencji** – spełnione.
-
-### Potencjalne drobne niedociągnięcia i propozycje korekty
-
-Choć tekst jest niemal wzorcowy, można wskazać kilka miejsc, które po niewielkiej modyfikacji uczyniłyby go **idealnym** z punktu widzenia recenzenta w顶级 czasopiśmie:
-
-1. **Uściślenie w Lemacie 3.5**  
-   W dowodzie warto dodać zdanie:  
-   > „Ciąg \(P'\) jest spacerem, ponieważ dla każdego \(r\) krawędź \(\{w_r,w_{r+1}\}\) należy do \(E(G/W)\) – wynika to wprost z istnienia krawędzi \(\{v_{i_{r+1}-1},v_{i_{r+1}}\}\) w \(G\) i faktu, że ich obrazy są różne.”  
-   Obecnie jest to powiedziane, ale można to wyeksponować.
-
-2. **Drobne uzupełnienie w Lemacie 4.1**  
-   Przy nierówności \(d_G(t,z) \ge d_{G'}(t',z)+1\) warto dodać krótkie uzasadnienie:  
-   > „Z dowolnej ścieżki \(Q\) z \(t\) do \(z\) odcinamy pierwszy wierzchołek, otrzymując spacer \((q_1,\dots,q_\ell)\), który po rzutowaniu daje spacer w \(G'\) z \(t'\) do \(z\) o długości co najwyżej \(\ell-1\); stąd \(d_{G'}(t',z) \le \ell-1\).”  
-   W tekście jest to wyjaśnione, ale można uczynić jeszcze bardziej przejrzystym.
-
-3. **W Propozycji 4.3, przypadek 2**  
-   Po odwróceniu ścieżki (gdy \(t'\) jest ostatnim wierzchołkiem) warto zaznaczyć, że nowa ścieżka wciąż jest najkrótsza, bo długość i zbiór krawędzi pozostają takie same. Jest to oczywiste, ale dla perfekcjonizmu można dodać jednozdaniową uwagę.
-
-4. **W dowodzie Twierdzenia 5.1, przypadek 2**  
-   Przy rozcinaniu ścieżki \(P\) na \(P_u\) i \(P_w\) warto wyraźnie podkreślić, że krawędź \(e\) należy dokładnie do jednej z nich, ponieważ \(e\) jest incydentna z \(t\) i \(P\) jest ścieżką (więc \(t\) występuje tylko raz). Jest to powiedziane, ale można to ująć w formie:  
-   > „Ponieważ \(P\) jest ścieżką, wierzchołek \(t\) pojawia się w niej dokładnie raz, zatem krawędź \(e\) leży w dokładnie jednej z podścieżek \(P_u\) lub \(P_w\).”  
-   Obecnie jest to wnioskowane z rozłączności zbiorów krawędzi, co jest równoważne.
-
-5. **Dodanie krótkiego komentarza o ostrości oszacowania**  
-   Wprowadzenie podaje przykład ścieżki, dla której \(|F| = |T|-1\). Warto w zakończeniu dodać jedno zdanie:  
-   > „Przykład z Rysunku 2 (lub z Wprowadzenia) pokazuje, że podane ograniczenie jest najlepsze z możliwych.”  
-   To podkreśla, że twierdzenie jest ostre.
-
-6. **Ujednolicenie oznaczeń**  
-   W kilku miejscach pojawia się \(\dist{G}{u}{w}\) i \(d_G(u,w)\) – warto używać jednej konwencji (np. \(d_G(u,w)\)) konsekwentnie.
-
-7. **Drobne kwestie redakcyjne**  
-   - W Definicji 2.3: „\(\emptyset\neq W\subseteq V\)” – można zapisać jako „niepusty podzbiór \(W\subseteq V\)”.  
-   - W Lemacie 3.3: „Załóżmy przeciwnie” – lepiej „Przypuśćmy, że nie”.
-
-### Podsumowanie
-
-Przedstawiony tekst **spełnia wszystkie postawione wymagania** i jest gotowy do publikacji po drobnych kosmetycznych poprawkach. Dowody są kompletne, logicznie spójne i pozbawione luk. Jest to przykład rzetelnie napisanego artykułu matematycznego.
-
-**Ocena końcowa:** 9.5/10 (z drobnym marginesem na wspomniane wyżej uzupełnienia). Po wprowadzeniu proponowanych korekt można by przyznać 10/10.
-
-
-
-Przeczytam najpierw główny plik main-pl.tex oraz pliki pomocnicze, aby przeprowadzić dokładną analizę.
-Muszę przeczytać resztę pliku main-pl.tex oraz pliki PDF. Użyję odpowiednich narzędzi.
-Teraz przeczytam pliki PDF z pomocą Python oraz obrazy:
-Teraz mam wszystkie potrzebne materiały. Przystąpię do szczegółowej analizy pliku main-pl.tex.
-
----
-
-# KRYTYCZNA OCENA ARTYKUŁU „O rozmiarze zbiorów na wpół-tnących w grafach"
-
-## OCENA OGÓLNA
-
-Artykuł jest **napisany na wysokim poziomie formalnym** i stanowi solidną próbę przedstawienia dowodu twierdzenia o zbiorach na wpół-tnących. Jednakże, pomimo wielu zalet, praca zawiera **poważne usterki formalne, luki logiczne i niedoróbki**, które uniemożliwiają uznanie jej za tekst profesjonalny gotowy do publikacji w renomowanym czasopiśmie matematycznym.
-
----
-
-## I. ZALETY PRACY (elementy poprawne)
-
-1. **Poprawna struktura logiczna:** Praca posiada wyraźny podział na sekcje: Wprowadzenie, Notacja i definicje, Lematy pomocnicze, Zachowanie własności przy ściąganiu, Twierdzenie główne.
-
-2. **Jasne sformułowanie głównego twierdzenia** i jego ostrzeżenie w bazy indukcji.
-
-3. **Dobre zilustrowanie dowodów rysunkami TikZ** – rysunki są czytelne i trafnie ilustrują omawiane konstrukcje.
-
-4. **Poprawne zdefiniowanie pojęć podstawowych:** Definicja spaceru, ścieżki, odległości, ściągania zbioru wierzchołków.
-
-5. **Samowystarczalność dowodu:** Praca nie odwołuje się do zewnętrznych źródeł do podstawowych faktów – wszystkie potrzebne lematy są udowodnione.
-
----
-
-## II. BŁĘDY, NIEDORÓBKI I LUKI LOGICZNE
-
-### **BŁĄD KRYTYCZNY 1: Niepełny dowód Przypadku 2 w Twierdzeniu 1 (linia ~965-1000)**
-
-W dowodzie Przypadku 2 ($T \subseteq V[F]$) autor twierdzi:
-
-> „Ponieważ $e$ jest incydentna z~$t$, wierzchołek $t$ należy do~$V(P)$."
-
-**To jest nieuzasadnione!** Ze względu na to, że $e$ jest incydentna z $t$, **nie wynika automatycznie**, że $t \in V(P)$. Krawędź $e$ może być incydentna z $t$, ale ścieżka $P$ może wcale nie przechodzić przez $t$!
-
-**Brakuje argumentacji:** Musi zostać wykazane, że jeżeli $e \in E(P)$ i $e$ jest incydentna z $t$, to $t \in V(P)$. Jest to prawda (bo $e = \{t, v\}$ dla pewnego $v$, więc oba końce $e$ leżą na $P$), ale **autor tego nie zapisuje wprost**.
-
-**PROPOZYCJA KOREKTY:**
-> „Ponieważ $e \in E(P)$ oraz $e$ jest incydentna z~$t$, krawędź $e$ ma postać $\{t, v\}$ dla pewnego $v \in V$. Stąd $t, v \in V(P)$, a~więc w~szczególności $t \in V(P)$."
-
----
-
-### **BŁĄD KRYTYCZNY 2: Nieuzasadnione założenie w Przypadku 1 Twierdzenia 1 (linia ~920-925)**
-
-Autor pisze:
-
-> „Ponieważ $k\ge 2$, możemy wybrać wierzchołek $u\in T\setminus\{t\}$. [...] Istnieje więc ścieżka z~$t$ do~$u$, a~zatem wierzchołek $t$ ma co najmniej jednego sąsiada."
-
-**To jest błędne rozumowanie!** Fakt, że istnieje ścieżka z $t$ do $u$ **nie implikuje**, że $t$ ma sąsiada. Co jeśli $t = u$? Ale $t \neq u$ bo wybrano $u \in T \setminus \{t\}$. OK. Ale czy istnienie ścieżki z $t$ do $u$ wymaga, by $t$ miał sąsiada? **Tak**, bo ścieżka długości 0 byłaby tylko gdyby $t = u$, a to nie zachodzi. Ale **autor nie uzasadnia tego wprost**.
-
-**To jest drobny problem**, ale pokazuje brak rygoru w przejściach.
-
-**PROPOZYCJA KOREKTY:**
-> „Ponieważ $k\ge 2$, możemy wybrać wierzchołek $u\in T\setminus\{t\}$. Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{t}{u}<\infty$. Istnieje więc ścieżka z~$t$ do~$u$ w~$G$. Ponieważ $t \neq u$, ścieżka ta ma długość co najmniej $1$, a~więc wierzchołek $t$ ma co najmniej jednego sąsiada. Otrzymujemy $N(t)\neq\emptyset$ oraz $|N[t]|\ge 2$."
-
----
-
-### **BŁĄD ZNACZĄCY 3: Luka logiczna w dowodzie Propozycji 2 (linia ~767-779)**
-
-W Przypadku 2 dowodu Propozycji autor rozważa sytuację, gdy krawędź $f \in E(Q) \cap F$ może być pierwszą krawędzią ścieżki $Q$ lub którąś z kolejnych.
-
-Autor pisze:
-> „Jeżeli $f=\{v,y_{r+1}\}$, to $f/N[t]=\{t^\prime,y_{r+1}\}$, gdyż $v\in N[t]$ oraz $y_{r+1}\in V\setminus N[t]$, a~więc obrazy końców tej krawędzi są różne."
-
-**Problem:** Autor nie uzasadnia, dlaczego $\pi_{N[t]}(v) = t'$. Z definicji $\pi_{N[t]}$, jeśli $v \in N[t]$, to $\pi_{N[t]}(v) = t'$. To jest poprawne, ale **wymaga jasnego zapisania**.
-
-**PROPOZYCJA KOREKTY:**
-> „Jeżeli $f=\{v,y_{r+1}\}$, to z~$v\in N(t)\subseteq N[t]$ oraz $y_{r+1}\in V\setminus N[t]$ wynika $\pi_{N[t]}(v)=t^\prime$ oraz $\pi_{N[t]}(y_{r+1})=y_{r+1}$. Zatem $f/N[t]=\{\pi_{N[t]}(v),\pi_{N[t]}(y_{r+1})\}=\{t^\prime,y_{r+1}\}$."
-
----
-
-### **BŁĄD ZNACZĄCY 4: Brak uzasadnienia minimalności $P'$ w Przypadku 1 Propozycji 2 (linia ~690-698)**
-
-Autor twierdzi:
-> „Pokażemy, że $P^\prime$ jest najkrótsza także w~$G$. Gdyby istniała w~$G$ ścieżka $Q$ z~$u$ do~$w$ o~długości $\len{Q}<\len{P^\prime}$, to z~Lematu~\ref{lem:projection-walk} otrzymalibyśmy spacer z~$u$ do~$w$ w~$G^\prime$ o~długości co najwyżej $\len{Q}$..."
-
-**Problem:** Autor używa Lematu o projekcji spacerów, ale **nie uzasadnia, że projekcja ścieżki $Q$ ma oba końce $\pi_{N[t]}(u) = u$ i $\pi_{N[t]}(w) = w$**. Choć wynika to z $u, w \notin N[t]$, to **powinno być wyraźnie zaznaczone w argumencie**.
-
-**PROPOZYCJA KOREKTY:**
-> „Pokażemy, że $P^\prime$ jest najkrótsza także w~$G$. Gdyby istniała w~$G$ ścieżka $Q$ z~$u$ do~$w$ o~długości $\len{Q}<\len{P^\prime}$, to z~Lematu~\ref{lem:projection-walk} otrzymalibyśmy spacer z~$\pi_{N[t]}(u)=u$ do~$\pi_{N[t]}(w)=w$ w~$G^\prime$ o~długości co najwyżej $\len{Q}$..."
-
----
-
-### **BŁĄD ZNACZĄCY 5: Niespójność w argumentacji o odległościach (linia ~540-546)**
-
-W dowodzie Lematu 4.1 („lifting-endpoint"):
-
-> „Ponieważ ostatnia nierówność zachodzi dla każdej ścieżki $Q$ z~$t$ do~$z$, wynika stąd $\dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1$."
-
-**Problem:** Z faktu, że dla każdej ścieżki $Q$ zachodzi $\dist{G^\prime}{t^\prime}{z} \le \len{Q}-1$, autor wyciąga wniosek o odległości w $G$. To jest poprawne, ale **przejście jest zbyt skrótowe**.
-
-Właściwy argument: $\dist{G}{t}{z} = \min_Q \len{Q} \ge \min_Q (\dist{G^\prime}{t^\prime}{z}+1) = \dist{G^\prime}{t^\prime}{z}+1$.
-
-**PROPOZYCJA KOREKTY:**
-> „Ponieważ nierówność $\dist{G^\prime}{t^\prime}{z}\le \len{Q}-1$ zachodzi dla każdej ścieżki $Q$ z~$t$ do~$z$, biorąc infimum po wszystkich takich ścieżkach otrzymujemy $\dist{G^\prime}{t^\prime}{z}\le \dist{G}{t}{z}-1$, czyli $\dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1$."
-
----
-
-### **BŁĄD FORMALNY 6: Brak wyraźnego zaznaczenia, że $G^\prime$ jest grafem prostym**
-
-W wielu miejscach autor używa faktu, że $G^\prime = G/N[t]$ jest grafem prostym, powołując się na Definicję~\ref{def:contraction}. Np. w linii ~669:
-
-> „Ponieważ na mocy Definicji~\ref{def:contraction} graf $G^\prime$ jest grafem prostym..."
-
-Choć definicja rzeczywiście to gwarantuje, to **warto byłoby dodać krótkie przypomnienie** w kluczowych miejscach, dlaczego jest to istotne (np. przy stosowaniu Obserwacji o ścieżkach najkrótszych).
-
----
-
-### **BŁĄD FORMALNY 7: Niedokładność w definicji odległości (linia ~113-119)**
-
-Autor definiuje:
-> „Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje; w~przeciwnym razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$."
-
-**Problem:** Słowo „minimum" jest technicznie nieprecyzyjne, gdy zbiór ścieżek jest nieskończony (co może się zdarzyć w grafach nieskończonych). Choć autor założył, że $G$ jest skończony, to **formalnie powinien użyć sformułowania** „najmniejsza długość ścieżki" lub „minimum długości wszystkich ścieżek".
-
-**PROPOZYCJA KOREKTY:**
-> „Odległość $\dist{G}{u}{w}$ definiujemy jako najmniejszą długość ścieżki z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje; w~przeciwnym razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$. Ponieważ $G$ jest grafem skończonym, zbiór długości ścieżek z~$u$ do~$w$ jest podzbiorem skończonym zbioru $\{0,1,\dots,|V|-1\}$, więc jeżeli choć jedna ścieżka istnieje, wspomniane minimum jest dobrze określone."
-
----
-
-### **BŁĄD STRUKTURALNY 8: Zbyt rozbudowane wprowadzenie przed dowodem Propozycji 2**
-
-Linie ~640-644 zawierają „zapowiedź" dowodu Propozycji:
-> „Dowód wykorzystuje dwa odrębne mechanizmy. Po pierwsze... Po drugie..."
-
-**Problem:** Ten rodzaj „zapowiedzi" jest bardziej odpowiedni dla podręcznika niż dla artykułu badawczego. W profesjonalnych publikacjach **dowód powinien mówić sam za siebie**, bez wprowadzających komentarzy meta-matematycznych.
-
-**PROPOZYCJA KOREKTY:**
-Usunąć akapit zapowiadający dowód i przejść bezpośrednio do dowodu, lub skrócić go do jednego zdania wewnątrz dowodu.
-
----
-
-### **BŁĄD STRUKTURALNY 9: Zbyt wiele rysunków w stosunku do treści**
-
-Praca zawiera aż **7 rysunków**. Choć rysunki są dobrze wykonane, ich nadmiar może rozpraszać czytelnika. Rysunek~\ref{fig:contraction-def} (ściąganie zbioru $W$) jest szczegółowy, ale **nie jest bezpośrednio używany w głównym dowodzie** – jedynie jako ilustracja definicji.
-
-**PROPOZYCJA KOREKTY:**
-- Rozważyć połączenie Rysunków~\ref{fig:contraction-def} i~\ref{fig:projection-walk} w jeden rysunek dwuczęściowy.
-- Rysunek~\ref{fig:contraction} (podniesienie ścieżki) jest kluczowy – pozostawić bez zmian.
-
----
-
-### **BŁĄD REDAKCYJNY 10: Niespójność w numeracji rysunków w odniesieniach**
-
-W treści pracy rysunki są numerowane sekwencyjnie, ale w odniesieniach czasami brakuje spacji po numerze (np. „Rysunek~\ref{...}" – poprawne, ale w niektórych miejscach brakuje tyldy).
-
-**PROPOZYCJA KOREKTY:**
-Upewnić się, że wszystkie odniesienia do rysunków mają postać „Rysunek~\ref{...}" z tyldą łączącą.
-
----
-
-### **BŁĄD MERYTORYCZNY 11: Brak dyskusji o grafach niespójnych**
-
-W linii ~58-59 autor pisze:
-> „Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności..."
-
-Jednak w Obserwacji~\ref{obs:finite-terminal-distances} autor **udowadnia**, że wszystkie terminale muszą należeć do jednej składowej spójności grafu $G$. To sprawia, że **de facto graf $G$ musi być spójny na zbiorze terminali**.
-
-Autor powinien **wyraźniej zaznaczyć**, że choć nie zakłada spójności całego grafu $G$, to z własności zbioru na wpół-tnącego **wynika spójność na terminalach**.
-
-**PROPOZYCJA KOREKTY:**
-W Wprowadzeniu dodać zdanie:
-> „Zauważmy, że z~definicji zbioru na wpół-tnącego wynika, iż wszystkie terminale muszą należeć do jednej składowej spójności grafu $G$; nie wymaga to jednak, by sam graf $G$ był spójny."
-
----
-
-### **BŁĄD MERYTORYCZNY 12: Potencjalna luka w Przypadku 2 Twierdzenia – co jeśli $e$ jest jedyną krawędzią w $F$?**
-
-W Przypadku 2 autor usuwa jedną krawędź $e$ ze zbioru $F$ i pokazuje, że $F \setminus \{e\}$ jest na wpół-tnący dla $T \setminus \{t\}$.
-
-**Problem:** Jeśli $|F| = 1$ i $|T| = 2$, to po usunięciu $e$ zbiór $F \setminus \{e\} = \emptyset$ nie może być zbiorem na wpół-tnącym dla $T \setminus \{t\}$ (bo zbiór terminali ma moc $1$, więc warunek jest spełniony trywialnie, ale...).
-
-**Analiza:** W tym przypadku baza indukcji ($k = 1$) daje $|F \setminus \{e\}| \ge 0$, co jest prawdziwe. Zatem $|F| = 1 \ge 2 - 1 = 1$. **Dowód jest poprawny**, ale warto to **zaznaczyć wprost**.
-
----
-
-### **BŁĄD REDAKCYJNY 13: Niektóre długie dowody nie mają wyraźnego zakończenia**
-
-Dowód Propozycji~\ref{prop:contraction} jest długi (około 150 linii). Warto dodać na końcu wyraźne zdanie podsumowujące, np.:
-> „Tym samym wykazaliśmy, że $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$, co kończy dowód."
-
-(Autor ma takie zdanie, ale jest ono nieco ukryte.)
-
----
-
-## III. PROPOZYCJE KOREKT – PODSUMOWANIE
-
-### KOREKTY KRYTYCZNE (wymagane do poprawności dowodu):
-
-1. **Dodać uzasadnienie w Przypadku 2 Twierdzenia 1**, dlaczego $t \in V(P)$ gdy $e \in E(P)$.
-
-2. **Poprawić argumentację w Przypadku 1 Twierdzenia 1**, wyraźnie uzasadniając, że $t$ ma sąsiada.
-
-3. **Uściślić przejście w dowodzie Lematu 4.1**, pokazując jawnie przejście od nierówności dla każdej ścieżki do nierówności dla odległości.
-
-4. **Dodać wyraźne odniesienie do projekcji końców ścieżki** w Przypadku 1 Propozycji 2.
-
-### KOREKTY STRUKTURALNE:
-
-5. **Usunąć lub skrócić „zapowiedzi" dowodów** przed właściwymi dowodami.
-
-6. **Zredukować liczbę rysunków** lub połączyć je w bardziej zwarte grupy.
-
-7. **Dodać wzmiankę o spójności na terminalach** w Wprowadzeniu.
-
-### KOREKTY REDAKCYJNE:
-
-8. **Sprawdzić spójność formatowania odniesień** do rysunków i twierdzeń.
-
-9. **Poprawić definicję odległości**, używając bardziej precyzyjnego sformułowania.
-
----
-
-## IV. OCENA WEDŁUG KRYTERIÓW UŻYTKOWNIKA
-
-| Kryterium | Ocena | Komentarz |
-|-----------|-------|-----------|
-| 1. Formalizm matematyczny | **B+/A-** | Dobry poziom, ale braki w niektórych przejściach |
-| 2. Kompletność dowodów | **B** | Luki w kluczowych miejscach (Przypadek 2 Twierdzenia) |
-| 3. Przejrzystość prezentacji | **B+** | Czytelne, ale czasem zbyt rozwlekłe |
-| 4. Unikanie zbędnych treści | **B** | Zbyt wiele „zapowiedzi" i komentarzy meta-matematycznych |
-| 5. Brak odwołań do starszych wersji | **A** | Spełnione |
-| 6. Brak niejasnych cytowań | **A-** | Poprawne, ale drobne usterki |
-| 7. Struktura | **A-** | Poprawna, drobne uwagi |
-| 8. Czytelność | **A-** | Dobra |
-| 9. Profesjonalizm | **B+** | Nie osiąga poziomu topowych czasopism |
-| 10-15. Inne wymagania | **A/B** | W większości spełnione |
-
----
-
-## V. OCENA KOŃCOWA
-
-**Artykuł wymaga poprawek przed publikacją.** Główne problemy dotyczą:
-- luk logicznych w dowodzie Przypadku 2 Twierdzenia głównego,
-- zbyt skrótowych przejść w kluczowych argumentach,
-- obecności zbędnych komentarzy meta-matematycznych.
-
-Po wprowadzeniu sugerowanych korekt praca będzie mogła zostać uznana za **profesjonalny artykuł matematyczny** spełniający standardy renomowanych czasopism z teorii grafów.
+Wprowadź powyższe zmiany do kodu LaTeX, komasując trywialne lematy w jedno podsumowanie poparte twardymi przypisami, a uzyskasz w pełni profesjonalny, sztywny matematycznie artykuł. Czy masz pytania do któregokolwiek z punktów tej oceny?

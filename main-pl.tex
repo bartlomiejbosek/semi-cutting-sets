@@ -33,14 +33,8 @@
 
 \begin{abstract}
 Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym. Dla $T\subseteq V$ oraz $F\subseteq E$ nazywamy $F$
-zbiorem na wpół-tnącym dla~$T$, jeżeli
-\[
-  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}
-\]
-dla każdej pary różnych terminali $u,w\in T$. W pracy dowodzimy, że każdy taki zbiór spełnia nierówność
-\[
-  |F|\ge |T|-1.
-\]
+zbiorem na wpół-tnącym dla~$T$, jeżeli $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla każdej pary różnych terminali
+$u,w\in T$. W pracy dowodzimy, że każdy taki zbiór spełnia nierówność $|F|\ge |T|-1$.
 Argument jest samowystarczalny: opiera się na charakterystyce przez ścieżki najkrótsze, na trwałości własności
 na wpół-tnącej przy ściąganiu domkniętego sąsiedztwa terminala nieincydentnego z~$F$ oraz na indukcji leksykograficznej
 względem pary $(|T|,|V|)$.
@@ -51,40 +45,23 @@ względem pary $(|T|,|V|)$.
 Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym oraz niech $T\subseteq V$. Dla zbioru krawędzi
 $F\subseteq E$ mówimy, że $F$ jest zbiorem na wpół-tnącym dla~$T$, jeżeli po usunięciu krawędzi z~$F$ odległość między
 każdą parą różnych terminali ściśle wzrasta, to znaczy
-\[
-  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}
-  \qquad\text{dla wszystkich różnych } u,w\in T.
-\]
+$\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla wszystkich różnych $u,w\in T$.
 Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej własności
 strukturalnej. Rozważany warunek lokuje się między pełną separacją terminali a~metrycznym wzrostem odległości; klasycznym
 punktem odniesienia dla zagadnień separacyjnych z~wyróżnionym zbiorem terminali jest wieloterminalny przekrój
 \cite{dahlhaus1994}. Używana w~pracy terminologia grafowa jest standardowa; por.~\cite{bondy-murty,diestel}.
 
-Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego
-\[
-  |F|\ge |T|-1,
-\]
-obowiązującego dla każdego zbioru na wpół-tnącego. Dowód jest samowystarczalny. Najpierw zapisujemy definicję tego
+Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego $|F|\ge |T|-1$ obowiązującego dla każdego zbioru
+na wpół-tnącego. Dowód jest samowystarczalny. Najpierw zapisujemy definicję tego
 zbioru w~równoważnej postaci wymagającej przecinania wszystkich ścieżek najkrótszych między terminalami. Następnie dowodzimy,
 że własność ta zachowuje się po ściągnięciu domkniętego otoczenia terminala $t\in T\setminus V[F]$. Ostatni etap stanowi
 indukcja leksykograficzna względem pary $(|T|,|V|)$.
 
 Oszacowanie jest ostre. Dla każdego $k\ge 2$ niech $G$ będzie grafem ścieżkowym o~zbiorze wierzchołków
-\[
-  V(G)=\{v_0,v_1,\dots,v_{2k-2}\}
-\]
-i~zbiorze krawędzi
-\[
-  E(G)=\bigl\{\{v_i,v_{i+1}\}: i=0,\dots,2k-3\bigr\}.
-\]
-Jeżeli weźmiemy zbiór terminali
-\[
-  T=\{v_0,v_2,\dots,v_{2k-2}\}
-\]
-oraz zbiór krawędzi
-\[
-  F=\bigl\{\{v_{2i},v_{2i+1}\}: i=0,\dots,k-2\bigr\}
-\]
+$V(G)=\{v_0,v_1,\dots,v_{2k-2}\}$ i~zbiorze krawędzi
+$E(G)=\bigl\{\{v_i,v_{i+1}\}: i=0,\dots,2k-3\bigr\}$. Jeżeli weźmiemy zbiór terminali
+$T=\{v_0,v_2,\dots,v_{2k-2}\}$ oraz zbiór krawędzi
+$F=\bigl\{\{v_{2i},v_{2i+1}\}: i=0,\dots,k-2\bigr\}$,
 to zachodzi równość $|F|=|T|-1$. Po usunięciu krawędzi z~$F$ każda składowa grafu $G\setminus F$ zawiera dokładnie jeden terminal,
 więc dwa różne terminale trafiają do różnych składowych i~ich odległość rośnie z~wartości skończonej do~$\infty$. Przykład
 dla $k=3$ przedstawia Rysunek~\ref{fig:semi-cut-example}.
@@ -120,58 +97,30 @@ Odległości traktujemy jako elementy zbioru $\mathbb{N}_0\cup\{\infty\}$, gdzie
 rozszerzonym przez relacje $n<\infty$ dla każdego $n\in\mathbb{N}_0$.
 
 \begin{definition}[Spacery, ścieżki i~odległość]\label{def:paths-distance}
-Niech $u,w\in V$. Spacerem z~$u$ do~$w$ nazywamy ciąg wierzchołków
-\[
-  P=(v_0,v_1,\dots,v_k),
-\]
-taki że $k\in\mathbb{N}_0$, $v_0=u$, $v_k=w$ oraz $\{v_{i-1},v_i\}\in E$ dla każdego $i\in\{1,\dots,k\}$. Długość spaceru $P$
-definiujemy przez
-$\len{P}\coloneqq k$.
+Niech $u,w\in V$. Spacerem z~$u$ do~$w$ nazywamy ciąg wierzchołków $P=(v_0,v_1,\dots,v_k)$, gdzie $k\in\mathbb{N}_0$,
+$v_0=u$, $v_k=w$ oraz $\{v_{i-1},v_i\}\in E$ dla każdego $i\in\{1,\dots,k\}$. Długość spaceru definiujemy przez
+$\len{P}\coloneqq k$. Ścieżką nazywamy spacer, w~którym wierzchołki są parami różne. Dla ścieżki
+$P=(v_0,\dots,v_k)$ piszemy $V(P)\coloneqq \{v_0,\dots,v_k\}$ oraz
+$E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: i=1,\dots,k\bigr\}$.
 
-Ścieżką nazywamy spacer $P=(v_0,\dots,v_k)$, w~którym wierzchołki $v_0,\dots,v_k$ są parami różne. Dla ścieżki
-$P=(v_0,\dots,v_k)$ oznaczamy
-\[
-  V(P)\coloneqq \{v_0,\dots,v_k\},
-  \qquad
-  E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: i=1,\dots,k\bigr\}.
-\]
+Jeżeli $P=(v_0,\dots,v_k)$ oraz $Q=(w_0,\dots,w_\ell)$ są spacerami takimi, że $v_k=w_0$, to ich konkatenację definiujemy
+przez $P\cdot Q\coloneqq (v_0,\dots,v_k,w_1,\dots,w_\ell)$.
 
-Jeżeli $P=(v_0,\dots,v_k)$ oraz $Q=(w_0,\dots,w_\ell)$ są spacerami takimi, że $v_k=w_0$, to ich konkatenację definiujemy przez
-\[
-  P\cdot Q\coloneqq (v_0,\dots,v_k,w_1,\dots,w_\ell).
-\]
-Jest to ponownie spacer, tym razem z~$v_0$ do~$w_\ell$.
-
-Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje; w~przeciwnym
-razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$. Ponieważ $G$ jest skończony, każda ścieżka w~$G$ ma długość co najwyżej
-$|V|-1$, a~więc jeżeli choć jedna ścieżka z~$u$ do~$w$ istnieje, to wspomniane minimum jest dobrze określone. Ścieżkę
-$P$ z~$u$ do~$w$ nazywamy ścieżką najkrótszą, jeżeli
-\[
-  \len{P}=\dist{G}{u}{w}.
-\]
+Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje;
+w~przeciwnym razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$. Ponieważ $G$ jest skończony, każda ścieżka w~$G$ ma długość
+co najwyżej $|V|-1$, a~więc jeżeli choć jedna ścieżka z~$u$ do~$w$ istnieje, to wspomniane minimum jest dobrze określone.
+Ścieżkę $P$ z~$u$ do~$w$ nazywamy ścieżką najkrótszą, jeżeli $\len{P}=\dist{G}{u}{w}$.
 \end{definition}
 
 \begin{notation}[Podstawowe operacje na grafie]\label{not:basic-operations}
-Jeżeli $F\subseteq E$, to przez $G\setminus F$ oznaczamy graf $(V,E\setminus F)$. Dla $F\subseteq E$ piszemy
-\[
-  V[F]\coloneqq \{v\in V:\ \exists\, e\in F\ \text{ takie, że } v\in e\}.
-\]
+Jeżeli $F\subseteq E$, to przez $G\setminus F$ oznaczamy graf $(V,E\setminus F)$, a~przez
+$V[F]\coloneqq \{v\in V:\ \exists\, e\in F\ \text{ takie, że } v\in e\}$ zbiór końców krawędzi ze zbioru $F$.
 Jeżeli $v\in V$, to jego otoczenie i~domknięte otoczenie oznaczamy odpowiednio przez
-\[
-  N(v)\coloneqq \{w\in V:\ \{v,w\}\in E\},
-  \qquad
-  N[v]\coloneqq N(v)\cup\{v\}.
-\]
-Jeżeli $P=(v_0,\dots,v_k)$ jest ścieżką i~$0\le i\le j\le k$, to oznaczamy
-\[
-  P[v_i,v_j]\coloneqq (v_i,\dots,v_j).
-\]
-Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem, to przez
-\[
-  \overleftarrow{P}\coloneqq (v_k,\dots,v_0)
-\]
-oznaczamy spacer otrzymany przez odwrócenie kolejności wierzchołków. Ponieważ graf jest nieskierowany, zachodzi
-$\len{\overleftarrow{P}}=\len{P}$; jeżeli $P$ jest ścieżką, to $\overleftarrow{P}$ jest ścieżką i~$E(\overleftarrow{P})=E(P)$.
+$N(v)\coloneqq \{w\in V:\ \{v,w\}\in E\}$ oraz $N[v]\coloneqq N(v)\cup\{v\}$.
+Jeżeli $P=(v_0,\dots,v_k)$ jest ścieżką i~$0\le i\le j\le k$, to piszemy $P[v_i,v_j]\coloneqq (v_i,\dots,v_j)$.
+Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem, to przez $\overleftarrow{P}\coloneqq (v_k,\dots,v_0)$ oznaczamy spacer otrzymany
+przez odwrócenie kolejności wierzchołków. Ponieważ graf jest nieskierowany, zachodzi $\len{\overleftarrow{P}}=\len{P}$;
+jeżeli $P$ jest ścieżką, to $\overleftarrow{P}$ jest ścieżką i~$E(\overleftarrow{P})=E(P)$.
 \end{notation}
 
 \begin{definition}[Ściąganie niepustego zbioru wierzchołków]\label{def:contraction}
@@ -246,33 +195,27 @@ na krawędzie incydentne z~$w^*$.}
 
 \begin{definition}[Zbiór na wpół-tnący]\label{def:semi-cut}
 Niech $T\subseteq V$. Mówimy, że $F\subseteq E$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, jeżeli dla każdej pary różnych
-wierzchołków $u,w\in T$ zachodzi
-\[
-  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}.
-\]
+wierzchołków $u,w\in T$ zachodzi nierówność $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$.
 Wierzchołki ze zbioru $T$ nazywamy terminalami.
 \end{definition}
 
 \begin{observation}\label{obs:finite-terminal-distances}
 Niech $T\subseteq V$ oraz $F\subseteq E$. Jeżeli $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, to dla każdej pary różnych
-terminali $u,w\in T$ zachodzi
-\[
-  \dist{G}{u}{w}<\infty.
-\]
+terminali $u,w\in T$ zachodzi $\dist{G}{u}{w}<\infty$.
 W~szczególności wszystkie terminale należą do jednej składowej spójności grafu $G$.
 \end{observation}
 
 \begin{proof}
-Weźmy dowolne różne wierzchołki $u,w\in T$. Z~Definicji~\ref{def:semi-cut} mamy
-\[
-  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}\le \infty.
-\]
-W~zbiorze $\mathbb{N}_0\cup\{\infty\}$ element $\infty$ nie jest mniejszy od żadnego elementu, więc powyższa nierówność
-wymusza $\dist{G}{u}{w}<\infty$. Istnienie skończonej odległości między każdą parą terminali oznacza, że między dowolnymi
-dwoma terminalami istnieje ścieżka w~$G$, a~zatem wszystkie terminale należą do jednej składowej spójności grafu $G$.
+Weźmy dowolne różne wierzchołki $u,w\in T$. Z~Definicji~\ref{def:semi-cut} wynika, że po usunięciu krawędzi z~$F$
+odległość między $u$ i~$w$ ściśle rośnie. W~szczególności odległość $\dist{G}{u}{w}$ jest skończona. Istnienie skończonej
+odległości między każdą parą terminali oznacza, że między dowolnymi dwoma terminalami istnieje ścieżka w~$G$. Zatem
+wszystkie terminale należą do jednej składowej spójności grafu $G$.
 \end{proof}
 
 \section{Lematy pomocnicze}
+
+Użyjemy kilku standardowych własności spacerów i~ścieżek najkrótszych; por.~\cite[rozdz.~1]{bondy-murty,diestel}. Dowody
+podajemy tylko tam, gdzie są bezpośrednio związane z~operacją ściągania stosowaną w~dalszej części pracy.
 
 \begin{lemma}\label{lem:contraction-image-size}
 Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas
@@ -304,46 +247,25 @@ o~długości nie większej niż długość tego spaceru.
 \end{lemma}
 
 \begin{proof}
-Wybierzmy wśród wszystkich spacerów z~$u$ do~$w$ o~długości nie większej niż długość ustalonego spaceru taki, którego długość
-jest najmniejsza. Niech będzie to $P=(v_0,\dots,v_k)$. Gdyby istniały indeksy $0\le i<j\le k$ takie, że $v_i=v_j$, to spacer
-\[
-  (v_0,\dots,v_i)\cdot(v_j,\dots,v_k)
-\]
-łączyłby $u$ z~$w$ i~miałby długość mniejszą niż $\len{P}$, wbrew minimalności wyboru. Zatem wierzchołki $v_0,\dots,v_k$ są
-parami różne, czyli $P$ jest ścieżką.
+Jest to standardowa własność spacerów: usuwając kolejne zamknięte fragmenty między dwoma wystąpieniami tego samego
+wierzchołka, otrzymujemy ścieżkę z~$u$ do~$w$ o~długości nie większej niż długość wyjściowego spaceru; por.~\cite[rozdz.~1]{bondy-murty,diestel}.
 \end{proof}
 
 \begin{lemma}\label{lem:subpath}
 Niech $H$ będzie skończonym grafem prostym oraz niech $P=(v_0,\dots,v_k)$ będzie ścieżką z~$u$ do~$w$ w~$H$ o~długości
 $\len{P}=\dist{H}{u}{w}$. Wówczas dla każdych indeksów $0\le i\le j\le k$ zachodzi
-\[
-  \len{P[v_i,v_j]}=\dist{H}{v_i}{v_j}.
-\]
+$\len{P[v_i,v_j]}=\dist{H}{v_i}{v_j}$.
 \end{lemma}
 
 \begin{proof}
-Załóżmy przeciwnie, że istnieje ścieżka $Q$ z~$v_i$ do~$v_j$ taka, że
-\[
-  \len{Q}<\len{P[v_i,v_j]}.
-\]
-Wtedy spacer
-\[
-  (v_0,\dots,v_i)\cdot Q\cdot(v_j,\dots,v_k)
-\]
-łączyłby $u$ z~$w$ i~miałby długość mniejszą niż $\len{P}$, co przeczy równości $\len{P}=\dist{H}{u}{w}$.
+Gdyby istniała ścieżka z~$v_i$ do~$v_j$ krótsza niż $P[v_i,v_j]$, to zastąpienie nią fragmentu $P[v_i,v_j]$ dawałoby ścieżkę
+z~$u$ do~$w$ krótszą niż $P$, wbrew równości $\len{P}=\dist{H}{u}{w}$; por.~\cite[rozdz.~1]{bondy-murty,diestel}.
 \end{proof}
 
 \begin{observation}\label{obs:shortest-paths}
 Niech $H$ będzie skończonym grafem prostym, niech $X\subseteq V(H)$ oraz niech $M\subseteq E(H)$. Wówczas $M$ jest zbiorem
 na wpół-tnącym dla~$X$ w~$H$ wtedy i~tylko wtedy, gdy dla każdych różnych $u,w\in X$ zachodzi $\dist{H}{u}{w}<\infty$ oraz każda
-ścieżka $P$ z~$u$ do~$w$ o~długości
-\[
-  \len{P}=\dist{H}{u}{w}
-\]
-spełnia
-\[
-  E(P)\cap M\neq\emptyset.
-\]
+ścieżka $P$ z~$u$ do~$w$ o~długości $\len{P}=\dist{H}{u}{w}$ spełnia $E(P)\cap M\neq\emptyset$.
 Sytuację tę ilustruje Rysunek~\ref{fig:shortest-path-condition}.
 \end{observation}
 
@@ -351,39 +273,24 @@ Sytuację tę ilustruje Rysunek~\ref{fig:shortest-path-condition}.
 Ustalmy różne wierzchołki $u,w\in X$.
 
 Załóżmy najpierw, że $M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$. Wtedy
-\[
-  \dist{H}{u}{w}<\dist{H\setminus M}{u}{w}\le \infty,
-\]
-więc $\dist{H}{u}{w}<\infty$. Niech $P$ będzie ścieżką z~$u$ do~$w$ o~długości $\dist{H}{u}{w}$. Gdyby $E(P)\cap M=\emptyset$,
+$\dist{H}{u}{w}<\dist{H\setminus M}{u}{w}\le \infty$, więc $\dist{H}{u}{w}<\infty$. Niech $P$ będzie ścieżką z~$u$ do~$w$
+o~długości $\dist{H}{u}{w}$. Gdyby $E(P)\cap M=\emptyset$,
 to $P$ byłaby także ścieżką w~$H\setminus M$, a~więc
-\[
-  \dist{H\setminus M}{u}{w}\le \len{P}=\dist{H}{u}{w},
-\]
-co przeczy założeniu.
+$\dist{H\setminus M}{u}{w}\le \len{P}=\dist{H}{u}{w}$, co przeczy założeniu.
 
 Załóżmy teraz, że $\dist{H}{u}{w}<\infty$ oraz każda ścieżka z~$u$ do~$w$ o~długości $\dist{H}{u}{w}$ przecina zbiór $M$.
-Jeżeli w~$H\setminus M$ nie istnieje ścieżka z~$u$ do~$w$, to
-\[
-  \dist{H\setminus M}{u}{w}=\infty>\dist{H}{u}{w}.
-\]
+Jeżeli w~$H\setminus M$ nie istnieje ścieżka z~$u$ do~$w$, to $\dist{H\setminus M}{u}{w}=\infty>\dist{H}{u}{w}$.
 Pozostaje przypadek $\dist{H\setminus M}{u}{w}<\infty$. Niech $Q$ będzie ścieżką z~$u$ do~$w$ w~$H\setminus M$ o~długości
-\[
-  \len{Q}=\dist{H\setminus M}{u}{w}.
-\]
+\(\len{Q}=\dist{H\setminus M}{u}{w}\).
 Ponieważ $E(H\setminus M)\subseteq E(H)$, ścieżka $Q$ jest także ścieżką w~$H$, a~zatem
-\[
-  \len{Q}\ge \dist{H}{u}{w}.
-\]
-Równość nie może zachodzić, gdyż wtedy $Q$ byłaby ścieżką najkrótszą w~$H$ nieprzecinającą zbioru $M$. Zatem
-\[
-  \dist{H\setminus M}{u}{w}=\len{Q}>\dist{H}{u}{w}.
-\]
+\(\len{Q}\ge \dist{H}{u}{w}\). Równość nie może zachodzić, gdyż wtedy $Q$ byłaby ścieżką najkrótszą w~$H$
+nieprzecinającą zbioru $M$. Zatem $\dist{H\setminus M}{u}{w}=\len{Q}>\dist{H}{u}{w}$.
 Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$.
 \end{proof}
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize}]
   %% Terminale
   \node[circle,draw,inner sep=3pt,fill=gray!30,label=left:$u$]  (u) at (0,0)   {};
   \node[circle,draw,inner sep=3pt,fill=gray!30,label=right:$w$] (w) at (7.2,0) {};
@@ -402,58 +309,28 @@ Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dl
   \node[align=center] at (3.6,0)
     {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
 \end{tikzpicture}
-\caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: każda ścieżka najkrótsza między
-$u$ i~$w$ przecina zbiór $F$, chociaż dłuższe ścieżki mogą $F$ ominąć.}
+\caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: zbiór $F$ przecina wszystkie ścieżki najkrótsze między
+$u$ i~$w$, choć nie musi przecinać ścieżek dłuższych.}
 \label{fig:shortest-path-condition}
 \end{figure}
 
 \begin{lemma}\label{lem:projection-walk}
 Niech $\emptyset\neq W\subseteq V$. Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem w~$G$, to w~$G/W$ istnieje spacer
-\[
-  P'=(w_0,\dots,w_m)
-\]
-taki, że $w_0=\pi_W(v_0)$, $w_m=\pi_W(v_k)$ oraz $m\le k$.
+$P'=(w_0,\dots,w_m)$ taki, że $w_0=\pi_W(v_0)$, $w_m=\pi_W(v_k)$ oraz $m\le k$.
 \end{lemma}
 
 \begin{proof}
-Niech $a_i\coloneqq \pi_W(v_i)$ dla $i=0,\dots,k$. Definiujemy ciąg indeksów
-\[
-  I\coloneqq \{0\}\cup\bigl\{i\in\{1,\dots,k\}:\ a_i\neq a_{i-1}\bigr\}
-    =\{i_0<i_1<\dots<i_m\}.
-\]
-Kładziemy
-\[
-  w_r\coloneqq a_{i_r}
-  \qquad\text{dla } r=0,\dots,m.
-\]
-Z~definicji wynika, że $w_0=a_0=\pi_W(v_0)$. Ponieważ $i_m$ jest początkiem ostatniego maksymalnego bloku stałego w~ciągu
-$(a_0,\dots,a_k)$, mamy także $w_m=a_{i_m}=a_k=\pi_W(v_k)$. Ponieważ $I\subseteq\{0,\dots,k\}$, zachodzi
-\[
-  m+1=|I|\le k+1,
-\]
-a~więc $m\le k$.
-
-Pozostaje wykazać, że kolejne wyrazy $w_0,\dots,w_m$ są połączone krawędziami w~$G/W$. Ustalmy $r\in\{0,\dots,m-1\}$. Z~minimalności
-wyboru $i_{r+1}$ wynika, że
-\[
-  a_{i_r}=a_{i_r+1}=\dots=a_{i_{r+1}-1}\neq a_{i_{r+1}}.
-\]
-W~szczególności
-\[
-  w_r=a_{i_{r+1}-1}=\pi_W(v_{i_{r+1}-1})
-  \qquad\text{oraz}\qquad
-  w_{r+1}=a_{i_{r+1}}=\pi_W(v_{i_{r+1}}).
-\]
-Ponieważ $\{v_{i_{r+1}-1},v_{i_{r+1}}\}\in E$ oraz $w_r\neq w_{r+1}$, z~Definicji~\ref{def:contraction} wynika
-\[
-  \{w_r,w_{r+1}\}\in E(G/W).
-\]
-Zatem $P'=(w_0,\dots,w_m)$ jest spacerem o~żądanych własnościach.
+Rozważmy obrazy kolejnych wierzchołków spaceru $P$ pod odwzorowaniem $\pi_W$ i~usuńmy z~otrzymanego ciągu wszystkie wyrazy
+równe bezpośrednio poprzedniemu. W ten sposób dostajemy ciąg $P'=(w_0,\dots,w_m)$, dla którego $w_0=\pi_W(v_0)$,
+$w_m=\pi_W(v_k)$ oraz $m\le k$. Jeśli $w_r$ i~$w_{r+1}$ są kolejnymi zachowanymi wyrazami, to istnieje indeks
+$j\in\{1,\dots,k\}$ taki, że $w_r=\pi_W(v_{j-1})$, $w_{r+1}=\pi_W(v_j)$ oraz $\pi_W(v_{j-1})\neq \pi_W(v_j)$. Ponieważ
+$\{v_{j-1},v_j\}\in E$, z~Definicji~\ref{def:contraction} wynika $\{w_r,w_{r+1}\}\in E(G/W)$. Zatem $P'$ jest spacerem
+o~żądanych własnościach.
 \end{proof}
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+\begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
   %% Lewa strona: graf G z zaznaczonym W = N[t]
   \begin{scope}[xshift=0cm]
     \node[circle,draw,inner sep=2pt,fill=white,label=below:$x$]  (x)  at (0,0) {};
@@ -479,8 +356,7 @@ Zatem $P'=(w_0,\dots,w_m)$ jest spacerem o~żądanych własnościach.
     \node at (1.8,1.9) {$G/W$};
   \end{scope}
 \end{tikzpicture}
-\caption{Ilustracja Lematu~\ref{lem:projection-walk}: po ściągnięciu zbioru $W=\{a,t,b\}$
-spacer $P$ w~$G$ przechodzi w~spacer $P'$ w~$G/W$ o~nie większej długości.}
+\caption{Ilustracja Lematu~\ref{lem:projection-walk}: po ściągnięciu zbioru $W=\{a,t,b\}$ długość obrazu spaceru nie rośnie.}
 \label{fig:projection-walk}
 \end{figure}
 
