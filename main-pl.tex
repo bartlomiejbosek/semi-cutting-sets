@@ -47,9 +47,7 @@ $F\subseteq E$ mówimy, że $F$ jest zbiorem na wpół-tnącym dla~$T$, jeżeli 
 każdą parą różnych terminali ściśle wzrasta, to znaczy
 $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla wszystkich różnych $u,w\in T$.
 Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej własności
-strukturalnej. Rozważany warunek lokuje się między pełną separacją terminali a~metrycznym wzrostem odległości; klasycznym
-punktem odniesienia dla zagadnień separacyjnych z~wyróżnionym zbiorem terminali jest wieloterminalny przekrój
-\cite{dahlhaus1994}. Używana w~pracy terminologia grafowa jest standardowa; por.~\cite{bondy-murty,diestel}.
+strukturalnej. Używana w~pracy terminologia grafowa jest standardowa; por.~\cite{bondy-murty,diestel}.
 
 Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego $|F|\ge |T|-1$ obowiązującego dla każdego zbioru
 na wpół-tnącego. Najpierw zapisujemy definicję tego
@@ -281,9 +279,9 @@ $\dist{H\setminus M}{u}{w}\le \len{P}=\dist{H}{u}{w}$, co przeczy założeniu.
 Załóżmy teraz, że $\dist{H}{u}{w}<\infty$ oraz każda ścieżka z~$u$ do~$w$ o~długości $\dist{H}{u}{w}$ przecina zbiór $M$.
 Jeżeli w~$H\setminus M$ nie istnieje ścieżka z~$u$ do~$w$, to $\dist{H\setminus M}{u}{w}=\infty>\dist{H}{u}{w}$.
 Pozostaje przypadek $\dist{H\setminus M}{u}{w}<\infty$. Niech $Q$ będzie ścieżką z~$u$ do~$w$ w~$H\setminus M$ o~długości
-\(\len{Q}=\dist{H\setminus M}{u}{w}\).
+$\len{Q}=\dist{H\setminus M}{u}{w}$.
 Ponieważ $E(H\setminus M)\subseteq E(H)$, ścieżka $Q$ jest także ścieżką w~$H$, a~zatem
-\(\len{Q}\ge \dist{H}{u}{w}\). Równość nie może zachodzić, gdyż wtedy $Q$ byłaby ścieżką najkrótszą w~$H$
+$\len{Q}\ge \dist{H}{u}{w}$. Równość nie może zachodzić, gdyż wtedy $Q$ byłaby ścieżką najkrótszą w~$H$
 nieprzecinającą zbioru $M$. Zatem $\dist{H\setminus M}{u}{w}=\len{Q}>\dist{H}{u}{w}$.
 Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$.
 \end{proof}
@@ -595,10 +593,7 @@ krawędź, co zmniejszy liczbę terminali.
 
 \begin{theorem}\label{thm:main}
 Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym, niech $T\subseteq V$ oraz niech $F\subseteq E$. Jeżeli $F$ jest
-zbiorem na wpół-tnącym dla~$T$ w~$G$, to
-\[
-  |F|\ge |T|-1.
-\]
+zbiorem na wpół-tnącym dla~$T$ w~$G$, to zachodzi $|F|\ge |T|-1$.
 \end{theorem}
 
 \begin{figure}[t]
@@ -794,11 +789,6 @@ w~Twierdzeniu~\ref{thm:main} zachodzi równość $|F|=|T|-1$.
 J.~A. Bondy, U.~S.~R. Murty,
 \emph{Graph Theory},
 Graduate Texts in Mathematics, vol.~244, Springer, New York, 2008.
-
-\bibitem{dahlhaus1994}
-E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
-\emph{The complexity of multiterminal cuts},
-SIAM Journal on Computing \textbf{23} (1994), 864--894.
 
 \bibitem{diestel}
 R.~Diestel,
