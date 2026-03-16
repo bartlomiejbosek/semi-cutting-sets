@@ -793,38 +793,15 @@ $t\in T$ oraz krawędź $e\in F$ incydentną z~$t$. Oznaczmy
 Pokażemy, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
 
 Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$F$ jest zbiorem na wpół-tnącym dla~$T$, z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
-\[
-  \dist{G}{u}{w}<\infty.
-\]
-Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths} dostajemy
-\[
-  E(P)\cap F\neq\emptyset.
-\]
-Jeżeli $e\notin E(P)$, to
-\[
-  E(P)\cap F^-\neq\emptyset.
-\]
+\(\dist{G}{u}{w}<\infty\). Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths}
+dostajemy $E(P)\cap F\neq\emptyset$. Jeżeli $e\notin E(P)$, to od razu $E(P)\cap F^-\neq\emptyset$.
 Pozostaje przypadek $e\in E(P)$.
 
 Ponieważ $e$ jest incydentna z~$t$, istnieje wierzchołek $s\in V$ taki, że $e=\{t,s\}$. Z~założenia $e\in E(P)$ wynika
-więc, że oba końce krawędzi $e$ należą do~$V(P)$, a~w szczególności $t\in V(P)$. Zapiszmy
-\[
-  P=(v_0,\dots,v_m).
-\]
-Istnieje dokładnie jeden indeks $j\in\{0,\dots,m\}$ taki, że $v_j=t$, gdyż $P$ jest ścieżką. Definiujemy
-\[
-  P_u\coloneqq (v_0,\dots,v_j)
-  \qquad\text{oraz}\qquad
-  P_w\coloneqq (v_j,\dots,v_m).
-\]
-Ponieważ $v_0=u\neq t$ oraz $v_m=w\neq t$, zachodzi
-\[
-  0<j<m.
-\]
-Wówczas $P_u$ jest podścieżką od~$u$ do~$t$, $P_w$ jest podścieżką od~$t$ do~$w$, a~ponadto
-\[
-  P=P_u\cdot P_w.
-\]
+więc, że oba końce krawędzi $e$ należą do~$V(P)$, a~w szczególności $t\in V(P)$. Zapiszmy $P=(v_0,\dots,v_m)$. Istnieje
+dokładnie jeden indeks $j\in\{0,\dots,m\}$ taki, że $v_j=t$, gdyż $P$ jest ścieżką. Definiujemy
+$P_u\coloneqq (v_0,\dots,v_j)$ oraz $P_w\coloneqq (v_j,\dots,v_m)$. Ponieważ $v_0=u\neq t$ oraz $v_m=w\neq t$, zachodzi
+$0<j<m$. Wówczas $P_u$ jest podścieżką od~$u$ do~$t$, $P_w$ jest podścieżką od~$t$ do~$w$, a~ponadto $P=P_u\cdot P_w$.
 Na mocy Lematu~\ref{lem:subpath} $P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$.
 Sytuację tę ilustruje
 Rysunek~\ref{fig:split-path}.
@@ -845,45 +822,25 @@ dwóch podścieżek.
 
 Jeżeli $e\in E(P_u)$, to z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ mamy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$
 jest ścieżką najkrótszą z~$t$ do~$w$ w~$G$, z~Obserwacji~\ref{obs:shortest-paths} wynika istnienie krawędzi
-\[
-  f\in E(P_w)\cap F.
-\]
+$f\in E(P_w)\cap F$.
 Wtedy $f\neq e$, a~więc $f\in F^-$. Jeżeli natomiast $e\in E(P_w)$, to analogicznie, korzystając z~tego, że $u,t\in T$ oraz
-$P_u$ jest ścieżką najkrótszą z~$u$ do~$t$ w~$G$, otrzymujemy krawędź
-\[
-  f\in E(P_u)\cap F.
-\]
-Znów zachodzi $f\neq e$, a~więc $f\in F^-$. W~obu podprzypadkach dostajemy
-\[
-  E(P)\cap F^-\neq\emptyset.
-\]
+$P_u$ jest ścieżką najkrótszą z~$u$ do~$t$ w~$G$, otrzymujemy krawędź $f\in E(P_u)\cap F$.
+Znów zachodzi $f\neq e$, a~więc $f\in F^-$. W~obu podprzypadkach dostajemy $E(P)\cap F^-\neq\emptyset$.
 
 Wykazaliśmy, że dla każdych różnych $u,w\in T^-$ odległość $\dist{G}{u}{w}$ jest skończona i~każda ścieżka najkrótsza między
 $u$ i~$w$ przecina zbiór $F^-$. Z~Obserwacji~\ref{obs:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
 w~$G$.
 
-Ponieważ $|T^-|=k-1$ oraz $|V(G)|=n$, zachodzi
-\[
-  (|T^-|,|V(G)|)\prec (k,n).
-\]
-Z~założenia indukcyjnego otrzymujemy
-\[
-  |F^-|\ge |T^-|-1=(k-1)-1=k-2.
-\]
-Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy
-\[
-  |F|=|F^-|+1\ge k-1.
-\]
+Ponieważ $|T^-|=k-1$ oraz $|V(G)|=n$, zachodzi $(|T^-|,|V(G)|)\prec (k,n)$. Z~założenia indukcyjnego otrzymujemy
+$|F^-|\ge |T^-|-1=(k-1)-1=k-2$. Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy $|F|=|F^-|+1\ge k-1$.
 Tym samym wykazano krok indukcyjny, a~więc i~dowód twierdzenia.
 \end{proof}
 
 \section{Uwagi końcowe}
 
 Twierdzenie~\ref{thm:main} jest ostre, co pokazuje rodzina przykładów ścieżkowych opisana we~Wprowadzeniu i~zilustrowana
-na Rysunku~\ref{fig:semi-cut-example}. Przedstawiony dowód korzysta wyłącznie z~własności grafów prostych, z~charakterystyki
-przez ścieżki najkrótsze oraz z~operacji ściągania domkniętego otoczenia terminala nieincydentnego z~rozważanym zbiorem
-krawędzi. Naturalnym dalszym problemem pozostaje opis wszystkich trójek $(G,T,F)$, dla których w~Twierdzeniu~\ref{thm:main}
-zachodzi równość $|F|=|T|-1$.
+na Rysunku~\ref{fig:semi-cut-example}. Naturalnym dalszym problemem pozostaje opis wszystkich trójek $(G,T,F)$, dla których
+w~Twierdzeniu~\ref{thm:main} zachodzi równość $|F|=|T|-1$.
 
 \begin{thebibliography}{9}
 
