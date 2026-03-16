@@ -97,6 +97,9 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 19. Absolutnie nie dawaj referencji do lokalnych plików ani manuskryptów!!!!!!!!!!!!!!
 
 
+20. Nie nadużywaj bloków \[ \] - raczej wzory powinieneś inlinować w tekście. Otoczenie blokowe \[ \] powinno być używane w wyjątkowych momentach.
+
+
 ---
 
 
