@@ -73,9 +73,7 @@ oraz zbiorem krawędzi
 \]
 spełnia równość $|F|=|T|-1$. Po usunięciu krawędzi z~$F$ każda składowa grafu $G\setminus F$ zawiera dokładnie jeden terminal,
 więc dwa różne terminale trafiają do różnych składowych i~ich odległość rośnie z~wartości skończonej do~$\infty$. Przykład
-dla $k=3$ przedstawia Rysunek~\ref{fig:semi-cut-example}. Zauważmy również, że sam warunek z~Definicji~\ref{def:semi-cut}
-wymusza skończoność odległości między dowolnymi dwoma terminalami w~$G$; wszystkie terminale leżą więc w~jednej składowej
-spójności, ale jest to wniosek z~definicji, a~nie dodatkowe założenie.
+dla $k=3$ przedstawia Rysunek~\ref{fig:semi-cut-example}.
 
 \section{Notacja i definicje}
 
@@ -176,7 +174,7 @@ Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
     \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$a$] (a)  at (1.5,2.3)  {};
     \node[circle,draw,inner sep=2pt,fill=gray!30,label=right:$b$] (b)  at (2.8,1.5)  {};
     \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$c$] (c)  at (1.5,0.7)  {};
-    %% Krawędzie wewnątrz W (staną się pętlami — znikną)
+    %% Krawędzie wewnątrz W znikają po ściągnięciu
     \draw[gray!50] (a)--(b)--(c)--(a);
     %% Krawędzie między W a resztą grafu
     \draw (x)--(a)  (x)--(c);
@@ -200,10 +198,9 @@ Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
   \end{scope}
 \end{tikzpicture}
 \caption{Ściąganie $W=\{a,b,c\}$ do wierzchołka $w^*$ (Definicja~\ref{def:contraction}).
-Krawędzie wewnętrzne zbioru $W$ znikają (stają się pętlami).
-Dwie krawędzie $\{a,x\}$ i~$\{c,x\}$ dają po ściągnięciu jedną krawędź $\{w^*,x\}$;
-krawędzie $\{b,y\}$ i~$\{b,z\}$ przechodzą odpowiednio na $\{w^*,y\}$ i~$\{w^*,z\}$.
-Krawędź $\{y,z\}$ pozostaje niezmieniona.}
+Krawędzie wewnętrzne zbioru $W$ są usuwane, a~krawędzie wychodzące z~$W$ przechodzą
+na krawędzie incydentne z~$w^*$; ewentualne wielokrotności utożsamiamy, aby pozostać
+w~klasie grafów prostych.}
 \label{fig:contraction-def}
 \end{figure}
 
@@ -215,6 +212,25 @@ wierzchołków $u,w\in T$ zachodzi
 \]
 Wierzchołki ze zbioru $T$ nazywamy terminalami.
 \end{definition}
+
+\begin{observation}\label{obs:finite-terminal-distances}
+Niech $T\subseteq V$ oraz $F\subseteq E$. Jeżeli $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, to dla każdej pary różnych
+terminali $u,w\in T$ zachodzi
+\[
+  \dist{G}{u}{w}<\infty.
+\]
+W~szczególności wszystkie terminale należą do jednej składowej spójności grafu $G$.
+\end{observation}
+
+\begin{proof}
+Weźmy dowolne różne wierzchołki $u,w\in T$. Z~Definicji~\ref{def:semi-cut} mamy
+\[
+  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}\le \infty.
+\]
+W~zbiorze $\mathbb{N}_0\cup\{\infty\}$ element $\infty$ nie jest mniejszy od żadnego elementu, więc powyższa nierówność
+wymusza $\dist{G}{u}{w}<\infty$. Istnienie skończonej odległości między każdą parą terminali oznacza, że między dowolnymi
+dwoma terminalami istnieje ścieżka w~$G$, a~zatem wszystkie terminale należą do jednej składowej spójności grafu $G$.
+\end{proof}
 
 \begin{figure}[ht]
 \centering
@@ -373,10 +389,8 @@ Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dl
   \node[align=center] at (3.6,0)
     {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
 \end{tikzpicture}
-\caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: $F=\{e\}$ jest zbiorem na wpół-tnącym
-dla~$\{u,w\}$, bo każda ścieżka najkrótsza długości~3 (niebieska) zawiera krawędź $e\in F$.
-Dłuższe ścieżki (szare) mogą $F$ ominąć -- ich istnienie gwarantuje, że
-$\dist{G\setminus F}{u}{w}=4>3=\dist{G}{u}{w}$.}
+\caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: każda ścieżka najkrótsza między
+$u$ i~$w$ przecina zbiór $F$, chociaż dłuższe ścieżki mogą $F$ ominąć.}
 \label{fig:shortest-path-condition}
 \end{figure}
 
@@ -460,6 +474,10 @@ spacer $P'$ długości~2 w~$G/W$. Blok stały $a,t,b$ redukuje się do jednego k
 
 \section{Zachowanie własności przy ściąganiu}
 
+Kluczowy krok dowodu polega na wykazaniu, że ściągnięcie domkniętego otoczenia terminala $t\notin V[F]$ zachowuje własność
+na wpół-tnącą. Użyjemy do tego dwóch mechanizmów: projekcji ścieżek do grafu ściągniętego oraz podnoszenia najkrótszej
+ścieżki wychodzącej z~$t^\prime$ do najkrótszej ścieżki wychodzącej z~$t$.
+
 \begin{lemma}\label{lem:lifting-endpoint}
 Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech
 \[
@@ -482,9 +500,13 @@ Ponieważ $z\neq t^\prime$, mamy $k\ge 1$. Z~równości
   V(G^\prime)=(V\setminus N[t])\cup\{t^\prime\}
 \]
 wynika, że wierzchołek $x_1$, jako różny od~$t^\prime$, należy do~$V\setminus N[t]$.
-Krawędź $\{t^\prime,x_1\}$ należy do~$E(G^\prime)$, więc z~Definicji~\ref{def:contraction} istnieje krawędź $\{v,x_1\}\in E$
-taka, że $v\in N[t]$ i~$\{v,x_1\}/N[t]=\{t^\prime,x_1\}$. Gdyby $v=t$, to z~$\{t,x_1\}\in E$ wynikałoby $x_1\in N(t)\subseteq N[t]$,
-sprzecznie z~$x_1\in V\setminus N[t]$. Zatem $v\in N(t)$.
+Krawędź $\{t^\prime,x_1\}$ należy do~$E(G^\prime)$, więc z~Definicji~\ref{def:contraction} istnieje pewien wierzchołek
+$v\in N[t]$ oraz odpowiadająca mu krawędź $\{v,x_1\}\in E$ taka, że
+\[
+  \{v,x_1\}/N[t]=\{t^\prime,x_1\}.
+\]
+Wybierzmy dowolny taki wierzchołek $v$. Gdyby $v=t$, to z~$\{t,x_1\}\in E$ wynikałoby $x_1\in N(t)\subseteq N[t]$, sprzecznie
+z~$x_1\in V\setminus N[t]$. Zatem $v\in N(t)$.
 
 Ponieważ $v\in N(t)\subseteq N[t]$ oraz $x_1,\dots,x_k\in V\setminus N[t]$, żaden z~wierzchołków $x_1,\dots,x_k$ nie jest równy
 ani~$t$, ani~$v$. Ponadto wierzchołki $x_1,\dots,x_k$ są parami różne, gdyż $P^\prime$ jest ścieżką. Dla każdego $i\in\{2,\dots,k\}$ krawędź $\{x_{i-1},x_i\}$ należy
@@ -566,9 +588,9 @@ czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
     \node at (2.25,1.75) {$G/N[t]$};
   \end{scope}
 \end{tikzpicture}
-\caption{Schemat zależności wykorzystywanej w~Lemacie~\ref{lem:lifting-endpoint} i~w~Przypadku~2 Propozycji~\ref{prop:contraction}. Ścieżka
-$Q^\prime$ w~grafie po ściągnięciu odpowiada ścieżce $Q$ w~grafie wyjściowym, a~krawędź z~$F$ leżąca na~$Q$ daje po ściągnięciu
-krawędź należącą do~$F^\prime$.}
+\caption{Schemat zależności wykorzystywanej w~Lemacie~\ref{lem:lifting-endpoint} i~w~dowodzie
+Propozycji~\ref{prop:contraction}. Ścieżka $Q^\prime$ w~grafie po ściągnięciu odpowiada ścieżce $Q$
+w~grafie wyjściowym.}
 \label{fig:contraction}
 \end{figure}
 
@@ -585,6 +607,11 @@ $t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkie
 Wówczas $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proposition}
 
+Dowód wykorzystuje dwa odrębne mechanizmy. Jeżeli ścieżka najkrótsza w~$G^\prime$ omija wierzchołek $t^\prime$, to jest ona
+zarazem ścieżką najkrótszą w~$G$ między tymi samymi końcami. Jeżeli natomiast przechodzi przez $t^\prime$, to jej końcowy
+fragment wychodzący z~$t^\prime$ można, na mocy Lematu~\ref{lem:lifting-endpoint}, podnieść do najkrótszej ścieżki
+wychodzącej z~$t$ w~grafie $G$.
+
 \begin{proof}
 Najpierw pokażemy, że
 \[
@@ -598,10 +625,11 @@ co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi żądanej
 \]
 
 W~następnym kroku pokażemy, że dla każdych różnych $u,w\in T^\prime$ zachodzi $\dist{G^\prime}{u}{w}<\infty$. Jeżeli
-$u,w\in T\setminus\{t\}$, to z~Definicji~\ref{def:semi-cut} mamy $\dist{G}{u}{w}<\infty$. Istnieje więc ścieżka z~$u$ do~$w$
+$u,w\in T\setminus\{t\}$, to z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{u}{w}<\infty$. Istnieje więc ścieżka z~$u$ do~$w$
 w~$G$. Ponieważ $u,w\notin N[t]$, mamy $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(w)=w$, więc z~Lematów~\ref{lem:projection-walk}
 i~\ref{lem:walk-to-path} otrzymujemy ścieżkę z~$u$ do~$w$ w~$G^\prime$. Jeżeli jeden z~wierzchołków $u,w$ jest równy $t^\prime$, to drugi należy do~$T\setminus\{t\}$;
-oznaczmy go przez $z$. Z~Definicji~\ref{def:semi-cut} mamy $\dist{G}{t}{z}<\infty$, więc w~$G$ istnieje ścieżka z~$t$ do~$z$.
+oznaczmy go przez $z$. Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{t}{z}<\infty$, więc w~$G$ istnieje
+ścieżka z~$t$ do~$z$.
 Ponieważ $\pi_{N[t]}(t)=t^\prime$ oraz $\pi_{N[t]}(z)=z$, z~Lematu~\ref{lem:projection-walk}, zastosowanego do tej ścieżki,
 otrzymujemy spacer z~$t^\prime$ do~$z$ w~$G^\prime$, a~następnie z~Lematu~\ref{lem:walk-to-path} ścieżkę z~$t^\prime$ do~$z$
 w~$G^\prime$. Tym samym każda para różnych terminali z~$T^\prime$
@@ -686,7 +714,8 @@ Ponieważ $t,z\in T$, z~Obserwacji~\ref{obs:shortest-paths} otrzymujemy
 \[
   E(Q)\cap F\neq\emptyset.
 \]
-Pierwsza krawędź ścieżki $Q$ jest równa $\{t,v\}$, a~ta krawędź nie należy do~$F$, bo $t\notin V[F]$. Wybierzmy więc
+Z~założenia $t\notin V[F]$ oraz z~definicji zbioru $V[F]$ wynika, że żadna krawędź incydentna z~$t$ nie należy do~$F$.
+W~szczególności pierwsza krawędź ścieżki $Q$, to znaczy $\{t,v\}$, nie należy do~$F$. Wybierzmy więc
 \[
   f\in E(Q)\cap F.
 \]
@@ -716,6 +745,11 @@ na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 
 \section{Twierdzenie główne}
 
+W~dowodzie głównego twierdzenia będziemy zmniejszać parametr indukcyjny na dwa sposoby. Jeżeli istnieje terminal
+nieincydentny z~żadną krawędzią ze zbioru $F$, to ściągniemy jego domknięte otoczenie i~zachowamy liczbę terminali przy
+mniejszej liczbie wierzchołków. W~przeciwnym razie każdy terminal dotyka zbioru $F$; wówczas usuniemy jeden terminal oraz
+jedną incydentną z~nim krawędź, co zmniejszy liczbę terminali.
+
 \begin{theorem}\label{thm:main}
 Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym, niech $T\subseteq V$ oraz niech $F\subseteq E$. Jeżeli $F$ jest
 zbiorem na wpół-tnącym dla~$T$ w~$G$, to
@@ -740,11 +774,8 @@ zbiorem na wpół-tnącym dla~$T$ w~$G$, to
   \node at (2.4,-0.65) {$e$};
   \node at (4.0,-0.65) {$f$};
 \end{tikzpicture}
-\caption{Sytuacja z~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Niebieska ścieżka przedstawia wyróżnioną ścieżkę najkrótszą $P$, czerwona
-krawędź oznacza krawędź $e\in F$, a~zielona krawędź oznacza krawędź $f\in F^-$. Po rozcięciu $P$ w~wierzchołku $t$ dostajemy
-podścieżki $P_u$ i~$P_w$. Na rysunku pokazano podprzypadek $e\in E(P_u)$; wtedy z~najkrótszości $P_w$ wynika istnienie krawędzi
-$f\in E(P_w)\cap F$, a~więc $f\neq e$ i~$f\in F^-$. Pozostałe krawędzie grafu $G$ nie są rysowane, gdyż nie wpływają na sam
-argument o~rozcięciu ścieżki. Podprzypadek $e\in E(P_w)$ jest symetryczny.}
+\caption{Rozcięcie ścieżki najkrótszej $P$ w~wierzchołku $t$ na podścieżki $P_u$ i~$P_w$
+w~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Zaznaczono krawędzie $e$ i~$f$.}
 \label{fig:split-path}
 \end{figure}
 
@@ -761,8 +792,12 @@ leksykograficznego
   \ \text{lub}\
   \bigl(k_1=k_2\ \text{i}\ n_1<n_2\bigr).
 \]
-Porządek ten jest dobrze ufundowany na~$\mathbb{N}_0^2$. Sama indukcja po~$|T|$ nie wystarcza, ponieważ operacja ściągania
-zachowuje liczbę terminali i~zmniejsza jedynie liczbę wierzchołków.
+Porządek ten jest dobrze ufundowany na zbiorze
+\[
+  \bigl\{(a,b)\in\mathbb{N}_0^2:\ a\le b\bigr\}.
+\]
+Sama indukcja po~$|T|$ nie wystarcza, ponieważ operacja ściągania zachowuje liczbę terminali i~zmniejsza jedynie liczbę
+wierzchołków.
 
 \medskip\noindent
 \textbf{Baza indukcji.} Niech $k\le 1$. Wtedy zbiór par różnych wierzchołków z~$X$ jest pusty, więc
@@ -778,18 +813,20 @@ krawędzi $F\subseteq E$, który jest na wpół-tnący dla~$T$ w~$G$. Pokażemy,
 \[
   |F|\ge k-1.
 \]
-Rozpatrujemy dwa przypadki.
+Jeżeli znajdziemy terminal nieincydentny z~$F$, przejdziemy do mniejszego grafu przez ściągnięcie jego domkniętego
+otoczenia. Jeżeli natomiast każdy terminal jest incydentny z~$F$, zachowamy graf, lecz usuniemy jeden terminal i~jedną
+krawędź ze zbioru $F$. Rozpatrujemy więc dwa przypadki.
 
 \medskip\noindent
 \textbf{Przypadek 1: istnieje terminal $t\in T\setminus V[F]$.}
-Ponieważ $k\ge 2$, możemy wybrać wierzchołek $u\in T\setminus\{t\}$. Z~Definicji~\ref{def:semi-cut} mamy
+Ponieważ $k\ge 2$, możemy wybrać wierzchołek $u\in T\setminus\{t\}$. Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
 \[
   \dist{G}{t}{u}<\infty.
 \]
-Niech $P=(v_0,\dots,v_m)$ będzie ścieżką z~$t$ do~$u$. Ponieważ $m\ge 1$, pierwsza krawędź ścieżki $P$ jest incydentna z~$t$,
-zatem $v_1\in N(t)$ i~$N(t)\neq\emptyset$
-i~w konsekwencji
+Istnieje więc ścieżka z~$t$ do~$u$, a~zatem wierzchołek $t$ ma co najmniej jednego sąsiada. Otrzymujemy
 \[
+  N(t)\neq\emptyset
+  \qquad\text{oraz w konsekwencji}\qquad
   |N[t]|\ge 2.
 \]
 
@@ -839,7 +876,7 @@ $t\in T$ oraz krawędź $e\in F$ incydentną z~$t$. Oznaczmy
 \]
 Pokażemy, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
 
-Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$F$ jest zbiorem na wpół-tnącym dla~$T$, mamy
+Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$F$ jest zbiorem na wpół-tnącym dla~$T$, z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
 \[
   \dist{G}{u}{w}<\infty.
 \]
@@ -851,28 +888,39 @@ Jeżeli $e\notin E(P)$, to
 \[
   E(P)\cap F^-\neq\emptyset.
 \]
-Pozostaje przypadek $e\in E(P)$. Ponieważ $e$ jest incydentna z~$t$, wierzchołek $t$ należy do~$V(P)$. Rozcinamy ścieżkę $P$
-w~wierzchołku $t$ i~piszemy
+Pozostaje przypadek $e\in E(P)$. Idea dalszego argumentu jest następująca: po rozcięciu ścieżki $P$ w~wierzchołku $t$
+jedna z~otrzymanych podścieżek zawiera krawędź $e$, natomiast druga jest ścieżką najkrótszą między parą terminali i~dlatego
+musi zawierać inną krawędź ze zbioru $F$. Tę drugą krawędź wykorzystamy jako element zbioru $F^-$ należący do~$E(P)$.
+
+Ponieważ $e$ jest incydentna z~$t$, wierzchołek $t$ należy do~$V(P)$. Zapiszmy
 \[
-  P=P_u\cdot P_w,
+  P=(v_0,\dots,v_m).
 \]
-gdzie $P_u$ jest podścieżką od~$u$ do~$t$, a~$P_w$ podścieżką od~$t$ do~$w$. Na mocy Lematu~\ref{lem:subpath}
-$P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$. Sytuację tę ilustruje
+Istnieje dokładnie jeden indeks $j\in\{0,\dots,m\}$ taki, że $v_j=t$, gdyż $P$ jest ścieżką. Definiujemy
+\[
+  P_u\coloneqq (v_0,\dots,v_j)
+  \qquad\text{oraz}\qquad
+  P_w\coloneqq (v_j,\dots,v_m).
+\]
+Wówczas $P_u$ jest podścieżką od~$u$ do~$t$, $P_w$ jest podścieżką od~$t$ do~$w$, a~ponadto
+\[
+  P=P_u\cdot P_w.
+\]
+Na mocy Lematu~\ref{lem:subpath} $P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$.
+Sytuację tę ilustruje
 Rysunek~\ref{fig:split-path}.
 Ponieważ $u,w\in T^-=T\setminus\{t\}$, obie te podścieżki mają dodatnią długość.
 
-Jeżeli $P=(v_0,\dots,v_k)$ oraz $v_j=t$, to indeks $j$ jest wyznaczony jednoznacznie, gdyż $P$ jest ścieżką, a~więc wierzchołek
-$t$ występuje na niej dokładnie raz. Wtedy $P_u=(v_0,\dots,v_j)$ i~$P_w=(v_j,\dots,v_k)$. Ponieważ $P$ jest ścieżką, oba ciągi
-mają wspólny dokładnie jeden wierzchołek, mianowicie $t$. Zatem
+Ponieważ $P$ jest ścieżką, oba ciągi mają wspólny dokładnie jeden wierzchołek, mianowicie $t$. Zatem
 \[
   V(P_u)\cap V(P_w)=\{t\}.
 \]
-Ponadto z~definicji konkatenacji otrzymujemy
+Z~definicji konkatenacji otrzymujemy
 \[
   E(P)=E(P_u)\cup E(P_w).
 \]
-W~szczególności żadna krawędź nie może należeć jednocześnie do obu zbiorów $E(P_u)$ i~$E(P_w)$, gdyż wtedy oba jej końce
-należałyby do~$\{t\}$, a~więc krawędź ta byłaby pętlą, co jest niemożliwe w~grafie prostym. Otrzymujemy więc
+Gdyby jakaś krawędź należała jednocześnie do obu zbiorów $E(P_u)$ i~$E(P_w)$, to oba jej końce należałyby do
+$V(P_u)\cap V(P_w)=\{t\}$, a~więc byłaby to pętla przy~$t$, sprzeczna z~tym, że $G$ jest grafem prostym. Otrzymujemy więc
 \[
   E(P_u)\cap E(P_w)=\emptyset.
 \]
