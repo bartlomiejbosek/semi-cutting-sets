@@ -88,6 +88,10 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 
 20. Nie nadużywaj bloków \[ \] - raczej wzory powinieneś inlinować w tekście. Otoczenie blokowe \[ \] powinno być używane w wyjątkowych momentach.
 
+
+21. Dodaj tekst na temat innych podobnych problemów spójrz na załączone artykuły PDF corley1982.pdf oraz dahlhaus1994 i może znajdziesz coś jeszcze bardziej ciekawego
+
+
 -----------------------------------------------------------------------------------------------------------
 
 Oceń go bardzo ostro.

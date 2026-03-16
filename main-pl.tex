@@ -49,6 +49,15 @@ $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla wszystkich różnych $u,w\in T$.
 Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej własności
 strukturalnej. Używana w~pracy terminologia grafowa jest standardowa; por.~\cite{bondy-murty,diestel}.
 
+Rozważany tu warunek leży między dwoma klasycznymi rodzinami problemów. Z~jednej strony problem \emph{multiterminal cut}
+wymaga usunięcia zbioru krawędzi rozdzielającego wszystkie terminale, a~jego podstawowym punktem odniesienia jest praca
+Dahlhausa, Johnsona, Papadimitriou, Seymoura i~Yannakakisa~\cite{dahlhaus1994}. Z~drugiej strony, w~problemach
+\emph{most vital links and nodes} bada się usunięcia powodujące możliwie największy wzrost odległości między wyróżnioną
+parą wierzchołków; nurt ten zapoczątkowali Corley i~Sha~\cite{corley-sha}, a~wariant dotyczący pojedynczej krawędzi na
+ścieżce najkrótszej analizowali później Nardelli, Proietti i~Widmayer~\cite{nardelli-proietti-widmayer}. Zbiory
+na wpół-tnące nie wymagają całkowitego rozspójnienia terminali, ale wymuszają jednoczesny ścisły wzrost wszystkich
+odległości między parami terminali, co nadaje badanemu tu pojęciu wyraźnie wieloterminalny charakter.
+
 Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego $|F|\ge |T|-1$ obowiązującego dla każdego zbioru
 na wpół-tnącego. Najpierw zapisujemy definicję tego
 zbioru w~równoważnej postaci wymagającej przecinania wszystkich ścieżek najkrótszych między terminalami. Następnie dowodzimy,
@@ -733,11 +742,17 @@ $|F^-|\ge |T^-|-1=(k-1)-1=k-2$. Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, m
 Tym samym wykazano krok indukcyjny, a~więc i~dowód twierdzenia.
 \end{proof}
 
-\section{Uwagi końcowe}
+\section{Uwagi końcowe i problemy pokrewne}
 
 Twierdzenie~\ref{thm:main} jest ostre, co pokazuje rodzina przykładów ścieżkowych opisana we~Wprowadzeniu i~zilustrowana
 na Rysunku~\ref{fig:semi-cut-example}. Naturalnym dalszym problemem pozostaje opis wszystkich trójek $(G,T,F)$, dla których
 w~Twierdzeniu~\ref{thm:main} zachodzi równość $|F|=|T|-1$.
+
+Z~punktu widzenia literatury problem ten można traktować jako wieloterminalny odpowiednik zagadnień o~wrażliwości
+najkrótszych ścieżek: jest on słabszy od żądania pełnego rozdzielenia terminali, typowego dla \emph{multiterminal cut}
+\cite{dahlhaus1994}, a~zarazem istotnie silniejszy od wymogu zwiększenia odległości tylko dla jednej zadanej pary,
+charakterystycznego dla problemów \emph{most vital links}~\cite{corley-sha,nardelli-proietti-widmayer}. Uzyskana nierówność
+$|F|\ge |T|-1$ ma zatem interpretację czysto strukturalnego ograniczenia dolnego dla tej pośredniej klasy zjawisk.
 
 \begin{thebibliography}{9}
 
@@ -750,6 +765,21 @@ Graduate Texts in Mathematics, vol.~244, Springer, New York, 2008.
 R.~Diestel,
 \emph{Graph Theory},
 5th ed., Graduate Texts in Mathematics, vol.~173, Springer, Berlin, 2017.
+
+\bibitem{corley-sha}
+H.~W. Corley, D.~Y. Sha,
+\emph{Most vital links and nodes in weighted networks},
+Operations Research Letters 1(4) (1982), 157--160.
+
+\bibitem{dahlhaus1994}
+E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
+\emph{The complexity of multiterminal cuts},
+SIAM Journal on Computing 23(4) (1994), 864--894.
+
+\bibitem{nardelli-proietti-widmayer}
+E.~Nardelli, G.~Proietti, P.~Widmayer,
+\emph{A faster computation of the most vital edge of a shortest path},
+Information Processing Letters 79(2) (2001), 81--85.
 
 \end{thebibliography}
 
