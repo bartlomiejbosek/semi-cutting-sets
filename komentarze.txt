@@ -1,227 +1,266 @@
-Przeanalizuję bardzo szczegółowo przesłany plik `main-pl.tex` zgodnie z wymaganiami. Dokonam krytycznej oceny pod kątem formalizmu matematycznego, kompletności dowodów, przejrzystości i zgodności ze standardami publikacji w topowych czasopismach teoretycznych.
+Teraz przeczytałem cały plik main-pl.txt oraz pliki pomocnicze. Przystępuję do przygotowania szczegółowej, krytycznej oceny dokumentu w formacie PDF.
+Przygotowałem szczegółową, krytyczną ocenę pliku `main-pl.txt` w formacie PDF. Plik został zapisany pod adresem:
 
-## 1. OCENA OGÓLNA
-
-Tekst jest **znacznie lepszy** niż typowe prace studenckie, ale **nie osiąga jeszcze standardu** Journal of Combinatorial Theory B czy Combinatorica. Główne problemy to: nadmierna werbalizacja w dowodach, pewne luki w uzasadnieniach geometrycznych oraz brak maksymalnej oszczędności w prezentacji.
-
----
-
-## 2. SZCZEGÓŁOWE BŁĘDY I NIEDORÓBKI
-
-### A. Definicja 2.3 (Ściąganie) – poważna nieścisłość
-
-**Problem:** W definicji obrazu krawędzi $e/W$ i zbioru $F/W$ brak precyzyjnego uzasadnienia, dlaczego $G/W$ pozostaje grafem prostym.
-
-**Obecny tekst:**
-> "Warunek $\pi_W(x)\neq \pi_W(y)$ gwarantuje, że w $G/W$ nie powstają pętle, a opis zbiorowy krawędzi utożsamia ewentualne krawędzie równoległe"
-
-**Błąd:** To jest **stwierdzenie bez dowodu**, a nie oczywistość. Trzeba wykazać, że jeśli $\{x,y\}, \{x',y'\} \in E$ i $\{\pi_W(x),\pi_W(y)\} = \{\pi_W(x'),\pi_W(y')\}$, to w $G/W$ mamy jedną krawędź, nie dwie.
-
-**Korekta:**
-```latex
-\begin{definition}[Ściąganie niepustego zbioru wierzchołków]\label{def:contraction}
-Niech $\emptyset\neq W\subseteq V$ oraz niech $w^\ast\notin V$ będzie nowym wierzchołkiem. Definiujemy odwzorowanie
-\[
-  \pi_W\colon V\to (V\setminus W)\cup\{w^\ast\},
-  \qquad
-  \pi_W(v)\coloneqq
-  \begin{cases}
-    w^\ast & \text{dla } v\in W,\\
-    v & \text{dla } v\notin W.
-  \end{cases}
-\]
-Przez $G/W$ oznaczamy graf $(V',E')$, gdzie
-\[
-  V'\coloneqq (V\setminus W)\cup\{w^\ast\},
-  \qquad
-  E'\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
-\]
-Zbiór $E'$ jest dobrze określony jako \emph{zbiór} (nie multizbiór), gdyż identyfikuje ewentualne krawędzie równoległe: jeśli $\{x,y\},\{x',y'\}\in E$ spełniają $\pi_W(x)=\pi_W(x')$ oraz $\pi_W(y)=\pi_W(y')$, to odpowiadają im te same dwuelementowe podzbiory $V'$. Warunek $\pi_W(x)\neq \pi_W(y)$ wyklucza pętle. Zatem $G/W$ jest grafem prostym.
-\end{definition}
-```
+**`/home/z/my-project/download/ocena_main_pl.pdf`**
 
 ---
 
-### B. Lemat 3.1 – słabe uzasadnienie
+## STRESZCZENIE OCENY
 
-**Problem:** Użycie "surjekcji" bez weryfikacji, że $\varphi$ jest dobrze określona.
+### Główne ustalenia:
 
-**Obecny tekst:**
-> "Z Definicji 2.3 wynika, że odwzorowanie [...] jest surjekcją"
-
-**Brak:** Nie sprawdzono, że $\varphi$ jest funkcją (tj. że każdy element $D$ ma dokładnie jeden obraz).
-
-**Korekta:**
-```latex
-\begin{proof}
-Niech $D\coloneqq \{\{x,y\}\in F: \pi_W(x)\neq \pi_W(y)\}$. Dla $e=\{x,y\}\in D$ kładziemy $\varphi(e)\coloneqq \{\pi_W(x),\pi_W(y)\}$. Ponieważ $\pi_W(x)\neq \pi_W(y)$, zbiór $\varphi(e)$ jest dwuelementowy, więc $\varphi(e)\in E(G/W)$. Odwzorowanie $\varphi\colon D\to F/W$ jest surjekcją z definicji $F/W$, zatem $|F/W|\le |D|\le |F|$.
-\end{proof}
-```
+**OCENA OGÓLNA:** Dokument stanowi w znacznym stopniu poprawny artykuł matematyczny, ale zawiera szereg istotnych luk logicznych uniemożliwiających uznanie go za kompletny.
 
 ---
 
-### C. Lemat 4.1 (Lifting) – krytyczna luka logiczna
+### BŁĘDY KRYTYCZNE (wymagają natychmiastowej korekty):
 
-**Problem:** Kluczowe stwierdzenie o minimalności $P$ wymaga precyzyjniejszego uzasadnienia.
+1. **Luka logiczna w dowodzie Propozycji 4.3 (Przypadek 1):** Brak uzasadnienia, że P′ jest ścieżką najkrótszą w G również wtedy, gdy istnieje inna ścieżka o tej samej długości przechodząca przez N[t].
 
-**Obecny tekst:**
-> "Z drugiej strony $P$ jest ścieżką z $t$ do $z$, więc $\dist{G}{t}{z}\le \len{P}=\len{P^\prime}+1=\dist{G^\prime}{t^\prime}{z}+1$. Obie nierówności dają $\dist{G}{t}{z}=\len{P}$"
+2. **Luka logiczna w dowodzie Twierdzenia 5.1 (Przypadek 2):** Brak formalnego rozróżnienia przypadków e ∈ E(P_u) vs e ∈ E(P_w) – sformułowanie jest zbyt potoczne.
 
-**Brak:** Nie wykazano explicit, że $\len{P} = \len{P^\prime} + 1$ implikuje optymalność. To jest **najdelikatniejszy moment** w całym dowodzie.
-
-**Korekta – dodatkowy lemat pomocniczy:**
-
-Wstawić przed Lematem 4.1:
-
-```latex
-\begin{lemma}\label{lem:distance-lift}
-Niech $t\in V$, $G^\prime=G/N[t]$ oraz $t^\prime$ będzie obrazem $N[t]$. Dla każdego $z\in V\setminus N[t]$ zachodzi
-\[
-\dist{G}{t}{z} = \dist{G^\prime}{t^\prime}{z} + 1.
-\]
-\end{lemma}
-
-\begin{proof}
-Dowód podzielimy na dwie nierówności.
-
-($\ge$): Niech $Q=(q_0,\dots,q_\ell)$ będzie ścieżką najkrótszą z $t$ do $z$ w $G$. Ponieważ $z\notin N[t]$, mamy $\ell\ge 2$ oraz $q_1\in N(t)$. Zatem $\pi_{N[t]}(q_1)=t^\prime$. Ciąg $(q_1,\dots,q_\ell)$ jest spacerem w $G$, więc z Lematu~\ref{lem:projection-walk} istnieje spacer z $t^\prime$ do $z$ w $G^\prime$ długości co najwyżej $\ell-1$. Stąd $\dist{G^\prime}{t^\prime}{z}\le \ell-1 = \dist{G}{t}{z}-1$.
-
-($\le$): Niech $P^\prime=(t^\prime,x_1,\dots,x_k)$ będzie ścieżką najkrótszą z $t^\prime$ do $z$ w $G^\prime$. Z definicji $G^\prime$ istnieje $v\in N(t)$ z $\{v,x_1\}\in E$. Wtedy $(t,v,x_1,\dots,x_k)$ jest ścieżką w $G$ długości $k+1=\dist{G^\prime}{t^\prime}{z}+1$.
-
-Obie nierówności dają żądaną równość.
-\end{proof}
-```
-
-Następnie **uproszczony Lemat 4.1**:
-
-```latex
-\begin{lemma}\label{lem:lifting-endpoint}
-Niech $t\in V$, $G^\prime=G/N[t]$ oraz $z\in V\setminus N[t]$. Dla każdej ścieżki najkrótszej $P^\prime$ z $t^\prime$ do $z$ w $G^\prime$ istnieje $v\in N(t)$ takie, że $P=(t,v)\cdot P^\prime[t^\prime,z]$ jest ścieżką najkrótszą z $t$ do $z$ w $G$.
-\end{lemma}
-
-\begin{proof}
-Z Lematu~\ref{lem:distance-lift} mamy $\dist{G}{t}{z}=\dist{G^\prime}{t^\prime}{z}+1=\len{P^\prime}+1$. Niech $P^\prime=(t^\prime,x_1,\dots,x_k)$. Z definicji $G^\prime$ istnieje $v\in N[t]$ z $\{v,x_1\}/N[t]=\{t^\prime,x_1\}$. Ponieważ $x_1\notin N[t]$, mamy $v\neq t$, więc $v\in N(t)$. Ścieżka $P=(t,v,x_1,\dots,x_k)$ ma długość $k+1=\dist{G}{t}{z}$, więc jest najkrótsza.
-\end{proof}
-```
+3. **Brak uzasadnienia w Lemacie 3.5:** Konstrukcja ciągu indeksów I i minimalność wyboru i_{r+1} nie są wystarczająco explicite wyprowadzone.
 
 ---
 
-### D. Propozycja 4.3 – nadmierna długość i chaos notacyjny
+### BŁĘDY ZNACZĄCE:
 
-**Problem:** Dowód ma ponad 2 strony, z czego połowa to powtórzenia. Struktura "Przypadek 1/Przypadek 2" jest nieczytelna.
+4. Wiersze 658–663: Brak wyraźnego odwołania do warunku zbioru na wpół-tnącego przy argumentacji o inkluzji T\{t} ⊆ V\N[t].
 
-**Strukturalna korekta:**
+5. Lemat 4.1: Zbyt zwięzłe uzasadnienie, dlaczego v ∈ N(t), a nie tylko N[t].
 
-```latex
-\begin{proposition}\label{prop:contraction}
-Niech $F$ będzie zbiorem na wpół-tnącym dla $T$ w $G$ oraz niech $t\in T\setminus V[F]$. Wtedy $F/N[t]$ jest zbiorem na wpół-tnącym dla $(T\setminus\{t\})\cup\{t^\prime\}$ w $G/N[t]$.
-\end{proposition}
+6. Lemat 3.3: Brak odwołania do literatury przy standardowym fakcie o podścieżkach.
 
-\begin{proof}
-Oznaczmy $G^\prime=G/N[t]$, $T^\prime=(T\setminus\{t\})\cup\{t^\prime\}$ oraz $F^\prime=F/N[t]$. Z Obserwacji~\ref{obs:finite-terminal-distances} wszystkie odległości między terminalami w $T$ są skończone.
-
-\emph{Krok 1: $T\setminus\{t\}\subseteq V\setminus N[t]$.} Gdyby $u\in T\setminus\{t\}$ należał do $N(t)$, to $\{t,u\}$ byłaby ścieżką najkrótszą przeciwaną przez $F$ (Obserwacja~\ref{obs:shortest-paths}), więc $t\in V[F]$ — sprzeczność.
-
-\emph{Krok 2: Skończoność odległości w $G^\prime$.} Dla $u,w\in T\setminus\{t\}$ projekcja ścieżki z $G$ daje ścieżkę w $G^\prime$ (Lematy~\ref{lem:projection-walk} i~\ref{lem:walk-to-path}). Dla $u\in T\setminus\{t\}$ mamy $\dist{G^\prime}{t^\prime}{u}\le\dist{G}{t}{u}<\infty$.
-
-\emph{Krok 3: Przeciwanie ścieżek najkrótszych.} Niech $P^\prime$ będzie ścieżką najkrótszą między różnymi $u,w\in T^\prime$.
-
-Jeśli $t^\prime\notin V(P^\prime)$, to $P^\prime$ jest ścieżką w $G$ (Obserwacja~\ref{obs:outside-edges}) i $\len{P^\prime}=\dist{G}{u}{w}$. Z Obserwacji~\ref{obs:shortest-paths} mamy $E(P^\prime)\cap F\neq\emptyset$, więc $E(P^\prime)\cap F^\prime\neq\emptyset$.
-
-Jeśli $t^\prime\in V(P^\prime)$, to przez symetrię załóżmy $P^\prime=(t^\prime,\dots,w)$. Niech $Q^\prime$ będzie podścieżką od $t^\prime$ do $w$. Z Lematu~\ref{lem:lifting-endpoint} istnieje $v\in N(t)$ takie, że $Q=(t,v)\cdot Q^\prime$ jest ścieżką najkrótszą w $G$. Z Obserwacji~\ref{obs:shortest-paths} mamy $f\in E(Q)\cap F$. Ponieważ $t\notin V[F]$, mamy $f\neq\{t,v\}$, więc $f\in E(Q^\prime)$ i $f/N[t]\in E(P^\prime)\cap F^\prime$.
-\end{proof}
-```
+7. Wiersze 61–62: Zbędne cytowanie dwóch podręczników przy „standardowej terminologii".
 
 ---
 
-### E. Twierdzenie 5.1 – struktura indukcji
+### BŁĘDY POMIJALNE:
 
-**Problem:** Parametr indukcyjny $(k,n)$ jest wprowadzany ad hoc, bez uzasadnienia dobrze ufundowania.
-
-**Korekta wprowadzenia:**
-
-```latex
-\begin{proof}
-Dowód przez indukcję względem pary $(|T|,|V|)$ uporządkowanej leksykograficznie. Zbiór $\{(k,n)\in\mathbb{N}_0^2: k\le n\}$ jest dobrze ufundowany przez $(k_1,n_1)\prec(k_2,n_2) \Leftrightarrow k_1<k_2 \lor (k_1=k_2 \land n_1<n_2)$.
-```
-
-**Problem w Przypadku 2:** Kluczowe stwierdzenie o rozłączności $E(P_u)$ i $E(P_w)$ wymaga uzasadnienia, że $V(P_u)\cap V(P_w)=\{t\}$.
-
-**Korekta:**
-```latex
-Ponieważ $P$ jest ścieżką, zachodzi $V(P_u)\cap V(P_w)=\{v_j\}=\{t\}$. Gdyby $g\in E(P_u)\cap E(P_w)$, to oba końce $g$ należałyby do $\{t\}$, co daje pętlę $\{t,t\}$ — sprzeczność z prostotą $G$.
-```
+8. Nadmierne użycie bloków \[ \] w streszczeniu
+9. Brak słów kluczowych i klasyfikacji MSC
+10. Nieoptymalny rysunek fig:contraction-def
+11. Słowo „samowystarczalny" w abstrakcie
 
 ---
 
-## 3. PROBLEMY STYLISTYCZNE I STRUKTURALNE
+### OCENY POZYTYWNE (zgodne z wymogami):
 
-### 3.1 Nadmierne wylistowania
-
-**Obecnie:** Rozdział 2 zawiera 4 definicje i 3 notacje w sekwencji.
-
-**Korekta:** Połączyć Definicję 2.1 i Notację 2.2 w jedną sekcję "Ścieżki i operacje bazowe".
-
-### 3.2 Rysunki – brak konsekwencji
-
-- Rysunek 1: terminale szare, $F$ czerwone ✓
-- Rysunek 2: $W$ szare, ale bez oznaczenia koloru w opisie
-- Rysunek 3: $F$ czerwone, ale terminale też szare (niekonsekwentne z legendą)
-
-**Korekta:** Wprowadzić **jednolity kod kolorystyczny** w opisie rysunków: terminale = szary 30%, zbiór $F$ = czerwony 70%, pozostałe wierzchołki = białe/białe z obrysem.
-
-### 3.3 Przypisy do literatury
-
-**Obecnie:** `[2]` w abstrakcie bez pełnej bibliografii na końcu.
-
-**Korekta:** Usunąć wszystkie cytowania z abstraktu (standard w JCTB). Przenieść odniesienia do wstępu.
+- **Kryterium 11:** Brak dodatkowych założeń strukturalnych (spójność, planarność) – poprawne!
+- **Kryterium 12:** Brak pojęć algorytmicznych – poprawne!
+- **Kryterium 13:** Brak tabelek – poprawne!
+- **Kryterium 14:** Tekst po polsku – poprawne (to wymóg, nie błąd)!
+- **Kryterium 18:** Jasne zaznaczenie, że dotyczy tylko grafów prostych – poprawne!
+- **Kryterium 19:** Brak referencji do lokalnych plików – poprawne!
 
 ---
 
-## 4. BŁĘDY TECHNICZNE W LATEXU
+Pełna szczegółowa analiza z konkretnymi propozycjami korekty każdego błędu znajduje się w wygenerowanym dokumencie PDF.
 
-1. **Linia 1:** `\documentclass[11pt,a4paper]{article}` – brak opcji `twoside` lub `leqno` (standard w czasopismach)
-
-2. **Definicja 2.1:** `v0=u` powinno być `v_0=u` (brak indeksu dolnego w tekście źródłowym – sprawdzić)
-
-3. **Lemat 3.3:** W treści PDF występuje `\check{s}\mathit{c i e z q}` – **błąd kodowania** w źródle
-
-4. **Rysunek 2:** W kodzie TikZ `V {^\prime\prime}` – podwójny prime, powinno być `V'`
-
----
-
-## 5. PROPOZYCJA REORGANIZACJI STRUKTURY
-
-```
-1. Wstęp (bez podziału na sekcje)
-   - Definicja problemu
-   - Główne twierdzenie (bez numeru, w ramce)
-   - Idea dowodu (2-3 zdania)
-
-2. Preliminaria
-   2.1 Grafy proste i odległości (Def. 2.1 + Not. 2.2)
-   2.2 Ściąganie zbiorów wierzchołków (Def. 2.3)
-   2.3 Zbiory na wpół-tnące (Def. 2.4 + Obserwacja 3.4)
-
-3. Własności ściągania
-   3.1 Projektowanie ścieżek (Lematy 3.5, 4.1)
-   3.2 Zachowanie własności na wpół-tnącej (Propozycja 4.3)
-
-4. Dowód głównego twierdzenia (Twierdzenie 5.1)
-
-5. Uwagi końcowe
-```
-
----
-
-## 6. PODSUMOWANIE PRIORYTETÓW KOREKT
-
-| Priorytet | Problem | Lokalizacja |
-|-----------|---------|-------------|
-| **Krytyczny** | Brak Lematu 3.1' o równości odległości | Przed Propozycją 4.3 |
-| **Wysoki** | Nadmierna długość dowodu Propozycji 4.3 | Strona 6-7 |
-| **Wysoki** | Nieścisłość w Definicji 2.3 (graf prosty) | Strona 2 |
-| **Średni** | Uproszczenie notacji w dowodzie Tw. 5.1 | Strona 8-9 |
-| **Niski** | Korekta stylu rysunków | Całość |
-
-Po wprowadzeniu powyższych poprawek tekst będzie spełniał standardy publikacyjne. Obecnie oceniam go na **6.5/10** (dobra praca magisterska, ale wymaga poprawek przed wysłaniem do czasopisma).
+SZCZEGÓŁOWA OCENA PLIKU main-pl.txt
+Krytyczna analiza dowodu matematycznego o zbiorach na wpół-tnących
+1. WSTĘP DO OCENY
+Niniejszy dokument stanowi rygorystyczną, punktową ocenę pliku main-pl.txt zawierającego dowód matematyczny
+dotyczący zbiorów na wpół-tnących w grafach. Ocena została przeprowadzona według dwudziestu ścisłych
+kryteriów określonych przez zamawiającego, ze szczególnym naciskiem na formalizm matematyczny, kompletność
+dowodów, przejrzystość prezentacji oraz zgodność ze standardami profesjonalnych czasopism matematycznych.
+Analiza ujawnia szereg istotnych braków, nieścisłości i luk logicznych, które uniemożliwiają uznanie tekstu za
+kompletny i profesjonalny artykuł matematyczny. Poniżej przedstawiono szczegółową listę wykrytych problemów
+wraz z konkretnymi propozycjami korekty.
+2. OCENA FORMALIZMU MATEMATYCZNEGO (Kryterium 1)
+2.1. Pozytywne aspekty
+Wprowadzenie notacji jest w większości poprawne i ścisłe. Definicja spaceru, ścieżki i odległości (Definicja 2.1) jest
+standardowa i poprawnie sformułowana. Definicja ściągania zbioru wierzchołków (Definicja 2.3) zawiera istotny
+szczegół o warunku π_W(x) ≠ π_W(y), który gwarantuje brak powstawania pętli – to ważny element formalizmu dla
+grafów prostych.
+2.2. Wykryte problemy
+BŁĄD FORMALNY 1: W wierszach 658–663 dowodu Propozycji 4.3, argument pokazujący inkluzję T\{t}
+V\N[t] zawiera lukę logiczną. Zapisano: „Weźmy dowolne u T\{t} i przypuśćmy, że u N(t). Wtedy
+d_G(t,u) = 1, a jedyna ścieżka długości 1 z t do u jest równa (t,u)." To stwierdzenie jest poprawne, ale
+uzasadnienie, że krawędź {t,u} musi należeć do F, wymaga dokładniejszego wywodu – brakuje wyraźnego
+odwołania do warunku, że F jest zbiorem na wpół-tnącym.
+PROPOZYCJA KOREKTY: Dodać explicitne odwołanie: „Z założenia F jest zbiorem na wpół-tnącym dla T,
+więc z Obserwacji 3.4 każda ścieżka najkrótsza między parami różnych terminali z T musi przecinać zbiór F.
+Ponieważ ścieżka (t,u) jest jedyną ścieżką długości 1 z t do u, krawędź {t,u} musi należeć do F, co przeczy
+założeniu t V[F]."
+BŁĄD FORMALNY 2: W dowodzie Lematu 4.1 (wiersze 509–565) brakuje precyzyjnego uzasadnienia,
+dlaczego wierzchołek v należy dokładnie do N(t), a nie tylko do N[t]. Argument w wierszach 520–521 („Gdyby
+v = t, to z {t,x_1} E wynikałoby x_1 N(t) N[t], sprzecznie z x_1 V\N[t]") jest poprawny, ale
+sformułowany zbyt zwięźle dla czytelnika nieznającego kontekstu.
+PROPOZYCJA KOREKTY: Rozwinąć argument: „Z Definicji 2.3 krawędź {t′,x_1} w G′ powstaje z pewnej
+krawędzi {v,x_1} E(G), gdzie v N[t]. Gdyby v = t, to x_1 byłoby sąsiadem t, czyli x_1 N(t) N[t], co
+przeczy ustalonemu wcześniej x_1 N[t]. Zatem koniecznie v N(t)\{t} = N(t)."
+3. KOMPLETNOŚĆ DOWODÓW (Kryterium 2)
+3.1. Dowód Propozycji 4.3 – luki w rozgałęzieniach
+LUKA LOGICZNA 1 (Przypadek 1, wiersze 686–718): W dowodzie, że P′ jest ścieżką najkrótszą w G, brakuje
+uzasadnienia, dlaczego nie może istnieć ścieżka w G z u do w o tej samej długości co P′, ale przechodząca przez
+N[t]. Argument w wierszach 698–702 dotyczy tylko ścieżek krótszych.PROPOZYCJA KOREKTY: Dodać po wierszu 702: „Co więcej, równość ℓ(Q) = ℓ(P′) również nie może
+zachodzić. Gdyby bowiem istniała ścieżka Q w G o długości ℓ(Q) = ℓ(P′), to na mocy Lematu 3.5
+otrzymalibyśmy ścieżkę w G′ o długości co najwyżej ℓ(P′), która musiałaby mieć długość dokładnie ℓ(P′) (z
+minimalności P′), a więc Q nie przechodzi przez N[t] (gdyby przechodziła, jej obraz byłby krótszy). Zatem Q =
+P′ jako ścieżka w G."
+LUKA LOGICZNA 2 (Przypadek 2, wiersze 720–803): W podprzypadku, gdy f = {v, y_{r+1}}, zapisano
+(wiersz 785), że „f/N[t] = {t′, y_{r+1}}". Brakuje jednak explicite uzasadnienia, dlaczego ta krawędź należy do
+F′. Definicja F′ = F/N[t] wymaga, aby końce krawędzi miały różne obrazy przez π_{N[t]} – to jest spełnione (v
+N[t], y_{r+1} N[t]), ale nie jest to wypowiedziane wprost.
+PROPOZYCJA KOREKTY: Dodać po wierszu 785: „Ponieważ v N[t] oraz y_{r+1} N[t], mamy
+π_{N[t]}(v) = t′ oraz π_{N[t]}(y_{r+1}) = y_{r+1}. Krawędź f ma zatem różne obrazy końców, więc z
+Definicji 2.3 należy ona do dziedziny odwzorowania F → F/N[t], a stąd f/N[t] F′."
+3.2. Dowód Twierdzenia 5.1 – luki w indukcji
+LUKA LOGICZNA 3 (Przypadek 2, wiersze 978–1073): W dowodzie, że F^− jest zbiorem na wpół-tnącym dla
+T^−, argument w wierszach 1000–1002 („po rozcięciu ścieżki P w wierzchołku t jedna z~otrzymanych
+podścieżek zawiera krawędź e") jest sformułowany zbyt potocznie. Brakuje formalnego rozróżnienia
+przypadków: czy e należy do E(P_u), czy do E(P_w).
+PROPOZYCJA KOREKTY: Przeformułować wiersze 1038–1054 w sposób bardziej sformalizowany:
+„Ponieważ e E(P) oraz E(P) = E(P_u) E(P_w) (rozkład rozłącznościowy), zachodzi dokładnie jeden z
+dwóch przypadków: (i) e E(P_u) – wtedy z rozłączności E(P_u) ∩ E(P_w) = mamy e E(P_w). Ponieważ
+P_w jest ścieżką najkrótszą z t do w (oba wierzchołki są w T), z Obserwacji 3.4 istnieje f E(P_w) ∩ F.
+Ponieważ e E(P_u), mamy f ≠ e, a więc f F\{e} = F^−. (ii) e E(P_w) – analogicznie, istnieje f E(P_u)
+∩ F z f F^−."
+LUKA LOGICZNA 4: Wiersze 1015–1017: stwierdzenie „Ponieważ v_0 = u ≠ t oraz v_m = w ≠ t, zachodzi 0 <
+j < m" wymaga uzasadnienia, dlaczego u ≠ t i w ≠ t. Choć wynika to z definicji T^− = T\{t} oraz u,w T^−,
+warto to wyraźnie zaznaczyć.
+PROPOZYCJA KOREKTY: Zmienić na: „Ponieważ u,w
+≠ t = v_j oraz v_m = w ≠ t = v_j, skąd 0 < j < m."
+T^− = T\{t}, mamy u ≠ t oraz w ≠ t. Zatem v_0 = u
+4. PRZEJRZYSTOŚĆ PREZENTACJI (Kryterium 3)
+PROBLEM 1: Dowód Propozycji 4.3 jest nadmiernie rozbudowany (ponad 150 wierszy). Czytelnik łatwo gubi
+wątek wśród wielu podprzypadków. Sugestia: rozbić dowód na dwa pomocnicze lematy – jeden dla przypadku t′
+V(P′), drugi dla t′ V(P′).
+PROPOZYCJA KOREKTY: Wprowadzić przed dowodem Propozycji 4.3 pomocnicze stwierdzenie: „Lemat A:
+Jeśli t′ V(P′), to P′ jest ścieżką najkrótszą w G i E(P′) ∩ F ≠ . Lemat B: Jeśli t′ V(P′), to istnieje f F\{e}
+takie, że f/N[t] E(P′) ∩ F′."
+PROBLEM 2: W Przypadku 2 dowodu Twierdzenia 5.1 (wiersze 978–1073) brakuje wizualizacji w TikZ
+pokazującej rozcięcie ścieżki P w wierzchołku t. Rysunek 7 (fig:split-path) pokazuje tylko jedną konfigurację,
+podczas gdy istnieją dwa symetryczne podprzypadki.
+PROPOZYCJA KOREKTY: Rozszerzyć Rysunek 7 o drugą konfigurację lub dodać schematyczny rysunek
+pokazujący oba podprzypadki obok siebie, z jasnym oznaczeniem, który podprzypadek dotyczy której krawędzi
+(e E(P_u) vs e E(P_w)).
+5. ZBĘDNE ELEMENTY (Kryterium 4)
+PROBLEM: Wiersze 61–62: cytowanie dwóch podręczników (Bondy–Murty'ego i Diestela) jest zbędne w
+kontekście „standardowej terminologii grafowej". W profesjonalnym artykule wystarczy jedno ogólneodwołanie, chyba że konkretna definicja jest nietypowa.
+PROPOZYCJA KOREKTY: Zastąpić: „Używana w pracy terminologia grafowa jest standardowa; por. [1]."
+Usunąć zbędny drugi cytat, chybaśli konkretna definicja wymaga odwołania do Diestela.
+6. ODWOŁANIA BEZ JASNYCH CYTOWAŃ (Kryterium 6)
+BŁĄD KRYTYCZNY 1: Wiersz 66 w streszczeniu: „Argument jest samowystarczalny" – to stwierdzenie jest
+nieformalne i nie powinno się znaleźć w abstrakcie profesjonalnego artykułu. Abstrakt powinien tylko
+streszczać treść, a nie oceniać jakość dowodu.
+PROPOZYCJA KOREKTY: Usunąć słowo „samowystarczalny" lub zastąpić precyzyjnym opisem: „Dowód
+opiera się wyłącznie na elementarnych własnościach grafów i nie wymaga dodatkowych założeń
+strukturalnych."
+BŁĄD KRYTYCZNY 2: Wiersze 443–444 w dowodzie Lematu 3.5: „Z minimalności wyboru i_{r+1} wynika,
+że a_{i_r} = a_{i_r+1} = ... = a_{i_{r+1}−1} ≠ a_{i_{r+1}}." – To jest kluczowy moment dowodu, ale brakuje
+explicite uzasadnienia, skąd wynika minimalność i jej konsekwencje.
+PROPOZYCJA KOREKTY: Dodać przed wierszem 443: „Z definicji zbioru I jako zbioru indeksów w których
+następuje zmiana wartości w ciągu (a_0,...,a_k), wynika, że dla każdego r {0,...,m−1} indeks i_{r+1} jest
+najmniejszym indeksem większym od i_r, dla którego a_{i_{r+1}} ≠ a_{i_r}. Stąd dla wszystkich indeksów i
+{i_r,...,i_{r+1}−1} zachodzi a_i = a_{i_r}."
+7. STRUKTURA PRACY (Kryterium 7)
+OCENA POZYTYWNA: Struktura pracy jest w zasadzie poprawna: Wprowadzenie → Notacja i definicje →
+Lematy pomocnicze → Zachowanie własności przy ściąganiu → Twierdzenie główne → Uwagi końcowe. Jest to
+zgodne z wymaganą strukturą A–B–C.
+PROBLEM: Brakuje jednak wyraźnego rozdzielenia „Lematów i propozycji pomocniczych" od „głównego
+twierdzenia". Propozycja 4.3 jest kluczowym elementem dowodu, a nie pomocniczym faktem, i powinna być
+wyraźniej wyodrębniona.
+PROPOZYCJA KOREKTY: Zmienić tytuł sekcji 4 na: „Kluczowa propozycja o zachowaniu własności przy
+ściąganiu" lub przenieść Propozycję 4.3 do nowej sekcji zatytułowanej „Główna propozycja".
+8. PROFESJONALNY WYGLĄD ARTYKUŁU (Kryterium 9)
+OCENA POZYTYWNA: Dokument ma poprawną strukturę LaTeX z odpowiednimi pakietami (amsmath, amsthm,
+tikz). Definicje, lematy, obserwacje i twierdzenia są poprawnie zdefiniowane przez \newtheorem. Bibliografia jest w
+standardowym formacie.
+PROBLEM: Brakuje słów kluczowych (keywords) po streszczeniu, co jest standardem w profesjonalnych
+artykułach matematycznych. Brakuje również klasyfikacji MSC (Mathematics Subject Classification).
+PROPOZYCJA KOREKTY: Dodać po abstrakcie: „\textbf{Słowa kluczowe:} zbiory na wpół-tnące, odległości
+w grafach, ściąganie wierzchołków, indukcja leksykograficzna. \newline \textbf{MSC 2020:} 05C12, 05C40."
+9. NADMIERNE UŻYCIE WYLISTOWAŃ (Kryterium 10)
+OCENA: Dokument w większości unika wylistowań, co jest zgodne z wymogiem. Jedyny wyjątek stanowi
+przypadek dowodu Twierdzenia 5.1, gdzie podprzypadki są oznaczone jako „Przypadek 1" i „Przypadek 2" z
+podprzypadkami – to jest jednak standardowa praktyka w dowodach matematycznych i nie stanowi naruszenia
+wymogu.
+10. DODATKOWE ZAŁOŻENIA O STRUKTURZE GRAFU (Kryterium 11)OCENA POZYTYWNA: Autor konsekwentnie unika dodatkowych założeń strukturalnych. Wiersze 58–59:
+„Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej
+własności strukturalnej." To jest zgodne z wymogiem i świadczy o świadomości autora.
+UWAGA: W dokumentacji pomocniczej (main-lluis.pdf) założono spójność grafu („Given a connected graph G").
+Autor main-pl.txt słusznie usunął to założenie, co wzmocniło twierdzenie.
+11. POJĘCIA ALGORYTMICZNE (Kryterium 12)
+OCENA POZYTYWNA: Dokument nie zawiera żadnych pojęć algorytmicznych, struktur danych ani wzmianek o
+złożoności czasowej. Dowód jest czysto matematyczny, co jest zgodne z wymogiem.
+12. TABELKI (Kryterium 13)
+OCENA POZYTYWNA: Dokument nie zawiera żadnych tabelek, co jest zgodne z wymogiem.
+13. JĘZYK POLSKI (Kryterium 14)
+OCENA POZYTYWNA: Tekst jest napisany po polsku, co jest zgodne z wymogiem. Terminologia jest spójna i
+poprawna („zbiór na wpół-tnący", „terminal", „ściągnięcie"). To NIE jest błąd – jest to wymóg.
+14. ELEMENTARNE WŁASNOŚCI RZUTOWANIA (Kryterium 15)
+OCENA POZYTYWNA: Lemat 3.5 (lem:projection-walk) precyzyjnie stwierdza własność rzutowania spacerów
+przy operacji ściągania. Dowód jest kompletny. Autor słusznie nie wyprowadza bardziej elementarnych własności,
+lecz odwołuje się do nich przy pomocy Lematu 3.2 (walk-to-path).
+PROBLEM: Brakuje jednak odwołania do literatury przy standardowym twierdzeniu, że podścieżka ścieżki
+najkrótszej jest ścieżką najkrótszą (Lemat 3.3). To jest standardowy fakt, który mógłby być tylko wspomniany z
+odwołaniem do podręcznika.
+PROPOZYCJA KOREKTY: Dodać po wierszu 322: „Fakt ten jest standardowy; por. np. [1, Proposition 1.3.2]."
+lub pozostawić dowód, ale skrócić go do jednego zdania z odwołaniem.
+15. RYSUNKI W TIKZ (Kryterium 16)
+OCENA: Dokument zawiera 7 rysunków w TikZ (fig:semi-cut-example, fig:contraction-def,
+fig:shortest-path-condition, fig:projection-walk, fig:contraction, fig:main-contraction, fig:split-path). Rysunki są
+technicznie poprawne i dobrze zilustrowane.
+PROBLEM: Rysunek fig:contraction-def (wiersze 206–245) przedstawia ogólne ściąganie zbioru W, ale nie jest
+bezpośrednio używany w dowodzie. Jest to rysunek dydaktyczny, który mógłby zostać usunięty lub zastąpiony
+rysunkiem bardziej specyficznym dla dowodu Propozycji 4.3.
+PROPOZYCJA KOREKTY: Rozważyć zastąpienie tego rysunku diagramem pokazującym konkretnie ściąganie
+N[t] dla terminala t, co byłoby bardziej użyteczne dla czytelnika.
+16. PORÓWNANIE Z main-lluis.pdf (Kryterium 17)
+Dokument main-lluis.pdf przedstawia dowód przy założeniu spójności grafu i używa prostszej konstrukcji (ściąganie
+krawędzi incydentnych z v_i zamiast domkniętego sąsiedztwa). Autor main-pl.txt słusznie wprowadził silniejszą
+konstrukcję (ściąganie N[t]), która pozwala usunąć założenie spójności. To jest istotne ulepszenie.
+PROBLEM: W main-lluis.pdf (strona 2) argument o tym, że sąsiad terminala nieincydentnego z F nie może być
+terminalem, jest przedstawiony bardziej explicite. W main-pl.txt ten argument jest ukryty w dowodzie
+Propozycji 4.3 (wiersze 658–663), co czyni go trudniejszym do zidentyfikowania.PROPOZYCJA KOREKTY: Wyodrębnić ten argument jako osobną obserwację przed Propozycją 4.3:
+„Obserwacja: Jeśli F jest zbiorem na wpół-tnącym dla T i t T\V[F], to N(t) ∩ T = ."
+17. GRAFY PROSTE BEZ PĘTLI (Kryterium 18)
+OCENA POZYTYWNA: Wiersze 117–118: „przez G = (V,E) oznaczamy dowolny skończony graf nieskierowany
+prosty, to znaczy graf bez pętli i~bez krawędzi równoległych." To jest jasne i zgodne z wymogiem.
+OCENA POZYTYWNA: Definicja ściągania (Definicja 2.3) zawiera warunek π_W(x) ≠ π_W(y), który gwarantuje,
+że w G/W nie powstają pętle, a krawędzie równoległe są utożsamiane. Wynikowy graf pozostaje grafem prostym.
+18. REFERENCJE DO LOKALNYCH PLIKÓW (Kryterium 19)
+OCENA POZYTYWNA: Dokument nie zawiera referencji do lokalnych plików ani manuskryptów. Bibliografia
+zawiera tylko trzy pozycje: Bondy–Murty (2008), Dahlhaus i in. (1994), Diestel (2017) – wszystkie są
+standardowymi pozycjami literatury.
+19. NADUŻYCIE BLOKÓW MATEMATYCZNYCH (Kryterium 20)
+OCENA: Dokument zawiera 42 bloki \[ \]. W większości przypadków są one użyte uzasadnione (definicje,
+twierdzenia, kluczowe równości). Jednak w kilku miejscach mogłyby zostać zinline'owane:
+PROBLEM 1: Wiersze 37–39: blok \[ \] dla definicji w streszczeniu jest nieuzasadniony. Równanie d_G(u,w) <
+d_{G\F}(u,w) mogłoby być zinline'owane.
+PROPOZYCJA KOREKTY: Zastąpić: „...jeżeli $d_G(u,w) < d_{G\setminus F}(u,w)$ dla każdej pary..."
+PROBLEM 2: Wiersze 64–66: nierówność |F| ≥ |T| − 1 mogłaby być zinline'owana. Jest to kluczowe
+twierdzenie, ale w tym miejscu (cel pracy) nie wymaga wyodrębnienia.
+PROPOZYCJA KOREKTY: Zastąpić: „Celem pracy jest wykazanie ograniczenia dolnego $|F| \ge |T| -1$..."
+20. PODSUMOWANIE I LISTA KOREKT
+Poniżej przedstawiono zbiórczą listę wszystkich wykrytych błędów, luk logicznych i problemów, uporządkowaną
+według priorytetu korekty:
+BŁĘDY KRYTYCZNE (wymagają natychmiastowej korekty):
+1. Luka logiczna w dowodzie Propozycji 4.3 (Przypadek 1) – brak uzasadnienia, że P′ jest najkrótsza również w
+G (nie tylko, że nie ma ścieżki krótszej).
+2. Luka logiczna w dowodzie Twierdzenia 5.1 (Przypadek 2) – brak formalnego rozróżnienia przypadków e
+E(P_u) vs e E(P_w).
+3. Brak explicite uzasadnienia w Lemacie 3.5 – minimalność wyboru i_{r+1} i jej konsekwencje.
+BŁĘDY ZNACZĄCE (wymagają korekty):
+4. Brak wyraźnego odwołania w dowodzie Propozycji 4.3 (wiersze 658–663) do warunku zbioru na
+wpół-tnącego.
+5. Brak explicite uzasadnienia w dowodzie Lematu 4.1, dlaczego v
+N(t) (nie tylko N[t]).
+6. Brak odwołania do literatury przy Lemacie 3.3 (podścieżka ścieżki najkrótszej).
+7. Zbędne elementy: dwa cytaty przy „standardowej terminologii" (wiersze 61–62).BŁĘDY POMIJALNE (warto skorygować):
+8. Nadmierne użycie bloków \[ \] w streszczeniu i we wstępie.
+9. Brak słów kluczowych i klasyfikacji MSC po abstrakcie.
+10. Nieoptymalny rysunek fig:contraction-def – mógłby być bardziej specyficzny.
+11. Słowo „samowystarczalny" w abstrakcie – sformułowanie nieformalne.
+21. WNIOSKI KOŃCOWE
+Dokument main-pl.txt stanowi w znacznym stopniu poprawny i profesjonalny artykuł matematyczny. Autor
+wykazuje się dobrą znajomością technik dowodowych i dbałością o formalizm. Jednakże zidentyfikowane luki
+logiczne w dowodzie Propozycji 4.3 i Twierdzenia 5.1 są istotne i wymagają uzupełnienia, aby tekst mógł zostać
+uznany za kompletny.
+Szczególnie problematyczne są miejsca, gdzie autor zakłada „oczywistość" pewnych przejść bez pełnego
+uzasadnienia lub odwołania do literatury. W profesjonalnym artykule matematycznym każdy krok dowodu musi być
+albo w pełni uzasadniony, albo odwoływać się do konkretnego źródła.
+Po wprowadzeniu proponowanych korekt dokument będzie stanowił wartościowy wkład do teorii grafów, z
+poprawnym i ścisłym dowodem interesującego twierdzenia o zbiorach na wpół-tnących.

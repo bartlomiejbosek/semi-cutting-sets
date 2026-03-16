@@ -134,20 +134,17 @@ Niech $\emptyset\neq W\subseteq V$ oraz niech $w^\ast\notin V$ będzie nowym wie
 \]
 Przez $G/W$ oznaczamy graf prosty $(V',E')$, gdzie
 \[
-  V'\coloneqq (V\setminus W)\cup\{w^\ast\},
-  \qquad
-  E'\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
+\begin{aligned}
+  V' &\coloneqq (V\setminus W)\cup\{w^\ast\},\\
+  E' &\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
+\end{aligned}
 \]
 Warunek $\pi_W(x)\neq \pi_W(y)$ gwarantuje, że w~$G/W$ nie powstają pętle, a~opis zbiorowy krawędzi utożsamia ewentualne
 krawędzie równoległe; w~szczególności $G/W$ pozostaje grafem prostym.
 Jeżeli $e=\{x,y\}\in E$ oraz $\pi_W(x)\neq \pi_W(y)$, to obraz tej krawędzi oznaczamy przez
-\[
-  e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E'.
-\]
+$e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E'$.
 Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
-\[
-  F/W\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in F,\ \pi_W(x)\neq \pi_W(y)\bigr\}\subseteq E'.
-\]
+$F/W\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in F,\ \pi_W(x)\neq \pi_W(y)\bigr\}\subseteq E'$.
 \end{definition}
 
 \begin{figure}[ht]
@@ -216,27 +213,18 @@ Użyjemy kilku standardowych własności spacerów i~ścieżek najkrótszych; po
 podajemy tylko tam, gdzie są bezpośrednio związane z~operacją ściągania stosowaną w~dalszej części pracy.
 
 \begin{lemma}\label{lem:contraction-image-size}
-Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas
-\[
-  |F/W|\le |F|.
-\]
+Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas $|F/W|\le |F|$.
 \end{lemma}
 
 \begin{proof}
-Niech
-\[
-  D\coloneqq \bigl\{\{x,y\}\in F:\ \pi_W(x)\neq \pi_W(y)\bigr\}.
-\]
+Niech $D\coloneqq \bigl\{\{x,y\}\in F:\ \pi_W(x)\neq \pi_W(y)\bigr\}$.
 Z~Definicji~\ref{def:contraction} wynika, że odwzorowanie
 \[
   \varphi\colon D\to F/W,
   \qquad
   \varphi(\{x,y\})\coloneqq \{\pi_W(x),\pi_W(y)\},
 \]
-jest surjekcją. Zatem
-\[
-  |F/W|\le |D|\le |F|.
-\]
+jest surjekcją. Zatem $|F/W|\le |D|\le |F|$.
 \end{proof}
 
 \begin{lemma}\label{lem:walk-to-path}
@@ -524,60 +512,33 @@ założyć, że
   y_r=t^\prime,
 \]
 gdzie $r<m$; dopuszczamy przy tym również przypadek $r=0$. Oznaczmy
-\[
-  Q^\prime\coloneqq P^\prime[y_r,y_m]
-  \qquad\text{oraz}\qquad
-  z\coloneqq y_m.
-\]
+$Q^\prime\coloneqq P^\prime[y_r,y_m]$ oraz $z\coloneqq y_m$.
 Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$, wierzchołek $z=y_m$ jest jednym z~końców tej ścieżki; po ewentualnym
 odwróceniu ścieżki jest to koniec różny od~$t^\prime$. Zatem
-\[
-  z\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}.
-\]
+$z\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$.
 W~szczególności $z\notin N[t]$. Ponieważ $y_{r+1},\dots,y_m$ są wierzchołkami grafu $G^\prime$ różnymi od~$t^\prime$, wszystkie
 one należą do~$V\setminus N[t]$. Ponieważ $P^\prime$ jest ścieżką najkrótszą, zachodzi
-\[
-  \len{P^\prime}=\dist{G^\prime}{u}{w}.
-\]
+$\len{P^\prime}=\dist{G^\prime}{u}{w}$.
 Ścieżka $Q^\prime$ jest podścieżką ścieżki $P^\prime$ o~końcach $t^\prime$ i~$z$, więc z~Lematu~\ref{lem:subpath},
-zastosowanego w~grafie prostym $G^\prime$, wynika
-\[
-  \len{Q^\prime}=\dist{G^\prime}{t^\prime}{z}.
-\]
-Możemy zatem zastosować Lemat~\ref{lem:lifting-endpoint}. Istnieje wówczas wierzchołek $v\in N(t)$ taki, że
-\[
-  Q=(t,v,y_{r+1},\dots,y_m)
-\]
-jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
+zastosowanego w~grafie prostym $G^\prime$, wynika $\len{Q^\prime}=\dist{G^\prime}{t^\prime}{z}$. Możemy zatem zastosować
+Lemat~\ref{lem:lifting-endpoint}. Istnieje wówczas wierzchołek $v\in N(t)$ taki, że
+$Q=(t,v,y_{r+1},\dots,y_m)$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 
-Ponieważ $t,z\in T$, z~Obserwacji~\ref{obs:shortest-paths} otrzymujemy
-\[
-  E(Q)\cap F\neq\emptyset.
-\]
+Ponieważ $t,z\in T$, z~Obserwacji~\ref{obs:shortest-paths} otrzymujemy $E(Q)\cap F\neq\emptyset$.
 Z~założenia $t\notin V[F]$ oraz z~definicji zbioru $V[F]$ wynika, że żadna krawędź incydentna z~$t$ nie należy do~$F$.
 W~szczególności pierwsza krawędź ścieżki $Q$, to znaczy $\{t,v\}$, nie należy do~$F$. Wybierzmy więc
-\[
-  f\in E(Q)\cap F.
-\]
+$f\in E(Q)\cap F$.
 Wtedy $f$ należy do~zbioru krawędzi ścieżki $(v,y_{r+1},\dots,y_m)$, będącej końcowym fragmentem ścieżki $Q$. Jeżeli
-$f=\{v,y_{r+1}\}$, to
-\[
-  f/N[t]=\{t^\prime,y_{r+1}\},
-\]
+$f=\{v,y_{r+1}\}$, to $f/N[t]=\{t^\prime,y_{r+1}\}$,
 gdyż $v\in N[t]$ oraz $y_{r+1}\in V\setminus N[t]$, a~więc obrazy końców tej krawędzi są różne. Zatem $f/N[t]$ jest pierwszą
 krawędzią ścieżki $Q^\prime$. Jeżeli natomiast
 $f=\{y_i,y_{i+1}\}$ dla pewnego
 $i\in\{r+1,\dots,m-1\}$, to oba końce krawędzi $f$ leżą poza $N[t]$, więc na mocy Obserwacji~\ref{obs:outside-edges}
 zachodzi $f/N[t]=f\in E(Q^\prime)$.
-W~obu podprzypadkach
-\[
-  f/N[t]\in E(Q^\prime)\subseteq E(P^\prime).
-\]
+W~obu podprzypadkach $f/N[t]\in E(Q^\prime)\subseteq E(P^\prime)$.
 W~obu podprzypadkach końce krawędzi $f$ mają różne obrazy przez odwzorowanie $\pi_{N[t]}$, więc z~Definicji~\ref{def:contraction}
 wynika, że $f/N[t]$ jest krawędzią grafu $G^\prime$. Ponieważ ponadto $f\in F$, otrzymujemy $f/N[t]\in F^\prime$. Stąd
-\[
-  E(P^\prime)\cap F^\prime\neq\emptyset.
-\]
+$E(P^\prime)\cap F^\prime\neq\emptyset$.
 
 Wykazaliśmy, że każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^\prime$ przecina zbiór $F^\prime$. Wraz ze
 skończonością odpowiednich odległości daje to, na mocy Obserwacji~\ref{obs:shortest-paths}, że $F^\prime$ jest zbiorem
@@ -725,16 +686,11 @@ $|F^\prime|\ge |T^\prime|-1=k-1$. Lemat~\ref{lem:contraction-image-size} daje $|
 \medskip\noindent
 \textbf{Przypadek 2: $T\subseteq V[F]$.}
 Ponieważ $T\subseteq V[F]$, każdy terminal jest incydentny z~co najmniej jedną krawędzią ze zbioru $F$. Wybierzmy więc
-$t\in T$ oraz krawędź $e\in F$ incydentną z~$t$. Oznaczmy
-\[
-  T^-\coloneqq T\setminus\{t\},
-  \qquad
-  F^-\coloneqq F\setminus\{e\}.
-\]
+$t\in T$ oraz krawędź $e\in F$ incydentną z~$t$. Oznaczmy $T^-\coloneqq T\setminus\{t\}$ oraz $F^-\coloneqq F\setminus\{e\}$.
 Pokażemy, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
 
 Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$F$ jest zbiorem na wpół-tnącym dla~$T$, z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
-\(\dist{G}{u}{w}<\infty\). Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths}
+$\dist{G}{u}{w}<\infty$. Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths}
 dostajemy $E(P)\cap F\neq\emptyset$. Jeżeli $e\notin E(P)$, to od razu $E(P)\cap F^-\neq\emptyset$.
 Pozostaje przypadek $e\in E(P)$.
 
