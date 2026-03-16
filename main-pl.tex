@@ -23,7 +23,6 @@
 
 \newcommand{\len}[1]{\ell(#1)}
 \newcommand{\dist}[3]{d_{#1}(#2,#3)}
-\newcommand{\doi}[1]{\href{https://doi.org/#1}{DOI: #1}}
 
 \title{\textbf{O rozmiarze zbiorów na wpół-tnących w grafach}}
 \author{}
@@ -49,36 +48,24 @@ względem pary $(|T|,|V|)$.
 
 \section{Wprowadzenie}
 
-Badanie wpływu usuwania krawędzi na właściwości metryczne i~topologiczne grafów stanowi klasyczny obszar analizy
-strukturalnej sieci. Historycznie zagadnienie to rozwijało się w~dwóch odrębnych nurtach. Z~jednej strony, w~ramach analizy
-tzw. witalności krawędzi (ang. \emph{edge vitality}), poszukuje się krawędzi, których usunięcie powoduje największy wzrost
-odległości między zadanymi wierzchołkami; koncepcja ta, sformalizowana między innymi przez Corleya i~Sha~\cite{corley1982},
-zakłada modyfikację metryki bez wymogu całkowitego zniszczenia ścieżek. Z~drugiej strony, w~przypadku analizy grafów
-z~wieloma wyróżnionymi wierzchołkami, fundamentalnym zagadnieniem jest problem wielodrogowego przekroju
-(\emph{Multiway Cut}). Jak pokazali Dahlhaus, Johnson, Papadimitriou, Seymour i~Yannakakis~\cite{dahlhaus1994}, separacja
-zadanego zbioru terminali jest problemem głęboko uwarunkowanym strukturalnie i~obliczeniowo.
-
-W~niniejszej pracy rozważamy wyłącznie skończone grafy nieskierowane proste, a~więc grafy bez pętli i~bez krawędzi
-równoległych, i~wprowadzamy pojęcie, które naturalnie łączy oba wspomniane nurty: zbiór na wpół-tnący. Dla grafu
-$G=(V,E)$, zbioru terminali $T\subseteq V$ oraz zbioru krawędzi $F\subseteq E$ wymagamy, aby po usunięciu $F$ odległość
-między każdą parą różnych terminali ściśle wzrosła, to znaczy aby zachodziła nierówność
+Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym oraz niech $T\subseteq V$. Dla zbioru krawędzi
+$F\subseteq E$ mówimy, że $F$ jest zbiorem na wpół-tnącym dla~$T$, jeżeli po usunięciu krawędzi z~$F$ odległość między
+każdą parą różnych terminali ściśle wzrasta, to znaczy
 \[
   \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}
   \qquad\text{dla wszystkich różnych } u,w\in T.
 \]
-W~odróżnieniu od klasycznych przekrojów~\cite{dahlhaus1994} nie narzucamy warunku, by odległość w~grafie $G\setminus F$
-stała się nieskończona; terminale mogą nadal należeć do tej samej składowej spójności. Wymagamy jedynie wydłużenia
-najkrótszych ścieżek, co koncepcyjnie nawiązuje do osłabionych warunków rozważanych przez Corleya i~Sha~\cite{corley1982}.
+Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej własności
+strukturalnej.
 
-Głównym rezultatem pracy jest wykazanie, że nawet przy tak osłabionym warunku separacji pozostaje w~mocy ta sama bariera
-rozmiaru: każdy zbiór na wpół-tnący musi spełniać nierówność
+Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego
 \[
   |F|\ge |T|-1,
 \]
-bez jakichkolwiek dodatkowych założeń o~strukturze grafu. Przedstawiony dowód jest samowystarczalny i~opiera się na
-charakterystyce przez przecinanie najkrótszych ścieżek, na trwałości własności na wpół-tnącej przy operacji ściągania
-domkniętego sąsiedztwa terminala nieincydentnego z~$F$ oraz na indukcji leksykograficznej względem pary $(|T|,|V(G)|)$.
-Stosowana w~artykule terminologia grafowa jest zgodna ze standardową terminologią monografii Diestela~\cite{diestel}.
+obowiązującego dla każdego zbioru na wpół-tnącego. Dowód jest samowystarczalny. Najpierw zapisujemy definicję tego
+zbioru w~równoważnej postaci wymagającej przecinania wszystkich ścieżek najkrótszych między terminalami. Następnie dowodzimy,
+że własność ta zachowuje się po ściągnięciu domkniętego otoczenia terminala $t\in T\setminus V[F]$. Ostatni etap stanowi
+indukcja leksykograficzna względem pary $(|T|,|V|)$.
 
 Oszacowanie jest ostre. Dla każdego $k\ge 2$ ścieżka
 $v_0v_1\dots v_{2k-2}$ wraz ze zbiorem terminali
@@ -125,7 +112,11 @@ Jest to ponownie spacer, tym razem z~$v_0$ do~$w_\ell$.
 
 Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje; w~przeciwnym
 razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$. Ponieważ $G$ jest skończony, każda ścieżka w~$G$ ma długość co najwyżej
-$|V|-1$, a~więc jeżeli choć jedna ścieżka z~$u$ do~$w$ istnieje, to wspomniane minimum jest dobrze określone.
+$|V|-1$, a~więc jeżeli choć jedna ścieżka z~$u$ do~$w$ istnieje, to wspomniane minimum jest dobrze określone. Ścieżkę
+$P$ z~$u$ do~$w$ nazywamy ścieżką najkrótszą, jeżeli
+\[
+  \len{P}=\dist{G}{u}{w}.
+\]
 \end{definition}
 
 \begin{notation}[Podstawowe operacje na grafie]\label{not:basic-operations}
@@ -545,8 +536,7 @@ $q_1\in N(t)\subseteq N[t]$, a~zatem $\pi_{N[t]}(q_1)=t^\prime$. Zastosowanie Le
 \]
 będącego końcowym fragmentem ścieżki $Q$ daje spacer z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$, gdyż
 $\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z$.
-Z~Lematu~\ref{lem:walk-to-path} otrzymujemy więc ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$,
-gdyż lemat ten skraca spacer do ścieżki bez zwiększania długości.
+Z~Lematu~\ref{lem:walk-to-path} otrzymujemy więc ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$.
 Wobec tego
 \[
   \dist{G^\prime}{t^\prime}{z}\le \ell-1=\len{Q}-1.
@@ -676,7 +666,8 @@ w~$G^\prime$. Tym samym każda para różnych terminali z~$T^\prime$
 ma w~$G^\prime$ skończoną odległość.
 
 Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$.
-Na mocy Obserwacji~\ref{obs:shortest-paths} wystarczy wykazać, że
+Ponieważ na mocy Definicji~\ref{def:contraction} graf $G^\prime$ jest grafem prostym, możemy zastosować do niego
+Obserwację~\ref{obs:shortest-paths}. Wystarczy więc wykazać, że
 \[
   E(P^\prime)\cap F^\prime\neq\emptyset.
 \]
@@ -718,7 +709,19 @@ Na mocy Obserwacji~\ref{obs:outside-edges} mamy $g/N[t]=g$, a~zatem $g\in F^\pri
 \textbf{Przypadek 2: $t^\prime\in V(P^\prime)$.}
 Ponieważ $P^\prime$ jest ścieżką, wierzchołek $t^\prime$ występuje w~niej dokładnie raz. Jeżeli $t^\prime$ jest ostatnim
 wierzchołkiem ścieżki $P^\prime$, to zastępujemy $P^\prime$ ścieżką $\overleftarrow{P^\prime}$. Na mocy Notacji~\ref{not:basic-operations}
-otrzymujemy znów ścieżkę najkrótszą o~tym samym zbiorze krawędzi, więc wystarczy rozpatrzyć tę nową ścieżkę. Możemy zatem
+otrzymujemy znów ścieżkę najkrótszą o~tym samym zbiorze krawędzi. Ponieważ
+\[
+  E(\overleftarrow{P^\prime})=E(P^\prime),
+\]
+warunek
+\[
+  E(P^\prime)\cap F^\prime\neq\emptyset
+\]
+jest równoważny warunkowi
+\[
+  E(\overleftarrow{P^\prime})\cap F^\prime\neq\emptyset.
+\]
+Wystarczy więc rozpatrzyć tę nową ścieżkę. Możemy zatem
 założyć, że
 \[
   P^\prime=(y_0,\dots,y_r,\dots,y_m),
@@ -731,7 +734,8 @@ gdzie $r<m$; dopuszczamy przy tym również przypadek $r=0$. Oznaczmy
   \qquad\text{oraz}\qquad
   z\coloneqq y_m.
 \]
-Wierzchołek $z$ jest końcem ścieżki $P^\prime$ różnym od~$t^\prime$, a~więc
+Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$, wierzchołek $z=y_m$ jest jednym z~końców tej ścieżki; po ewentualnym
+odwróceniu ścieżki jest to koniec różny od~$t^\prime$. Zatem
 \[
   z\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}.
 \]
@@ -788,9 +792,9 @@ na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \section{Twierdzenie główne}
 
 W~dowodzie głównego twierdzenia będziemy zmniejszać parametr indukcyjny na dwa sposoby. Jeżeli istnieje terminal
-nieincydentny z~żadną krawędzią ze zbioru $F$, to ściągniemy jego domknięte otoczenie i~zachowamy liczbę terminali przy
-mniejszej liczbie wierzchołków. W~przeciwnym razie każdy terminal dotyka zbioru $F$; wówczas usuniemy jeden terminal oraz
-jedną incydentną z~nim krawędź, co zmniejszy liczbę terminali.
+$t\in T\setminus V[F]$, to ściągniemy jego domknięte otoczenie i~zachowamy liczbę terminali przy mniejszej liczbie
+wierzchołków. W~przeciwnym razie zachodzi $T\subseteq V[F]$; wtedy usuniemy jeden terminal oraz jedną incydentną z~nim
+krawędź, co zmniejszy liczbę terminali.
 
 \begin{theorem}\label{thm:main}
 Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym, niech $T\subseteq V$ oraz niech $F\subseteq E$. Jeżeli $F$ jest
@@ -802,22 +806,70 @@ zbiorem na wpół-tnącym dla~$T$ w~$G$, to
 
 \begin{figure}[t]
 \centering
+\begin{tikzpicture}[scale=0.98, every node/.style={font=\small}]
+  \begin{scope}[xshift=0cm]
+    \node at (3.3,2.9) {$G$};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (u) at (0.0,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (x) at (1.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!20,label=above:$a$] (a) at (2.9,2.2) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$t$] (t) at (3.2,1.2) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$b$] (b) at (3.0,0.2) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (y) at (4.9,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (w) at (6.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (z) at (5.2,0.0) {};
+    \draw[very thick,red!70!black] (u)--(x);
+    \draw (x)--(a)--(t)--(b)--(y);
+    \draw[very thick,red!70!black] (y)--(w);
+    \draw (y)--(z);
+    \node[draw,dashed,rounded corners,fit=(a)(t)(b),inner sep=7pt,label=left:{$N[t]$}] {};
+    \node[align=center] at (3.2,-1.0)
+      {$t\in T\setminus V[F]$\\[2pt] $F=\{\{u,x\},\{y,w\}\}$};
+  \end{scope}
+
+  \draw[-{Latex[length=3mm]},thick] (7.4,1.2) -- (8.8,1.2);
+  \node at (8.1,1.65) {\small ściągnięcie $N[t]$};
+
+  \begin{scope}[xshift=9.7cm]
+    \node at (2.5,2.9) {$G^\prime=G/N[t]$};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (up) at (0.0,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (xp) at (1.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!45,label=below:$t^\prime$] (tp) at (2.9,1.0) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (yp) at (4.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (wp) at (5.8,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (zp) at (4.7,0.0) {};
+    \draw[very thick,red!70!black] (up)--(xp);
+    \draw (xp)--(tp)--(yp);
+    \draw[very thick,red!70!black] (yp)--(wp);
+    \draw (yp)--(zp);
+    \node[align=center] at (2.9,-1.0)
+      {$T^\prime=(T\setminus\{t\})\cup\{t^\prime\}$\\[2pt] $F^\prime=F/N[t]$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Przypadek~1 w~dowodzie Twierdzenia~\ref{thm:main}: ściągnięcie domkniętego otoczenia terminala
+$t\in T\setminus V[F]$. Krawędzie zbioru $F$ nie mają końców w~$N[t]$, więc przechodzą do grafu $G^\prime$
+bez utraty własności na wpół-tnącej.}
+\label{fig:main-contraction}
+\end{figure}
+
+\begin{figure}[t]
+\centering
 \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-  \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$u$] (u) at (0,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=below:$u$] (u) at (0,0) {};
   \node[circle,draw,inner sep=1.5pt,fill=white] (x) at (1.6,0) {};
-  \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$t$] (t) at (3.2,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=below:$t$] (t) at (3.2,0) {};
   \node[circle,draw,inner sep=1.5pt,fill=white] (y) at (4.8,0) {};
-  \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$w$] (w) at (6.4,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=below:$w$] (w) at (6.4,0) {};
   \draw[very thick,blue!70!black] (u)--(x)--(t)--(y)--(w);
   \draw[very thick,red!70!black] (x)--(t);
-\draw[very thick,green!50!black] (t)--(y);
+  \draw[very thick,green!50!black] (t)--(y);
   \node at (1.6,0.6) {$P_u$};
   \node at (4.8,0.6) {$P_w$};
   \node at (2.4,-0.65) {$e$};
   \node at (4.0,-0.65) {$f$};
 \end{tikzpicture}
 \caption{Rozcięcie ścieżki najkrótszej $P$ w~wierzchołku $t$ na podścieżki $P_u$ i~$P_w$
-w~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Zaznaczono krawędzie $e$ i~$f$.}
+w~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Na rysunku pokazano podprzypadek $e\in E(P_u)$; wówczas
+$f\in E(P_w)\cap(F\setminus\{e\})$. Przypadek symetryczny jest analogiczny.}
 \label{fig:split-path}
 \end{figure}
 
@@ -855,9 +907,9 @@ krawędzi $F\subseteq E$, który jest na wpół-tnący dla~$T$ w~$G$. Pokażemy,
 \[
   |F|\ge k-1.
 \]
-Jeżeli znajdziemy terminal nieincydentny z~$F$, przejdziemy do mniejszego grafu przez ściągnięcie jego domkniętego
-otoczenia. Jeżeli natomiast każdy terminal jest incydentny z~$F$, zachowamy graf, lecz usuniemy jeden terminal i~jedną
-krawędź ze zbioru $F$. Rozpatrujemy więc dwa przypadki.
+Jeżeli znajdziemy terminal należący do~$T\setminus V[F]$, przejdziemy do mniejszego grafu przez ściągnięcie jego
+domkniętego otoczenia. Jeżeli natomiast $T\subseteq V[F]$, zachowamy graf, lecz usuniemy jeden terminal i~jedną krawędź
+ze zbioru $F$. Rozpatrujemy więc dwa przypadki.
 
 \medskip\noindent
 \textbf{Przypadek 1: istnieje terminal $t\in T\setminus V[F]$.}
@@ -880,6 +932,7 @@ Niech $t^\prime\notin V$ będzie nowym wierzchołkiem i~niech
   \qquad
   F^\prime\coloneqq F/N[t].
 \]
+Sytuację tę ilustruje Rysunek~\ref{fig:main-contraction}.
 Ponieważ z~założenia tego przypadku mamy $t\in T\setminus V[F]$, na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$
 jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$. Ponieważ
 $t^\prime\notin V$ oraz $T\subseteq V$, mamy $t^\prime\notin T$, a~więc
@@ -944,6 +997,10 @@ Istnieje dokładnie jeden indeks $j\in\{0,\dots,m\}$ taki, że $v_j=t$, gdyż $P
   \qquad\text{oraz}\qquad
   P_w\coloneqq (v_j,\dots,v_m).
 \]
+Ponieważ $v_0=u\neq t$ oraz $v_m=w\neq t$, zachodzi
+\[
+  0<j<m.
+\]
 Wówczas $P_u$ jest podścieżką od~$u$ do~$t$, $P_w$ jest podścieżką od~$t$ do~$w$, a~ponadto
 \[
   P=P_u\cdot P_w.
@@ -951,7 +1008,7 @@ Wówczas $P_u$ jest podścieżką od~$u$ do~$t$, $P_w$ jest podścieżką od~$t$
 Na mocy Lematu~\ref{lem:subpath} $P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$.
 Sytuację tę ilustruje
 Rysunek~\ref{fig:split-path}.
-Ponieważ $u,w\in T^-=T\setminus\{t\}$, obie te podścieżki mają dodatnią długość.
+Stąd obie te podścieżki mają dodatnią długość.
 
 Ponieważ $P$ jest ścieżką, podścieżki $P_u$ i~$P_w$ mają wspólny jedynie wierzchołek $t$. W~szczególności
 \[
@@ -959,8 +1016,12 @@ Ponieważ $P$ jest ścieżką, podścieżki $P_u$ i~$P_w$ mają wspólny jedynie
   \qquad\text{oraz}\qquad
   E(P_u)\cap E(P_w)=\emptyset,
 \]
-gdyż wspólna krawędź dawałaby pętlę przy~$t$, niemożliwą w~grafie prostym. Krawędź $e$ należy więc dokładnie do jednej
-z~tych dwóch podścieżek.
+gdyż gdyby krawędź $g$ należała do~$E(P_u)\cap E(P_w)$, to oba jej końce należałyby do~zbioru
+\[
+  V(P_u)\cap V(P_w)=\{t\},
+\]
+a~więc mielibyśmy $g=\{t,t\}$, co jest niemożliwe w~grafie prostym. Krawędź $e$ należy więc dokładnie do jednej z~tych
+dwóch podścieżek.
 
 Jeżeli $e\in E(P_u)$, to z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ mamy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$
 jest ścieżką najkrótszą z~$t$ do~$w$ w~$G$, z~Obserwacji~\ref{obs:shortest-paths} wynika istnienie krawędzi
@@ -995,26 +1056,5 @@ Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy
 \]
 Tym samym wykazano krok indukcyjny, a~więc i~dowód twierdzenia.
 \end{proof}
-
-\begin{thebibliography}{9}
-
-\bibitem{corley1982}
-H.~W. Corley, D.~Y. Sha,
-\emph{Most vital links and nodes in weighted networks},
-Operations Research Letters \textbf{1}(4) (1982), 157--160.
-\doi{10.1016/0167-6377(82)90020-7}
-
-\bibitem{dahlhaus1994}
-E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
-\emph{The complexity of multiterminal cuts},
-SIAM Journal on Computing \textbf{23}(4) (1994), 864--894.
-\doi{10.1137/S0097539792225297}
-
-\bibitem{diestel}
-R.~Diestel,
-\emph{Graph Theory}, 5th ed.,
-Graduate Texts in Mathematics, vol.~173, Springer, Heidelberg, 2017.
-
-\end{thebibliography}
 
 \end{document}
