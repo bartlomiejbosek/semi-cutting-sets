@@ -1,274 +1,140 @@
-## Ocena artykułu `main-pl.tex`
-
-Poniżej przedstawiam szczegółową analizę zgodnie z wymaganymi kryteriami. Oceniam tekst bardzo ostro, wskazując konkretne miejsca wymagające poprawy, luki logiczne, nieścisłości oraz naruszenia reguł redakcyjnych.
+Now let me also read the main-lluis.pdf carefully for comparison, and check the line 558 that was truncated:Przeczytałem dokładnie cały plik `main-pl.tex`, porównałem z wersją angielską (`main-lluis.pdf`) oraz z notatkami ręcznymi. Poniżej surowa, szczegółowa ocena.
 
 ---
 
-### 1. Formalizm matematyczny
+## OCENA OGÓLNA
 
-**Mocne strony:**
-- Większość definicji jest poprawnie sformułowana (spacer, ścieżka, odległość, ściąganie zbioru wierzchołków, zbiór na wpół-tnący).
-- Operacja ściągania zdefiniowana precyzyjnie z użyciem rzutnika \(\pi_W\).
-- Lematy i obserwacje opatrzone dowodami, choć nie wszystkie są w pełni rygorystyczne.
-
-**Słabe strony / błędy:**
-
-1. **Definicja 2.1 (spacer, ścieżka):** Mówi się o „spacerze” i „ścieżce”, ale w dalszej części brakuje precyzyjnego rozróżnienia między nimi w kontekście konkatenacji – np. w lemacie 3.5 używa się spaceru, a potem powołuje na lemat 3.2 (przekształcenie spaceru w ścieżkę). Jest to poprawne, ale mogłoby być jaśniej wyeksplikowane.
-
-2. **Obserwacja 2.5:** Twierdzi się, że z definicji zbioru na wpół-tnącego wynika, że wszystkie terminale są w jednej składowej spójności. Dowód jest poprawny, ale warto dodać, że gdyby któreś dwa terminale były w różnych składowych, ich odległość w \(G\) byłaby \(\infty\), a w \(G\setminus F\) też \(\infty\) (lub nadal nieskończona), co nie spełnia warunku ścisłego wzrostu. Autor napisał: „W szczególności odległość \(d_G(u,w)\) jest skończona.” To wystarczy, ale dalszy wniosek o jednej składowej jest już oczywisty. OK.
-
-3. **Lemat 3.1:** \( |F/W| \le |F| \) – dowód przez surjekcję jest poprawny, ale używa oznaczenia \(D\), które nie jest wcześniej zdefiniowane. Jest to drobny brak precyzji.
-
-4. **Lemat 3.5:** Dowód – autor usuwa powtórzenia w ciągu obrazów, ale nie uzasadnia, że powstały ciąg jest spacerem (tzn. że kolejne zachowane wierzchołki są połączone krawędzią). Wystarczy powołać się na fakt, że jeśli dwa kolejne wierzchołki w oryginalnym spacerze dają ten sam obraz, to ten sam obraz pomijamy; jeśli dają różne obrazy, to krawędź między nimi istnieje w \(G/W\) na mocy definicji ściągania. To jest w porządku, ale dowód mógłby być bardziej przejrzysty.
-
-5. **Lemat 4.1:** Kluczowy lemat o podnoszeniu ścieżki. Jest dobrze uzasadniony, ale w jednym miejscu pojawia się stwierdzenie: „Gdyby \(\ell=1\), to \(z\in N(t)\)”, co jest prawdą, ale należałoby dodać, że to przeczy założeniu \(z\notin N[t]\). OK.
-
-6. **Obserwacja 4.2:** Prosta, poprawna.
-
-7. **Propozycja 4.3 – dowód:** To najważniejszy fragment. Jest dość rozbudowany i zawiera kilka potencjalnych luk:
-
-   - Na początku pokazano, że \(T\setminus\{t\}\subseteq V\setminus N[t]\). Argument: gdyby \(u\in N(t)\), to \(d_G(t,u)=1\), a jedyna ścieżka długości 1 to \((t,u)\), więc z obserwacji 3.4 krawędź \(\{t,u\}\) musiałaby należeć do \(F\), co przeczy \(t\notin V[F]\). To jest poprawne.
-   - Następnie dowód, że dla każdych \(u,w\in T'\) odległość w \(G'\) jest skończona. Rozważa dwa przypadki: oba w \(T\setminus\{t\}\) lub jeden z nich to \(t'\). W pierwszym przypadku używa lematów 3.5 i 3.2. Uwaga: lemat 3.5 daje spacer, a lemat 3.2 przekształca go w ścieżkę. To jest w porządku.
-   - **Przypadek 1** ( \(t'\notin V(P')\) ): Pokazano, że \(P'\) jest ścieżką w \(G\). Następnie dowodzi się, że \(P'\) jest najkrótsza także w \(G\). Argument przez sprzeczność: gdyby istniała krótsza ścieżka \(Q\) w \(G\), to przez lemat 3.5 i 3.2 dostalibyśmy krótszą ścieżkę w \(G'\). To jest poprawne. Potem stwierdza się, że \(u,w\in T\setminus\{t\}\), więc z obserwacji 3.4 istnieje \(g\in E(P')\cap F\). Używa się faktu, że \(P'\) jest najkrótsza w \(G\), więc musi przecinać \(F\). OK. Na koniec: \(g/N[t]=g\) (z obserwacji 4.2) i \(g\in F'\). Wszystko gra.
-   - **Przypadek 2** ( \(t'\in V(P')\) ): Jest bardziej złożony. Najpierw autor zakłada, że \(t'\) nie jest ostatnim wierzchołkiem (ewentualnie odwraca ścieżkę). To drobna korekta, ale poprawna.
-     * Definiuje \(Q' = P'[y_r,y_m]\) i \(z = y_m\). Następnie stwierdza, że \(z\in T'\setminus\{t'\}=T\setminus\{t\}\). To prawda, bo \(y_m\) to koniec ścieżki \(P'\) różny od \(t'\) (po ewentualnym odwróceniu). Należy jednak upewnić się, że \(y_m\) rzeczywiście jest terminalem. W \(P'\) oba końce są terminalami, więc \(y_m\) to albo \(u\) albo \(w\), oba należą do \(T'\). Zatem \(z\) jest terminalem.
-     * Stosuje lemat 4.1 do \(Q'\) – ale lemat 4.1 wymaga, by \(z\in V\setminus N[t]\). Czy \(z\) spełnia to? Tak, bo \(z\in T\setminus\{t\}\) i wcześniej pokazano, że \(T\setminus\{t\}\subseteq V\setminus N[t]\). OK.
-     * Otrzymujemy \(Q=(t,v,y_{r+1},\dots,y_m)\) – najkrótszą ścieżkę z \(t\) do \(z\) w \(G\).
-     * Z obserwacji 3.4, \(E(Q)\cap F\neq\emptyset\). Wybieramy \(f\in E(Q)\cap F\). Ponieważ \(t\notin V[F]\), pierwsza krawędź \(\{t,v\}\) nie należy do \(F\), więc \(f\) leży w dalszej części \(Q\).
-     * Teraz rozważa dwa podprzypadki: \(f=\{v,y_{r+1}\}\) lub \(f=\{y_i,y_{i+1}\}\) dla \(i\ge r+1\). W obu pokazuje, że \(f/N[t]\) należy do \(E(Q')\subseteq E(P')\) i do \(F'\).
-     * Uwaga: W pierwszym podprzypadku, gdy \(f=\{v,y_{r+1}\}\), to \(f/N[t]=\{t',y_{r+1}\}\). Trzeba sprawdzić, czy \(\{t',y_{r+1}\}\) rzeczywiście jest krawędzią w \(G'\) – tak, bo \(v\in N[t]\), \(y_{r+1}\notin N[t]\). OK.
-     * W drugim podprzypadku, \(f=\{y_i,y_{i+1}\}\) z \(i\ge r+1\), wtedy oba końce są poza \(N[t]\), więc \(f/N[t]=f\) i \(f\in E(Q')\).
-     * Wniosek: \(E(P')\cap F'\neq\emptyset\).
-
-   **Potencjalne luki w przypadku 2:**
-   - Czy \(Q'\) na pewno jest najkrótszą ścieżką z \(t'\) do \(z\)? Autor powołuje się na Lemat 3.3, który mówi, że podścieżka ścieżki najkrótszej jest najkrótsza między swoimi końcami. To jest prawda, ale wymaga, by \(P'\) była najkrótsza. Jest tak z założenia. OK.
-   - W lemat 4.1 zakładamy, że \(Q'\) jest najkrótsza, co właśnie mamy.
-   - Należy upewnić się, że \(y_{r+1}\) jest dobrze określone – tzn. że \(r<m\), co zapewniliśmy (t' nie jest ostatni). OK.
-   - Czy w przypadku, gdy \(f=\{v,y_{r+1}\}\), to \(f/N[t]\) rzeczywiście należy do \(F'\)? Tak, bo \(f\in F\) i \(f/N[t]\) jest krawędzią w \(G'\) (końce mają różne obrazy). Definicja \(F'\) obejmuje wszystkie takie krawędzie. OK.
-
-   Ogólnie dowód Propozycji 4.3 jest poprawny, choć dość skomplikowany. Można go nieco uprościć, ale nie ma w nim rażących błędów.
-
-8. **Twierdzenie 5.1 (główne):** Dowód indukcyjny.
-
-   - Baza indukcji: \(k\le 1\) – trywialna, poprawna.
-   - Krok indukcyjny: podział na dwa przypadki. W przypadku 1 (istnieje \(t\notin V[F]\)) stosujemy ściągnięcie i Propozycję 4.3, potem założenie indukcyjne i lemat 3.1. Wszystko jasne.
-   - W przypadku 2 (\(T\subseteq V[F]\)) wybieramy \(t\in T\) i \(e\in F\) incydentne z \(t\). Definiujemy \(T^- = T\setminus\{t\}\), \(F^- = F\setminus\{e\}\). Należy pokazać, że \(F^-\) jest zbiorem na wpół-tnącym dla \(T^-\).
-   - Dowód tego faktu:
-     * Ustalamy \(u,w\in T^-\) i bierzemy dowolną najkrótszą ścieżkę \(P\) między nimi. Z własności \(F\) wiemy, że \(E(P)\cap F\neq\emptyset\).
-     * Jeśli \(e\notin E(P)\), to \(E(P)\cap F^-\neq\emptyset\) – OK.
-     * Jeśli \(e\in E(P)\), to \(e\) jest incydentne z \(t\). Ponieważ \(P\) jest ścieżką, \(t\) pojawia się dokładnie raz. Dzielimy \(P\) na \(P_u\) (od \(u\) do \(t\)) i \(P_w\) (od \(t\) do \(w\)). Z lematu 3.3 obie są najkrótsze odpowiednio między \(u,t\) i \(t,w\).
-     * Teraz \(e\) należy do jednej z nich – załóżmy do \(P_u\). Wtedy \(e\notin P_w\). Ponieważ \(P_w\) jest najkrótsza między \(t\) i \(w\), a \(t,w\in T\), z obserwacji 3.4 istnieje \(f\in E(P_w)\cap F\). Ponieważ \(e\in P_u\), a \(P_u\) i \(P_w\) są rozłączne krawędziowo (mają tylko wspólny \(t\)), to \(f\neq e\), więc \(f\in F^-\). Analogicznie, gdy \(e\in P_w\).
-     * Wniosek: \(E(P)\cap F^-\neq\emptyset\).
-   - To rozumowanie jest poprawne, ale wymaga pewnej ostrożności: w momencie, gdy \(e\in P_u\), to \(P_w\) jest najkrótsza, ale czy na pewno musi istnieć \(f\in E(P_w)\cap F\)? Tak, bo z obserwacji 3.4 dla pary \((t,w)\) (oba w \(T\)) każda najkrótsza ścieżka (tu \(P_w\)) przecina \(F\). OK.
-   - Należy też sprawdzić, że \(P_u\) i \(P_w\) są rozłączne krawędziowo – autor podaje argument: gdyby krawędź należała do obu, to jej oba końce byłyby w \(\{t\}\), co jest niemożliwe w grafie prostym. To poprawne.
-   - Następnie stosujemy założenie indukcyjne do \((T^-, G, F^-)\): \(|F^-| \ge |T^-|-1 = k-2\), więc \(|F| = |F^-|+1 \ge k-1\).
-
-   **Potencjalne luki:**
-   - W dowodzie, że \(F^-\) jest zbiorem na wpół-tnącym, użyto obserwacji 3.4. Należy upewnić się, że \(d_G(u,w)<\infty\) dla \(u,w\in T^-\) – to wynika z tego, że \(T^-\subseteq T\) i dla \(T\) odległości są skończone (obserwacja 2.5). OK.
-   - W przypadku, gdy \(e\in P_u\), zakładamy, że \(P_w\) istnieje i jest najkrótsza. Jeśli \(u\) i \(w\) są takie, że \(t\) leży między nimi na ścieżce, to podział jest dobrze zdefiniowany. Jednak w ogólności dla dowolnej pary \(u,w\) może nie istnieć najkrótsza ścieżka przechodząca przez \(t\) – ale my wybraliśmy konkretną ścieżkę \(P\), która akurat zawiera \(e\), więc \(t\) na niej leży. To wystarczy.
-   - Warto dodać, że \(P_u\) i \(P_w\) mają dodatnią długość, bo \(u\neq t\) i \(w\neq t\). To jest oczywiste, ale można wspomnieć.
-
-   Ogólnie dowód głównego twierdzenia jest poprawny i kompletny.
-
-**Podsumowanie formalizmu:** Poza drobnymi niedociągnięciami w dowodzie lematu 3.5 i pewną zawiłością w Propozycji 4.3, formalizm jest na dobrym poziomie. Wszystkie kroki są uzasadnione, nie ma rażących błędów logicznych.
+Tekst jest **matematycznie poprawny** — nie znalazłem błędu logicznego w żadnym z dowodów. Struktura jest właściwa (definicje → lematy → propozycja → twierdzenie), rysunki TikZ są trafne, a żadne dodatkowe założenia strukturalne nie zostały dołożone. Tekst nie odwołuje się do starszych wersji ani do lokalnych plików. Jest to solidny manuskrypt, ale do poziomu „idealnego artykułu w Journal of Combinatorial Theory B" brakuje mu kilkunastu korekt, które wymieniam poniżej w kolejności od najpoważniejszych.
 
 ---
 
-### 2. Kompletność dowodów (ciągłość logiczna w rozgałęzieniach i przypadkach)
+## A. NADUŻYWANIE BLOKÓW WYŚWIETLANYCH `\[ \]` — problem systemowy
 
-- Dowód Propozycji 4.3 jest rozpisany bardzo szczegółowo, z podziałem na przypadki i podprzypadki. Każdy przypadek jest starannie omówiony, a przejścia są logiczne. Jednak momentami autor zakłada coś bez wyraźnego uzasadnienia (np. w przypadku 2, że po odwróceniu ścieżki możemy założyć, iż \(t'\) nie jest ostatnim wierzchołkiem). To jest poprawne, ale warto byłoby dodać zdanie: „Jeżeli \(t'\) jest ostatnim wierzchołkiem, zastępujemy \(P'\) ścieżką \(\overleftarrow{P'}\); wtedy \(t'\) staje się pierwszym wierzchołkiem i dalsze rozumowanie jest symetryczne.” Autor to robi, ale w nieco skrótowej formie.
-- W dowodzie głównego twierdzenia, przypadek 2, rozumowanie z podziałem ścieżki jest poprawne, ale warto podkreślić, że \(P_u\) i \(P_w\) są najkrótsze na mocy Lematu 3.3 – to jest zrobione.
-- Brakuje jednego drobnego uzasadnienia: w przypadku 2, gdy \(e\in P_u\), korzystamy z istnienia \(f\in E(P_w)\cap F\). Ale \(P_w\) jest najkrótsza między \(t\) i \(w\), a \(t,w\in T\), więc z obserwacji 3.4 rzeczywiście istnieje taka krawędź. To jest w porządku.
-- W przypadku 2, gdy \(e\in P_w\), symetrycznie. Wszystko spójne.
+To jest **najpoważniejszy defekt formatowania** i dotyczy całego tekstu. Naliczyłem ponad 40 bloków `\[ \]`, z których co najmniej połowa zawiera proste przypisania lub równości, które należy inlinować. Przykłady:
 
-**Wniosek:** Dowody są kompletne, choć momentami gęste. Nie ma luk, które uniemożliwiałyby zrozumienie.
+**Definicja 2.3** (ściąganie) — cztery bloki wyświetlane. Definicja $\pi_W$ z klamrą `\begin{cases}` jest jedyną formułą, która zasługuje na blok. Pozostałe trzy ($V'$, $E'$; $e/W$; $F/W$) powinny być inlinowane w tekście, np. „Przez $G/W$ oznaczamy graf prosty $(V', E')$, gdzie $V' \coloneqq (V \setminus W) \cup \{w^\ast\}$ oraz $E' \coloneqq \bigl\{\ldots\bigr\}$."
 
----
+**Lemat 4.1** — około dziesięciu bloków wyświetlanych. Równości takie jak $G' \coloneqq G/N[t]$, $P' = (t', x_1, \ldots, x_k)$, $\{v,x_1\}/N[t] = \{t', x_1\}$, $\ell(P) = \ell(P') + 1$ powinny być w tekście ciągłym.
 
-### 3. Przejrzystość prezentacji
+**Propozycja 4.3** — pola $G'$, $T'$, $F'$ wyłożone w bloku `\[ \]` — wystarczy inlinować. Podobnie bloki w ciele dowodu: $\ell(Q') = d_{G'}(t', z)$, $f/N[t] = \{t', y_{r+1}\}$, itd.
 
-**Zalety:**
-- Struktura artykułu jest logiczna: wprowadzenie, notacja, lematy pomocnicze, kluczowa propozycja, główne twierdzenie, uwagi końcowe.
-- Definicje są wyodrębnione i opatrzone numerami.
-- Rysunki TikZ są czytelne i dobrze ilustrują operacje ściągania oraz podział ścieżki.
+**Dowód Twierdzenia 5.1** — definicja porządku leksykograficznego i zbioru $\{(a,b) \in \mathbb{N}_0^2 : a \le b\}$ — dwa bloki, z których wystarczy jeden; definicje $T^-$ i $F^-$ oraz rozkład $E(P) = E(P_u) \cup E(P_w)$ — wszystkie do inlinowania.
 
-**Wady:**
-1. **Zbyt wiele bloków \[ \]** – autor często używa wyśrodkowanych wzorów nawet dla prostych wyrażeń, co zaburza płynność czytania. Zgodnie z punktem 20, należy ich unikać na rzecz formuł inline. Przykłady:
-   - W Definicji 2.1: \(\len{P}\coloneqq k\) – to można śmiało inline.
-   - W Lemacie 3.1: \[|F/W|\le |F|\] – lepiej inline.
-   - W wielu miejscach wzory są wyśrodkowane, choć nie jest to konieczne.
-   - Np. w dowodzie Lematu 4.1: \(\len{P}=\len{P'}+1\) – można inline.
-   Poprawa: należy używać \(...\) dla prostych wyrażeń, a \[ \] tylko dla ważniejszych, wielolinijkowych formuł.
-
-2. **Niepotrzebne wylistowania** – w dowodzie Propozycji 4.3 autor używa \textbf{Przypadek 1:} i \textbf{Przypadek 2:} z wcięciami, co jest dopuszczalne, ale wewnątrz tych przypadków pojawiają się dalsze podpunkty (np. w przypadku 2 jest rozróżnienie na dwa podprzypadki dotyczące krawędzi \(f\)). To jest w porządku, ale warto zachować jednolitą konwencję.
-
-3. **Styl matematyczny:** Czasami zdania są zbyt długie i zawierają wiele wzorów wtrąconych, co utrudnia czytanie. Np. w Lemacie 4.1: „Niech \(P'=(t',x_1,\dots,x_k)\) będzie ścieżką najkrótszą z \(t'\) do \(z\) w \(G'\). Wówczas istnieje wierzchołek \(v\in N(t)\) taki, że \(P=(t,v,x_1,\dots,x_k)\) jest ścieżką najkrótszą z \(t\) do \(z\) w \(G\).” – to jest OK, ale dalej w dowodzie autor pisze długie akapity. Można je rozbić na krótsze zdania.
-
-4. **Oznaczenia:** Wprowadzono \(\len{P}\) dla długości, ale w wielu miejscach używa się też \(\ell(P)\) – to konsekwentne.
-
-5. **Brak odniesień do literatury przy standardowych faktach** – np. w Lemacie 3.2 (spacer → ścieżka) autor powołuje się na [1,3, rozdz.1] – to jest OK, bo to cytowanie podręczników. Jednak w Lemacie 3.3 (podścieżka najkrótszej jest najkrótsza) też jest odwołanie. To jest zgodne z wymogiem, aby nie pisać „oczywiste”, tylko podać referencję lub pełny dowód. Tutaj podano referencję, co jest akceptowalne. Jednak w Lemacie 3.5 (projekcja spaceru) brak jest odwołania do literatury, choć dowód jest podany w całości. To też OK.
-
-**Ogólnie:** Przejrzystość jest dobra, ale można poprawić poprzez zmniejszenie liczby wyśrodkowanych wzorów i skrócenie zdań.
+**Propozycja korekty:** Przejdź przez cały tekst i zamień każdy blok `\[ \]`, który zawiera jedną linię krótszą niż ~60% szerokości kolumny, na formułę inlinową `\( \)` lub `$...$`. Bloki pozostaw wyłącznie dla: (a) definicji wieloliniowych z `cases`; (b) centralnych nierówności, na które czytelnik powinien zwrócić uwagę (np. końcowy wynik $|F| \ge |T| - 1$); (c) ciągów nierówności z `\le`/`\ge` wymagających złamania linii.
 
 ---
 
-### 4. Zbędne rzeczy
+## B. ZBYT OGÓLNIKOWE ODWOŁANIA BIBLIOGRAFICZNE
 
-- Wprowadzenie jest zwięzłe i na temat.
-- Definicje są potrzebne.
-- Lematy pomocnicze są istotne.
-- Nie ma zbędnych dygresji, wszystko służy dowodowi.
-- Jedynym elementem, który może być uznany za nadmiarowy, jest bardzo szczegółowe rozpisywanie niektórych prostych faktów (np. w Lemacie 4.1 dowód, że \(v\in N(t)\) jest dość rozwlekły, ale to kluczowy lemat, więc usprawiedliwione).
-- Obrazki są pomocne, nie są zbędne.
+W trzech miejscach pojawia się formuła typu:
 
-**Wniosek:** Brak zbędnych treści.
+> por. `\cite[rozdz.~1]{bondy-murty,diestel}`
 
----
+Dotyczy to: Lematu 3.2 (spacer → ścieżka), Lematu 3.3 (podścieżka najkrótszej jest najkrótsza), oraz akapitu otwierającego Sekcję 3.
 
-### 5. Odwołania do starszych wersji
+**Problem:** „Rozdział 1" to kilkadziesiąt stron. Czytelnik nie jest w stanie zlokalizować konkretnego faktu. Ponadto składnia `\cite[rozdz.~1]{bondy-murty,diestel}` z dwoma kluczami w jednym `\cite` z opcjonalnym argumentem jest technicznie niepoprawna w standardowym BibTeX — generuje jeden wspólny nawias z jednym numerem rozdziału, co jest dwuznaczne.
 
-W tekście nie ma żadnych odniesień do „starszych wersji” ani do plików takich jak `dowod-1.jpg` czy `main-lluis.pdf`. Jedynie w bibliografii są trzy pozycje: Bondy-Murty, Dahlhaus i Diestel – to poprawne cytowania. Zgodność z punktem 5 i 19.
+**Propozycja korekty:** Zamień na precyzyjne cytowania z numerami twierdzeń. Dla Bondy–Murty: Proposition 1.2.2 (każdy spacer zawiera ścieżkę), Proposition 1.3.4 (podścieżka najkrótszej ścieżki jest najkrótsza). Dla Diestla: Proposition 1.3.1 i 1.3.3 (wydanie 5.). Rozdziel cytowania: `\cite[Proposition~1.2.2]{bondy-murty}; \cite[Proposition~1.3.1]{diestel}`.
 
 ---
 
-### 6. Zakaz stwierdzeń typu „oczywiste” bez referencji
+## C. PROBLEM STRUKTURALNY: OBSERWACJA 4.2 UŻYTA PRZED JEJ SFORMUŁOWANIEM
 
-Autor skrupulatnie unika takich stwierdzeń. Nawet w elementarnych faktach (lemat 3.2, 3.3) podaje referencje do podręczników. To jest zgodne z wymaganiami.
+W dowodzie Lematu 4.1 (linia 400–401) pojawia się wniosek:
 
----
+> „krawędź $\{x_{i-1}, x_i\}$ należy do $E(G')$ i ma oba końce poza $N[t]$, a więc z Definicji 2.3 wynika $\{x_{i-1}, x_i\} \in E$."
 
-### 7. Struktura artykułu
+Jest to dokładnie treść Obserwacji 4.2 (kierunek $E(G') \to E(G)$ dla wierzchołków spoza $N[t]$), która w tekście pojawia się dopiero na linii 443 — czyli *po* Lemacie 4.1. Co prawda argument wynika wprost z Definicji 2.3 (surjekcja krawędzi jest jednorodna na wierzchołkach stałych), ale brak jawnej argumentacji w połączeniu z późniejszym osobnym sformułowaniem tej samej własności tworzy niezręczność logiczną.
 
-Artykuł ma wyraźną strukturę:
-- Wprowadzenie (sekcja 1)
-- Notacja i definicje (sekcja 2)
-- Lematy pomocnicze (sekcja 3)
-- Zachowanie własności przy ściąganiu (sekcja 4) – zawiera kluczową Propozycję 4.3
-- Twierdzenie główne (sekcja 5)
-- Uwagi końcowe (sekcja 6)
-
-To jest zgodne z żądaną strukturą A, B, C.
+**Propozycja korekty:** Przenieś Obserwację 4.2 **przed** Lemat 4.1, a w dowodzie Lematu 4.1 odwołaj się do niej explicite. Alternatywnie: scal Obserwację 4.2 z sekcją Lematów pomocniczych (sekcja 3) jako ogólną własność ściągania.
 
 ---
 
-### 8. Profesjonalny wygląd (jak w topowych czasopismach)
+## D. BRAK UZASADNIENIA W JEDNYM KROKU DOWODU OBSERWACJI 2.5
 
-- Styl LaTeX jest staranny, używa odpowiednich pakietów (amsthm, tikz, hyperref itp.).
-- Twierdzenia i lematy są numerowane w jednej ciągłej sekwencji.
-- Rysunki TikZ są starannie przygotowane, choć momentami nieco prymitywne (np. Rysunek 1 jest prosty, ale czytelny). W topowych czasopismach grafika bywa bardziej dopracowana, ale to kwestia gustu.
-- Brakuje abstraktu w osobnym bloku – jest, ale zatytułowany „Streszczenie” – to OK.
-- Brak afiliacji autora – to może być celowe, ale w profesjonalnym artykule powinny być dane autorów. W treści na początku jest tylko tytuł i brak autorów. To poważny brak. Artykuł powinien zawierać imiona i nazwiska oraz afiliacje.
-- Brak słów kluczowych.
-- Brak klasyfikacji MSC – często dodawane w czasopismach.
+Obserwacja 2.5 stwierdza, że terminale leżą w jednej składowej spójności. Dowód (linie 208–213) mówi:
 
-**Uwaga:** W pliku na początku jest `\title{\textbf{O rozmiarze zbiorów na wpół-tnących w grafach}} \author{} \date{}` – puste pole autora. To rażący brak profesjonalizmu. Należy dodać przynajmniej fikcyjnych autorów lub pozostawić miejsce, ale w ostatecznej wersji musi być wypełnione.
+> „odległość $d_G(u,w)$ jest skończona. Istnienie skończonej odległości [...] oznacza, że [...] wszystkie terminale należą do jednej składowej spójności."
 
-**Inne:** W bibliografii pozycje są sformatowane poprawnie, zgodnie ze stylem typowym dla czasopism.
+Przejście od „każda para ma skończoną odległość" do „wszystkie leżą w jednej składowej" nie jest jawnie uzasadnione. Formalnie wymaga tranzytywności relacji „być w tej samej składowej" (albo faktu, że składowe to klasy relacji „istnieje ścieżka"). Jest to elementarne, ale w pracy, która chce być rygorystyczna, brakuje jednego zdania.
 
-**Wniosek:** Pod względem wizualnym i strukturalnym artykuł jest bliski ideału, ale brak autorów to poważny mankament.
+**Propozycja korekty:** Dodaj: „Ponieważ relacja «istnieje ścieżka w $G$» jest relacją równoważności, a dla każdej pary $u, w \in T$ odległość $d_G(u,w) < \infty$ implikuje istnienie ścieżki, zbiór $T$ jest zawarty w jednej klasie tej relacji, czyli w jednej składowej spójności."
 
 ---
 
-### 9. Zakaz nadmiernego użycia wylistowań
+## E. NIEJASNOŚĆ W ZAMIANIE ŚCIEŻKI PRZEZ ODWRÓCENIE (PROPOZYCJA 4.3, PRZYPADEK 2)
 
-W tekście nie ma nadmiaru wypunktowań. Użyto kilku środowisk `itemize` w dowodach, ale to akceptowalne. W Propozycji 4.3 wewnątrz przypadków pojawiają się podpunkty opisane słownie, ale nie są one formalnie listowane, więc nie naruszają zasady.
+W liniach 569–576 tekst mówi:
 
----
+> „Jeżeli $t'$ jest ostatnim wierzchołkiem ścieżki $P'$, to zastępujemy $P'$ ścieżką $\overleftarrow{P'}$. [...] Możemy zatem założyć, że $P' = (y_0, \ldots, y_r, \ldots, y_m)$, $y_r = t'$, gdzie $r < m$."
 
-### 10. Brak dodatkowych założeń (spójność, planarność)
+Po odwróceniu ścieżki z $u$ do $w$ otrzymujemy ścieżkę z $w$ do $u$. Tekst nie mówi jawnie, że po odwróceniu zamieniają się role $u$ i $w$, i nie wyjaśnia, dlaczego dalszą część argumentu prowadzi się dla dowolnego oznaczenia końców (bo wystarczy, żeby $z = y_m$ był terminalem różnym od $t'$). To jest poprawne, ale czytelnik musi sam domyślić się tego przeskoku.
 
-Autor wyraźnie zaznacza we wstępie: „Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej własności strukturalnej.” W dalszej części nigdzie nie wprowadza ukrytych założeń. Obserwacja 2.5 dowodzi, że wszystkie terminale muszą być w jednej składowej, ale to wynika z definicji, a nie jest założeniem. To poprawne.
-
----
-
-### 11. Zakaz pojęć algorytmicznych
-
-W artykule nie ma żadnych wzmianek o algorytmach, złożoności, strukturach danych. Czysta matematyka.
+**Propozycja korekty:** Po zdaniu o odwróceniu dodaj: „Po ewentualnym odwróceniu ścieżki i zamianie ról $u$ i $w$ możemy zatem założyć, że $t'$ nie jest ostatnim wierzchołkiem ścieżki $P'$, to znaczy $r < m$. Oznaczmy $z \coloneqq y_m$; wtedy $z$ jest jednym z końców ścieżki (spośród $u$ i $w$), a w szczególności $z \in T' \setminus \{t'\}$."
 
 ---
 
-### 12. Zakaz tabelek
+## F. W DOWODZIE LEMATU 3.1 NADMIAR FORMALIZMU
 
-Brak tabelek.
+Dowód Lematu $|F/W| \le |F|$ (linie 227–242) definiuje zbiór $D$, odwzorowanie $\varphi$, dowodzi surjektywności i wyprowadza $|F/W| \le |D| \le |F|$ — w pięciu blokach wyświetlanych. To jest poprawne, ale nieproporcjonalne do trywialności faktu. W artykule w Combinatorice tego typu nierówność zapisuje się jednym zdaniem: „Ponieważ odwzorowanie $\{x,y\} \mapsto \{\pi_W(x), \pi_W(y)\}$ ograniczone do krawędzi z $F$ o różnych obrazach końców jest surjekcją na $F/W$, mamy $|F/W| \le |F|$."
 
----
-
-### 13. Język polski – nie jest błędem
-
-Język polski jest poprawny, choć zdarzają się drobne usterki stylistyczne (np. „wpol-tnącym” – powinno być „wpół-tnącym” z ogonkiem; w tytule jest „wpoł-tnących” – też bez ogonka). W kilku miejscach literówki: „wpol” zamiast „wpół”. Należy poprawić polskie znaki diakrytyczne.
-
-Przykłady:
-- W tytule: „wpoł-tnących” – powinno być „wpół-tnących”.
-- W definicji 2.4: „wpoł-tnącym” – powinno być „wpół-tnącym”.
-- W streszczeniu: „na wpół-tnącej” – to jest poprawne, ale w innych miejscach jest „wpol”. Należy ujednolicić na „wpół”.
-
-To są drobne błędy korektorskie.
+**Propozycja korekty:** Zamień dowód Lematu 3.1 na jedno–dwuzdaniowy argument inlinowy, bez definiowania osobnych symboli $D$ i $\varphi$.
 
 ---
 
-### 14. Obrazki TikZ
+## G. POWTÓRZENIE PARAGRAFU WSTĘPNEGO W SEKCJI 4
 
-Rysunki są generalnie poprawne i dobrze ilustrują idee. Kilka uwag:
-- Rysunek 1 (przykład ostrości) – dobrze oddaje ideę.
-- Rysunek 2 (ściąganie) – czytelny.
-- Rysunek 3 (ilustracja obserwacji 3.4) – pokazuje ścieżki, ale warto dodać etykiety \(F\) (czerwone krawędzie) – jest, ale nie ma opisu, która krawędź należy do \(F\) (na rysunku jest jedna czerwona, to wystarczy).
-- Rysunek 4 (projekcja spaceru) – dobrze.
-- Rysunek 5 (podniesienie ścieżki) – dobrze.
-- Rysunek 6 (przypadek 1 głównego dowodu) – dobrze.
-- Rysunek 7 (rozcięcie ścieżki) – dobrze.
+Akapit otwierający Sekcję 4 (linie 365–367) i pierwszy akapit dowodu Propozycji 4.3 (linie 525–528) mówią niemal to samo: „Krawędzie o obu końcach poza $N[t]$ przechodzą bez zmiany [...], a jeżeli ścieżka przechodzi przez $t'$, to podnoszenie [...]". To niepotrzebna redundancja.
 
-Ogólnie grafika spełnia swoją rolę.
+**Propozycja korekty:** Usuń jeden z tych dwóch akapitów. Sugeruję zostawić wersję z dowodu Propozycji (linie 525–528), bo tam pełni rolę planu dowodu, a paragraf otwierający sekcję (linie 365–367) zamienić na krótsze jedno zdanie motywacyjne.
 
 ---
 
-### 15. Odniesienia do literatury
+## H. BRAK SŁÓW KLUCZOWYCH I KLASYFIKACJI MSC
 
-Bibliografia zawiera trzy pozycje: Bondy-Murty (2008), Dahlhaus et al. (1994), Diestel (2017). To wystarczy. W tekście są do nich odwołania (np. \cite{bondy-murty,diestel} w lemacie 3.2). Wszystkie cytowania są właściwe.
+Żaden artykuł w JCT-B, JGT czy Combinatorice nie ukazuje się bez klasyfikacji AMS Mathematics Subject Classification i listy słów kluczowych. Tekst nie ma tych elementów.
 
-**Uwaga:** W lemacie 3.2 i 3.3 autor podaje referencje do podręczników, co jest zgodne z wymogiem, aby nie pisać „oczywiste”. Jednak w lemacie 3.5 (projekcja spaceru) nie ma cytowania, ale dowód jest podany wprost, więc to też akceptowalne.
-
----
-
-### 16. Nadmierne użycie bloków \[ \]
-
-To już zostało wspomniane. W całym artykule jest wiele miejsc, gdzie proste równania są wyśrodkowane. Przykłady:
-- W Definicji 2.3: \[ V'\coloneqq (V\setminus W)\cup\{w^\ast\}, \qquad E'\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}. \] To uzasadnione, bo definicja jest ważna.
-- Ale w Lemacie 3.1: \[ |F/W|\le |F|. \] – to można zapisać jako \( |F/W| \le |F| \).
-- W Lemacie 4.1 w środku dowodu: \(\len{P}=\len{P'}+1\) – to już lepiej inline.
-
-Zalecenie: przeglądnąć dokument i zastąpić większość pojedynczych krótkich wzorów formą inline. To poprawi płynność.
+**Propozycja korekty:** Dodaj po abstrakcie:
+- *Słowa kluczowe:* zbiory na wpół-tnące, odległości w grafach, ściąganie wierzchołków, drzewa.
+- *2020 Mathematics Subject Classification:* 05C12, 05C40.
 
 ---
 
-### 17. Zgodność z treścią dostarczonych plików (dowod-1.jpg, dowod-2.jpg, main-lluis.pdf)
+## I. AKAPIT O OSTROŚCI OSZACOWANIA WE WPROWADZENIU — LEKKI NADMIAR
 
-Autor najwyraźniej korzystał z wcześniejszych wersji, ale w finalnym tekście nie ma do nich odwołań. To dobrze. Treść jest samodzielna.
+Opis ostrości (linie 60–67) jest poprawny i ważny, ale zajmuje sporo miejsca. Formalna definicja grafu ścieżkowego przez $V(G)$ i $E(G)$ mogłaby być krótsza — wystarczy powiedzieć „niech $G$ będzie ścieżką o $2k-1$ wierzchołkach $v_0, v_1, \ldots, v_{2k-2}$" bez podawania jawnego zapisu zbioru krawędzi (bo jest oczywisty z kontekstu ścieżki).
 
----
-
-## Podsumowanie krytyczne – lista wymaganych poprawek
-
-Aby tekst uznać za idealny, należy wprowadzić następujące korekty:
-
-1. **Uzupełnić dane autorów** (imiona, nazwiska, afiliacje) w preambule. Bez tego artykuł jest niekompletny.
-2. **Poprawić pisownię „wpół”** zamiast „wpoł” we wszystkich miejscach (w tytule, definicjach, streszczeniu). Użyć polskich znaków diakrytycznych konsekwentnie.
-3. **Zmniejszyć liczbę wyśrodkowanych wzorów** – przenieść do trybu inline tam, gdzie to możliwe, zwłaszcza w lematach pomocniczych i w trakcie dowodów. Pozostawić \[ \] tylko dla ważniejszych formuł, np. definicji, długich wyrażeń.
-4. **W dowodzie Lematu 3.5** dodać krótkie uzasadnienie, że usunięcie powtórzeń daje ciąg, w którym kolejne wierzchołki są połączone krawędzią – to już jest, ale można nieco rozwinąć.
-5. **W dowodzie Propozycji 4.3** w przypadku 2, po odwróceniu ścieżki, warto dodać wyraźne stwierdzenie: „Bez straty ogólności zakładamy, że \(t'\) nie jest ostatnim wierzchołkiem \(P'\); w przeciwnym razie rozpatrujemy \(\overleftarrow{P'}\).” Autor to robi, ale w formie „Jeżeli \(t'\) jest ostatnim wierzchołkiem ścieżki \(P'\), to zastępujemy \(P'\) ścieżką \(\overleftarrow{P'}\).” To jest OK.
-6. **W dowodzie głównego twierdzenia, przypadek 2**, dodać zdanie, że \(P_u\) i \(P_w\) mają dodatnią długość (bo \(u\neq t\) i \(w\neq t\)), co jest oczywiste, ale można zaznaczyć.
-7. **Poprawić drobne błędy interpunkcyjne i stylistyczne** – np. w zdaniu „Ponieważ \(P\) jest ścieżką, podścieżki \(P_u\) i \(P_w\) mają wspólny jedynie wierzchołek \(t\).” – lepiej: „mają wspólny tylko wierzchołek \(t\)”.
-8. **Sprawdzić wszystkie odwołania do rysunków** – czy numery się zgadzają (np. Rysunek 5 jest przywołany w tekście? Tak, w lemacie 4.1 jest „Rysunek 5”, ale w kodzie w tym miejscu jest wstawiony rysunek o etykiecie fig:contraction – to jest OK, ale trzeba upewnić się, że wszystkie etykiety są poprawne). W obecnej wersji rysunki mają etykiety, ale w tekście są przywoływane jako \ref{...}. Wszystko działa.
-9. **Dodać słowa kluczowe** (opcjonalnie, ale w profesjonalnych artykułach często są).
-10. **Dodać klasyfikację MSC** (opcjonalnie).
+**Propozycja korekty:** Skróć: „Dla każdego $k \ge 2$ niech $G$ będzie ścieżką o wierzchołkach $v_0, v_1, \ldots, v_{2k-2}$. Jeżeli $T = \{v_0, v_2, \ldots, v_{2k-2}\}$ i $F = \bigl\{\{v_{2i}, v_{2i+1}\} : i = 0, \ldots, k-2\bigr\}$, to $|F| = |T| - 1$."
 
 ---
 
-## Ostateczna ocena
+## J. DROBNE KWESTIE STYLISTYCZNE I TYPOGRAFICZNE
 
-Artykuł jest bardzo dobry pod względem merytorycznym – dowody są poprawne, kompletne, logicznie spójne. Spełnia większość rygorystycznych wymagań. Główne mankamenty to:
-- brak danych autorów,
-- nadmiar wyśrodkowanych wzorów,
-- drobne błędy ortograficzne („wpoł” zamiast „wpół”),
-- kilka miejsc, gdzie można poprawić styl.
+1. **Definicja 2.1** definiuje spacer, ścieżkę, konkatenację i odległość — to cztery pojęcia w jednym środowisku `definition`. W profesjonalnym artykule odległość z reguły definiuje się osobno lub wyodrębnia jako Notację.
 
-Po wprowadzeniu powyższych poprawek tekst będzie spełniał kryteria artykułu z topowego czasopisma.
+2. **Brak `\qed` po Obserwacji 4.2** — dowód się kończy, ale w stylu `amsthm` znacznik końca dowodu powinien pojawić się automatycznie. Warto sprawdzić kompilację.
+
+3. **Linia 217:** `\cite[rozdz.~1]{bondy-murty,diestel}` — jak wspomniano w punkcie B, ta składnia jest niepoprawna.
+
+4. **Uwagi końcowe (sekcja 6)** są jednozdaniowe. W artykule klasy JCT-B warto dodać choćby jedno zdanie o powiązaniu z drzewami (jak w abstrakcie angielskiej wersji: „reinforces the close connection between distances in a graph and trees").
+
+5. **Pole `\author{}`** jest puste — do ewentualnej kompilacji oczywiście wymaga uzupełnienia.
+
+---
+
+## K. PODSUMOWANIE: CO DOKŁADNIE TRZEBA ZMIENIĆ
+
+Aby tekst można było uznać za gotowy do wysłania do top-tierowego czasopisma teorii grafów, potrzebne jest:
+
+1. Zamienić ~20–25 zbędnych bloków `\[ \]` na inline math.
+2. Podać precyzyjne numery twierdzeń w cytowaniach (zamiast „rozdz. 1") i rozdzielić komendy `\cite`.
+3. Przenieść Obserwację 4.2 przed Lemat 4.1 i odwołać się do niej w dowodzie.
+4. Dopisać jedno zdanie uzasadniające tranzytywność w Obserwacji 2.5.
+5. Doprecyzować zamianę ról $u$/$w$ po odwróceniu ścieżki w Propozycji 4.3, Przypadek 2.
+6. Skrócić dowód Lematu 3.1 do jednego zdania.
+7. Usunąć powtórzenie akapitu motywacyjnego w Sekcji 4 / Propozycji 4.3.
+8. Dodać MSC i słowa kluczowe.
+9. Minimalnie skrócić opis ostrości we Wprowadzeniu.
+10. Ewentualnie rozdzielić Definicję 2.1 na dwie (spacery/ścieżki; odległość) i rozbudować o jedno–dwa zdania Uwagi końcowe.
+
+Po wprowadzeniu tych zmian — bez żadnych nowych treści, tylko korekty formy i precyzji — tekst będzie nadawał się do uznania za wzorcowy.

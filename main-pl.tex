@@ -367,103 +367,49 @@ na wpół-tnącą. Użyjemy do tego dwóch mechanizmów: projekcji ścieżek do 
 ścieżki wychodzącej z~$t^\prime$ do najkrótszej ścieżki wychodzącej z~$t$.
 
 \begin{lemma}\label{lem:lifting-endpoint}
-Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech
-\[
-  G^\prime\coloneqq G/N[t],
-\]
-gdzie zbiór $N[t]$ został ściągnięty do~$t^\prime$. Niech $z\in V\setminus N[t]$ i~niech
-\[
-  P^\prime=(t^\prime,x_1,\dots,x_k)
-\]
-będzie ścieżką najkrótszą z~$t^\prime$ do~$z$ w~$G^\prime$. Wówczas istnieje wierzchołek $v\in N(t)$ taki, że
-\[
-  P=(t,v,x_1,\dots,x_k)
-\]
-jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
+Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech $G^\prime\coloneqq G/N[t]$, gdzie zbiór
+$N[t]$ został ściągnięty do~$t^\prime$. Niech $z\in V\setminus N[t]$ i~niech $P^\prime=(t^\prime,x_1,\dots,x_k)$ będzie
+ścieżką najkrótszą z~$t^\prime$ do~$z$ w~$G^\prime$. Wówczas istnieje wierzchołek $v\in N(t)$ taki, że
+$P=(t,v,x_1,\dots,x_k)$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 \end{lemma}
 
 \begin{proof}
-Ponieważ $z\neq t^\prime$, mamy $k\ge 1$. Z~równości
-\[
-  V(G^\prime)=(V\setminus N[t])\cup\{t^\prime\}
-\]
-wynika, że wierzchołek $x_1$, jako różny od~$t^\prime$, należy do~$V\setminus N[t]$.
+Ponieważ $z\neq t^\prime$, mamy $k\ge 1$. Z~równości $V(G^\prime)=(V\setminus N[t])\cup\{t^\prime\}$ wynika, że wierzchołek
+$x_1$, jako różny od~$t^\prime$, należy do~$V\setminus N[t]$.
 Krawędź $\{t^\prime,x_1\}$ należy do~$E(G^\prime)$, więc z~Definicji~\ref{def:contraction} istnieje pewien wierzchołek
-$v\in N[t]$ oraz odpowiadająca mu krawędź $\{v,x_1\}\in E$ taka, że
-\[
-  \{v,x_1\}/N[t]=\{t^\prime,x_1\}.
-\]
+$v\in N[t]$ oraz odpowiadająca mu krawędź $\{v,x_1\}\in E$ taka, że $\{v,x_1\}/N[t]=\{t^\prime,x_1\}$.
 Wybierzmy dowolny taki wierzchołek $v$. Gdyby $v=t$, to z~$\{t,x_1\}\in E$ wynikałoby $x_1\in N(t)\subseteq N[t]$, sprzecznie
 z~$x_1\in V\setminus N[t]$. Zatem $v\in N(t)$.
 
 Ponieważ $v\in N(t)\subseteq N[t]$ oraz $x_1,\dots,x_k\in V\setminus N[t]$, żaden z~wierzchołków $x_1,\dots,x_k$ nie jest równy
 ani~$t$, ani~$v$. Ponadto wierzchołki $x_1,\dots,x_k$ są parami różne, gdyż $P^\prime$ jest ścieżką. Dla każdego $i\in\{2,\dots,k\}$ krawędź $\{x_{i-1},x_i\}$ należy
 do~$E(G^\prime)$ i~ma oba końce poza $N[t]$, a~więc z~Definicji~\ref{def:contraction} wynika $\{x_{i-1},x_i\}\in E$. Zatem
-\[
-  P=(t,v,x_1,\dots,x_k)
-\]
-jest ścieżką w~$G$ i~spełnia
-\[
-  \len{P}=\len{P^\prime}+1.
-\]
-Ponieważ $P^\prime$ jest ścieżką najkrótszą, mamy ponadto
-\[
-  \dist{G^\prime}{t^\prime}{z}=\len{P^\prime}<\infty.
-\]
+$P=(t,v,x_1,\dots,x_k)$ jest ścieżką w~$G$ i~spełnia $\len{P}=\len{P^\prime}+1$. Ponieważ $P^\prime$ jest ścieżką najkrótszą,
+mamy ponadto $\dist{G^\prime}{t^\prime}{z}=\len{P^\prime}<\infty$.
 
 Niech teraz $Q=(q_0,\dots,q_\ell)$ będzie dowolną ścieżką z~$t$ do~$z$ w~$G$. Gdyby $\ell=1$, to z~$\{t,z\}\in E$
 wynikałoby $z\in N(t)\subseteq N[t]$, wbrew założeniu $z\notin N[t]$. Zatem $\ell\ge 2$ oraz
-$\{q_0,q_1\}=\{t,q_1\}\in E$, skąd $q_1\in N(t)\subseteq N[t]$, a~zatem $\pi_{N[t]}(q_1)=t^\prime$. Ciąg
-\[
-  (q_1,\dots,q_\ell)
-\]
+$\{q_0,q_1\}=\{t,q_1\}\in E$, skąd $q_1\in N(t)\subseteq N[t]$, a~zatem $\pi_{N[t]}(q_1)=t^\prime$. Ciąg $(q_1,\dots,q_\ell)$
 jest końcowym fragmentem ścieżki $Q$, a~więc spacerem w~$G$. Zastosowanie Lematu~\ref{lem:projection-walk} do tego spaceru
 daje spacer z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$, gdyż
 $\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z$.
 Z~Lematu~\ref{lem:walk-to-path} otrzymujemy więc ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$.
-Wobec tego
-\[
-  \dist{G^\prime}{t^\prime}{z}\le \ell-1=\len{Q}-1.
-\]
-Ponieważ ostatnia nierówność zachodzi dla każdej ścieżki $Q$ z~$t$ do~$z$, wynika stąd
-\[
-  \dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1.
-\]
-Z~drugiej strony $P$ jest ścieżką z~$t$ do~$z$, więc
-\[
-  \dist{G}{t}{z}\le \len{P}=\len{P^\prime}+1=\dist{G^\prime}{t^\prime}{z}+1.
-\]
-Obie nierówności dają
-\[
-  \dist{G}{t}{z}=\len{P},
-\]
-czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
+Wobec tego $\dist{G^\prime}{t^\prime}{z}\le \ell-1=\len{Q}-1$. Ponieważ ostatnia nierówność zachodzi dla każdej ścieżki $Q$
+z~$t$ do~$z$, wynika stąd $\dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1$. Z~drugiej strony $P$ jest ścieżką z~$t$ do~$z$,
+więc $\dist{G}{t}{z}\le \len{P}=\len{P^\prime}+1=\dist{G^\prime}{t^\prime}{z}+1$. Obie nierówności dają
+$\dist{G}{t}{z}=\len{P}$, czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
 \end{proof}
 
 \begin{observation}\label{obs:outside-edges}
-Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech
-\[
-  G^\prime\coloneqq G/N[t].
-\]
-Jeżeli $x,y\in V\setminus N[t]$ są różne, to
-\[
-  \{x,y\}\in E(G^\prime)
-  \quad\Longleftrightarrow\quad
-  \{x,y\}\in E(G),
-\]
-a~w tym przypadku
-\[
-  \{x,y\}/N[t]=\{x,y\}.
-\]
+Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech $G^\prime\coloneqq G/N[t]$. Jeżeli
+$x,y\in V\setminus N[t]$ są różne, to $\{x,y\}\in E(G^\prime)$ wtedy i~tylko wtedy, gdy $\{x,y\}\in E(G)$, a~w tym przypadku
+$\{x,y\}/N[t]=\{x,y\}$.
 \end{observation}
 
 \begin{proof}
 Ponieważ $x,y\notin N[t]$, mamy $\pi_{N[t]}(x)=x$ oraz $\pi_{N[t]}(y)=y$. Jeżeli $\{x,y\}\in E(G)$, to z~Definicji~\ref{def:contraction}
 wynika, że $\{x,y\}\in E(G^\prime)$ oraz $\{x,y\}/N[t]=\{x,y\}$. Odwrotnie, jeżeli $\{x,y\}\in E(G^\prime)$, to z~tej samej
-definicji istnieje krawędź $\{u,v\}\in E(G)$ taka, że
-\[
-  \{\pi_{N[t]}(u),\pi_{N[t]}(v)\}=\{x,y\}.
-\]
+definicji istnieje krawędź $\{u,v\}\in E(G)$ taka, że $\{\pi_{N[t]}(u),\pi_{N[t]}(v)\}=\{x,y\}$.
 Ponieważ jedynym wierzchołkiem grafu $G^\prime$ leżącym poza zbiorem $V\setminus N[t]$ jest $t^\prime$, z~równości obrazów
 wynika, że $u,v\notin N[t]$. Stąd $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(v)=v$, a~zatem $\{u,v\}=\{x,y\}\in E(G)$.
 \end{proof}
