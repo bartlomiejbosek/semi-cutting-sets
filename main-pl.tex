@@ -7,6 +7,7 @@
 \usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
 \usetikzlibrary{arrows.meta,calc,fit,positioning,decorations.pathreplacing}
 \geometry{margin=2.5cm}
 
@@ -22,6 +23,7 @@
 
 \newcommand{\len}[1]{\ell(#1)}
 \newcommand{\dist}[3]{d_{#1}(#2,#3)}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{DOI: #1}}
 
 \title{\textbf{O rozmiarze zbiorów na wpół-tnących w grafach}}
 \author{}
@@ -47,20 +49,36 @@ względem pary $(|T|,|V|)$.
 
 \section{Wprowadzenie}
 
-W całym tekście rozważamy wyłącznie skończone grafy nieskierowane proste, a~więc grafy bez pętli i~bez krawędzi
-równoległych. Dla zbioru terminali $T\subseteq V(G)$ i~zbioru krawędzi $F\subseteq E(G)$ pytamy, jak mały może być zbiór
-na wpół-tnący, to znaczy taki, którego usunięcie ściśle zwiększa odległość między każdą parą różnych terminali. Celem pracy
-jest pełny dowód nierówności
+Badanie wpływu usuwania krawędzi na właściwości metryczne i~topologiczne grafów stanowi klasyczny obszar analizy
+strukturalnej sieci. Historycznie zagadnienie to rozwijało się w~dwóch odrębnych nurtach. Z~jednej strony, w~ramach analizy
+tzw. witalności krawędzi (ang. \emph{edge vitality}), poszukuje się krawędzi, których usunięcie powoduje największy wzrost
+odległości między zadanymi wierzchołkami; koncepcja ta, sformalizowana między innymi przez Corleya i~Sha~\cite{corley1982},
+zakłada modyfikację metryki bez wymogu całkowitego zniszczenia ścieżek. Z~drugiej strony, w~przypadku analizy grafów
+z~wieloma wyróżnionymi wierzchołkami, fundamentalnym zagadnieniem jest problem wielodrogowego przekroju
+(\emph{Multiway Cut}). Jak pokazali Dahlhaus, Johnson, Papadimitriou, Seymour i~Yannakakis~\cite{dahlhaus1994}, separacja
+zadanego zbioru terminali jest problemem głęboko uwarunkowanym strukturalnie i~obliczeniowo.
+
+W~niniejszej pracy rozważamy wyłącznie skończone grafy nieskierowane proste, a~więc grafy bez pętli i~bez krawędzi
+równoległych, i~wprowadzamy pojęcie, które naturalnie łączy oba wspomniane nurty: zbiór na wpół-tnący. Dla grafu
+$G=(V,E)$, zbioru terminali $T\subseteq V$ oraz zbioru krawędzi $F\subseteq E$ wymagamy, aby po usunięciu $F$ odległość
+między każdą parą różnych terminali ściśle wzrosła, to znaczy aby zachodziła nierówność
+\[
+  \dist{G}{u}{w}<\dist{G\setminus F}{u}{w}
+  \qquad\text{dla wszystkich różnych } u,w\in T.
+\]
+W~odróżnieniu od klasycznych przekrojów~\cite{dahlhaus1994} nie narzucamy warunku, by odległość w~grafie $G\setminus F$
+stała się nieskończona; terminale mogą nadal należeć do tej samej składowej spójności. Wymagamy jedynie wydłużenia
+najkrótszych ścieżek, co koncepcyjnie nawiązuje do osłabionych warunków rozważanych przez Corleya i~Sha~\cite{corley1982}.
+
+Głównym rezultatem pracy jest wykazanie, że nawet przy tak osłabionym warunku separacji pozostaje w~mocy ta sama bariera
+rozmiaru: każdy zbiór na wpół-tnący musi spełniać nierówność
 \[
   |F|\ge |T|-1,
 \]
-prawdziwej bez jakichkolwiek dodatkowych założeń o~strukturze grafu.
-
-Dowód ma trzy kroki. Najpierw zapisujemy równoważną postać definicji opartą na przecinaniu wszystkich ścieżek najkrótszych
-między terminalami. Następnie wykazujemy, że jeżeli terminal $t$ nie jest incydentny z~żadną krawędzią z~$F$, to po
-ściągnięciu zbioru $N[t]$ do nowego wierzchołka własność na wpół-tnąca przechodzi na obraz zbioru $F$. Ostatni krok stanowi
-indukcja leksykograficzna względem pary $(|T|,|V(G)|)$: w~pierwszym przypadku maleje liczba wierzchołków, a~w drugim liczba
-terminali.
+bez jakichkolwiek dodatkowych założeń o~strukturze grafu. Przedstawiony dowód jest samowystarczalny i~opiera się na
+charakterystyce przez przecinanie najkrótszych ścieżek, na trwałości własności na wpół-tnącej przy operacji ściągania
+domkniętego sąsiedztwa terminala nieincydentnego z~$F$ oraz na indukcji leksykograficznej względem pary $(|T|,|V(G)|)$.
+Stosowana w~artykule terminologia grafowa jest zgodna ze standardową terminologią monografii Diestela~\cite{diestel}.
 
 Oszacowanie jest ostre. Dla każdego $k\ge 2$ ścieżka
 $v_0v_1\dots v_{2k-2}$ wraz ze zbiorem terminali
@@ -959,5 +977,26 @@ Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy
 \]
 Tym samym wykazano krok indukcyjny, a~więc i~dowód twierdzenia.
 \end{proof}
+
+\begin{thebibliography}{9}
+
+\bibitem{corley1982}
+H.~W. Corley, D.~Y. Sha,
+\emph{Most vital links and nodes in weighted networks},
+Operations Research Letters \textbf{1}(4) (1982), 157--160.
+\doi{10.1016/0167-6377(82)90020-7}
+
+\bibitem{dahlhaus1994}
+E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
+\emph{The complexity of multiterminal cuts},
+SIAM Journal on Computing \textbf{23}(4) (1994), 864--894.
+\doi{10.1137/S0097539792225297}
+
+\bibitem{diestel}
+R.~Diestel,
+\emph{Graph Theory}, 5th ed.,
+Graduate Texts in Mathematics, vol.~173, Springer, Heidelberg, 2017.
+
+\end{thebibliography}
 
 \end{document}
