@@ -172,7 +172,9 @@ Let $H$ be a finite simple graph. If there exists a walk from $u$ to $w$ in $H$,
 \end{lemma}
 
 \begin{proof}
-Let $P=(v_0,\dots,v_k)$ be a walk from $u$ to $w$ in $H$. If all the vertices $v_0,\dots,v_k$ are pairwise distinct, then $P$ is a path and there is nothing to prove. Assume then that there are indices $i<j$ such that $v_i=v_j$. Then the sequence $P'\coloneqq (v_0,\dots,v_i,v_{j+1},\dots,v_k)$ is again a walk from $u$ to $w$: the only new pair of consecutive vertices is the pair $v_i,v_{j+1}$, but $v_i=v_j$, so from the fact that $P$ is a walk, it follows that $\{v_i,v_{j+1}\}=\{v_j,v_{j+1}\}\in E(H)$. Moreover, $\len{P'}=k-(j-i)\le k=\len{P}$, and the number of terms in the sequence $P'$ is less than the number of terms in the sequence $P$. Repeating the above operation whenever two identical vertices appear in the obtained walk, after a finite number of steps we obtain a walk from $u$ to $w$ without vertex repetitions. This is a path, and at each step the length does not increase. The final path therefore has a length no greater than the length of the initial walk $P$.
+Let $W=(w_0,\dots,w_m)$ be a walk from $u$ to $w$ in $H$. Among all walks from $u$ to $w$ of length at most $\len{W}$, choose one, say $P=(v_0,\dots,v_k)$, with minimum length. We claim that the vertices $v_0,\dots,v_k$ are pairwise distinct. Suppose otherwise that $v_i=v_j$ for some indices $i<j$.
+
+If $j<k$, then the sequence $(v_0,\dots,v_i,v_{j+1},\dots,v_k)$ is a walk from $u$ to $w$: the only new pair of consecutive vertices is $v_i,v_{j+1}$, and $\{v_i,v_{j+1}\}=\{v_j,v_{j+1}\}\in E(H)$ because $P$ is a walk. If $j=k$, then $(v_0,\dots,v_i)$ is a walk from $u$ to $w$, because $v_i=v_k=w$. In either case we obtain a walk from $u$ to $w$ shorter than $P$, contradicting the choice of $P$. Hence $P$ is a path, and by construction $\len{P}\le \len{W}$.
 \end{proof}
 
 \begin{lemma}\label{lem:subpath}
@@ -180,7 +182,13 @@ Let $H$ be a finite simple graph and let $P=(v_0,\dots,v_k)$ be a path from $u$ 
 \end{lemma}
 
 \begin{proof}
-If there were a path from $v_i$ to $v_j$ shorter than $P[v_i,v_j]$, replacing the fragment $P[v_i,v_j]$ with it would yield a path from $u$ to $w$ shorter than $P$, contrary to the equality $\len{P}=\dist{H}{u}{w}$.
+Suppose that $\len{P[v_i,v_j]}>\dist{H}{v_i}{v_j}$. Then there exists a path $R$ from $v_i$ to $v_j$ in $H$ such that $\len{R}<\len{P[v_i,v_j]}$. The concatenation $P[v_0,v_i]\cdot R\cdot P[v_j,v_k]$ is therefore a walk from $u$ to $w$ in $H$ of length
+\[
+  \len{P[v_0,v_i]}+\len{R}+\len{P[v_j,v_k]}
+  < \len{P[v_0,v_i]}+\len{P[v_i,v_j]}+\len{P[v_j,v_k]}
+  = \len{P}.
+\]
+By Lemma~\ref{lem:walk-to-path}, this walk yields a path from $u$ to $w$ in $H$ shorter than $P$, contrary to $\len{P}=\dist{H}{u}{w}$. Hence $\len{P[v_i,v_j]}=\dist{H}{v_i}{v_j}$.
 \end{proof}
 
 \begin{observation}\label{obs:shortest-paths}
@@ -504,7 +512,7 @@ This completes the inductive step and hence the proof of the theorem.
 
 Theorem~\ref{thm:main} is sharp, which is shown by the family of path examples described in the Introduction and illustrated in Figure~\ref{fig:semi-cut-example}. A natural further problem remains to describe all triples $(G,T,F)$ for which the equality $|F|=|T|-1$ holds in Theorem~\ref{thm:main}. Two further natural directions are weighted and vertex versions of semi-cutting sets, as well as pair-restricted variants in which the distance increase is required only for a prescribed family of terminal pairs.
 
-From the point of view of the literature, this problem can be treated as a multiterminal counterpart of shortest-path vulnerability issues. In the paper by Dahlhaus and co-authors~\cite{dahlhaus1994}, the goal is the complete separation of all terminals, and thus the transition of the corresponding distances to the value $\infty$. In this paper, we only require a strict increase of every terminal--terminal distance; this increase may, but does not have to, lead to disconnection. On the other hand, in Corley and Sha~\cite{corley-sha}, Malik, Mittal, and Gupta~\cite{malik-mittal-gupta}, and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}, a single pair of endpoints is distinguished, whereas here all pairs from the set $T$ are treated simultaneously. A further nearby direction is shortest-path network interdiction, where one studies budgeted perturbations that increase the distance between prescribed vertices; see Israeli and Wood~\cite{israeli-wood}. That direction is again fundamentally single-pair, while the present note remains purely structural and multiterminal. Moreover, those papers consider weighted, and sometimes also directed networks, while this article concerns only finite simple undirected graphs. The obtained inequality $|F|\ge |T|-1$ therefore has the interpretation of a purely structural lower bound for an intermediate class of phenomena, lying between the complete separation of terminals and the shortest-path vulnerability for one distinguished pair.
+From the point of view of the literature, semi-cutting sets lie between edge-separation problems and geodesic covering problems. Multiterminal cuts force all terminal--terminal distances to become infinite~\cite{dahlhaus1994}, whereas the most-vital-edge line of work treats a single distinguished pair and studies deletions that affect its shortest connections~\cite{corley-sha,malik-mittal-gupta,nardelli-proietti-widmayer}. A different nearby direction keeps the graph fixed and asks for sets that generate or meet shortest paths: this is the viewpoint of geodetic sets~\cite{harary-loukakis-tsouros} and of shortest-path covering parameters such as the maximal shortest paths cover number~\cite{peterin-semanisin}. Semi-cutting sets may therefore be viewed as an edge-deletion analogue of geodesic covering with a simultaneous multiterminal requirement.
 
 \begin{thebibliography}{9}
 
@@ -533,15 +541,20 @@ E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
 \emph{The complexity of multiterminal cuts},
 SIAM Journal on Computing 23(4) (1994), 864--894.
 
+\bibitem{harary-loukakis-tsouros}
+F.~Harary, E.~Loukakis, C.~Tsouros,
+\emph{The geodetic number of a graph},
+Mathematical and Computer Modelling 17(11) (1993), 89--95.
+
 \bibitem{nardelli-proietti-widmayer}
 E.~Nardelli, G.~Proietti, P.~Widmayer,
 \emph{A faster computation of the most vital edge of a shortest path},
 Information Processing Letters 79(2) (2001), 81--85.
 
-\bibitem{israeli-wood}
-E.~Israeli, R.~K. Wood,
-\emph{Shortest-path network interdiction},
-Networks 40(2) (2002), 97--111.
+\bibitem{peterin-semanisin}
+I.~Peterin, G.~Semani\v{s}in,
+\emph{On the maximal shortest paths cover number},
+Mathematics 9(14) (2021), Article 1592.
 
 \end{thebibliography}
 

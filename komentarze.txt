@@ -1,118 +1,18 @@
-Nie. To **nie jest jeszcze “najlepiej spisany artykuł”** w sensie topowego tekstu matematycznego. To jest **solidny, już dość dojrzały draft**, który ma wyraźną architekturę dowodu i — co ważne — po tej lekturze **nie widzę oczywistej, śmiertelnej luki logicznej** w rdzeniu argumentu: równoważność przez najkrótsze ścieżki jest sformułowana i udowodniona, własność po kontrakcji jest rozpisana krok po kroku, a dowód głównego twierdzenia rzeczywiście idzie przez indukcję leksykograficzną z dwoma przypadkami. Ale od tekstu na poziomie *Journal of Graph Theory / Combinatorica* wciąż dzieli go trochę pracy redakcyjnej i kompozycyjnej. 
+Dokładnie tak! To jest absolutnie kluczowy punkt, na którym wykłada się wiele nieformalnych dowodów z teorii grafów.
 
-Moja surowa ocena ogólna:
+Jeśli Twoje główne twierdzenie zakłada, że $G$ jest **grafem prostym** (simple graph), to aby krok indukcyjny był w ogóle poprawny logicznie, graf po operacji ściągnięcia (tzw. mniejsza instancja problemu) **musi bezwzględnie należeć do tej samej klasy obiektów** – czyli również musi być grafem prostym.
 
-* **formalizm matematyczny:** 8/10,
-* **kompletność dowodów:** 8/10,
-* **przejrzystość prezentacji:** 7/10,
-* **eliminacja zbędnych rzeczy:** 6.5/10,
-* **gotowość do stylu top-journal:** 6.5/10.
-  To już nie jest chaotyczny raport, ale jeszcze nie jest tekst “idealny”. 
+W standardowej definicji (np. u Diestela) ściągnięcie krawędzi lub zbioru wierzchołków naturalnie generuje multigraf (powstają pętle wewnątrz ściąganego zbioru oraz krawędzie wielokrotne, jeśli dwa wierzchołki ze ściąganego zbioru miały wspólnego sąsiada na zewnątrz).
 
-## 1. Co jest naprawdę dobre
+Dlatego w Twoim artykule musisz zdefiniować tzw. **prostą kontrakcję (simple contraction)**.
 
-Tekst spełnia najważniejsze warunki merytoryczne. Już w abstrakcie i wstępie jest jasno napisane, że chodzi o **skończone grafy proste, nieskierowane**, bez dokładania spójności, planarności czy innych dodatkowych założeń; te ograniczenia są potem spójne z treścią twierdzenia głównego. To jest duży plus, bo dokładnie odpowiada Twoim wymaganiom 11 i 18.  
+Oto idealne, w pełni sformalizowane zdanie (po angielsku), które powinieneś wpleść do definicji operacji ściągania, aby uciąć wszelkie wątpliwości recenzentów:
 
-Struktura logiczna też jest poprawnie zaprojektowana: najpierw definicje i operacje na grafie, potem równoważność definicji przez najkrótsze ścieżki, potem techniczne lematy o rzutowaniu/liftingu ścieżek przy kontrakcji, potem propozycja o zachowaniu własności, a na końcu indukcja leksykograficzna w twierdzeniu głównym. To jest architektura sensowna i profesjonalna.
+> "Let $G/N[t]$ denote the graph obtained from $G$ by contracting the closed neighborhood $N[t]$ into a single new vertex $t'$. To ensure that the resulting graph remains within the class of simple graphs (and thus satisfies the inductive hypothesis), we perform a simple contraction: we explicitly delete any loops formed at $t'$ and replace any multiple edges incident to $t'$ with single edges. Note that this simplification process preserves the property that for any $x, y \notin N[t]$, the distance satisfies $d_{G/N[t]}(x,y) \le d_G(x,y)$, since any shortest path in $G$ projects to a valid walk in the contracted multigraph, and removing loops or parallel edges does not increase the length of the shortest path in the underlying simple graph."
 
-Najważniejsze: w tych miejscach, gdzie najłatwiej byłoby “przeskoczyć” argument, autor tego **nie robi**. Observation 3.4 nie jest pozostawione jako slogan, tylko ma pełny dowód w obie strony. Proposition 4.3 nie jest potraktowana hasłowo, tylko rozbita na kroki: terminale poza $N[t]$, skończoność dystansów w grafie po kontrakcji, i przecięcie wszystkich najkrótszych ścieżek z obrazem $F'$. Theorem 5.1 faktycznie ma dwa przypadki i oba są domknięte. 
+**Dlaczego to sformułowanie jest "kuloodporne"?**
 
-## 2. Najpoważniejsze zastrzeżenia
+1. **Zabezpiecza indukcję:** Wyraźnie stwierdza, że celowo redukujemy graf do prostego, aby móc powołać się na założenie indukcyjne.
+2. **Uzasadnia metrykę:** Tłumaczy, dlaczego usunięcie tych krawędzi wielokrotnych i pętli nie psuje nierówności dystansów, która jest sercem Twojego dowodu (bo najkrótsza ścieżka i tak nie używa pętli ani zduplikowanych krawędzi).
 
-### (a) Tekst jest **za bardzo dydaktyczny**, a za mało “journal-tight”
-
-To nie jest błąd logiczny, ale jest to realna wada stylu naukowego. Artykuł miejscami brzmi bardziej jak **bardzo staranna notatka wykładowa** niż jak zwięzła, ostro przycięta publikacja. Widać to zwłaszcza w częściach elementarnych: Observation 2.5, Lemma 3.2, Lemma 3.3, a nawet uzasadnienie dobrze ufundowania porządku leksykograficznego w dowodzie Theorem 5.1 są rozpisane bardzo szeroko. Matematycznie jest to poprawne, ale z punktu widzenia topowego stylu — zbyt rozwlekłe.  
-
-**Korekta:** nie zmieniać treści dowodu, tylko **skondensować** rutynowe fragmenty. Najbardziej elementarne fakty powinny zostać albo skrócone o 30–40%, albo scalone. W szczególności Lemma 3.2 + Lemma 3.3 + część komentarzy wokół nich da się podać znacznie ciaśniej bez utraty rygoru.
-
-### (b) Zależności między lematami są poprawne, ale **za długie i zbyt kosztowne poznawczo**
-
-Proposition 4.3 jest poprawna w konstrukcji, ale czytelnik musi przejść przez bardzo długi łańcuch zależności: Observation 3.4, Lemma 3.5, Lemma 3.2, Lemma 4.1, Observation 4.2, a potem znowu Observation 3.4. To wszystko działa, ale jest ciężkie w audycie. W dobrym tekście journalowym taki proof pipeline powinien być bardziej “oznakowany”.
-
-**Korekta:** na początku Proposition 4.3 dodać **jedno krótkie zdanie mapujące dowód**, np. że skończoność dystansów w $G'$ pochodzi z projekcji ścieżek, a przecięcie najkrótszych ścieżek z $F'$ pochodzi z rozbicia na przypadki $t'\notin V(P')$ i $t'\in V(P')$ oraz z liftingu końcowego fragmentu ścieżki. Bez nowej matematyki — tylko lepsza nawigacja.
-
-### (c) Dowód głównego twierdzenia jest dobry, ale nadal ma miejscami **smak notatki roboczej**
-
-Sam mechanizm indukcji jest sensowny: przypadek kontrakcyjny zachowuje liczbę terminali i zmniejsza liczbę wierzchołków, a przypadek $T\subseteq V[F]$ usuwa jeden terminal i jedną krawędź. To jest dokładnie ten typ struktury, który powinien tu być. Problemem nie jest logika, tylko redakcja: część Case 2 jest pisana poprawnie, lecz wciąż trochę “mikrokrokowo”. Czytelnik musi długo śledzić rozcięcie $P=P_u\cdot P_w$, rozłączność zbiorów krawędzi i wybór nowej krawędzi $f\neq e$ z drugiej części ścieżki.
-
-**Korekta:** w Case 2 trzeba wyraźniej wyeksponować **główny niezmiennik logiczny**:
-„jeżeli wybrana krawędź $e$ leży na jednej z dwóch najkrótszych podścieżek do/od $t$, to druga podścieżka — jako najkrótsza ścieżka między terminalami — nadal musi zawierać jakąś krawędź z $F$, a więc daje krawędź z $F\setminus{e}$.”
-To już w tekście jest, ale nie jest wystarczająco wybijane jako oś argumentu. 
-
-### (d) Wstęp i zakończenie **powtarzają** podobne treści
-
-Wstęp już tłumaczy relację do multiterminal cut oraz do most vital edge / shortest-path vulnerability. Zakończenie wraca do prawie tego samego kontrastu. To nie jest błąd, ale przy 10 stronach jest to marnowanie miejsca.  
-
-**Korekta:** albo skrócić wstępowy przegląd literatury, albo przenieść ciężar porównania do sekcji końcowej i tam zrobić go naprawdę treściwie.
-
-### (e) Sekcja “related problems” jest **za słaba względem Twojego wymagania 21**
-
-Masz tam jeden zwięzły akapit, który wspomina Dahlhausa, Corley–Sha, Nardelli–Proietti–Widmayer i Israeli–Wood. To jest sensowne, ale jeszcze zbyt cienkie, jeśli celem jest naprawdę dobre osadzenie problemu w krajobrazie. Sama literatura, którą załączyłeś, sugeruje znacznie bogatszy kontekst:
-
-* Corley–Sha badają **most vital links/nodes** w sieciach ważonych, czyli wersję single-pair z maksymalizacją wzrostu dystansu,
-* Dahlhaus et al. badają **multiterminal cut**, czyli pełne rozdzielenie terminali,
-* Nardelli et al. badają **most vital edge of a shortest path**, znów w wersji single-pair i na poziomie jednej najkrótszej ścieżki.   
-
-Obecny tekst tylko sygnalizuje te związki, ale nie wydobywa ich intelektualnie. Nie mówi np. wyraźnie, że Twój wynik jest **czysto strukturalnym dolnym ograniczeniem** dla zjawiska pośredniego między “pairwise strict distance increase” a pełnym odcięciem wszystkich terminali, ani nie wyjaśnia, dlaczego taki bound jest naturalny właśnie z punktu widzenia tych trzech nurtów.
-
-**Korekta:** rozbudować sekcję końcową o 2–3 zwarte akapity, każdy z jedną ostrą myślą porównawczą:
-
-1. semi-cutting vs multiterminal cut,
-2. semi-cutting vs most vital edge / most vital links,
-3. semi-cutting vs interdiction / budgeted perturbation.
-   Bez rozwlekania, ale konkretnie.
-
-### (f) Użycie display math jest trochę zbyt częste
-
-Nie jest to katastrofa, ale przy Twoich własnych kryteriach ten tekst da się jeszcze “odchudzić”. W dowodzie Theorem 5.1 i w sekcjach technicznych pojawia się sporo krótkich bloków wzorów, które spokojnie mogłyby zostać inline. To trochę wzmacnia wrażenie “notatki technicznej”.
-
-**Korekta:** zostawić display tylko tam, gdzie naprawdę poprawia czytelność ciągu logicznego: definicja kontrakcji, definicja porządku leksykograficznego, kluczowe przypisania w Case 1. Resztę wciągnąć do tekstu.
-
-### (g) TikZ-y są sensowne, ale jest ich **lekko za dużo jak na krótki note**
-
-Masz figurę ostrości boundu, figurę definicji kontrakcji, figurę do Observation 3.4, figurę projekcji/liftingu, figurę Case 1, figurę Case 2. To jest dydaktycznie dobre, ale w krótkim artykule może wyglądać trochę ciężko. Część z nich jest bardzo pomocna, lecz część można by połączyć lub ograniczyć.
-
-**Korekta:** zostawić bezwzględnie te figury, które niosą ideę dowodu, a nie tylko definicję. Na poziomie topowego note’u rozważyłbym redukcję o 1–2 rysunki albo scalenie figur technicznych.
-
-## 3. Czy są faktyczne luki logiczne?
-
-Po tej lekturze moja odpowiedź brzmi: **nie widzę w tej chwili oczywistej luki śmiertelnej** w rdzeniu matematycznym.
-
-* Observation 3.4 jest kompletna. 
-* Proposition 4.3 jest rozpisana w sposób audytowalny i domyka oba problemy: skończoność dystansów po kontrakcji oraz przecięcie wszystkich najkrótszych ścieżek z $F'$.
-* Theorem 5.1 ma poprawny schemat indukcji leksykograficznej i oba przypadki są doprowadzone do końca.
-
-To nie znaczy, że tekst jest idealny. To znaczy tylko tyle, że **największy problem nie leży już w samej matematyce, tylko w polerowaniu formy, hierarchii argumentów i ekonomii prezentacji**.
-
-## 4. Ocena względem Twoich 21 wymagań
-
-Spełnione albo prawie spełnione:
-
-* ścisłe wprowadzenie notacji i operacji na grafie — tak, wyraźnie.
-* pomocnicze lematy z dowodami — tak.
-* główne twierdzenie z indukcją krok po kroku — tak.
-* brak dodatkowych założeń strukturalnych — tak. 
-* brak algorytmiki / struktur danych / tabel — tak. 
-* angielski — tak. 
-* proste grafy bez pętli i wielokrotnych krawędzi — tak, jasno powiedziane.
-* brak odwołań do lokalnych plików i starszych wersji — tak, bibliografia zawiera tylko publikacje.
-
-Częściowo spełnione:
-
-* przejrzystość prezentacji — dobra, ale nie wybitna; za dużo drobiazgów technicznych.
-* niepisanie o zbędnych rzeczach — częściowo; zbędne nie są te rzeczy matematycznie, ale część jest zbyt rozwinięta.
-* ograniczenie display math — częściowo.
-* related problems — tylko częściowo; za mało treści wobec Twojego ambitnego oczekiwania.
-
-## 5. Co trzeba poprawić, żebym następnym razem uznał tekst za idealny
-
-1. **Skrócić część elementarną** bez utraty rygoru.
-2. **Dodać mini-roadmapy** na początku Proposition 4.3 i Case 2 w Theorem 5.1.
-3. **Usunąć powtórzenia** między wstępem a zakończeniem.
-4. **Uczynić sekcję related problems naprawdę merytoryczną**, a nie tylko sygnalizacyjną.
-5. **Zredukować liczbę krótkich display formulas**.
-6. **Lekko odchudzić warstwę ilustracyjną**, zostawiając tylko rysunki naprawdę nośne dla idei dowodu.
-7. **Zachować dokładnie obecną dyscyplinę formalną** w miejscach krytycznych — tu bym niczego nie upraszczał kosztem ścisłości.
-
-Najkrótszy uczciwy werdykt jest taki: **matematycznie ten tekst wygląda już poważnie i zasadniczo poprawnie, ale redakcyjnie wciąż jest bardziej “very polished proof note” niż “ideal top-journal article.”**
-
+Zastosowanie tego rygoru zamyka jedną z największych luk w pierwotnej wersji tekstu.
