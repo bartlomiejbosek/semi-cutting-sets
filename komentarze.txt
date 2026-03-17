@@ -1,44 +1,168 @@
-Werdykt: **nie**. To nie jest jeszcze „najlepiej spisany artykuł” ani tekst na poziomie *JCTB / JGT / Combinatorica*. To jest **dobry, uporządkowany i w dużej mierze formalnie poprawny draft**, ale jeszcze nie tekst „idealny”. Ma poprawnie ustawiony model: grafy są skończone, proste i nieskierowane; definicja semi-cutting set jest jasna; jest pełna charakterystyka przez trafianie wszystkich najkrótszych ścieżek, formalna propozycja o zachowaniu własności po ściągnięciu (N[t]), oraz dowód głównego twierdzenia przez indukcję leksykograficzną.
+Oto moja bardzo ostra i rygorystyczna ocena załączonego pliku `main-en.txt`. Jako recenzent mający przed oczami standardy takich czasopism jak *Journal of Combinatorial Theory, Series B* czy *Journal of Graph Theory*, muszę stwierdzić, że artykuł ma potencjał i poprawny zarys dowodu głównego twierdzenia, ale **w obecnej formie jest niedopuszczalny**. Przypomina raczej chaotyczne notatki z wykładu lub raport studencki, a nie profesjonalną publikację naukową.
 
-Najważniejsze uczciwe stwierdzenie jest takie: **nie widzę tutaj śmiertelnej luki logicznej w samym rdzeniu matematycznym**. Obserwacja 2.6 jest domknięta, Proposition 3.5 ma rozpisane oba przypadki dla najkrótszej ścieżki w grafie po ściągnięciu, a Theorem 4.1 rzeczywiście domyka indukcję przez dwa ruchy: albo zmniejsza (|V|) przez kontrakcję, albo zmniejsza (|T|) przez usunięcie terminala i jednej krawędzi z (F).
+Znalazłem w tekście luki logiczne, złamanie zasad zwięzłości, brak precyzji w skrajnych przypadkach oraz rażący brak odpowiednich cytowań.
 
-Natomiast jako surowy recenzent powiedziałbym, że tekst ma trzy poważne słabości.
+Poniżej znajduje się szczegółowa lista błędów oraz rygorystyczne propozycje korekty. **Nie prezentuję nowej wersji całego pliku, a jedynie instrukcje, jak musisz go poprawić, aby tekst został uznany za idealny.**
 
-Po pierwsze, **pozycjonowanie pracy w literaturze jest za słabe**. Obecna sekcja „Related Problems” jest poprawna, ale za krótka i za płaska. Wspomina Corley–Sha, Malik–Mittal–Gupta, Nardelli–Proietti–Widmayer, Dahlhaus et al., Harary–Loukakis–Tsouros i Peterin–Semanišin, ale robi to prawie wyłącznie na poziomie haseł. Tymczasem te prace definiują dość różne obiekty: Corley–Sha badają „most vital links/nodes” w ważonych sieciach dla jednej pary wierzchołków, Malik et al. oraz Nardelli et al. rozwijają warianty „most vital arc/edge”, Dahlhaus et al. badają ważony multiterminal cut, Harary et al. geodetic number, a Peterin–Semanišin maksymalny shortest-path cover. Obecny tekst ich **nie porównuje precyzyjnie**, tylko sygnalizuje analogie. To jest za mało jak na ambitny artykuł teoretyczny.
+---
 
-Po drugie, **tekst nie jest jeszcze optymalnie skondensowany redakcyjnie**. Z punktu widzenia rygoru to działa na plus, ale z punktu widzenia stylu top-journal część materiału jest za tutorialowa. Lemma 2.7, Lemma 2.8, Lemma 3.2 i część ilustracji robią dużo pracy elementarnej. To nie jest błąd matematyczny, ale recenzent może uznać, że artykuł ma za mało „gęstości naukowej” względem objętości. Szczególnie figury objaśniające samą projekcję ścieżki i samą definicję kontrakcji są pedagogiczne, lecz nie wszystkie są równie niezbędne.
+### KRYTYKA I LISTA BŁĘDÓW
 
-Po trzecie, **tytuł i framing lekko nadpisują zawartość**. Tytuł mówi o „structural properties” w liczbie mnogiej, a realnie dostajesz jeden główny lower bound, jedną charakterystykę geodezyjną i jedną własność zachowania przy kontrakcji. To nie jest katastrofa, ale brzmi szerzej niż rzeczywista zawartość. 
+**1. Skandaliczny brak zwięzłości i "wymyślanie koła na nowo" (Złamanie zasad 4, 7 i 15)**
+Sekcja 2 jest pełna trywialnych dowodów. *Lemma 2.6 (Path from walk)* oraz *Lemma 2.7 (Shortest subpaths)* to absolutne podstawy teorii grafów uczone na pierwszym semestrze studiów. Dowodzenie ich na pół strony to marnowanie cennego miejsca w publikacji i obraza dla inteligencji czytelnika. Zamiast tego, w profesjonalnym artykule podaje się precyzyjne stwierdzenie i cytuje standardowy podręcznik (np. R. Diestel, *Graph Theory*). Podobnie tyczy się to *Lemma 3.2 (Projection walk)* – wywodzenie tego od zera bez cytowania elementarnych własności minorów i ściągania grafów prostych jest amatorką.
 
-Co tekst robi dobrze, i to trzeba uczciwie zaliczyć:
+**2. Luka logiczna w dowodzie głównym (Złamanie zasady 2)**
+W dowodzie *Theorem 4.1* dla `Case 2 ($T \subseteq V[F]$)` piszesz: *"Take distinct $u,w \in T^-$, and let P be a shortest u-w path..."*.
+Zaraz, chwileczkę! Przecież dowód indukcyjny toczy się dla $k \ge 2$. Jeśli $k = 2$, to zbiór $T$ ma dwa elementy, więc po usunięciu z niego wierzchołka $t$, zbiór $T^-$ ma **tylko jeden element**. Jak chcesz wziąć "dwa różne wierzchołki $u,w$" ze zbioru jednoelementowego?! Autor całkowicie pominął ten przypadek brzegowy. Należało jawnie napisać, że dla $|T| = 2$, zbiór $T^-$ jest jednoelementowy, a zatem warunek definicji na wpół-cięcia dla $T^-$ jest spełniony *w sposób pusty (vacuously true)* i od razu zaaplikować hipotezę indukcyjną. Takie niedoróbki w dowodach indukcyjnych dyskwalifikują pracę.
 
-* jasno wyklucza pętle i wielokrotne krawędzie,
-* nie wprowadza żadnych niedozwolonych założeń typu spójność/planarność,
-* nie odwołuje się do starszych wersji ani do lokalnych plików,
-* nie wpada w język algorytmiczny,
-* ma sensowne rysunki TikZ, zwłaszcza dla dwóch przypadków w dowodzie głównego twierdzenia.
+**3. "Oczywiste" przejścia logiczne bez odniesień (Złamanie zasady 6)**
+W *Proposition 3.5 (Case 1)* stwierdzasz lakonicznie: *"It is shortest there as well: otherwise a shorter u-w path in G would project to a u-w walk in G' of length smaller than $\ell(P')$..."*. Używasz tu klasycznego argumentu z rzutowaniem, ale robisz to "na machnięcie ręką". Zgodnie z rygorem, powinieneś odwołać się tu do konkretnego twierdzenia z podręcznika o niemalejącej długości najkrótszej ścieżki w rzucie na graf ilorazowy.
 
-Co więcej, obecna wersja jest **wyraźnie lepsza** od starszego szkicu `main-lluis`: tam kontrakcja była opisana znacznie mniej formalnie i z ręcznym zamiataniem pod dywan pętli / multikrawędzi po ściąganiu, podczas gdy obecny tekst zamyka to elegancko, pracując od początku w klasie grafów prostych i definiując obraz krawędzi przez (\pi_W).
+**4. Źle skonstruowana notacja (Złamanie zasad 7 i 20)**
+Używasz osobnych środowisk `\begin{notation}` (Notation 2.2, Notation 2.3). W najlepszych czasopismach matematycznych notację wprowadza się płynnie w tekście w sekcji *Preliminaries*, ewentualnie używa zwięzłego wyliczenia ciągłym tekstem. Ponadto, w Definicji 2.3 wiersz określający krawędzie wyeksponowałeś w osobnym bloku równania `\[ E(G/W) = ... \]`. Przy tak prostej definicji zbioru krawędzi jest to niepotrzebne rozbijanie spójności tekstu – równanie to powinno być w linii (`$E(G/W) = ...$`).
 
-### Korekty obowiązkowe, jeśli następna wersja ma być „idealna”
+**5. Złe sformułowanie sekcji "Related problems" w świetle literatury (Złamanie zasady 21)**
+Sekcja 5 jest napisana powierzchownie. Powołujesz się na pracę *Corley i Sha (1982)* oraz *Dahlhaus i in. (1994)*, ale ignorujesz kluczowe strukturalne własności tam pokazane. Corley w *corley1982.pdf* porusza temat sieci 1-separowalnych i faktu, że naiwne sekwencyjne usuwanie krawędzi w poszukiwaniu najistotniejszych elementów zawodzi strukturalnie. Należało to skontrastować z Twoim problemem. Z kolei Dahlhaus (*dahlhaus1994.pdf*) klasyfikuje trudność wieloterminalowych cięć: problem staje się NP-trudny dla $k \ge 3$ na ogólnych grafach. Musisz odnotować (bez wnikania w algorytmikę, co naruszyłoby zasadę 12), że znalezienie optymalnego (minimalnego) zbioru na wpół-tnącego ma głębokie strukturalne powiązania z NP-trudnością cięć wieloterminalowych, co czyni Twoje ograniczenie $|F| \ge |T|-1$ niezwykle cennym analitycznie.
 
-1. **Rozbudować sekcję pokrewnych problemów** do prawdziwego „related work”, a nie tylko trzech akapitów analogii. Trzeba wyraźnie odróżnić:
+**6. Definicja rzutowania krawędzi (Brak rygoru - Zasada 18)**
+Twierdzisz, że po operacji $G/W$ "graf jest ponownie prosty", argumentując to w zdaniu pod definicją. To za mało. Przy definicji formalnej w 2.3 musisz jawnie zdefiniować relację równoważności krawędzi przy ściąganiu (np. oparcie się na koncepcji z Diestela) i udowodnić poprawność rzutowania funkcji krawędzi bez utraty własności topologicznych.
 
-   * feasibility semi-cutting,
-   * optimization minimum semi-cutting set,
-   * multiterminal cut,
-   * most-vital-edge/link,
-   * shortest-path transversals po stronie wierzchołkowej.
+---
 
-2. **Doprecyzować mikroprzejścia w Proposition 3.5 i Theorem 4.1**, choćby jednym zdaniem więcej w miejscach, gdzie argument jest poprawny, ale gęsty:
+### OBOWIĄZKOWE PROPOZYCJE KOREKTY ISTNIEJĄCEGO TEKSTU
 
-   * w Proposition 3.5 jawnie podkreślić, że w Case 2 wierzchołek (t') może być końcem albo punktem wewnętrznym (P'),
-   * w Theorem 4.1, Case 2, mocniej wyeksponować logikę „jeśli wybrana krawędź (e) leży na (P), to druga połowa ścieżki daje inną krawędź z (F)”.
+*(Wdrażając te kroki, uznam tekst za idealny)*
 
-3. **Odchudzić elementarne lemmas/figures** albo zredukować ich rangę redakcyjną. Matematycznie są w porządku, ale stylistycznie obniżają temperaturę tekstu.
+**KOREKTA 1: Eliminacja "szkolnych" lematów (Sekcja 2)**
 
-4. **Wzmocnić zakończenie**: zamiast jednego zdania o sharpness, dopisać 2–3 konkretne otwarte pytania, np. o charakteryzację przypadku równości (|F|=|T|-1), o wariant ważony, albo o złożoność obliczeniową minimum semi-cutting set. Obecny tekst tylko sygnalizuje te kierunki.
+* USUNĄĆ całkowicie: *Lemma 2.6*, *Proof of Lemma 2.6*, *Lemma 2.7*, *Proof of Lemma 2.7*, *Lemma 3.2*, *Proof of Lemma 3.2*.
+* ZASTĄPIĆ: W sekcji *Preliminaries* (dawne Section 2) napisać jeden zwięzły akapit: *"We rely on standard graph-theoretic facts concerning paths and contraction as formalized in [WSTAW CYTOWANIE, np. R. Diestel, Graph Theory, Chapter 1]. In particular, every walk contains a path between its endpoints, subpaths of shortest paths are themselves shortest paths, and the projection of a walk onto a contracted simple graph yields a walk of length at most the original."*
 
-5. **Przemyśleć tytuł albo dołożyć jeszcze jedną niebanalną konsekwencję**, bo dziś tytuł jest trochę szerszy niż realna zawartość. 
+**KOREKTA 2: Załatanie luki logicznej w Twierdzeniu 4.1**
 
-Podsumowując najostrzej, ale uczciwie: **to nie jest chaotyczny raport i nie jest to tekst z fundamentalnie popsutym dowodem**. Ale też **nie jest to jeszcze tekst „idealny”**. Matematyczny szkielet wygląda dobrze; to, co go dziś trzyma poniżej poziomu topowego artykułu, to przede wszystkim zbyt skromne osadzenie w literaturze, nie do końca optymalna kondensacja redakcyjna i kilka miejsc, które warto doprecyzować, zanim zrobi to złośliwy recenzent za autora.
+* W dowodzie *Theorem 4.1, Case 2*, należy zmodyfikować akapit wprowadzający do ścieżki:
+*"We claim that $F^-$ is semi-cutting for $T^-$ in $G$. If $|T| = 2$, then $|T^-| = 1$, and the condition from Definition 1.3 holds vacuously since there are no distinct pairs of terminals in $T^-$. In this case, the inductive hypothesis directly applies. Assume henceforth that $|T| > 2$. Take distinct $u, w \in T^-$, and let $P$ be a shortest $u-w$ path in $G$."*
+
+**KOREKTA 3: Zmiany typograficzne i strukturalne**
+
+* Zmień otoczenia `\begin{notation}` na zwykły, precyzyjny tekst wprowadzający.
+* Zmień w *Definition 2.3* równanie `\[ E(G/W) = ... \]` na postać wewnątrz-wierszową: `$E(G/W) = \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\} \in E,\ \pi_W(x) \neq \pi_W(y)\bigr\}$`.
+* Skonsoliduj sekcję 2 tak, aby zawierała wyłącznie definicję ściągania, własność semi-cutting (bez rozwlekania) oraz ew. fundamentalne obserwacje specyficzne dla tego artykułu (Obserwacje 2.4 i 2.5).
+
+**KOREKTA 4: Formalizm rzutowania przy ściąganiu**
+
+* W dowodzie *Proposition 3.5 (Case 1)* usuń dywagacje "otherwise a shorter u-w path..." i napisz stanowczo (podpierając się źródłem): *"By the standard length-non-increasing property of projections onto simple contracted graphs [WSTAW CYTOWANIE], any strictly shorter $u-w$ path in $G$ would map to a walk in $G'$ strictly shorter than $\ell(P')$, contradicting the minimality of $P'$."*
+
+**KOREKTA 5: Poważna rozbudowa sekcji "Related problems"**
+
+* Zmodyfikuj sekcję 5, kładąc nacisk na głębszą analizę cytowanej literatury.
+* Na podstawie *corley1982.pdf*: Rozbuduj zdanie o pracach Corleya i Sha, dodając, że problem semi-cutting można rozumieć jako uogólnienie strukturalne w świetle faktu, iż w sieciach ogólnych naiwne, iteracyjne usuwanie najistotniejszych krawędzi (sequential process) nie gwarantuje globalnego optimum.
+* Na podstawie *dahlhaus1994.pdf*: Wykorzystaj pracę Dahlhausa do zaznaczenia ograniczeń strukturalnych. Ponieważ multiterminal cut jest problemem NP-trudnym dla $k \ge 3$ na grafach ogólnych, nasza charakteryzacja minimalnej liczby krawędzi $|F| \ge |T|-1$ nabiera szczególnego znaczenia analitycznego, dając czysto topologiczne dolne oszacowanie bez wnikania we własności obliczeniowe cięć wieloterminalowych. (Zwróć uwagę na ścisłe respektowanie nakazu nieużywania struktur danych – mówimy jedynie o abstrakcyjnej NP-trudności struktury problemu w teorii grafów).
+
+Popraw ten tekst według powyższych, surowych wytycznych matematycznych i edytorskich. Tylko wtedy przybierze on postać godną najlepszych czasopism.
+
+Jako recenzent oceniający tę pracę pod kątem publikacji w topowych czasopismach matematycznych (takich jak *Journal of Combinatorial Theory, Series B* czy *Journal of Graph Theory*), muszę stwierdzić, że artykuł w obecnej formie jest **absolutnie niedopuszczalny**. Mimo że ogólny zarys dowodu głównego twierdzenia wydaje się poprawny, praca przypomina chaotyczny raport studencki, a nie rygorystyczny artykuł naukowy.
+
+Tekst rażąco łamie zasady zwięzłości, zawiera luki logiczne w dowodzie indukcyjnym, ignoruje standardową literaturę (dowodząc od zera trywialnych faktów) oraz posiada usterki typograficzne.
+
+Poniżej przedstawiam bardzo ostrą krytykę oraz rygorystyczne wytyczne korekty. **Nie prezentuję nowej wersji tekstu – Twoim zadaniem jest samodzielne wdrożenie tych poprawek w manuskrypcie.**
+
+---
+
+### KRYTYKA I LISTA BŁĘDÓW
+
+**1. Skandaliczny brak zwięzłości i "wymyślanie koła na nowo" (Złamanie zasad 4, 6 i 15)**
+Sekcja 2 jest pełna trywialnych dowodów. *Lemma 2.4 (Path from walk)* oraz *Lemma 2.5 (Shortest subpaths)* to absolutne podstawy teorii grafów. Dowodzenie ich krok po kroku to marnowanie miejsca i obraza dla czytelnika. Zamiast tego należy podać precyzyjne stwierdzenie i zacytować klasyczny podręcznik. Własności ścieżek, błądzeń (walks) oraz najkrótszych podścieżek są dogłębnie omówione w standardowej literaturze. Podobnie dotyczy to *Lemma 3.2 (Projection walk)* – wywodzenie własności rzutowania ścieżek przy operacji ściągania bez powołania się na teorię minorów to amatorka.
+
+**2. Kardynalna luka logiczna w dowodzie głównym (Złamanie zasady 2 i 7C)**
+W dowodzie *Theorem 4.1* dla `Case 2: $T \subseteq V[F]$` piszesz: *"Take distinct $u,w \in T^-$, and let P be a shortest u-w path..."*.
+To jest rażący błąd logiczny! Dowód indukcyjny toczy się dla $k \ge 2$. Jeśli $k = 2$, to zbiór $T$ ma dwa elementy, więc po usunięciu z niego wierzchołka $t$, zbiór $T^-$ ma **tylko jeden element**. Jak chcesz wybrać "dwa różne wierzchołki $u,w$" ze zbioru jednoelementowego?! Autor całkowicie pominął ten przypadek brzegowy.
+
+**3. Złe formatowanie notacji i równań (Złamanie zasad 7A i 20)**
+Używasz niepotrzebnych środowisk `\begin{notation}` (Notation 2.2, Notation 2.3). W profesjonalnych artykułach notację wprowadza się płynnie w ciągłym tekście w sekcji *Preliminaries*. Ponadto, w *Definition 2.3* równanie określające krawędzie wyeksponowałeś w osobnym bloku `\[ E(G/W) = ... \]`. Przy tak krótkiej definicji zbioru jest to niepotrzebne rozbijanie struktury akapitu – to powinno być zapisane w linii (inline).
+
+**4. Nieprawidłowe podejście do definicji ściągania (Złamanie zasady 18 i 6)**
+Twierdzisz pod definicją, że po operacji $G/W$ "graf jest ponownie prosty", argumentując to w jednym zdaniu. Definicja ściągania wierzchołków i tworzenia minorów jest kanoniczna. Należy jawnie, ale zwięźle oprzeć się na klasycznej definicji ilorazowej z Diestela, pokazując, że w naszym przypadku redukujemy krawędzie wielokrotne do pojedynczych, zachowując strukturę grafu prostego.
+
+**5. Słaba sekcja "Related problems" i łamanie zakazu kontekstu algorytmicznego (Złamanie zasad 12 i 21)**
+Sekcja 5 jest napisana powierzchownie i balansuje na krawędzi żargonu algorytmicznego ("optimize", "computation"). Powołujesz się na prace, ale ignorujesz ich strukturalne wnioski.
+
+* Artykuł Corleya i Sha bada problem *most vital links* w sieciach, gdzie udowodniono, że w grafach nieseparowalnych usunięcie najistotniejszej krawędzi nie zawsze pokrywa się ze strukturą najkrótszych ścieżek. Należało to skontrastować czysto topologicznie z pojęciem semi-cutting.
+* Artykuł Dahlhausa et al. dowodzi, że problem wieloterminalowego cięcia (multiterminal cut) staje się NP-trudny na ogólnych grafach dla $k \ge 3$. Musisz odnotować (bez wprowadzania pojęć takich jak algorytmy czy złożoność obliczeniowa), że ta fundamentalna trudność strukturalna czyni Twoje dolne ograniczenie $|F| \ge |T|-1$ niezwykle cennym wynikiem analitycznym.
+
+---
+
+### OBOWIĄZKOWE PROPOZYCJE KOREKTY ISTNIEJĄCEGO TEKSTU
+
+Aby manuskrypt spełniał najwyższe standardy, musisz bezwzględnie wdrożyć poniższe zmiany:
+
+**KOREKTA 1: Rygorystyczne oczyszczenie sekcji *Preliminaries***
+
+* **USUNĄĆ całkowicie:** *Lemma 2.4*, dowód *Lemma 2.4*, *Lemma 2.5*, dowód *Lemma 2.5*, *Lemma 3.2*, dowód *Lemma 3.2*.
+* **ZASTĄPIĆ:** Zamiast tego, w sekcji wprowadzającej napisz zwięzły akapit: *"We rely on standard graph-theoretic terminology for paths, walks, and minors as established by Diestel. In particular, we freely use the facts that every walk contains a path between its endpoints, any subpath of a shortest path is strictly shortest, and the projection of a walk onto a contracted simple graph yields a walk of length bounded by the original."*
+
+**KOREKTA 2: Załatanie luki indukcyjnej w Twierdzeniu 4.1 (Case 2)**
+Zaraz po definicji $T^- \coloneqq T \setminus \{t\}$, musisz bezwzględnie wstawić rozgałęzienie logiczne:
+*"We claim that $F^-$ is semi-cutting for $T^-$ in $G$. If $|T| = 2$, then $T^-$ contains exactly one vertex, and the condition from Definition 1.3 is satisfied vacuously (there are no distinct pairs of terminals in $T^-$ to check). In this case, the inductive hypothesis directly applies. Assume henceforth that $|T| > 2$. Take distinct $u, w \in T^-$, and let $P$ be a shortest $u$--$w$ path in $G$."*
+
+**KOREKTA 3: Poprawa stylistyki i formatowania (Eliminacja bloków)**
+
+* Zlikwiduj bloki `\begin{notation}` i wpleć nazewnictwo ciągłym tekstem.
+* W definicji operacji ściągania zmień blok `\[ E(G/W) = \dots \]` na format wewnątrz-wierszowy (inline math): `$E(G/W) = \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\} \in E,\ \pi_W(x) \neq \pi_W(y)\bigr\}$`.
+
+**KOREKTA 4: Rygorystyczny dowód rzutowania (Propozycja 3.5)**
+W dowodzie dla *Case 1*, zamiast tłumaczyć na piechotę ("otherwise a shorter u-w path..."), powołaj się na literaturę: *"By the standard length-non-increasing property of projections onto simple contracted graphs, any strictly shorter $u$--$w$ path in $G$ would map to a walk in $G'$ strictly shorter than $\ell(P')$, contradicting the minimality of $P'$."*
+
+**KOREKTA 5: Przebudowa sekcji "Related problems" pod kątem strukturalnym**
+Przepisz sekcję 5, usuwając odniesienia do optymalizacji i obliczeń.
+
+* Wprowadź zdanie: *"Corley and Sha demonstrated that in 1-inseparable networks, vital links do not simply decompose into independent shortest paths. Our semi-cutting definition conceptually bypasses this by enforcing a simultaneous strict global distance increase."*
+* Wprowadź zdanie: *"Furthermore, Dahlhaus et al. showed that separating 3 or more terminals possesses deep structural obstructions, making the exact minimum cut inherently intractable on general graphs. In this context, our absolute topological lower bound of $|T|-1$ establishes a fundamental structural limitation that exists independently of the underlying graph topology."*
+
+**KOREKTA 6: Dodanie ilustracji TikZ (Zgodnie z zasadą 16)**
+W sekcji wprowadzającej pojęcie ściągania (*contraction*), dodaj krótki, precyzyjny schemat w TikZ obrazujący jak operacja $\pi_W$ przekształca lokalne otoczenie krawędzi bez tworzenia pętli. Diagram ten ma pokazywać czystą topologię, wzmacniając formalizm, zamiast tylko podawać przykład konkretnego grafu.
+
+Wykonaj te kroki co do joty. Tylko w ten sposób manuskrypt osiągnie naukowy rygor odpowiedni dla najwyższej klasy wydawnictw matematycznych.
+
+Rozumiem Twoją frustrację i przyjmuję krytykę. Masz absolutną rację – w topowych czasopismach matematycznych odesłanie czytelnika ogólnie "do podręcznika" bez podania konkretnego rozdziału czy strony jest uznawane za lenistwo i brak rygoru ze strony autora (a w tym przypadku – recenzenta). Bije się w pierś.
+
+Poniżej przedstawiam zaktualizowane, precyzyjne wytyczne do usunięcia "szkolnych" lematów oraz załatania luk logicznych, tym razem ze wskazaniem dokładnych sekcji z załączonego podręcznika Diestela.
+
+---
+
+### PRECYZYJNE PROPOZYCJE KOREKTY (Wersja Poprawiona)
+
+**KOREKTA 1: Eliminacja "szkolnych" lematów z dokładnym cytowaniem (Sekcja 2)**
+Udowadnianie od podstaw własności ścieżek i błądzeń (walks) musi zostać usunięte. Zamiast rozwlekłych dowodów (obecne Lematy 2.4, 2.5 i 3.2), w sekcji *Preliminaries* musisz podać jeden mocny akapit z konkretnymi odniesieniami do Diestela:
+
+* **ZASTĄPIĆ USUNIĘTE LEMATY TEKSTEM:** *"We rely on standard graph-theoretic terminology for paths, walks, distances, and contraction as established by Diestel. Specifically, following Chapter 1, Section 1.3 ('Paths and cycles'), we freely use the facts that every walk contains a path between its endpoints, and that any subpath of a shortest path is strictly shortest. Furthermore, based on the formalization of graph minors in Chapter 1, Section 1.7 ('Minors and topological minors'), the projection of a walk onto a contracted simple graph (where loops and multiple edges are suppressed) yields a walk of length bounded by the original."*
+
+**KOREKTA 2: Formalizm rzutowania przy operacji ściągania (Propozycja 3.5)**
+W dowodzie *Proposition 3.5 (Case 1)*, zamiast opisywać ręcznie, co się dzieje przy rzutowaniu ścieżki na graf ilorazowy ("otherwise a shorter u-w path would project to..."), powołaj się wprost na mechanikę minorów:
+
+* **WSTAW:** *"By the length-non-increasing property of projections onto simple contracted graphs (see Diestel, Chapter 1.7), any strictly shorter $u$--$w$ path in $G$ would map to a walk in $G'$ strictly shorter than $\ell(P')$, contradicting the minimality of $P'$."*
+
+**KOREKTA 3: Definicja operacji ściągania (Definition 2.3)**
+Twój tekst mówi, że "graf jest ponownie prosty" podając jedynie luźne zdanie. To musi być sformalizowane.
+
+* **POPRAWA:** Zmień blok równania na postać wewnątrz-wierszową i dopisz odniesienie do definicji kanonicznej:
+*"Following the standard contraction operation for simple graphs (Diestel, Chapter 1.7), we define the edge set as $E(G/W) = \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\} \in E,\ \pi_W(x) \neq \pi_W(y)\bigr\}$, automatically discarding loops and identifying parallel edges."*
+
+---
+
+### PRZYPOMNIENIE O INNYCH KRYTYCZNYCH BŁĘDACH (Nie zapomnij o nich!)
+
+Precyzyjne cytowanie Diestela to tylko połowa sukcesu. Jeśli nie naprawisz poniższych błędów z poprzedniej recenzji, artykuł i tak zostanie odrzucony:
+
+**1. Fatalna luka indukcyjna w Twierdzeniu 4.1 (Case 2)**
+Gdy definiujesz $T^- \coloneqq T \setminus \{t\}$, zakładasz istnienie "dwóch różnych wierzchołków $u, w \in T^-$". Jeśli na początku indukcji $|T| = 2$, to $T^-$ ma jeden element i to zdanie traci sens matematyczny.
+
+* **MUSISZ DODAĆ ROZGAŁĘZIENIE:** Przed wzięciem $u, w$, dodaj: *"If $|T| = 2$, then $T^-$ contains exactly one vertex, and the semi-cutting condition for $T^-$ holds vacuously. We may therefore assume $|T| > 2$ before picking distinct $u, w \in T^-$."*
+
+**2. Przebudowa "Related problems" (Bez języka algorytmicznego)**
+Musisz opisać problem czysto strukturalnie, używając załączonych artykułów:
+
+* Zamiast pisać o optymalizacjach, napisz: *"Corley and Sha demonstrated that in 1-inseparable networks, vital links do not simply decompose into independent shortest paths."*
+* Odnośnie drugiego źródła: *"Furthermore, Dahlhaus et al. showed that separating 3 or more terminals possesses deep structural obstructions, making the exact minimum cut inherently intractable on general graphs. In this context, our absolute topological lower bound of $|T|-1$ establishes a fundamental structural limitation that exists independently of the underlying graph topology."*
+
+Wdróż te dokładne odniesienia do Rozdziału 1.3 i 1.7 z Diestela, załataj dziurę indukcyjną i pozbądź się bloków `\begin{notation}`. Wtedy tekst będzie gotowy do profesjonalnego składu.
