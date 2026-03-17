@@ -1,73 +1,107 @@
-### KRYTYCZNE BŁĘDY I NARUSZENIA ZASAD
+### 1. Krytyka rygoru dowodowego i "zaklęć" językowych (Złamanie reguły 6)
 
-**1. Nieuprawnione założenie o spójności grafu (Złamanie zasady nr 11)**
-Wprowadzenie oraz sekcja 2  jawnie zakładają: *"Let $G=(V,E)$ be a finite simple connected undirected graph"*. To jest **ABSOLUTNIE NIEDOPUSZCZALNE**.
-*Zarzut logiczny:* Twierdzenie jest prawdziwe dla grafów niespójnych. Jeśli $G$ jest niespójny i wierzchołki $T$ leżą w różnych komponentach, to $d_G(u,w) = \infty$. Wtedy warunek $d_G(u,w) < d_{G \setminus F}(u,w)$ daje $\infty < \infty$, co jest fałszem. Oznacza to jedynie, że dla takiego zbioru $T$ zbiór na wpół-tnący w ogóle nie istnieje (implikacja jest pusta, więc twierdzenie formalnie zachodzi). Zakładanie z góry spójności to matematyczne lenistwo.
+Zabroniłeś używania sformułowań typu "oczywiste jest" bez pełnego wywodu lub precyzyjnego cytowania. Autor niestety wielokrotnie posiłkuje się zgubną w matematyce intuicją:
 
-**2. Przerost formy i elementarne dowody (Złamanie zasady nr 6, 9 i 15)**
-Udowadnianie, że z każdego spaceru można wyciąć ścieżkę (Lemat 3.2) oraz że podścieżka najkrótszej ścieżki jest najkrótsza (Lemat 3.3) , to absurd w publikacji aspirującej do *Combinatorica*. Szanujący się recenzent uzna to za obrazę inteligencji czytelnika.
-*Błąd:* Brak bezpośredniego odwołania do standardowej literatury (np. Diestela ) dla tak trywialnych własności.
-
-**3. Nadużywanie środowisk blokowych dla wzorów (Złamanie zasady nr 20)**
-Autor notorycznie używa środowiska blokowego (np. `\[ ... \]`) dla krótkich definicji i przypisań, które powinny być wkomponowane w tekst (inline).
-
-* Definicja 2.2: Przypisanie $\pi_W(v)$ zajmuje niepotrzebnie tyle miejsca, co kluczowe równania.
+* 
+**Dowód Lematu 3.2:** Autor pisze, że wygenerowany ciąg $P'$ "clearly satisfies" $w_0=\pi_W(v_0)$. W profesjonalnym dowodzie nic nie jest "jasne" samo z siebie. Należy jednoznacznie wskazać, że operacja usunięcia powtarzających się następników nie zmienia pierwszego i ostatniego elementu ciągu.
 
 
-* Konkatenacja ścieżek: Trywialna nierówność rozpisana w bloku.
+* 
+**Dowód Lematu 3.3:** Pojawia się odwołanie do "standard path-extraction fact quoted above". To kolokwializm. Należy podać konkretne odniesienie do twierdzenia z monografii (np. [Diestel, Twierdzenie 1.x]) lub sformułować to jako odrębną, jednozdaniową własność z przypisem.
 
 
-* Propozycja 4.2 i Twierdzenie 5.1: Definiowanie porządku leksykograficznego i zbiorów $G', T', F'$ w osobnych blokach rozbija spójność czytania.
+* 
+**Dowód Propozycji 3.5 oraz Twierdzenia 4.1:** Autor nagminnie używa sformułowania "By the standard subpath property...". Choć na początku sekcji 3 wspomniał o Diestelu, w kluczowych momentach dowodu brakuje rygoru. Zamiast rzucać "standardową własnością", należy formalnie zapisać, że podścieżka $Q^\prime\coloneqq P^\prime[y_r,y_m]$ dziedziczy minimalność długości z racji sumowania się wag (długości) rozłącznych krawędziowo podścieżek.
+
+
+
+### 2. Zbędny "fluff" i tłumaczenie podstaw (Złamanie reguły 4 i 9)
+
+Tekst zawiera fragmenty, które obrażają inteligencję recenzentów z topowych czasopism grafowych:
+
+* 
+**Porządek leksykograficzny:** W dowodzie Twierdzenia 4.1 autor marnuje czas na tłumaczenie, dlaczego porządek leksykograficzny na zbiorze $\mathbb{N}_0^2$ jest dobrze ufundowany ("This order is well-founded... because every non-empty subset has a pair with minimal first coordinate..."). To jest wiedza na poziomie pierwszego roku studiów licencjackich z matematyki! Ten fragment jest całkowicie do usunięcia. Wystarczy samo wskazanie indukcji po porządku leksykograficznym parametrów $(|T|,|V|)$.
+
+
+* 
+**Tłumaczenie definicji krawędzi wielokrotnych:** W Definicji 2.3 autor wdaje się w opisową pogadankę: "while parallel edges are identified automatically because the edge set consists of two-element subsets". Profesjonalny artykuł definiuje zbiór i na tym poprzestaje. Zbiór z definicji nie ma duplikatów. To opisowe zdanie obniża rangę tekstu.
+
+
+
+### 3. Nieścisłości topologiczne w głównym dowodzie (Twierdzenie 4.1)
+
+Dowód kroku indukcyjnego w Przypadku 2 zawiera lukę w formalizmie:
+
+* Autor pisze o podziale ścieżki $P$ na $P_u$ i $P_w$ w punkcie $t$ i stwierdza opisowo: "As $e$ is incident to $t$, it belongs to exactly one of them.".
+
+
+* **Luka:** To zdanie opiera się na wizualnej intuicji, a nie na matematyce. Skoro $P=(v_0,\dots,v_m)$ i $v_j=t$, to krawędź $e$ incydentna z $t$ będąca elementem $E(P)$ MUSI być krawędzią o indeksie $\{v_{j-1}, v_j\}$ lub $\{v_j, v_{j+1}\}$. Dopiero zapisanie tego w oparciu o indeksy jednoznacznie dowodzi, że $e$ należy do $E(P_u)$ albo $E(P_w)$, ale nie do obu (ponieważ $E(P_u)$ i $E(P_w)$ są rozłączne z definicji ścieżki jako ciągu wierzchołków bez powtórzeń).
+
+
+
+### 4. Nadużywanie otoczeń blokowych dla prostych wzorów (Złamanie reguły 20)
+
+Zgodnie z Twoimi restrykcyjnymi zasadami, bloki równań mają być używane w wyjątkowych momentach. Autor wyrzucił do oddzielnych linii trywialne nierówności:
+
+* Nierówność szacująca odległość: $\dist{G}{t}{z}\le \len{P}=\dots$ w Lemacie 3.3. Powinna być w tekście (inline).
+
+
+* Szacowanie mocy zbioru wierzchołków: $|V(G^\prime)|=|V|-|N[t]|+1\le n-1<n$ w Twierdzeniu 4.1. To prosty rachunek, który bezwzględnie musi znaleźć się wewnątrz akapitu.
+
+
+
+### 5. Brak pogłębionego rozwinięcia tematyki pokrewnej (Złamanie reguły 21)
+
+Zakończenie pracy jest zbyt pobieżne. Autor wspomina o pracach Corleya i Sha oraz Dahlhausa, ale robi to na poziomie streszczenia wstępu.
+Aby tekst był wartościowy naukowo, w sekcji 5 należy:
+
+* Jawnie zdefiniować "Most Vital Edges (MVE)" oraz różnicę między MVE a "Semi-cutting sets".
+* Wskazać, czy problem znalezienia minimalnego zbioru na wpół-tnącego ma szansę być NP-trudny (tak jak Multiterminal Cut wg Dahlhausa), opierając się na przedstawionym twierdzeniu o rozmiarze $|F| \ge |T|-1$.
+* Zaproponować uogólnienie na grafy z wagami (edge-weighted graphs), co było przedmiotem analiz Malika, Mittala i Gupty.
 
 
 
 ---
 
-### LUKI LOGICZNE I BRAKI W DOWODACH (Propozycja 4.2 i Twierdzenie 5.1)
+### PROPOZYCJE KOREKTY (Wymagane do zaakceptowania następnej wersji)
 
-**1. Niewyjaśniony przypadek pustego $F$ w indukcji (Twierdzenie 5.1)**
-W Przypadku 2 (Case 2)  dowód zakłada: *"Since $T\subseteq V[F]$, every terminal is incident to at least one edge from the set $F$. Let us therefore choose $t\in T$ and an edge $e\in F$ incident to $t$."*
-Brakuje jednego kroku logicznego: skąd wiemy, że $F$ nie jest puste? Dla $k \ge 2$, jeśli $F = \emptyset$, to $G \setminus F = G$. Wtedy $d_G(u,w) < d_{G \setminus F}(u,w)$ sprowadza się do $d_G(u,w) < d_G(u,w)$, co jest sprzecznością. Należy to zaznaczyć *przed* wyborem krawędzi $e$, inaczej przejście zakłada tezę lub nie obejmuje przypadku brzegowego.
+Aby tekst został przeze mnie uznany za idealny przy kolejnej iteracji, wymagam wdrożenia poniższych zmian:
 
-**2. Zbędne odwracanie ścieżek w Propozycji 4.2**
-W Case 2, autor argumentuje o odwracaniu ścieżki $\overleftarrow{P^\prime}$, jeśli $t'$ jest jej ostatnim wierzchołkiem. Jest to rozwlekłe i algorytmiczne w duchu (czego miało nie być – zasada 12). Matematyk napisałby po prostu: "Bez straty ogólności, niech $t'$ pojawia się jako wierzchołek $y_r$ dla $r < m$, w przeciwnym razie zamieniamy rolami $u$ i $w$."
-
-**3. Formalizm rzutowania ścieżek**
-W dowodzie Lematów 3.4 (Observation) oraz w samej definicji kontrakcji, autor tłumaczy się, że "warunek gwarantuje brak pętli". Artykuł powinien zakładać rygorystyczną algebraiczną definicję grafu prostego po kontrakcji: zachowujemy tylko krawędzie między różnymi wierzchołkami.
-
----
-
-### STYL, PREZENTACJA I LITERATURA
-
-**1. Styl "wykładowy" zamiast "badawczego"**
-Wyrażenia takie jak *"We will first show that..."* , *"Let us consider..."* czy robienie długich wstępów do dowodów  rozwlekają tekst. Abstrakty i wstępy powinny być zwięzłe i uderzać w sedno: "The proof bounds $|F|$ by..."
-
-**2. TikZ i wizualizacje (Zasada 16)**
-Rysunki są poprawne (np. Rysunek 4 i Rysunek 5 ), ale podpisy pod nimi są przegadane. Rysunek powinien wspierać intuicję geometryczną, nie stanowić powtórzenia całych akapitów dowodu.
-
-**3. Szerszy kontekst problemów powiązanych (Zasada 21)**
-W zakończeniu odwołano się do prac Corleya i Dahlhausa. To krok w dobrą stronę, ale brakuje matematycznego "mięsa". Zamiast pisać luźno o "nearby direction", należy wskazać dokładne parametry: dlaczego semi-cutting sets łączą zbiory multicięć ($k$-terminal cuts) z uderzaniem w witalne krawędzie (most vital links). Czy złożoność tych problemów rzuca światło na trudność obliczania zbiorów na wpół-tnących? Brak tego elementu zuboża pracę.
-
----
-
-### PROPOZYCJE KOREKTY (JAK OSIĄGNĄĆ IDEAŁ NASTĘPNYM RAZEM)
-
-Aby tekst spełniał standardy najwyższej klasy i był zgodny ze wszystkimi Twoimi instrukcjami, musisz przyjąć następujący rygor przy generowaniu nowej wersji:
-
-1. **Usuń założenie o spójności na samym wstępie.** Zdefiniuj graf po prostu jako $G=(V,E)$ – skończony, prosty. Dodaj krótką uwagę (Observation): *Jeżeli dla jakiejkolwiek pary $u,w \in T$, wierzchołki te leżą w różnych komponentach spójności $G$, to zbiór na wpół-tnący z definicji nie może istnieć, ponieważ nierówność $\infty < \infty$ jest fałszywa. Wystarczy zatem analizować pary leżące w jednym komponencie.*
-2. **Zabij Lemat 3.2 i Lemat 3.3.** Usuń je całkowicie. Zastąp je jednym krótkim akapitem z powołaniem się na literaturę: Podstawowe własności najkrótszych ścieżek, w tym fakt, że podścieżka najkrótszej ścieżki jest najkrótsza oraz że każdy spacer zawiera ścieżkę, przyjmujemy za klasycznymi podręcznikami (np. Diestel ).
+1. **Cięcia redakcyjne:**
+* Usuń zdanie wyjaśniające, dlaczego równoległe krawędzie znikają w Definicji 2.3.
 
 
-3. 
-**Spłaszcz formatowanie wzorów.** Zmień zapisy definicyjne typu `\[ G^\prime\coloneqq G/N[t] ... \]`  na wstawki wewnątrz tekstu (np. `$G^\prime\coloneqq G/N[t]$`, `$T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\}$`). Oszczędzaj środowiska wieloliniowe (
+* Usuń w całości zdanie udowadniające dobre ufundowanie porządku leksykograficznego w Twierdzeniu 4.1.
 
 
-$$...$$
 
 
-) wyłącznie do skomplikowanych ciągów nierówności.
-4. **Zacieśnij logikę indukcji.** W dowodzie Twierdzenia 5.1 od razu odpraw przypadek pustego zbioru krawędzi: *Jeśli $F = \emptyset$, to dystanse nie ulegają zmianie, co przeczy istnieniu co najmniej dwóch terminali. Zatem $F \neq \emptyset$ i przy założeniu $T \subseteq V[F]$ możemy bezpiecznie wybrać $t \in T$ oraz krawędź $e \in F$ incydentną z $t$.*
-5. **Skondensuj Propozycję 4.2.** Przestań rozwlekać trywialne przypadki (tzw. "Step 1, Step 2, Step 3"). Udowodnij przecięcie ścieżek czysto topologicznie, wykorzystując jednoznaczną notację matematyczną bez pseudokodowego dzielenia.
-6. 
-**Wzmocnij wnioski.** W sekcji 6 (Concluding remarks) połącz precyzyjniej parametry z artykułów Corleya (1982) i Dahlhausa (1994), wskazując np., że podczas gdy problem Dahlhausa dotyczy rozspójniania bez liczenia dystansów, wasz problem uogólnia "vital edges" na wszystkie pary z $T$ jednocześnie.
+2. **Formalizacja języka:**
+* Zamień słowo "clearly"  na formalny wywód: *Własność $w_0=\pi_W(v_0)$ wynika bezpośrednio z faktu, że algorytm usuwa jedynie następniki, zachowując pierwszy element ciągu*.
+
+
+* Wyruguj z tekstu sformułowania "standard subpath property". Zastąp je jednym, twardym cytowaniem we Wprowadzeniu lub bezpośrednim odniesieniem do konkretnego lematu z Diestela przy każdym użyciu.
+
+
+
+
+3. **Uszczelnienie dowodu ścieżkowego:**
+* W Przypadku 2 Twierdzenia 4.1, zamiast pisać "As $e$ is incident to $t$, it belongs to exactly one of them", wprowadź notację indeksową: Skoro $e \in E(P)$ i jest incydentna z $t=v_j$, to $e = \{v_{j-1}, v_j\}$ (co implikuje $e \in E(P_u)$) lub $e = \{v_j, v_{j+1}\}$ (co implikuje $e \in E(P_w)$). Ponieważ ciąg wierzchołków ścieżki jest unikalny, przypadki te wykluczają się wzajemnie.
+
+
+
+
+4. **Formatowanie matematyczne:**
+* Wszystkie proste wyliczenia w Lemacie 3.3 i Twierdzeniu 4.1 ustrukturyzuj jako wzory w tekście (inline), używając wyłącznie środowiska matematycznego otoczonego znakami dolara bez spacji.
+
+
+5. **Wzbogacenie sekcji "Concluding Remarks":**
+* Dopisz akapit techniczny porównujący złożoność ewentualnego algorytmu aproksymacyjnego dla MVE (z prac Corleya/Malika) do problemu minimalizacji zbiorów na wpół-tnących.
+* Rozwiń problem minimalizacji takiego zbioru jako potencjalny problem optymalizacyjny z konkretnymi cytowaniami.
+
+
+6. **Wizualia (TikZ):**
+* Obrazki w pracy są poprawne, ale upewnij się, że nie służą one "łataniu" dziur w dowodzie. Rysunek 7  musi stanowić jedynie graficzną reprezentację dowodu opartego stricte na indeksach krawędzi (jak zaproponowano w punkcie 3).
+
+
 
