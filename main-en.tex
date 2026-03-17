@@ -38,9 +38,9 @@ Let $G=(V,E)$ be a finite simple undirected graph. For $T\subseteq V$ and $F\sub
 
 \section{Introduction}
 
-Let $G=(V,E)$ be a finite simple undirected graph and let $T\subseteq V$. For an edge set $F\subseteq E$, we say that $F$ is a semi-cutting set for $T$ if after removing the edges of $F$ the distance between every pair of distinct terminals strictly increases, that is, $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for all distinct $u,w\in T$. We consider only simple graphs; however, we do not assume connectivity, planarity, or any other additional structural property. The graph terminology used in this paper is standard; cf.~\cite{bondy-murty,diestel}.
+Let $G=(V,E)$ be a finite simple connected undirected graph and let $T\subseteq V$. Since $G$ is connected, the distance $\dist{G}{u}{w}$ is a finite integer for every pair of vertices $u,w\in V$. For an edge set $F\subseteq E$, we say that $F$ is a semi-cutting set for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for all distinct $u,w\in T$, where $\dist{G\setminus F}{u}{w}=\infty$ whenever $u$ and $w$ belong to different connected components of $G\setminus F$. Thus the deletion of $F$ may disconnect the graph, and for every terminal pair separated in $G\setminus F$ the defining inequality holds trivially because a finite integer is strictly smaller than $\infty$. We consider only finite simple connected graphs, and the graph terminology used in this paper is standard; cf.~\cite{bondy-murty,diestel}.
 
-The condition considered here lies between two classical families of problems. On the one hand, the \emph{multiterminal cut} problem requires the removal of an edge set separating all terminals, and its main reference point is the paper by Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994}. On the other hand, in \emph{most vital links and nodes} problems, one studies removals that cause the largest possible increase in the distance between a distinguished pair of vertices; this trend was initiated by Corley and Sha~\cite{corley-sha}, and the variant concerning a single edge on a shortest path was later analyzed by Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}. Semi-cutting sets do not require the complete disconnection of terminals, but they force a simultaneous strict increase of all distances between pairs of terminals, which gives the concept studied here a distinctly multiterminal character.
+The condition considered here lies between two classical families of edge-deletion phenomena. On the one hand, the \emph{multiterminal cut} setting requires the complete separation of all terminals, with the paper of Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994} as a natural reference point. On the other hand, the line of work on \emph{most vital links and nodes}, initiated by Corley and Sha~\cite{corley-sha} and developed further by Malik, Mittal, and Gupta~\cite{malik-mittal-gupta}, studies deletions that enlarge the distance between a distinguished pair of vertices. Semi-cutting sets unify these viewpoints under a single distance formulation: they allow terminal pairs to become disconnected, as in multiterminal cuts, but they also encompass the strictly path-lengthening behavior characteristic of vital-link problems, now imposed simultaneously on all pairs of terminals.
 
 The aim of this paper is to show a purely structural lower bound $|F|\ge |T|-1$ valid for every semi-cutting set. First, we write the definition of this set in an equivalent form requiring the intersection of all shortest paths between terminals. Next, we prove that this property is preserved after the contraction of the closed neighborhood of a terminal $t\in T\setminus V[F]$. The final stage is a lexicographical induction with respect to the pair $(|T|,|V|)$.
 
@@ -69,7 +69,7 @@ The bound is sharp. For every $k\ge 2$, let $G$ be a path graph with the vertex 
 
 \section{Notation and definitions}
 
-In this section and in further formulations, $G=(V,E)$ denotes any finite simple undirected graph, that is, a graph without loops and without multiple edges. We therefore identify each edge with a two-element subset of the vertex set. We treat distances as elements of the set $\mathbb{N}_0\cup\{\infty\}$, where $\mathbb{N}_0=\{0,1,2,\dots\}$, with the order extended by the relations $n<\infty$ for every $n\in\mathbb{N}_0$.
+In this section and throughout the paper, $G=(V,E)$ denotes a finite simple connected undirected graph, that is, a graph without loops and without multiple edges. We therefore identify each edge with a two-element subset of the vertex set. We treat distances as elements of the set $\mathbb{N}_0\cup\{\infty\}$, where $\mathbb{N}_0=\{0,1,2,\dots\}$, with the order extended by the relations $n<\infty$ for every $n\in\mathbb{N}_0$; for the original graph $G$ all such distances are finite, whereas the value $\infty$ may occur after deleting an edge set and thereby separating vertices into different connected components.
 
 \begin{definition}[Walks, paths, and distance]\label{def:paths-distance}
 Let $u,w\in V$. A walk from $u$ to $w$ is a sequence of vertices $P=(v_0,v_1,\dots,v_k)$, where $k\in\mathbb{N}_0$, $v_0=u$, $v_k=w$, and $\{v_{i-1},v_i\}\in E$ for every $i\in\{1,\dots,k\}$. The length of the walk is defined as $\len{P}\coloneqq k$. A path is a walk in which the vertices are pairwise distinct. For a path $P=(v_0,\dots,v_k)$, we write $V(P)\coloneqq \{v_0,\dots,v_k\}$ and $E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: i=1,\dots,k\bigr\}$.
@@ -138,15 +138,15 @@ The condition $\pi_W(x)\neq \pi_W(y)$ guarantees that no loops are created in $G
 \end{figure}
 
 \begin{definition}[Semi-cutting set]\label{def:semi-cut}
-Let $T\subseteq V$. We say that $F\subseteq E$ is a semi-cutting set for $T$ in $G$ if for every pair of distinct vertices $u,w\in T$, the inequality $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ holds. The vertices of the set $T$ are called terminals.
+Let $T\subseteq V$. We say that $F\subseteq E$ is a semi-cutting set for $T$ in the finite simple connected graph $G=(V,E)$ if for every pair of distinct vertices $u,w\in T$, the inequality $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ holds, where $\dist{G}{u}{w}\in\mathbb{N}_0$ by connectedness of $G$ and $\dist{G\setminus F}{u}{w}=\infty$ whenever $u$ and $w$ lie in different connected components of $G\setminus F$; the vertices of the set $T$ are called terminals.
 \end{definition}
 
 \begin{observation}\label{obs:finite-terminal-distances}
-Let $T\subseteq V$ and $F\subseteq E$. If $F$ is a semi-cutting set for $T$ in $G$, then for every pair of distinct terminals $u,w\in T$, we have $\dist{G}{u}{w}<\infty$. In particular, all terminals belong to a single connected component of the graph $G$.
+Let $T\subseteq V$ and $F\subseteq E$. If $F$ is a semi-cutting set for $T$ in $G$, then for every pair of distinct terminals $u,w\in T$, we have $\dist{G}{u}{w}<\infty$; moreover, if $u$ and $w$ lie in different connected components of $G\setminus F$, then $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}=\infty$.
 \end{observation}
 
 \begin{proof}
-Let us take any distinct vertices $u,w\in T$. From Definition~\ref{def:semi-cut}, it follows that after removing the edges of $F$, the distance between $u$ and $w$ strictly increases. In particular, the distance $\dist{G}{u}{w}$ is finite. The existence of a finite distance between every pair of terminals means that there is a path in $G$ between any two terminals. Thus, all terminals belong to a single connected component of the graph $G$.
+Let us take any distinct vertices $u,w\in T$. The finiteness of $\dist{G}{u}{w}$ follows from the connectedness of $G$. If the vertices $u$ and $w$ lie in different connected components of $G\setminus F$, then by Definition~\ref{def:semi-cut} we have $\dist{G\setminus F}{u}{w}=\infty$, and therefore $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$.
 \end{proof}
 
 \section{Auxiliary lemmas}
