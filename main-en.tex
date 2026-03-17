@@ -24,25 +24,25 @@
 \newcommand{\len}[1]{\ell(#1)}
 \newcommand{\dist}[3]{d_{#1}(#2,#3)}
 
-\title{\textbf{Structural properties of semi-cutting sets}}
+\title{Semi-cutting sets and a sharp lower bound}
 \author{}
 \date{}
 
 \begin{document}
 
 \begin{abstract}
-Let $G=(V,E)$ be a finite simple undirected graph. For $T\subseteq V$ and $F\subseteq E$, we call $F$ a semi-cutting set for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every pair of distinct terminals $u,w\in T$, where disconnected pairs have distance $\infty$. We prove that every such set satisfies $|F|\ge |T|-1$. The proof uses a shortest-path characterization of the semi-cutting property, its preservation under contracting the closed neighborhood of a terminal not incident to $F$, and a lexicographic induction on the pair $(|T|,|V|)$.
+Let $G=(V,E)$ be a finite simple undirected graph, let $T\subseteq V$, and let $F\subseteq E$. We call $F$ semi-cutting for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every pair of distinct terminals $u,w\in T$. We prove that every semi-cutting set satisfies $|F|\ge |T|-1$. The argument uses no connectivity or planarity assumption on $G$. It combines a shortest-path characterization of the semi-cutting property with its preservation under contracting the closed neighborhood of a terminal not incident to $F$. The bound is sharp.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
 
-Throughout the paper, graphs are finite, simple, and undirected; in particular, loops and parallel edges are excluded in every construction. For a graph $G=(V,E)$, a terminal set $T\subseteq V$, and an edge set $F\subseteq E$, we say that $F$ is \emph{semi-cutting} for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every two distinct vertices $u,w\in T$. Distances are allowed to take the value $\infty$, so terminal pairs may become disconnected after deleting $F$. On the other hand, if $\dist{G}{u}{w}=\infty$ already in $G$, then the defining inequality would read $\infty<\infty$, which is impossible. Thus the statement concerns arbitrary simple graphs, but every actual instance with a semi-cutting set has all terminal pairs joined by paths in the original graph.
+Throughout the paper, graphs are finite, simple, and undirected; in particular, loops and parallel edges are excluded from the outset. For a graph $G=(V,E)$, a terminal set $T\subseteq V$, and an edge set $F\subseteq E$, we say that $F$ is \emph{semi-cutting} for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every two distinct terminals $u,w\in T$. Distances are allowed to take the value $\infty$, so terminal pairs may become disconnected after deleting $F$. If $\dist{G}{u}{w}=\infty$ already in $G$, however, then the defining inequality becomes $\infty<\infty$, which is impossible. Hence a semi-cutting instance automatically has finite terminal distances in the original graph, but no global assumption such as connectivity is imposed on $G$.
 
-Semi-cutting sets lie between two classical edge-deletion themes. The multiterminal cut problem of Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994} asks for the complete pairwise separation of the terminals. On instances in which all terminal pairs are connected in the original graph, every multiterminal cut is therefore semi-cutting, but the converse fails because a semi-cutting set may leave some terminal pairs connected while merely forcing their distances to increase. At the other end, the most-vital-link framework introduced by Corley and Sha~\cite{corley-sha} and refined in later work~\cite{malik-mittal-gupta,nardelli-proietti-widmayer} focuses on a single distinguished pair of vertices and studies deletions that enlarge the distance between them. Semi-cutting sets retain this geodesic viewpoint, but require it simultaneously for every pair of terminals.
+Semi-cutting sets sit between two classical distance themes. When $|T|=2$, the condition simply says that every geodesic between the two prescribed terminals must meet $F$, so the notion is close to the most-vital-link and most-vital-edge problems studied by Corley and Sha~\cite{corley-sha}, Malik, Mittal, and Gupta~\cite{malik-mittal-gupta}, and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}. For larger terminal sets, multiterminal cuts~\cite{dahlhaus1994} provide a stricter comparison object: every multiterminal cut is semi-cutting whenever the terminal distances in $G$ are finite, but a semi-cutting set need not disconnect any terminal pair. We return to these relations in the final section.
 
-The main result is the lower bound $|F|\ge |T|-1$ for every semi-cutting set. The proof has three structural ingredients. First, semi-cutting sets can be characterized by the requirement that they intersect every shortest path between distinct terminals. Second, if a terminal $t$ is not incident to any edge of $F$, then after contracting the closed neighborhood $N[t]$ to a single vertex, the resulting image of $F$ is still semi-cutting for the modified terminal set. Third, these two facts feed a lexicographic induction on $(|T|,|V|)$.
+The main result is the sharp lower bound $|F|\ge |T|-1$. The proof has three ingredients. First, semi-cutting sets admit a shortest-path characterization. Second, if a terminal $t$ is not incident to any edge of $F$, then contracting the closed neighborhood $N[t]$ preserves the semi-cutting property. Third, these two facts combine in a lexicographic induction on $(|T|,|V|)$.
 
 The bound is sharp. For every $k\ge 2$, let $G$ be the path with vertex set $\{v_0,v_1,\dots,v_{2k-2}\}$ and edge set $\bigl\{\{v_i,v_{i+1}\}: i=0,\dots,2k-3\bigr\}$. If $T=\{v_0,v_2,\dots,v_{2k-2}\}$ and $F=\bigl\{\{v_{2i},v_{2i+1}\}: i=0,\dots,k-2\bigr\}$, then $|F|=|T|-1$. After deleting $F$, each connected component contains exactly one terminal, so all terminal-terminal distances increase from finite values to $\infty$. Figure~\ref{fig:semi-cut-example} shows the case $k=3$.
 
@@ -67,7 +67,7 @@ The bound is sharp. For every $k\ge 2$, let $G$ be the path with vertex set $\{v
 \label{fig:semi-cut-example}
 \end{figure}
 
-\section{Preliminaries}
+\section{Notation and auxiliary facts}
 
 Let $G=(V,E)$ be a finite simple graph. Distances take values in $\mathbb{N}_0\cup\{\infty\}$, ordered by $n<\infty$ for every $n\in\mathbb{N}_0$.
 
@@ -89,38 +89,7 @@ E(G/W)=\bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}
 If $e=\{x,y\}\in E$ and $\pi_W(x)\neq \pi_W(y)$, we write $e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E(G/W)$. For $F\subseteq E$, we also put $F/W\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in F,\ \pi_W(x)\neq \pi_W(y)\bigr\}\subseteq E(G/W)$.
 \end{definition}
 
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
-  \begin{scope}[xshift=0cm]
-    \node at (2.2,3.0) {$G$};
-    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]    (x)  at (0,1.5)   {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]   (y)  at (4.4,2.2)  {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]   (z)  at (4.4,0.8)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$a$] (a)  at (1.5,2.3)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=right:$b$] (b)  at (2.8,1.5)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$c$] (c)  at (1.5,0.7)  {};
-    \draw[gray!50] (a)--(b)--(c)--(a);
-    \draw (x)--(a)  (x)--(c);
-    \draw (b)--(y)  (b)--(z);
-    \draw (y)--(z);
-    \node[draw,dashed,rounded corners,fit=(a)(b)(c),inner sep=7pt,
-          label={[font=\small]above right:$W$}] {};
-  \end{scope}
-  \draw[-{Latex[length=3mm]},thick] (5.4,1.5) -- (6.8,1.5)
-    node[midway,above,font=\small] {$/W$};
-  \begin{scope}[xshift=7.4cm]
-    \node at (1.8,3.0) {$G/W$};
-    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]       (xp) at (0,1.5)   {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]      (yp) at (3.6,2.2)  {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]      (zp) at (3.6,0.8)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!50,label=above:$w^*$]  (wp) at (1.8,1.5)  {};
-    \draw (xp)--(wp)  (wp)--(yp)  (wp)--(zp)  (yp)--(zp);
-  \end{scope}
-\end{tikzpicture}
-\caption{Contracting $W=\{a,b,c\}$ to the vertex $w^\ast$.}
-\label{fig:contraction-def}
-\end{figure}
+Thus $G/W$ is again simple: loops are discarded by the condition $\pi_W(x)\neq \pi_W(y)$, and different edges of $G$ may have the same image but produce only one edge of $G/W$.
 
 \begin{definition}[Semi-cutting set]\label{def:semi-cut}
 Let $T\subseteq V$. An edge set $F\subseteq E$ is a \emph{semi-cutting set} for $T$ in $G$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every pair of distinct vertices $u,w\in T$. The vertices of $T$ are the \emph{terminals}.
@@ -160,28 +129,7 @@ Let $P=(v_0,\dots,v_k)$ be a shortest path in $G$. If $0\le i\le j\le k$, then t
 Suppose that $Q$ were a $v_i$--$v_j$ path with $\len{Q}<\len{P[v_i,v_j]}$. Concatenating $P[v_0,v_i]$, $Q$, and $P[v_j,v_k]$ yields a walk from $v_0$ to $v_k$ of length smaller than $\len{P}$. Lemma~\ref{lem:path-from-walk} then gives a $v_0$--$v_k$ path shorter than $P$, contradicting the choice of $P$.
 \end{proof}
 
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize}]
-  \node[circle,draw,inner sep=3pt,fill=gray!30,label=left:$u$]  (u) at (0,0)   {};
-  \node[circle,draw,inner sep=3pt,fill=gray!30,label=right:$w$] (w) at (7.2,0) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=above:$p$] (p) at (2.2,1.1) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=above:$q$] (q) at (5.0,1.1) {};
-  \draw[thick,blue!70!black] (u)--(p);
-  \draw[very thick,red!70!black] (p)--node[above]{$e\in F$}(q);
-  \draw[thick,blue!70!black] (q)--(w);
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$a$] (a) at (1.8,-1.1) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$b$] (b) at (3.6,-1.1) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$c$] (c) at (5.4,-1.1) {};
-  \draw[thick,black!35] (u)--(a)--(b)--(c)--(w);
-  \node[align=center] at (3.6,0)
-    {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
-\end{tikzpicture}
-\caption{Every shortest $u$--$w$ path meets $F$, although longer ones may avoid it.}
-\label{fig:shortest-path-condition}
-\end{figure}
-
-\section{Preservation Under Contraction}
+\section{The contraction step}
 
 \begin{lemma}\label{lem:contraction-image-size}
 Let $\emptyset\neq W\subseteq V$ and $F\subseteq E$. Then $|F/W|\le |F|$.
@@ -198,35 +146,6 @@ Let $\emptyset\neq W\subseteq V$. If $P=(v_0,\dots,v_k)$ is a walk in $G$, then 
 \begin{proof}
 Let $S\coloneqq \bigl(\pi_W(v_0),\dots,\pi_W(v_k)\bigr)$. From each maximal block of consecutive equal entries of $S$, keep only its first term. The resulting sequence $P'=(w_0,\dots,w_m)$ satisfies $m\le k$, its first term is $w_0=\pi_W(v_0)$, and its last term is $w_m=\pi_W(v_k)$. If $w_r,w_{r+1}$ are consecutive terms of $P'$, then there is an index $j\in\{1,\dots,k\}$ such that $w_r=\pi_W(v_{j-1})$, $w_{r+1}=\pi_W(v_j)$, and $\pi_W(v_{j-1})\neq \pi_W(v_j)$. Since $\{v_{j-1},v_j\}\in E(G)$, Definition~\ref{def:contraction} yields $\{w_r,w_{r+1}\}\in E(G/W)$. Hence $P'$ is a walk in $G/W$.
 \end{proof}
-
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
-  \begin{scope}[xshift=0cm]
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$x$]  (x)  at (0,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$a$] (a)  at (1.8,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$t$] (t)  at (3.2,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$b$] (b)  at (4.6,0) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$y$]  (y)  at (6.4,0) {};
-    \draw[very thick,blue!70!black] (x)--(a)--(t)--(b)--(y);
-    \node[draw,dashed,rounded corners,fit=(a)(t)(b),inner sep=5pt,label=above:$W$] {};
-    \node at (3.2,-1.1) {walk $P$: $x$--$a$--$t$--$b$--$y$};
-    \node at (3.2,1.9) {$G$};
-  \end{scope}
-  \draw[-{Latex[length=3mm]},thick] (7.2,0) -- (8.6,0);
-  \node at (7.9,0.45) {\small $/W$};
-  \begin{scope}[xshift=9.4cm]
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$x$]     (xp) at (0,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!40,label=below:$w^*$] (wp) at (1.8,0) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$y$]     (yp) at (3.6,0) {};
-    \draw[very thick,blue!70!black] (xp)--(wp)--(yp);
-    \node at (1.8,-1.1) {walk $P'$: $x$--$w^*$--$y$};
-    \node at (1.8,1.9) {$G/W$};
-  \end{scope}
-\end{tikzpicture}
-\caption{Projecting a walk under contraction can only shorten it.}
-\label{fig:projection-walk}
-\end{figure}
 
 \begin{lemma}\label{lem:lifting-endpoint}
 Let $t\in V$, let $t^\prime\notin V$ be a new vertex, and let $G^\prime\coloneqq G/N[t]$. Let $z\in V\setminus N[t]$, and let $P^\prime=(t^\prime,x_1,\dots,x_k)$ be a shortest path from $t^\prime$ to $z$ in $G^\prime$. Then there exists a vertex $v\in N(t)$ such that $P=(t,v,x_1,\dots,x_k)$ is a shortest path from $t$ to $z$ in $G$.
@@ -304,63 +223,18 @@ Then all vertices of $P^\prime$ lie in $V\setminus N[t]$, so Observation~\ref{ob
 
 \smallskip\noindent
 \textbf{Case 2: $t^\prime\in V(P^\prime)$.}
-Because the endpoints of $P^\prime$ play symmetric roles, we may index the path as $P^\prime=(y_0,\dots,y_m)$ with $y_r=t^\prime$ for some $r<m$. Set $z\coloneqq y_m\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$ and $Q^\prime\coloneqq P^\prime[y_r,y_m]$. Lemma~\ref{lem:shortest-subpaths} shows that $Q^\prime$ is a shortest path from $t^\prime$ to $z$ in $G^\prime$. Lemma~\ref{lem:lifting-endpoint} therefore gives a vertex $v\in N(t)$ such that $Q=(t,v,y_{r+1},\dots,y_m)$ is a shortest path from $t$ to $z$ in $G$.
+Because the endpoints of $P^\prime$ play symmetric roles, we may index the path as $P^\prime=(y_0,\dots,y_m)$ with $y_r=t^\prime$ for some $r<m$; if $t^\prime$ is itself an endpoint, then $r=0$. Set $z\coloneqq y_m\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$ and $Q^\prime\coloneqq P^\prime[y_r,y_m]$. Lemma~\ref{lem:shortest-subpaths} shows that $Q^\prime$ is a shortest path from $t^\prime$ to $z$ in $G^\prime$. Lemma~\ref{lem:lifting-endpoint} therefore gives a vertex $v\in N(t)$ such that $Q=(t,v,y_{r+1},\dots,y_m)$ is a shortest path from $t$ to $z$ in $G$.
 
 Since $t,z\in T$, Observation~\ref{obs:shortest-paths} implies $E(Q)\cap F\neq\emptyset$. No edge of $F$ is incident to $t$, because $t\notin V[F]$, so the first edge $\{t,v\}$ of $Q$ does not belong to $F$. Choose $f\in E(Q)\cap F$. If $f=\{v,y_{r+1}\}$, then $f/N[t]=\{t^\prime,y_{r+1}\}$ is the first edge of $Q^\prime$. Otherwise $f=\{y_i,y_{i+1}\}$ for some $i\in\{r+1,\dots,m-1\}$, and both endpoints lie outside $N[t]$; hence Observation~\ref{obs:outside-edges} gives $f/N[t]=f\in E(Q^\prime)$. In both subcases, $f/N[t]\in E(Q^\prime)\subseteq E(P^\prime)$ and $f/N[t]\in F^\prime$.
 
 Thus every shortest path between distinct terminals in $T^\prime$ meets $F^\prime$. Observation~\ref{obs:shortest-paths} completes the proof.
 \end{proof}
 
-\section{Main Theorem}
+\section{Proof of the main theorem}
 
 \begin{theorem}\label{thm:main}
 Let $G=(V,E)$ be a finite simple undirected graph, let $T\subseteq V$, and let $F\subseteq E$. If $F$ is a semi-cutting set for $T$ in $G$, then $|F|\ge |T|-1$.
 \end{theorem}
-
-\begin{figure}[t]
-\centering
-\begin{tikzpicture}[scale=0.98, every node/.style={font=\small}]
-  \begin{scope}[xshift=0cm]
-    \node at (3.3,2.9) {$G$};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (u) at (0.0,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (x) at (1.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=above:$a$] (a) at (2.9,2.2) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$t$] (t) at (3.2,1.2) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$b$] (b) at (3.0,0.2) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (y) at (4.9,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (w) at (6.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (z) at (5.2,0.0) {};
-    \draw[very thick,red!70!black] (u)--(x);
-    \draw (x)--(a)--(t)--(b)--(y);
-    \draw[very thick,red!70!black] (y)--(w);
-    \draw (y)--(z);
-    \node[draw,dashed,rounded corners,fit=(a)(t)(b),inner sep=7pt,label=left:{$N[t]$}] {};
-    \node[align=center] at (3.2,-1.0)
-      {$t\in T\setminus V[F]$\\[2pt] $F=\{\{u,x\},\{y,w\}\}$};
-  \end{scope}
-
-  \draw[-{Latex[length=3mm]},thick] (7.4,1.2) -- (8.8,1.2);
-  \node at (8.1,1.65) {\small contraction of $N[t]$};
-
-  \begin{scope}[xshift=9.7cm]
-    \node at (2.5,2.9) {$G^\prime=G/N[t]$};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (up) at (0.0,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (xp) at (1.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!45,label=below:$t^\prime$] (tp) at (2.9,1.0) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (yp) at (4.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (wp) at (5.8,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (zp) at (4.7,0.0) {};
-    \draw[very thick,red!70!black] (up)--(xp);
-    \draw (xp)--(tp)--(yp);
-    \draw[very thick,red!70!black] (yp)--(wp);
-    \draw (yp)--(zp);
-    \node[align=center] at (2.9,-1.0)
-      {$T^\prime=(T\setminus\{t\})\cup\{t^\prime\}$\\[2pt] $F^\prime=F/N[t]$};
-  \end{scope}
-\end{tikzpicture}
-\caption{Case 1 of Theorem~\ref{thm:main}: contracting the closed neighborhood of a terminal outside $V[F]$.}
-\label{fig:main-contraction}
-\end{figure}
 
 \begin{figure}[t]
 \centering
@@ -395,7 +269,7 @@ Fix $(k,n)$ with $k\ge 2$, and assume the claim for every $(k',n')\prec (k,n)$. 
 
 \smallskip\noindent
 \textbf{Case 1: $T\setminus V[F]\neq \emptyset$.}
-Choose $t\in T\setminus V[F]$. Since $k\ge 2$, there exists $u\in T\setminus\{t\}$. By Observation~\ref{obs:finite-terminal-distances}, the vertices $t$ and $u$ are joined by a path in $G$, so the first edge of such a path is incident to $t$. Hence $N(t)\neq\emptyset$, and therefore $|N[t]|\ge 2$. Let $t^\prime\notin V$ be a new vertex and define $G^\prime\coloneqq G/N[t]$, $T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\}$, and $F^\prime\coloneqq F/N[t]$, as in Figure~\ref{fig:main-contraction}. Proposition~\ref{prop:contraction} shows that $F^\prime$ is semi-cutting for $T^\prime$ in $G^\prime$. Moreover $|T^\prime|=|T|=k$ and $|V(G^\prime)|=|V|-|N[t]|+1\le n-1<n$.
+Choose $t\in T\setminus V[F]$. Since $k\ge 2$, there exists $u\in T\setminus\{t\}$. By Observation~\ref{obs:finite-terminal-distances}, the vertices $t$ and $u$ are joined by a path in $G$, so the first edge of such a path is incident to $t$. Hence $N(t)\neq\emptyset$, and therefore $|N[t]|\ge 2$. Let $t^\prime\notin V$ be a new vertex and define $G^\prime\coloneqq G/N[t]$, $T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\}$, and $F^\prime\coloneqq F/N[t]$. Proposition~\ref{prop:contraction} shows that $F^\prime$ is semi-cutting for $T^\prime$ in $G^\prime$. Moreover $|T^\prime|=|T|=k$ and $|V(G^\prime)|=|V|-|N[t]|+1\le n-1<n$.
 Thus $(|T^\prime|,|V(G^\prime)|)\prec (k,n)$, and the inductive hypothesis yields $|F^\prime|\ge |T^\prime|-1=k-1$. Lemma~\ref{lem:contraction-image-size} gives $|F^\prime|\le |F|$, so $|F|\ge k-1$.
 
 \smallskip\noindent
@@ -406,22 +280,24 @@ We claim that $F^-$ is semi-cutting for $T^-$ in $G$. By Observation~\ref{obs:fi
 
 Take distinct $u,w\in T^-$, and let $P$ be a shortest $u$--$w$ path in $G$. Since $u,w\in T$, Observation~\ref{obs:shortest-paths} gives $E(P)\cap F\neq\emptyset$. If $e\notin E(P)$, then already $E(P)\cap F^-\neq\emptyset$. Suppose now that $e\in E(P)$. Write $P=(v_0,\dots,v_m)$ and let $v_j=t$. Because $u,w\neq t$, we have $0<j<m$. Put $P_u\coloneqq (v_0,\dots,v_j)$ and $P_w\coloneqq (v_j,\dots,v_m)$, so Figure~\ref{fig:split-path} depicts the situation. Lemma~\ref{lem:shortest-subpaths} shows that $P_u$ and $P_w$ are shortest paths for the pairs $(u,t)$ and $(t,w)$. Since $e\in E(P)$ and $e$ is incident with $v_j=t$, either $e=\{v_{j-1},v_j\}$ or $e=\{v_j,v_{j+1}\}$.
 
-If $e=\{v_{j-1},v_j\}$, then $e\notin E(P_w)$. Because $t,w\in T$ and $P_w$ is a shortest $t$--$w$ path, Observation~\ref{obs:shortest-paths} yields an edge $f\in E(P_w)\cap F$. This edge lies in $E(P)$ and satisfies $f\neq e$, hence $f\in F^-$. If instead $e=\{v_j,v_{j+1}\}$, then the same argument applied to the shortest path $P_u$ between $u$ and $t$ gives an edge $f\in E(P_u)\cap F$ with $f\neq e$, and again $f\in F^-$. In either case, $E(P)\cap F^-\neq\emptyset$, and the claim follows.
+Exactly one of the two subpaths $P_u$ and $P_w$ contains the edge $e$. Let $R$ denote the other one, so $R$ is a shortest path whose endpoints are $t$ and one of the terminals $u,w$, and $e\notin E(R)$. Observation~\ref{obs:shortest-paths} therefore yields an edge $f\in E(R)\cap F$. Since $E(R)\subseteq E(P)$ and $f\neq e$, we obtain $f\in E(P)\cap F^-$. Thus $E(P)\cap F^-\neq\emptyset$, and the claim follows.
 
 Since $|T^-|=k-1$ and $|V(G)|=n$, we have $(|T^-|,|V(G)|)\prec (k,n)$. By the inductive hypothesis, $|F^-|\ge |T^-|-1=k-2$. Therefore $|F|=|F^-|+1\ge k-1$.
 \end{proof}
 
-\section{Related Problems}
+\section{Related problems and further directions}
 
-The path family from the introduction shows that Theorem~\ref{thm:main} is sharp. A first structural question is therefore to describe the equality case $|F|=|T|-1$.
+The path family from the introduction shows that Theorem~\ref{thm:main} is sharp. The first structural problem left open by the theorem is therefore the characterization of the equality case $|F|=|T|-1$.
 
-Theorem~\ref{thm:main} also places semi-cutting sets next to several established distance problems. For $|T|=2$, the defining condition says exactly that every shortest path between the two terminals meets $F$. This is close in spirit to the most-vital-edge and most-vital-link problems introduced by Corley and Sha~\cite{corley-sha}, where one prescribes the number of deleted edges and maximizes the resulting increase of a single source--target distance in a weighted network. Malik, Mittal, and Gupta~\cite{malik-mittal-gupta} study the corresponding problem for $k$ deleted arcs, and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer} refine the single-edge setting for undirected weighted graphs. A weighted theory of semi-cutting sets, in which every weighted terminal distance must increase after deleting $F$, is therefore a natural continuation of the present work.
+For two terminals, semi-cutting sets are exactly edge transversals of the family of geodesics between a prescribed pair of vertices. This places the notion near the most-vital-link and most-vital-edge problems introduced by Corley and Sha~\cite{corley-sha}, extended to larger deleted sets by Malik, Mittal, and Gupta~\cite{malik-mittal-gupta}, and refined for undirected weighted graphs by Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}. Those papers optimize the increase of one distinguished distance, whereas the present condition requires simultaneous increase for every pair of terminals. This suggests, in particular, a weighted version of semi-cutting sets.
 
-For larger terminal sets, the closest classical comparison is the multiterminal cut problem of Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994}. Every multiterminal cut is semi-cutting whenever the original terminal distances are finite, but semi-cutting sets need not disconnect the terminals. Thus the minimum semi-cutting set problem lies strictly between geodesic obstruction and full terminal separation. The NP-hardness of multiterminal cut for at least three terminals shows that this neighboring optimization problem is already computationally hard, although Theorem~\ref{thm:main} by itself does not imply such a hardness result for semi-cutting sets.
+For larger terminal sets, the closest classical comparison is the multiterminal cut problem of Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994}. Every multiterminal cut is semi-cutting whenever the original terminal distances are finite, but the converse fails because a semi-cutting set may leave all terminal pairs connected while merely forcing their distances to increase. In this sense, minimum semi-cutting sets lie strictly between geodesic obstruction and complete terminal separation.
 
-Observation~\ref{obs:shortest-paths} gives a second viewpoint: a semi-cutting set is an edge transversal for the family of terminal geodesics. This makes the problem analogous to vertex-covering questions for shortest-path families. Harary, Loukakis, and Tsouros~\cite{harary-loukakis-tsouros} introduced the geodetic number, which asks for a vertex set whose geodetic closure covers the graph, while Peterin and Semani\v{s}in~\cite{peterin-semanisin} study the maximal shortest paths cover number, a vertex parameter defined by hitting all maximal shortest paths. Semi-cutting sets differ from these invariants in two ways: they act on edges rather than vertices, and they are tied to a prescribed terminal set instead of all geodesics in the graph.
+Observation~\ref{obs:shortest-paths} gives a second viewpoint: a semi-cutting set is an edge transversal for a prescribed family of terminal geodesics. Vertex versions of this idea have been studied from several directions. Harary, Loukakis, and Tsouros~\cite{harary-loukakis-tsouros} introduced the geodetic number, where one asks for a vertex set whose geodetic closure covers the whole graph. Manuel, Bre\v{s}ar, and Klav\v{z}ar~\cite{manuel-bresar-klavzar-transversal} studied the transversal problem for all maximal geodesics, while Peterin and Semani\v{s}in~\cite{peterin-semanisin} considered the related maximal shortest paths cover number. The packing side of maximal geodesics was later investigated by Manuel, Bre\v{s}ar, and Klav\v{z}ar~\cite{manuel-bresar-klavzar-packing}. Semi-cutting sets differ from these parameters in two essential respects: they use edges rather than vertices, and they concern only geodesics whose endpoints lie in a prescribed terminal set.
 
-\begin{thebibliography}{6}
+Taken together, these comparisons point to three natural directions beyond Theorem~\ref{thm:main}: characterize the equality case $|F|=|T|-1$, formulate a weighted theory, and develop a structural theory of minimum semi-cutting sets.
+
+\begin{thebibliography}{8}
 
 \bibitem{corley-sha}
 H.~W. Corley, D.~Y. Sha,
@@ -433,6 +309,11 @@ K.~Malik, A.~K. Mittal, S.~K. Gupta,
 \emph{The $k$ most vital arcs in the shortest path problem},
 Operations Research Letters 8(4) (1989), 223--227.
 
+\bibitem{nardelli-proietti-widmayer}
+E.~Nardelli, G.~Proietti, P.~Widmayer,
+\emph{A faster computation of the most vital edge of a shortest path},
+Information Processing Letters 79(2) (2001), 81--85.
+
 \bibitem{dahlhaus1994}
 E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
 \emph{The complexity of multiterminal cuts},
@@ -443,15 +324,20 @@ F.~Harary, E.~Loukakis, C.~Tsouros,
 \emph{The geodetic number of a graph},
 Mathematical and Computer Modelling 17(11) (1993), 89--95.
 
-\bibitem{nardelli-proietti-widmayer}
-E.~Nardelli, G.~Proietti, P.~Widmayer,
-\emph{A faster computation of the most vital edge of a shortest path},
-Information Processing Letters 79(2) (2001), 81--85.
+\bibitem{manuel-bresar-klavzar-transversal}
+P.~D. Manuel, B.~Bre\v{s}ar, S.~Klav\v{z}ar,
+\emph{The geodesic-transversal problem},
+Applied Mathematics and Computation 413 (2022), Art.~126621.
 
 \bibitem{peterin-semanisin}
 I.~Peterin, G.~Semani\v{s}in,
 \emph{On the maximal shortest paths cover number},
 Mathematics 9(14) (2021), Art.~1592.
+
+\bibitem{manuel-bresar-klavzar-packing}
+P.~D. Manuel, B.~Bre\v{s}ar, S.~Klav\v{z}ar,
+\emph{Geodesic packing in graphs},
+Applied Mathematics and Computation 459 (2023), Art.~128277.
 
 \end{thebibliography}
 

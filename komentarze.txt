@@ -1,107 +1,44 @@
-### 1. Krytyka rygoru dowodowego i "zaklęć" językowych (Złamanie reguły 6)
+Werdykt: **nie**. To nie jest jeszcze „najlepiej spisany artykuł” ani tekst na poziomie *JCTB / JGT / Combinatorica*. To jest **dobry, uporządkowany i w dużej mierze formalnie poprawny draft**, ale jeszcze nie tekst „idealny”. Ma poprawnie ustawiony model: grafy są skończone, proste i nieskierowane; definicja semi-cutting set jest jasna; jest pełna charakterystyka przez trafianie wszystkich najkrótszych ścieżek, formalna propozycja o zachowaniu własności po ściągnięciu (N[t]), oraz dowód głównego twierdzenia przez indukcję leksykograficzną.
 
-Zabroniłeś używania sformułowań typu "oczywiste jest" bez pełnego wywodu lub precyzyjnego cytowania. Autor niestety wielokrotnie posiłkuje się zgubną w matematyce intuicją:
+Najważniejsze uczciwe stwierdzenie jest takie: **nie widzę tutaj śmiertelnej luki logicznej w samym rdzeniu matematycznym**. Obserwacja 2.6 jest domknięta, Proposition 3.5 ma rozpisane oba przypadki dla najkrótszej ścieżki w grafie po ściągnięciu, a Theorem 4.1 rzeczywiście domyka indukcję przez dwa ruchy: albo zmniejsza (|V|) przez kontrakcję, albo zmniejsza (|T|) przez usunięcie terminala i jednej krawędzi z (F).
 
-* 
-**Dowód Lematu 3.2:** Autor pisze, że wygenerowany ciąg $P'$ "clearly satisfies" $w_0=\pi_W(v_0)$. W profesjonalnym dowodzie nic nie jest "jasne" samo z siebie. Należy jednoznacznie wskazać, że operacja usunięcia powtarzających się następników nie zmienia pierwszego i ostatniego elementu ciągu.
+Natomiast jako surowy recenzent powiedziałbym, że tekst ma trzy poważne słabości.
 
+Po pierwsze, **pozycjonowanie pracy w literaturze jest za słabe**. Obecna sekcja „Related Problems” jest poprawna, ale za krótka i za płaska. Wspomina Corley–Sha, Malik–Mittal–Gupta, Nardelli–Proietti–Widmayer, Dahlhaus et al., Harary–Loukakis–Tsouros i Peterin–Semanišin, ale robi to prawie wyłącznie na poziomie haseł. Tymczasem te prace definiują dość różne obiekty: Corley–Sha badają „most vital links/nodes” w ważonych sieciach dla jednej pary wierzchołków, Malik et al. oraz Nardelli et al. rozwijają warianty „most vital arc/edge”, Dahlhaus et al. badają ważony multiterminal cut, Harary et al. geodetic number, a Peterin–Semanišin maksymalny shortest-path cover. Obecny tekst ich **nie porównuje precyzyjnie**, tylko sygnalizuje analogie. To jest za mało jak na ambitny artykuł teoretyczny.
 
-* 
-**Dowód Lematu 3.3:** Pojawia się odwołanie do "standard path-extraction fact quoted above". To kolokwializm. Należy podać konkretne odniesienie do twierdzenia z monografii (np. [Diestel, Twierdzenie 1.x]) lub sformułować to jako odrębną, jednozdaniową własność z przypisem.
+Po drugie, **tekst nie jest jeszcze optymalnie skondensowany redakcyjnie**. Z punktu widzenia rygoru to działa na plus, ale z punktu widzenia stylu top-journal część materiału jest za tutorialowa. Lemma 2.7, Lemma 2.8, Lemma 3.2 i część ilustracji robią dużo pracy elementarnej. To nie jest błąd matematyczny, ale recenzent może uznać, że artykuł ma za mało „gęstości naukowej” względem objętości. Szczególnie figury objaśniające samą projekcję ścieżki i samą definicję kontrakcji są pedagogiczne, lecz nie wszystkie są równie niezbędne.
 
+Po trzecie, **tytuł i framing lekko nadpisują zawartość**. Tytuł mówi o „structural properties” w liczbie mnogiej, a realnie dostajesz jeden główny lower bound, jedną charakterystykę geodezyjną i jedną własność zachowania przy kontrakcji. To nie jest katastrofa, ale brzmi szerzej niż rzeczywista zawartość. 
 
-* 
-**Dowód Propozycji 3.5 oraz Twierdzenia 4.1:** Autor nagminnie używa sformułowania "By the standard subpath property...". Choć na początku sekcji 3 wspomniał o Diestelu, w kluczowych momentach dowodu brakuje rygoru. Zamiast rzucać "standardową własnością", należy formalnie zapisać, że podścieżka $Q^\prime\coloneqq P^\prime[y_r,y_m]$ dziedziczy minimalność długości z racji sumowania się wag (długości) rozłącznych krawędziowo podścieżek.
+Co tekst robi dobrze, i to trzeba uczciwie zaliczyć:
 
+* jasno wyklucza pętle i wielokrotne krawędzie,
+* nie wprowadza żadnych niedozwolonych założeń typu spójność/planarność,
+* nie odwołuje się do starszych wersji ani do lokalnych plików,
+* nie wpada w język algorytmiczny,
+* ma sensowne rysunki TikZ, zwłaszcza dla dwóch przypadków w dowodzie głównego twierdzenia.
 
+Co więcej, obecna wersja jest **wyraźnie lepsza** od starszego szkicu `main-lluis`: tam kontrakcja była opisana znacznie mniej formalnie i z ręcznym zamiataniem pod dywan pętli / multikrawędzi po ściąganiu, podczas gdy obecny tekst zamyka to elegancko, pracując od początku w klasie grafów prostych i definiując obraz krawędzi przez (\pi_W).
 
-### 2. Zbędny "fluff" i tłumaczenie podstaw (Złamanie reguły 4 i 9)
+### Korekty obowiązkowe, jeśli następna wersja ma być „idealna”
 
-Tekst zawiera fragmenty, które obrażają inteligencję recenzentów z topowych czasopism grafowych:
+1. **Rozbudować sekcję pokrewnych problemów** do prawdziwego „related work”, a nie tylko trzech akapitów analogii. Trzeba wyraźnie odróżnić:
 
-* 
-**Porządek leksykograficzny:** W dowodzie Twierdzenia 4.1 autor marnuje czas na tłumaczenie, dlaczego porządek leksykograficzny na zbiorze $\mathbb{N}_0^2$ jest dobrze ufundowany ("This order is well-founded... because every non-empty subset has a pair with minimal first coordinate..."). To jest wiedza na poziomie pierwszego roku studiów licencjackich z matematyki! Ten fragment jest całkowicie do usunięcia. Wystarczy samo wskazanie indukcji po porządku leksykograficznym parametrów $(|T|,|V|)$.
+   * feasibility semi-cutting,
+   * optimization minimum semi-cutting set,
+   * multiterminal cut,
+   * most-vital-edge/link,
+   * shortest-path transversals po stronie wierzchołkowej.
 
+2. **Doprecyzować mikroprzejścia w Proposition 3.5 i Theorem 4.1**, choćby jednym zdaniem więcej w miejscach, gdzie argument jest poprawny, ale gęsty:
 
-* 
-**Tłumaczenie definicji krawędzi wielokrotnych:** W Definicji 2.3 autor wdaje się w opisową pogadankę: "while parallel edges are identified automatically because the edge set consists of two-element subsets". Profesjonalny artykuł definiuje zbiór i na tym poprzestaje. Zbiór z definicji nie ma duplikatów. To opisowe zdanie obniża rangę tekstu.
+   * w Proposition 3.5 jawnie podkreślić, że w Case 2 wierzchołek (t') może być końcem albo punktem wewnętrznym (P'),
+   * w Theorem 4.1, Case 2, mocniej wyeksponować logikę „jeśli wybrana krawędź (e) leży na (P), to druga połowa ścieżki daje inną krawędź z (F)”.
 
+3. **Odchudzić elementarne lemmas/figures** albo zredukować ich rangę redakcyjną. Matematycznie są w porządku, ale stylistycznie obniżają temperaturę tekstu.
 
+4. **Wzmocnić zakończenie**: zamiast jednego zdania o sharpness, dopisać 2–3 konkretne otwarte pytania, np. o charakteryzację przypadku równości (|F|=|T|-1), o wariant ważony, albo o złożoność obliczeniową minimum semi-cutting set. Obecny tekst tylko sygnalizuje te kierunki.
 
-### 3. Nieścisłości topologiczne w głównym dowodzie (Twierdzenie 4.1)
+5. **Przemyśleć tytuł albo dołożyć jeszcze jedną niebanalną konsekwencję**, bo dziś tytuł jest trochę szerszy niż realna zawartość. 
 
-Dowód kroku indukcyjnego w Przypadku 2 zawiera lukę w formalizmie:
-
-* Autor pisze o podziale ścieżki $P$ na $P_u$ i $P_w$ w punkcie $t$ i stwierdza opisowo: "As $e$ is incident to $t$, it belongs to exactly one of them.".
-
-
-* **Luka:** To zdanie opiera się na wizualnej intuicji, a nie na matematyce. Skoro $P=(v_0,\dots,v_m)$ i $v_j=t$, to krawędź $e$ incydentna z $t$ będąca elementem $E(P)$ MUSI być krawędzią o indeksie $\{v_{j-1}, v_j\}$ lub $\{v_j, v_{j+1}\}$. Dopiero zapisanie tego w oparciu o indeksy jednoznacznie dowodzi, że $e$ należy do $E(P_u)$ albo $E(P_w)$, ale nie do obu (ponieważ $E(P_u)$ i $E(P_w)$ są rozłączne z definicji ścieżki jako ciągu wierzchołków bez powtórzeń).
-
-
-
-### 4. Nadużywanie otoczeń blokowych dla prostych wzorów (Złamanie reguły 20)
-
-Zgodnie z Twoimi restrykcyjnymi zasadami, bloki równań mają być używane w wyjątkowych momentach. Autor wyrzucił do oddzielnych linii trywialne nierówności:
-
-* Nierówność szacująca odległość: $\dist{G}{t}{z}\le \len{P}=\dots$ w Lemacie 3.3. Powinna być w tekście (inline).
-
-
-* Szacowanie mocy zbioru wierzchołków: $|V(G^\prime)|=|V|-|N[t]|+1\le n-1<n$ w Twierdzeniu 4.1. To prosty rachunek, który bezwzględnie musi znaleźć się wewnątrz akapitu.
-
-
-
-### 5. Brak pogłębionego rozwinięcia tematyki pokrewnej (Złamanie reguły 21)
-
-Zakończenie pracy jest zbyt pobieżne. Autor wspomina o pracach Corleya i Sha oraz Dahlhausa, ale robi to na poziomie streszczenia wstępu.
-Aby tekst był wartościowy naukowo, w sekcji 5 należy:
-
-* Jawnie zdefiniować "Most Vital Edges (MVE)" oraz różnicę między MVE a "Semi-cutting sets".
-* Wskazać, czy problem znalezienia minimalnego zbioru na wpół-tnącego ma szansę być NP-trudny (tak jak Multiterminal Cut wg Dahlhausa), opierając się na przedstawionym twierdzeniu o rozmiarze $|F| \ge |T|-1$.
-* Zaproponować uogólnienie na grafy z wagami (edge-weighted graphs), co było przedmiotem analiz Malika, Mittala i Gupty.
-
-
-
----
-
-### PROPOZYCJE KOREKTY (Wymagane do zaakceptowania następnej wersji)
-
-Aby tekst został przeze mnie uznany za idealny przy kolejnej iteracji, wymagam wdrożenia poniższych zmian:
-
-1. **Cięcia redakcyjne:**
-* Usuń zdanie wyjaśniające, dlaczego równoległe krawędzie znikają w Definicji 2.3.
-
-
-* Usuń w całości zdanie udowadniające dobre ufundowanie porządku leksykograficznego w Twierdzeniu 4.1.
-
-
-
-
-2. **Formalizacja języka:**
-* Zamień słowo "clearly"  na formalny wywód: *Własność $w_0=\pi_W(v_0)$ wynika bezpośrednio z faktu, że algorytm usuwa jedynie następniki, zachowując pierwszy element ciągu*.
-
-
-* Wyruguj z tekstu sformułowania "standard subpath property". Zastąp je jednym, twardym cytowaniem we Wprowadzeniu lub bezpośrednim odniesieniem do konkretnego lematu z Diestela przy każdym użyciu.
-
-
-
-
-3. **Uszczelnienie dowodu ścieżkowego:**
-* W Przypadku 2 Twierdzenia 4.1, zamiast pisać "As $e$ is incident to $t$, it belongs to exactly one of them", wprowadź notację indeksową: Skoro $e \in E(P)$ i jest incydentna z $t=v_j$, to $e = \{v_{j-1}, v_j\}$ (co implikuje $e \in E(P_u)$) lub $e = \{v_j, v_{j+1}\}$ (co implikuje $e \in E(P_w)$). Ponieważ ciąg wierzchołków ścieżki jest unikalny, przypadki te wykluczają się wzajemnie.
-
-
-
-
-4. **Formatowanie matematyczne:**
-* Wszystkie proste wyliczenia w Lemacie 3.3 i Twierdzeniu 4.1 ustrukturyzuj jako wzory w tekście (inline), używając wyłącznie środowiska matematycznego otoczonego znakami dolara bez spacji.
-
-
-5. **Wzbogacenie sekcji "Concluding Remarks":**
-* Dopisz akapit techniczny porównujący złożoność ewentualnego algorytmu aproksymacyjnego dla MVE (z prac Corleya/Malika) do problemu minimalizacji zbiorów na wpół-tnących.
-* Rozwiń problem minimalizacji takiego zbioru jako potencjalny problem optymalizacyjny z konkretnymi cytowaniami.
-
-
-6. **Wizualia (TikZ):**
-* Obrazki w pracy są poprawne, ale upewnij się, że nie służą one "łataniu" dziur w dowodzie. Rysunek 7  musi stanowić jedynie graficzną reprezentację dowodu opartego stricte na indeksach krawędzi (jak zaproponowano w punkcie 3).
-
-
-
+Podsumowując najostrzej, ale uczciwie: **to nie jest chaotyczny raport i nie jest to tekst z fundamentalnie popsutym dowodem**. Ale też **nie jest to jeszcze tekst „idealny”**. Matematyczny szkielet wygląda dobrze; to, co go dziś trzyma poniżej poziomu topowego artykułu, to przede wszystkim zbyt skromne osadzenie w literaturze, nie do końca optymalna kondensacja redakcyjna i kilka miejsc, które warto doprecyzować, zanim zrobi to złośliwy recenzent za autora.
