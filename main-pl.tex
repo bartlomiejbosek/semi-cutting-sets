@@ -218,8 +218,7 @@ wszystkie terminale należą do jednej składowej spójności grafu $G$.
 
 \section{Lematy pomocnicze}
 
-Użyjemy kilku standardowych własności spacerów i~ścieżek najkrótszych; por.~\cite[rozdz.~1]{bondy-murty,diestel}. Dowody
-podajemy tylko tam, gdzie są bezpośrednio związane z~operacją ściągania stosowaną w~dalszej części pracy.
+W~tej sekcji zbieramy trzy własności, które będą wykorzystywane w~części dotyczącej ściągania.
 
 \begin{lemma}\label{lem:contraction-image-size}
 Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas $|F/W|\le |F|$.
@@ -242,8 +241,16 @@ o~długości nie większej niż długość tego spaceru.
 \end{lemma}
 
 \begin{proof}
-Jest to standardowa własność spacerów: usuwając kolejne zamknięte fragmenty między dwoma wystąpieniami tego samego
-wierzchołka, otrzymujemy ścieżkę z~$u$ do~$w$ o~długości nie większej niż długość wyjściowego spaceru; por.~\cite[rozdz.~1]{bondy-murty,diestel}.
+Niech $P=(v_0,\dots,v_k)$ będzie spacerem z~$u$ do~$w$ w~$H$. Jeżeli wszystkie wierzchołki $v_0,\dots,v_k$ są parami różne,
+to $P$ jest ścieżką i~nie ma czego dowodzić. Załóżmy więc, że istnieją indeksy $i<j$ takie, że $v_i=v_j$. Wówczas ciąg
+$P'\coloneqq (v_0,\dots,v_i,v_{j+1},\dots,v_k)$ jest znów spacerem z~$u$ do~$w$: jedyną nową parą kolejnych wierzchołków
+jest para $v_i,v_{j+1}$, lecz $v_i=v_j$, a~więc z~faktu, że $P$ jest spacerem, wynika
+$\{v_i,v_{j+1}\}=\{v_j,v_{j+1}\}\in E(H)$. Ponadto $\len{P'}=k-(j-i)\le k=\len{P}$ oraz liczba wyrazów ciągu $P'$
+jest mniejsza niż liczba wyrazów ciągu $P$.
+
+Powtarzając powyższą operację zawsze wtedy, gdy w~otrzymanym spacerze pojawią się dwa równe wierzchołki, po skończonej
+liczbie kroków otrzymujemy spacer z~$u$ do~$w$ bez powtórzeń wierzchołków. Jest to ścieżka, a~na każdym kroku długość
+nie rośnie. Ostateczna ścieżka ma więc długość nie większą niż długość wyjściowego spaceru $P$.
 \end{proof}
 
 \begin{lemma}\label{lem:subpath}
@@ -254,7 +261,7 @@ $\len{P[v_i,v_j]}=\dist{H}{v_i}{v_j}$.
 
 \begin{proof}
 Gdyby istniała ścieżka z~$v_i$ do~$v_j$ krótsza niż $P[v_i,v_j]$, to zastąpienie nią fragmentu $P[v_i,v_j]$ dawałoby ścieżkę
-z~$u$ do~$w$ krótszą niż $P$, wbrew równości $\len{P}=\dist{H}{u}{w}$; por.~\cite[rozdz.~1]{bondy-murty,diestel}.
+z~$u$ do~$w$ krótszą niż $P$, wbrew równości $\len{P}=\dist{H}{u}{w}$.
 \end{proof}
 
 \begin{observation}\label{obs:shortest-paths}
@@ -463,29 +470,28 @@ Wówczas $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
 \end{proposition}
 
 \begin{proof}
-Dowód opiera się na dwóch mechanizmach. Krawędzie o~obu końcach poza $N[t]$ przechodzą do $G^\prime$ bez zmiany
-na mocy Obserwacji~\ref{obs:outside-edges}. Jeżeli natomiast ścieżka najkrótsza w~$G^\prime$ przechodzi przez $t^\prime$,
-to jej końcowy fragment wychodzący z~$t^\prime$ można, na mocy Lematu~\ref{lem:lifting-endpoint}, podnieść do ścieżki
-najkrótszej wychodzącej z~$t$ w~grafie $G$. Najpierw pokażemy, że $T\setminus\{t\}\subseteq V\setminus N[t]$.
-Weźmy dowolne $u\in T\setminus\{t\}$ i~przypuśćmy, że $u\in N(t)$. Wtedy $\dist{G}{t}{u}=1$, a~jedyna ścieżka długości $1$
+\emph{Krok 1: terminale z~$T\setminus\{t\}$ leżą poza $N[t]$.}
+Weźmy dowolne $u\in T\setminus\{t\}$ i~przypuśćmy, że $u\in N(t)$. Wtedy $\dist{G}{t}{u}=1$, a~jedyna ścieżka długości~$1$
 z~$t$ do~$u$ jest równa $(t,u)$. Z~Obserwacji~\ref{obs:shortest-paths} wynikałoby więc, że krawędź $\{t,u\}$ należy do~$F$,
-co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi żądanej inkluzji. W~szczególności $T^\prime\subseteq V(G^\prime)$.
+co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi inkluzji $T\setminus\{t\}\subseteq V\setminus N[t]$.
+W~szczególności $T^\prime\subseteq V(G^\prime)$.
 
-W~następnym kroku pokażemy, że dla każdych różnych $u,w\in T^\prime$ zachodzi $\dist{G^\prime}{u}{w}<\infty$. Jeżeli
-$u,w\in T\setminus\{t\}$, to z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{u}{w}<\infty$. Istnieje więc ścieżka z~$u$ do~$w$
-w~$G$. Ponieważ $u,w\notin N[t]$, mamy $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(w)=w$, więc z~Lematów~\ref{lem:projection-walk}
-i~\ref{lem:walk-to-path} otrzymujemy ścieżkę z~$u$ do~$w$ w~$G^\prime$. Jeżeli jeden z~wierzchołków $u,w$ jest równy $t^\prime$, to drugi należy do~$T\setminus\{t\}$;
-oznaczmy go przez $z$. Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{t}{z}<\infty$, więc w~$G$ istnieje
-ścieżka z~$t$ do~$z$.
+\emph{Krok 2: każda para różnych terminali z~$T^\prime$ ma w~$G^\prime$ skończoną odległość.}
+Niech $u,w\in T^\prime$ będą różne. Jeżeli $u,w\in T\setminus\{t\}$, to z~Obserwacji~\ref{obs:finite-terminal-distances}
+mamy $\dist{G}{u}{w}<\infty$. Istnieje więc ścieżka z~$u$ do~$w$ w~$G$. Ponieważ $u,w\notin N[t]$, mamy
+$\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(w)=w$, więc z~Lematów~\ref{lem:projection-walk} i~\ref{lem:walk-to-path}
+otrzymujemy ścieżkę z~$u$ do~$w$ w~$G^\prime$.
+
+Jeżeli jeden z~wierzchołków $u,w$ jest równy $t^\prime$, to drugi należy do~$T\setminus\{t\}$; oznaczmy go przez $z$.
+Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{t}{z}<\infty$, więc w~$G$ istnieje ścieżka z~$t$ do~$z$.
 Ponieważ $\pi_{N[t]}(t)=t^\prime$ oraz $\pi_{N[t]}(z)=z$, z~Lematu~\ref{lem:projection-walk}, zastosowanego do tej ścieżki,
 otrzymujemy spacer z~$t^\prime$ do~$z$ w~$G^\prime$, a~następnie z~Lematu~\ref{lem:walk-to-path} ścieżkę z~$t^\prime$ do~$z$
-w~$G^\prime$. Tym samym każda para różnych terminali z~$T^\prime$
-ma w~$G^\prime$ skończoną odległość.
+w~$G^\prime$.
 
-Niech teraz $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$.
-Ponieważ na mocy Definicji~\ref{def:contraction} graf $G^\prime$ jest grafem prostym, możemy zastosować do niego
-Obserwację~\ref{obs:shortest-paths}. Wystarczy więc wykazać, że $E(P^\prime)\cap F^\prime\neq\emptyset$.
-Rozpatrujemy dwa przypadki.
+\emph{Krok 3: każda ścieżka najkrótsza między różnymi terminalami z~$T^\prime$ przecina $F^\prime$.}
+Niech $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$.
+Ponieważ graf $G^\prime$ jest prosty, z~Obserwacji~\ref{obs:shortest-paths} wystarczy wykazać, że
+$E(P^\prime)\cap F^\prime\neq\emptyset$. Rozpatrujemy dwa przypadki.
 
 \medskip\noindent
 \textbf{Przypadek 1: $t^\prime\notin V(P^\prime)$.}
@@ -503,7 +509,7 @@ $P^\prime$, sprzeczną z~minimalnością $P^\prime$.
 Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$ w~$G$, zachodzi zarazem $\dist{G}{u}{w}\le \len{P^\prime}$, skąd
 $\len{P^\prime}=\dist{G}{u}{w}$. Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} dostajemy krawędź
 $g\in E(P^\prime)\cap F$.
-Na mocy Obserwacji~\ref{obs:outside-edges} mamy $g/N[t]=g$, a~zatem $g\in F^\prime$. Otrzymujemy
+Na mocy Obserwacji~\ref{obs:outside-edges} mamy $g/N[t]=g$, a~więc z~definicji $F^\prime=F/N[t]$ dostajemy $g\in F^\prime$. Otrzymujemy
 $E(P^\prime)\cap F^\prime\neq\emptyset$.
 
 \medskip\noindent
@@ -533,6 +539,8 @@ zastosowanego w~grafie prostym $G^\prime$, wynika $\len{Q^\prime}=\dist{G^\prime
 Lemat~\ref{lem:lifting-endpoint}. Istnieje wówczas wierzchołek $v\in N(t)$ taki, że
 $Q=(t,v,y_{r+1},\dots,y_m)$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
 
+\smallskip\noindent
+Przenosimy teraz z~$G$ do~$G^\prime$ odpowiednią krawędź ze zbioru $F$.
 Ponieważ $t,z\in T$, z~Obserwacji~\ref{obs:shortest-paths} otrzymujemy $E(Q)\cap F\neq\emptyset$.
 Z~założenia $t\notin V[F]$ oraz z~definicji zbioru $V[F]$ wynika, że żadna krawędź incydentna z~$t$ nie należy do~$F$.
 W~szczególności pierwsza krawędź ścieżki $Q$, to znaczy $\{t,v\}$, nie należy do~$F$. Wybierzmy więc
@@ -545,8 +553,7 @@ $f=\{y_i,y_{i+1}\}$ dla pewnego
 $i\in\{r+1,\dots,m-1\}$, to oba końce krawędzi $f$ leżą poza $N[t]$, więc na mocy Obserwacji~\ref{obs:outside-edges}
 zachodzi $f/N[t]=f\in E(Q^\prime)$.
 W~obu podprzypadkach $f/N[t]\in E(Q^\prime)\subseteq E(P^\prime)$.
-W~obu podprzypadkach końce krawędzi $f$ mają różne obrazy przez odwzorowanie $\pi_{N[t]}$, więc z~Definicji~\ref{def:contraction}
-wynika, że $f/N[t]$ jest krawędzią grafu $G^\prime$. Ponieważ ponadto $f\in F$, otrzymujemy $f/N[t]\in F^\prime$. Stąd
+Ponieważ ponadto $f\in F$, z~definicji $F^\prime=F/N[t]$ otrzymujemy $f/N[t]\in F^\prime$. Stąd
 $E(P^\prime)\cap F^\prime\neq\emptyset$.
 
 Wykazaliśmy, że każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^\prime$ przecina zbiór $F^\prime$. Wraz ze
@@ -652,6 +659,8 @@ Porządek ten jest dobrze ufundowany na zbiorze
 \[
   \bigl\{(a,b)\in\mathbb{N}_0^2:\ a\le b\bigr\}.
 \]
+Rzeczywiście, w~każdym niepustym podzbiorze tego zbioru można najpierw wybrać pary o~najmniejszej pierwszej współrzędnej,
+a~następnie spośród nich parę o~najmniejszej drugiej współrzędnej.
 Sama indukcja po~$|T|$ nie wystarcza, ponieważ operacja ściągania zachowuje liczbę terminali i~zmniejsza jedynie liczbę
 wierzchołków.
 
@@ -696,7 +705,9 @@ $|F^\prime|\ge |T^\prime|-1=k-1$. Lemat~\ref{lem:contraction-image-size} daje $|
 \textbf{Przypadek 2: $T\subseteq V[F]$.}
 Ponieważ $T\subseteq V[F]$, każdy terminal jest incydentny z~co najmniej jedną krawędzią ze zbioru $F$. Wybierzmy więc
 $t\in T$ oraz krawędź $e\in F$ incydentną z~$t$. Oznaczmy $T^-\coloneqq T\setminus\{t\}$ oraz $F^-\coloneqq F\setminus\{e\}$.
-Pokażemy, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
+Pokażemy najpierw, że dla każdej pary różnych wierzchołków $u,w\in T^-$ oraz każdej ścieżki najkrótszej $P$ z~$u$ do~$w$
+w~$G$ zachodzi $E(P)\cap F^-\neq\emptyset$. Wraz z~Obserwacją~\ref{obs:finite-terminal-distances} da to, na mocy
+Obserwacji~\ref{obs:shortest-paths}, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
 
 Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$F$ jest zbiorem na wpół-tnącym dla~$T$, z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
 $\dist{G}{u}{w}<\infty$. Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths}
@@ -733,9 +744,10 @@ Wtedy $f\neq e$, a~więc $f\in F^-$. Jeżeli natomiast $e\in E(P_w)$, to analogi
 $P_u$ jest ścieżką najkrótszą z~$u$ do~$t$ w~$G$, otrzymujemy krawędź $f\in E(P_u)\cap F$.
 Znów zachodzi $f\neq e$, a~więc $f\in F^-$. W~obu podprzypadkach dostajemy $E(P)\cap F^-\neq\emptyset$.
 
-Wykazaliśmy, że dla każdych różnych $u,w\in T^-$ odległość $\dist{G}{u}{w}$ jest skończona i~każda ścieżka najkrótsza między
-$u$ i~$w$ przecina zbiór $F^-$. Z~Obserwacji~\ref{obs:shortest-paths} wynika więc, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$
-w~$G$.
+Wykazaliśmy więc, że usunięcie pojedynczej krawędzi $e$ incydentnej z~usuwanym terminalem $t$ nie niszczy własności
+przecinania wszystkich ścieżek najkrótszych między parami z~$T^-$. Ponieważ ponadto dla każdej pary różnych
+$u,w\in T^-$ zachodzi $\dist{G}{u}{w}<\infty$, z~Obserwacji~\ref{obs:shortest-paths} wynika, że $F^-$ jest zbiorem
+na wpół-tnącym dla~$T^-$ w~$G$.
 
 Ponieważ $|T^-|=k-1$ oraz $|V(G)|=n$, zachodzi $(|T^-|,|V(G)|)\prec (k,n)$. Z~założenia indukcyjnego otrzymujemy
 $|F^-|\ge |T^-|-1=(k-1)-1=k-2$. Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy $|F|=|F^-|+1\ge k-1$.
@@ -749,10 +761,15 @@ na Rysunku~\ref{fig:semi-cut-example}. Naturalnym dalszym problemem pozostaje op
 w~Twierdzeniu~\ref{thm:main} zachodzi równość $|F|=|T|-1$.
 
 Z~punktu widzenia literatury problem ten można traktować jako wieloterminalny odpowiednik zagadnień o~wrażliwości
-najkrótszych ścieżek: jest on słabszy od żądania pełnego rozdzielenia terminali, typowego dla \emph{multiterminal cut}
-\cite{dahlhaus1994}, a~zarazem istotnie silniejszy od wymogu zwiększenia odległości tylko dla jednej zadanej pary,
-charakterystycznego dla problemów \emph{most vital links}~\cite{corley-sha,nardelli-proietti-widmayer}. Uzyskana nierówność
-$|F|\ge |T|-1$ ma zatem interpretację czysto strukturalnego ograniczenia dolnego dla tej pośredniej klasy zjawisk.
+najkrótszych ścieżek. W~pracy Dahlhausa i~współautorów~\cite{dahlhaus1994} celem jest pełne rozdzielenie wszystkich
+terminali, a~więc przejście odpowiednich odległości do~wartości $\infty$. W~niniejszej pracy wymagamy jedynie ścisłego
+wzrostu każdej odległości terminal--terminal; wzrost ten może, lecz nie musi, prowadzić do rozspójnienia. Z~kolei
+u~Corleya i~Sha~\cite{corley-sha} oraz u~Nardellego, Proiettiego i~Widmayera~\cite{nardelli-proietti-widmayer}
+wyróżniona jest pojedyncza para końców, natomiast tutaj wszystkie pary ze zbioru $T$ są traktowane jednocześnie.
+Ponadto tamte prace rozważają sieci ważone, a~miejscami także skierowane, podczas gdy niniejszy artykuł dotyczy
+wyłącznie skończonych grafów prostych nieskierowanych. Uzyskana nierówność $|F|\ge |T|-1$ ma zatem interpretację
+czysto strukturalnego ograniczenia dolnego dla pośredniej klasy zjawisk, leżącej między pełnym rozdzieleniem terminali
+a~wrażliwością najkrótszej drogi dla jednej wyróżnionej pary.
 
 \begin{thebibliography}{9}
 
