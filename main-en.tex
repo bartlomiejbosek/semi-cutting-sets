@@ -1,0 +1,537 @@
+\documentclass[12pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usetikzlibrary{arrows.meta,calc,fit,positioning,decorations.pathreplacing}
+\geometry{margin=2.5cm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{notation}[definition]{Notation}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{observation}[definition]{Observation}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{theorem}[definition]{Theorem}
+
+\newcommand{\len}[1]{\ell(#1)}
+\newcommand{\dist}[3]{d_{#1}(#2,#3)}
+
+\title{\textbf{On the size of semi-cutting sets in graphs}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G=(V,E)$ be a finite simple undirected graph. For $T\subseteq V$ and $F\subseteq E$, we call $F$ a semi-cutting set for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every pair of distinct terminals $u,w\in T$. In this paper, we prove that every such set satisfies the inequality $|F|\ge |T|-1$. The proof is based on a shortest path characterization, the persistence of the semi-cutting property under the contraction of the closed neighborhood of a terminal not incident to $F$, and on lexicographical induction with respect to the pair $(|T|,|V|)$.
+\end{abstract}
+
+\section{Introduction}
+
+Let $G=(V,E)$ be a finite simple undirected graph and let $T\subseteq V$. For an edge set $F\subseteq E$, we say that $F$ is a semi-cutting set for $T$ if after removing the edges of $F$ the distance between every pair of distinct terminals strictly increases, that is, $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for all distinct $u,w\in T$. We consider only simple graphs; however, we do not assume connectivity, planarity, or any other additional structural property. The graph terminology used in this paper is standard; cf.~\cite{bondy-murty,diestel}.
+
+The condition considered here lies between two classical families of problems. On the one hand, the \emph{multiterminal cut} problem requires the removal of an edge set separating all terminals, and its main reference point is the paper by Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994}. On the other hand, in \emph{most vital links and nodes} problems, one studies removals that cause the largest possible increase in the distance between a distinguished pair of vertices; this trend was initiated by Corley and Sha~\cite{corley-sha}, and the variant concerning a single edge on a shortest path was later analyzed by Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}. Semi-cutting sets do not require the complete disconnection of terminals, but they force a simultaneous strict increase of all distances between pairs of terminals, which gives the concept studied here a distinctly multiterminal character.
+
+The aim of this paper is to show a purely structural lower bound $|F|\ge |T|-1$ valid for every semi-cutting set. First, we write the definition of this set in an equivalent form requiring the intersection of all shortest paths between terminals. Next, we prove that this property is preserved after the contraction of the closed neighborhood of a terminal $t\in T\setminus V[F]$. The final stage is a lexicographical induction with respect to the pair $(|T|,|V|)$.
+
+The bound is sharp. For every $k\ge 2$, let $G$ be a path graph with the vertex set $V(G)=\{v_0,v_1,\dots,v_{2k-2}\}$ and the edge set $E(G)=\bigl\{\{v_i,v_{i+1}\}: i=0,\dots,2k-3\bigr\}$. If we take the terminal set $T=\{v_0,v_2,\dots,v_{2k-2}\}$ and the edge set $F=\bigl\{\{v_{2i},v_{2i+1}\}: i=0,\dots,k-2\bigr\}$, then the equality $|F|=|T|-1$ holds. After removing the edges of $F$, each component of the graph $G\setminus F$ contains exactly one terminal, so two distinct terminals end up in different components and their distance increases from a finite value to $\infty$. An example for $k=3$ is shown in Figure~\ref{fig:semi-cut-example}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$u$] (u) at (0,0) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$a$]   (a) at (1.8,0) {};
+  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$v$] (v) at (3.6,0) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$b$]   (b) at (5.4,0) {};
+  \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$w$] (w) at (7.2,0) {};
+  \draw[very thick,red!70!black] (u) -- node[above]{$e_1$} (a);
+  \draw (a) -- (v);
+  \draw[very thick,red!70!black] (v) -- node[above]{$e_2$} (b);
+  \draw (b) -- (w);
+  \node[align=center] at (3.6,-1.3)
+    {$\dist{G}{u}{v}=2,\quad \dist{G\setminus F}{u}{v}=\infty$\\[2pt]
+     $\dist{G}{v}{w}=2,\quad \dist{G\setminus F}{v}{w}=\infty$\\[2pt]
+     $\dist{G}{u}{w}=4,\quad \dist{G\setminus F}{u}{w}=\infty$};
+\end{tikzpicture}
+\caption{An example of the sharpness of the bound $|F|\ge |T|-1$. The graph $G$ is a path $u$--$a$--$v$--$b$--$w$; the terminals $T=\{u,v,w\}$ are marked in gray, and the set $F=\{e_1,e_2\}$ in red.}
+\label{fig:semi-cut-example}
+\end{figure}
+
+\section{Notation and definitions}
+
+In this section and in further formulations, $G=(V,E)$ denotes any finite simple undirected graph, that is, a graph without loops and without multiple edges. We therefore identify each edge with a two-element subset of the vertex set. We treat distances as elements of the set $\mathbb{N}_0\cup\{\infty\}$, where $\mathbb{N}_0=\{0,1,2,\dots\}$, with the order extended by the relations $n<\infty$ for every $n\in\mathbb{N}_0$.
+
+\begin{definition}[Walks, paths, and distance]\label{def:paths-distance}
+Let $u,w\in V$. A walk from $u$ to $w$ is a sequence of vertices $P=(v_0,v_1,\dots,v_k)$, where $k\in\mathbb{N}_0$, $v_0=u$, $v_k=w$, and $\{v_{i-1},v_i\}\in E$ for every $i\in\{1,\dots,k\}$. The length of the walk is defined as $\len{P}\coloneqq k$. A path is a walk in which the vertices are pairwise distinct. For a path $P=(v_0,\dots,v_k)$, we write $V(P)\coloneqq \{v_0,\dots,v_k\}$ and $E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: i=1,\dots,k\bigr\}$.
+
+If $P=(v_0,\dots,v_k)$ and $Q=(w_0,\dots,w_\ell)$ are walks such that $v_k=w_0$, then their concatenation is defined as $P\cdot Q\coloneqq (v_0,\dots,v_k,w_1,\dots,w_\ell)$.
+
+The distance $\dist{G}{u}{w}$ is defined as the minimum length of a path from $u$ to $w$ in $G$, if such a path exists; otherwise, we set $\dist{G}{u}{w}\coloneqq \infty$. Since $G$ is finite, every path in $G$ has length at most $|V|-1$, so if at least one path from $u$ to $w$ exists, the aforementioned minimum is well-defined. A path $P$ from $u$ to $w$ is called a shortest path if $\len{P}=\dist{G}{u}{w}$.
+\end{definition}
+
+\begin{notation}[Basic graph operations]\label{not:basic-operations}
+If $F\subseteq E$, then $G\setminus F$ denotes the graph $(V,E\setminus F)$, and $V[F]\coloneqq \{v\in V:\ \exists\, e\in F\ \text{ such that } v\in e\}$ is the set of endpoints of the edges in $F$. If $v\in V$, then its neighborhood and closed neighborhood are denoted respectively by $N(v)\coloneqq \{w\in V:\ \{v,w\}\in E\}$ and $N[v]\coloneqq N(v)\cup\{v\}$. If $P=(v_0,\dots,v_k)$ is a path and $0\le i\le j\le k$, we write $P[v_i,v_j]\coloneqq (v_i,\dots,v_j)$. If $P=(v_0,\dots,v_k)$ is a walk, then $\overleftarrow{P}\coloneqq (v_k,\dots,v_0)$ denotes the walk obtained by reversing the order of the vertices. Since the graph is undirected, we have $\len{\overleftarrow{P}}=\len{P}$; if $P$ is a path, then $\overleftarrow{P}$ is a path and $E(\overleftarrow{P})=E(P)$.
+\end{notation}
+
+\begin{definition}[Contraction of a non-empty vertex set]\label{def:contraction}
+Let $\emptyset\neq W\subseteq V$ and let $w^\ast\notin V$ be a new vertex. We define the mapping
+\[
+  \pi_W\colon V\to (V\setminus W)\cup\{w^\ast\},
+  \qquad
+  \pi_W(v)\coloneqq
+  \begin{cases}
+    w^\ast & \text{for } v\in W,\\
+    v & \text{for } v\notin W.
+  \end{cases}
+\]
+By $G/W$ we denote the simple graph $(V',E')$, where
+\[
+\begin{aligned}
+  V' &\coloneqq (V\setminus W)\cup\{w^\ast\},\\
+  E' &\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
+\end{aligned}
+\]
+The condition $\pi_W(x)\neq \pi_W(y)$ guarantees that no loops are created in $G/W$, and the set description of the edges identifies possible multiple edges; in particular, $G/W$ remains a simple graph. If $e=\{x,y\}\in E$ and $\pi_W(x)\neq \pi_W(y)$, then the image of this edge is denoted by $e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E'$. For $F\subseteq E$, we define the image of the edge set as $F/W\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in F,\ \pi_W(x)\neq \pi_W(y)\bigr\}\subseteq E'$.
+\end{definition}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+  \begin{scope}[xshift=0cm]
+    \node at (2.2,3.0) {$G$};
+    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]    (x)  at (0,1.5)   {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]   (y)  at (4.4,2.2)  {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]   (z)  at (4.4,0.8)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$a$] (a)  at (1.5,2.3)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=right:$b$] (b)  at (2.8,1.5)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$c$] (c)  at (1.5,0.7)  {};
+    \draw[gray!50] (a)--(b)--(c)--(a);
+    \draw (x)--(a)  (x)--(c);
+    \draw (b)--(y)  (b)--(z);
+    \draw (y)--(z);
+    \node[draw,dashed,rounded corners,fit=(a)(b)(c),inner sep=7pt,
+          label={[font=\small]above right:$W$}] {};
+  \end{scope}
+  \draw[-{Latex[length=3mm]},thick] (5.4,1.5) -- (6.8,1.5)
+    node[midway,above,font=\small] {$/W$};
+  \begin{scope}[xshift=7.4cm]
+    \node at (1.8,3.0) {$G/W$};
+    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]       (xp) at (0,1.5)   {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]      (yp) at (3.6,2.2)  {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]      (zp) at (3.6,0.8)  {};
+    \node[circle,draw,inner sep=2pt,fill=gray!50,label=above:$w^*$]  (wp) at (1.8,1.5)  {};
+    \draw (xp)--(wp)  (wp)--(yp)  (wp)--(zp)  (yp)--(zp);
+  \end{scope}
+\end{tikzpicture}
+\caption{Contraction of $W=\{a,b,c\}$ into the vertex $w^*$ (Definition~\ref{def:contraction}). The internal edges of the set $W$ disappear, and the edges leaving $W$ transition to edges incident to $w^*$.}
+\label{fig:contraction-def}
+\end{figure}
+
+\begin{definition}[Semi-cutting set]\label{def:semi-cut}
+Let $T\subseteq V$. We say that $F\subseteq E$ is a semi-cutting set for $T$ in $G$ if for every pair of distinct vertices $u,w\in T$, the inequality $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ holds. The vertices of the set $T$ are called terminals.
+\end{definition}
+
+\begin{observation}\label{obs:finite-terminal-distances}
+Let $T\subseteq V$ and $F\subseteq E$. If $F$ is a semi-cutting set for $T$ in $G$, then for every pair of distinct terminals $u,w\in T$, we have $\dist{G}{u}{w}<\infty$. In particular, all terminals belong to a single connected component of the graph $G$.
+\end{observation}
+
+\begin{proof}
+Let us take any distinct vertices $u,w\in T$. From Definition~\ref{def:semi-cut}, it follows that after removing the edges of $F$, the distance between $u$ and $w$ strictly increases. In particular, the distance $\dist{G}{u}{w}$ is finite. The existence of a finite distance between every pair of terminals means that there is a path in $G$ between any two terminals. Thus, all terminals belong to a single connected component of the graph $G$.
+\end{proof}
+
+\section{Auxiliary lemmas}
+
+In this section, we collect three properties that will be used in the part concerning contraction.
+
+\begin{lemma}\label{lem:contraction-image-size}
+Let $\emptyset\neq W\subseteq V$ and $F\subseteq E$. Then $|F/W|\le |F|$.
+\end{lemma}
+
+\begin{proof}
+Let $D\coloneqq \bigl\{\{x,y\}\in F:\ \pi_W(x)\neq \pi_W(y)\bigr\}$. From Definition~\ref{def:contraction}, it follows that the mapping
+\[
+  \varphi\colon D\to F/W,
+  \qquad
+  \varphi(\{x,y\})\coloneqq \{\pi_W(x),\pi_W(y)\},
+\]
+is a surjection. Therefore, $|F/W|\le |D|\le |F|$.
+\end{proof}
+
+\begin{lemma}\label{lem:walk-to-path}
+Let $H$ be a finite simple graph. If there exists a walk from $u$ to $w$ in $H$, then there also exists a path from $u$ to $w$ of length no greater than the length of this walk.
+\end{lemma}
+
+\begin{proof}
+Let $P=(v_0,\dots,v_k)$ be a walk from $u$ to $w$ in $H$. If all the vertices $v_0,\dots,v_k$ are pairwise distinct, then $P$ is a path and there is nothing to prove. Assume then that there are indices $i<j$ such that $v_i=v_j$. Then the sequence $P'\coloneqq (v_0,\dots,v_i,v_{j+1},\dots,v_k)$ is again a walk from $u$ to $w$: the only new pair of consecutive vertices is the pair $v_i,v_{j+1}$, but $v_i=v_j$, so from the fact that $P$ is a walk, it follows that $\{v_i,v_{j+1}\}=\{v_j,v_{j+1}\}\in E(H)$. Moreover, $\len{P'}=k-(j-i)\le k=\len{P}$, and the number of terms in the sequence $P'$ is less than the number of terms in the sequence $P$. Repeating the above operation whenever two identical vertices appear in the obtained walk, after a finite number of steps we obtain a walk from $u$ to $w$ without vertex repetitions. This is a path, and at each step the length does not increase. The final path therefore has a length no greater than the length of the initial walk $P$.
+\end{proof}
+
+\begin{lemma}\label{lem:subpath}
+Let $H$ be a finite simple graph and let $P=(v_0,\dots,v_k)$ be a path from $u$ to $w$ in $H$ of length $\len{P}=\dist{H}{u}{w}$. Then for all indices $0\le i\le j\le k$, we have $\len{P[v_i,v_j]}=\dist{H}{v_i}{v_j}$.
+\end{lemma}
+
+\begin{proof}
+If there were a path from $v_i$ to $v_j$ shorter than $P[v_i,v_j]$, replacing the fragment $P[v_i,v_j]$ with it would yield a path from $u$ to $w$ shorter than $P$, contrary to the equality $\len{P}=\dist{H}{u}{w}$.
+\end{proof}
+
+\begin{observation}\label{obs:shortest-paths}
+Let $H$ be a finite simple graph, let $X\subseteq V(H)$, and let $M\subseteq E(H)$. Then $M$ is a semi-cutting set for $X$ in $H$ if and only if for all distinct $u,w\in X$, we have $\dist{H}{u}{w}<\infty$, and every path $P$ from $u$ to $w$ of length $\len{P}=\dist{H}{u}{w}$ satisfies $E(P)\cap M\neq\emptyset$. This situation is illustrated in Figure~\ref{fig:shortest-path-condition}.
+\end{observation}
+
+\begin{proof}
+Let us fix distinct vertices $u,w\in X$.
+
+First, assume that $M$ is a semi-cutting set for $X$ in $H$. Then $\dist{H}{u}{w}<\dist{H\setminus M}{u}{w}\le \infty$, so $\dist{H}{u}{w}<\infty$. Let $P$ be a path from $u$ to $w$ of length $\dist{H}{u}{w}$. If we had $E(P)\cap M=\emptyset$, then $P$ would also be a path in $H\setminus M$, and so $\dist{H\setminus M}{u}{w}\le \len{P}=\dist{H}{u}{w}$, which contradicts the assumption.
+
+Now assume that $\dist{H}{u}{w}<\infty$ and every path from $u$ to $w$ of length $\dist{H}{u}{w}$ intersects the set $M$. If no path from $u$ to $w$ exists in $H\setminus M$, then $\dist{H\setminus M}{u}{w}=\infty>\dist{H}{u}{w}$. The remaining case is $\dist{H\setminus M}{u}{w}<\infty$. Let $Q$ be a path from $u$ to $w$ in $H\setminus M$ of length $\len{Q}=\dist{H\setminus M}{u}{w}$. Since $E(H\setminus M)\subseteq E(H)$, the path $Q$ is also a path in $H$, and therefore $\len{Q}\ge \dist{H}{u}{w}$. Equality cannot hold, because then $Q$ would be a shortest path in $H$ not intersecting the set $M$. Thus $\dist{H\setminus M}{u}{w}=\len{Q}>\dist{H}{u}{w}$. Since the pair $u,w$ was arbitrary, the set $M$ is a semi-cutting set for $X$ in $H$.
+\end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize}]
+  \node[circle,draw,inner sep=3pt,fill=gray!30,label=left:$u$]  (u) at (0,0)   {};
+  \node[circle,draw,inner sep=3pt,fill=gray!30,label=right:$w$] (w) at (7.2,0) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=above:$p$] (p) at (2.2,1.1) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=above:$q$] (q) at (5.0,1.1) {};
+  \draw[thick,blue!70!black] (u)--(p);
+  \draw[very thick,red!70!black] (p)--node[above]{$e\in F$}(q);
+  \draw[thick,blue!70!black] (q)--(w);
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$a$] (a) at (1.8,-1.1) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$b$] (b) at (3.6,-1.1) {};
+  \node[circle,draw,inner sep=2pt,fill=white,label=below:$c$] (c) at (5.4,-1.1) {};
+  \draw[thick,black!35] (u)--(a)--(b)--(c)--(w);
+  \node[align=center] at (3.6,0)
+    {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
+\end{tikzpicture}
+\caption{Illustration of Observation~\ref{obs:shortest-paths}: the set $F$ intersects all shortest paths between $u$ and $w$, although it does not have to intersect longer paths.}
+\label{fig:shortest-path-condition}
+\end{figure}
+
+\begin{lemma}\label{lem:projection-walk}
+Let $\emptyset\neq W\subseteq V$. If $P=(v_0,\dots,v_k)$ is a walk in $G$, then in $G/W$ there exists a walk $P'=(w_0,\dots,w_m)$ such that $w_0=\pi_W(v_0)$, $w_m=\pi_W(v_k)$, and $m\le k$.
+\end{lemma}
+
+\begin{proof}
+Let us consider the images of successive vertices of the walk $P$ under the mapping $\pi_W$ and remove from the obtained sequence all terms equal to the immediately preceding one. In this way, we obtain a sequence $P'=(w_0,\dots,w_m)$ for which $w_0=\pi_W(v_0)$, $w_m=\pi_W(v_k)$, and $m\le k$. If $w_r$ and $w_{r+1}$ are consecutive preserved terms, then there is an index $j\in\{1,\dots,k\}$ such that $w_r=\pi_W(v_{j-1})$, $w_{r+1}=\pi_W(v_j)$, and $\pi_W(v_{j-1})\neq \pi_W(v_j)$. Since $\{v_{j-1},v_j\}\in E$, from Definition~\ref{def:contraction} it follows that $\{w_r,w_{r+1}\}\in E(G/W)$. Thus $P'$ is a walk with the desired properties.
+\end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
+  \begin{scope}[xshift=0cm]
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$x$]  (x)  at (0,0) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$a$] (a)  at (1.8,0) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$t$] (t)  at (3.2,0) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$b$] (b)  at (4.6,0) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$y$]  (y)  at (6.4,0) {};
+    \draw[very thick,blue!70!black] (x)--(a)--(t)--(b)--(y);
+    \node[draw,dashed,rounded corners,fit=(a)(t)(b),inner sep=5pt,label=above:$W$] {};
+    \node at (3.2,-1.1) {walk $P$: $x$–$a$–$t$–$b$–$y$ (len.\ 4)};
+    \node at (3.2,1.9) {$G$};
+  \end{scope}
+  \draw[-{Latex[length=3mm]},thick] (7.2,0) -- (8.6,0);
+  \node at (7.9,0.45) {\small $/ W$};
+  \begin{scope}[xshift=9.4cm]
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$x$]     (xp) at (0,0) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!40,label=below:$w^*$] (wp) at (1.8,0) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$y$]     (yp) at (3.6,0) {};
+    \draw[very thick,blue!70!black] (xp)--(wp)--(yp);
+    \node at (1.8,-1.1) {walk $P'$: $x$–$w^*$–$y$ (len.\ 2)};
+    \node at (1.8,1.9) {$G/W$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Illustration of Lemma~\ref{lem:projection-walk}: after contracting the set $W=\{a,t,b\}$, the length of the walk's image does not increase.}
+\label{fig:projection-walk}
+\end{figure}
+
+\section{Preservation of the property under contraction}
+
+The key step of the proof is to show that the contraction of the closed neighborhood of a terminal $t\notin V[F]$ preserves the semi-cutting property. We will use two mechanisms for this: the projection of paths to the contracted graph and the lifting of the shortest path starting from $t^\prime$ to the shortest path starting from $t$.
+
+\begin{lemma}\label{lem:lifting-endpoint}
+Let $t\in V$, let $t^\prime\notin V$ be a new vertex, and let $G^\prime\coloneqq G/N[t]$, where the set $N[t]$ has been contracted to $t^\prime$. Let $z\in V\setminus N[t]$ and let $P^\prime=(t^\prime,x_1,\dots,x_k)$ be a shortest path from $t^\prime$ to $z$ in $G^\prime$. Then there exists a vertex $v\in N(t)$ such that $P=(t,v,x_1,\dots,x_k)$ is a shortest path from $t$ to $z$ in $G$.
+\end{lemma}
+
+\begin{proof}
+Since $z\neq t^\prime$, we have $k\ge 1$. From the equality $V(G^\prime)=(V\setminus N[t])\cup\{t^\prime\}$, it follows that the vertex $x_1$, being distinct from $t^\prime$, belongs to $V\setminus N[t]$. The edge $\{t^\prime,x_1\}$ belongs to $E(G^\prime)$, so from Definition~\ref{def:contraction} there exists some vertex $v\in N[t]$ and a corresponding edge $\{v,x_1\}\in E$ such that $\{v,x_1\}/N[t]=\{t^\prime,x_1\}$. Let us choose any such vertex $v$. If we had $v=t$, then from $\{t,x_1\}\in E$ it would follow that $x_1\in N(t)\subseteq N[t]$, contradicting $x_1\in V\setminus N[t]$. Thus $v\in N(t)$. Since $v\in N(t)\subseteq N[t]$ and $x_1,\dots,x_k\in V\setminus N[t]$, none of the vertices $x_1,\dots,x_k$ is equal to either $t$ or $v$. Moreover, the vertices $x_1,\dots,x_k$ are pairwise distinct, because $P^\prime$ is a path. For every $i\in\{2,\dots,k\}$, the edge $\{x_{i-1},x_i\}$ belongs to $E(G^\prime)$ and has both endpoints outside $N[t]$, so from Definition~\ref{def:contraction} it follows that $\{x_{i-1},x_i\}\in E$. Thus $P=(t,v,x_1,\dots,x_k)$ is a path in $G$ and satisfies $\len{P}=\len{P^\prime}+1$. Since $P^\prime$ is a shortest path, we also have $\dist{G^\prime}{t^\prime}{z}=\len{P^\prime}<\infty$.
+
+Now let $Q=(q_0,\dots,q_\ell)$ be any path from $t$ to $z$ in $G$. If $\ell=1$, then from $\{t,z\}\in E$ it would follow that $z\in N(t)\subseteq N[t]$, contrary to the assumption $z\notin N[t]$. Thus $\ell\ge 2$ and $\{q_0,q_1\}=\{t,q_1\}\in E$, from which $q_1\in N(t)\subseteq N[t]$, and therefore $\pi_{N[t]}(q_1)=t^\prime$. The sequence $(q_1,\dots,q_\ell)$ is the final fragment of the path $Q$, and thus a walk in $G$. Applying Lemma~\ref{lem:projection-walk} to this walk yields a walk from $t^\prime$ to $z$ in $G^\prime$ of length at most $\ell-1$, because $\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z$. From Lemma~\ref{lem:walk-to-path}, we thus obtain a path from $t^\prime$ to $z$ in $G^\prime$ of length at most $\ell-1$. Hence $\dist{G^\prime}{t^\prime}{z}\le \ell-1=\len{Q}-1$. Since the last inequality holds for every path $Q$ from $t$ to $z$, it follows that $\dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1$. On the other hand, $P$ is a path from $t$ to $z$, so $\dist{G}{t}{z}\le \len{P}=\len{P^\prime}+1=\dist{G^\prime}{t^\prime}{z}+1$. Both inequalities yield $\dist{G}{t}{z}=\len{P}$, which means $P$ is a shortest path from $t$ to $z$.
+\end{proof}
+
+\begin{observation}\label{obs:outside-edges}
+Let $t\in V$, let $t^\prime\notin V$ be a new vertex, and let $G^\prime\coloneqq G/N[t]$. If $x,y\in V\setminus N[t]$ are distinct, then $\{x,y\}\in E(G^\prime)$ if and only if $\{x,y\}\in E(G)$, and in this case $\{x,y\}/N[t]=\{x,y\}$.
+\end{observation}
+
+\begin{proof}
+Since $x,y\notin N[t]$, we have $\pi_{N[t]}(x)=x$ and $\pi_{N[t]}(y)=y$. If $\{x,y\}\in E(G)$, then from Definition~\ref{def:contraction} it follows that $\{x,y\}\in E(G^\prime)$ and $\{x,y\}/N[t]=\{x,y\}$. Conversely, if $\{x,y\}\in E(G^\prime)$, then from the same definition there exists an edge $\{u,v\}\in E(G)$ such that $\{\pi_{N[t]}(u),\pi_{N[t]}(v)\}=\{x,y\}$. Since the only vertex of the graph $G^\prime$ lying outside the set $V\setminus N[t]$ is $t^\prime$, from the equality of images it follows that $u,v\notin N[t]$. Hence $\pi_{N[t]}(u)=u$ and $\pi_{N[t]}(v)=v$, and therefore $\{u,v\}=\{x,y\}\in E(G)$.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  \begin{scope}[xshift=0cm]
+    \node[circle,draw,inner sep=1.5pt,fill=white] (a) at (-0.2,1.1) {};
+    \node[circle,draw,inner sep=1.5pt,fill=white] (b) at (-0.4,-1.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$t$] (t) at (1.0,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$v$] (v) at (2.2,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$y_{r+1}$] (y1) at (4.0,0.0) {};
+    \node[circle,draw,inner sep=1.5pt,fill=white] (y2) at (5.2,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$z$] (z) at (6.5,0.0) {};
+    \draw[gray!70] (a)--(t) (b)--(t) (t)--(v);
+    \draw[very thick,blue!70!black] (t)--(v)--(y1)--(y2)--(z);
+    \draw[very thick,red!70!black] (v)--(y1);
+    \node[draw,dashed,rounded corners,fit=(a)(b)(t)(v),inner sep=6pt] {};
+    \node at (0.9,1.8) {$N[t]$};
+    \node at (3.2,-1.0) {$Q=(t,v,y_{r+1},\dots,z)$};
+    \node at (3.2,-1.7) {$e=\{v,y_{r+1}\}$};
+    \node at (3.2,1.75) {$G$};
+  \end{scope}
+
+  \draw[-{Latex[length=3mm]},thick] (7.4,0) -- (8.8,0);
+  \node at (8.1,0.45) {\small contraction of $N[t]$};
+
+  \begin{scope}[xshift=9.8cm]
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$t^\prime$] (tp) at (0.0,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$y_{r+1}$] (yp1) at (2.0,0.0) {};
+    \node[circle,draw,inner sep=1.5pt,fill=white] (yp2) at (3.2,0.0) {};
+    \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$z$] (zp) at (4.5,0.0) {};
+    \draw[very thick,blue!70!black] (tp)--(yp1)--(yp2)--(zp);
+    \draw[very thick,red!70!black] (tp)--(yp1);
+    \node at (2.25,-1.0) {$Q^\prime=(t^\prime,y_{r+1},\dots,z)$};
+    \node at (2.25,-1.7) {$e/N[t]=\{t^\prime,y_{r+1}\}$};
+    \node at (2.25,1.75) {$G/N[t]$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Lifting the final fragment of a path from $G/N[t]$ to $G$.}
+\label{fig:contraction}
+\end{figure}
+
+\begin{proposition}\label{prop:contraction}
+Let $T\subseteq V$ and $F\subseteq E$. Assume that $F$ is a semi-cutting set for $T$ in $G$. Let $t\in T\setminus V[F]$ and let $t^\prime\notin V$ be a new vertex. Let us denote
+\[
+  G^\prime\coloneqq G/N[t],
+  \qquad
+  T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\},
+  \qquad
+  F^\prime\coloneqq F/N[t].
+\]
+Then $F^\prime$ is a semi-cutting set for $T^\prime$ in $G^\prime$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1: terminals from $T\setminus\{t\}$ lie outside $N[t]$.}
+Let us take any $u\in T\setminus\{t\}$ and suppose that $u\in N(t)$. Then $\dist{G}{t}{u}=1$, and the only path of length $1$ from $t$ to $u$ is equal to $(t,u)$. From Observation~\ref{obs:shortest-paths} it would therefore follow that the edge $\{t,u\}$ belongs to $F$, which contradicts the assumption $t\notin V[F]$. The obtained contradiction proves the inclusion $T\setminus\{t\}\subseteq V\setminus N[t]$. In particular, $T^\prime\subseteq V(G^\prime)$.
+
+\emph{Step 2: every pair of distinct terminals from $T^\prime$ has a finite distance in $G^\prime$.}
+Let $u,w\in T^\prime$ be distinct. If $u,w\in T\setminus\{t\}$, then from Observation~\ref{obs:finite-terminal-distances} we have $\dist{G}{u}{w}<\infty$. There thus exists a path from $u$ to $w$ in $G$. Since $u,w\notin N[t]$, we have $\pi_{N[t]}(u)=u$ and $\pi_{N[t]}(w)=w$, so from Lemmas~\ref{lem:projection-walk} and~\ref{lem:walk-to-path} we obtain a path from $u$ to $w$ in $G^\prime$.
+If one of the vertices $u,w$ is equal to $t^\prime$, then the other belongs to $T\setminus\{t\}$; let us denote it by $z$. From Observation~\ref{obs:finite-terminal-distances} we have $\dist{G}{t}{z}<\infty$, so there exists a path from $t$ to $z$ in $G$. Since $\pi_{N[t]}(t)=t^\prime$ and $\pi_{N[t]}(z)=z$, from Lemma~\ref{lem:projection-walk}, applied to this path, we obtain a walk from $t^\prime$ to $z$ in $G^\prime$, and then from Lemma~\ref{lem:walk-to-path} a path from $t^\prime$ to $z$ in $G^\prime$.
+
+\emph{Step 3: every shortest path between distinct terminals from $T^\prime$ intersects $F^\prime$.}
+Let $u,w\in T^\prime$ be distinct and let $P^\prime$ be any shortest path from $u$ to $w$ in $G^\prime$. Since the graph $G^\prime$ is simple, from Observation~\ref{obs:shortest-paths} it suffices to show that $E(P^\prime)\cap F^\prime\neq\emptyset$. We consider two cases.
+
+\medskip\noindent
+\textbf{Case 1: $t^\prime\notin V(P^\prime)$.}
+Then $V(P^\prime)\subseteq V\setminus N[t]$, because the only vertex of the graph $G^\prime$ from outside the set $V\setminus N[t]$ is precisely $t^\prime$. Every edge of the path $P^\prime$ thus has both endpoints outside $N[t]$, and therefore by Observation~\ref{obs:outside-edges} is simultaneously an edge of the graph $G$. It follows that $P^\prime$ is a path from $u$ to $w$ also in $G$. Since the endpoints of the path belong to $V(P^\prime)$, we also have $u,w\neq t^\prime$, and therefore $u,w\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$.
+
+We will show that $P^\prime$ is shortest also in $G$. If there existed in $G$ a path $Q$ from $u$ to $w$ of length $\len{Q}<\len{P^\prime}$, then from Lemma~\ref{lem:projection-walk} we would obtain a walk from $u$ to $w$ in $G^\prime$ of length at most $\len{Q}$, because $\pi_{N[t]}(u)=u$ and $\pi_{N[t]}(w)=w$. Then from Lemma~\ref{lem:walk-to-path} we would obtain a path from $u$ to $w$ in $G^\prime$ of length at most $\len{Q}$. We would therefore obtain a path shorter than $P^\prime$, contrary to the minimality of $P^\prime$.
+
+Since $P^\prime$ is a path from $u$ to $w$ in $G$, we simultaneously have $\dist{G}{u}{w}\le \len{P^\prime}$, from which $\len{P^\prime}=\dist{G}{u}{w}$. Since $u,w\in T\setminus\{t\}$, from Observation~\ref{obs:shortest-paths} we get an edge $g\in E(P^\prime)\cap F$. By Observation~\ref{obs:outside-edges} we have $g/N[t]=g$, and so from the definition $F^\prime=F/N[t]$ we get $g\in F^\prime$. We obtain $E(P^\prime)\cap F^\prime\neq\emptyset$.
+
+\medskip\noindent
+\textbf{Case 2: $t^\prime\in V(P^\prime)$.}
+Since $P^\prime$ is a path, the vertex $t^\prime$ appears in it exactly once. If $t^\prime$ is the last vertex of the path $P^\prime$, then we replace $P^\prime$ with the path $\overleftarrow{P^\prime}$. By Notation~\ref{not:basic-operations} we again obtain a shortest path with the same edge set. Since $E(\overleftarrow{P^\prime})=E(P^\prime)$, the condition $E(P^\prime)\cap F^\prime\neq\emptyset$ is equivalent to the condition $E(\overleftarrow{P^\prime})\cap F^\prime\neq\emptyset$. It is therefore sufficient to consider this new path. We can thus assume that
+\[
+  P^\prime=(y_0,\dots,y_r,\dots,y_m),
+  \qquad
+  y_r=t^\prime,
+\]
+where $r<m$; we also allow the case $r=0$. Let us denote $Q^\prime\coloneqq P^\prime[y_r,y_m]$ and $z\coloneqq y_m$. Since $P^\prime$ is a path from $u$ to $w$, the vertex $z=y_m$ is one of the endpoints of this path; after possibly reversing the path, this is the endpoint distinct from $t^\prime$. Thus $z\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$. In particular, $z\notin N[t]$.
+
+Since $y_{r+1},\dots,y_m$ are vertices of the graph $G^\prime$ distinct from $t^\prime$, all of them belong to $V\setminus N[t]$. Since $P^\prime$ is a shortest path, we have $\len{P^\prime}=\dist{G^\prime}{u}{w}$. The path $Q^\prime$ is a subpath of the path $P^\prime$ with endpoints $t^\prime$ and $z$, so from Lemma~\ref{lem:subpath}, applied in the simple graph $G^\prime$, it follows that $\len{Q^\prime}=\dist{G^\prime}{t^\prime}{z}$. We can therefore apply Lemma~\ref{lem:lifting-endpoint}. There then exists a vertex $v\in N(t)$ such that $Q=(t,v,y_{r+1},\dots,y_m)$ is a shortest path from $t$ to $z$ in $G$.
+
+\smallskip\noindent
+We now transfer an appropriate edge from the set $F$ from $G$ to $G^\prime$. Since $t,z\in T$, from Observation~\ref{obs:shortest-paths} we obtain $E(Q)\cap F\neq\emptyset$. From the assumption $t\notin V[F]$ and from the definition of the set $V[F]$, it follows that no edge incident to $t$ belongs to $F$. In particular, the first edge of the path $Q$, that is $\{t,v\}$, does not belong to $F$. Let us choose then $f\in E(Q)\cap F$. Then $f$ belongs to the edge set of the path $(v,y_{r+1},\dots,y_m)$, which is the final fragment of the path $Q$.
+
+If $f=\{v,y_{r+1}\}$, then $f/N[t]=\{t^\prime,y_{r+1}\}$, because $v\in N[t]$ and $y_{r+1}\in V\setminus N[t]$, and so the images of the endpoints of this edge are distinct. Thus $f/N[t]$ is the first edge of the path $Q^\prime$. If on the other hand $f=\{y_i,y_{i+1}\}$ for some $i\in\{r+1,\dots,m-1\}$, then both endpoints of the edge $f$ lie outside $N[t]$, so by Observation~\ref{obs:outside-edges} we have $f/N[t]=f\in E(Q^\prime)$. In both subcases $f/N[t]\in E(Q^\prime)\subseteq E(P^\prime)$. Since moreover $f\in F$, from the definition $F^\prime=F/N[t]$ we obtain $f/N[t]\in F^\prime$. Hence $E(P^\prime)\cap F^\prime\neq\emptyset$.
+
+We have shown that every shortest path between distinct vertices from $T^\prime$ intersects the set $F^\prime$. Together with the finiteness of the respective distances, this yields, by Observation~\ref{obs:shortest-paths}, that $F^\prime$ is a semi-cutting set for $T^\prime$ in $G^\prime$.
+\end{proof}
+
+\section{Main theorem}
+
+In the proof of the main theorem, we will decrease the inductive parameter in two ways. If there exists a terminal $t\in T\setminus V[F]$, we will contract its closed neighborhood and preserve the number of terminals with a smaller number of vertices. Otherwise, $T\subseteq V[F]$ holds; then we will remove one terminal and one edge incident to it, which will decrease the number of terminals.
+
+\begin{theorem}\label{thm:main}
+Let $G=(V,E)$ be a finite simple undirected graph, let $T\subseteq V$, and let $F\subseteq E$. If $F$ is a semi-cutting set for $T$ in $G$, then $|F|\ge |T|-1$ holds.
+\end{theorem}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.98, every node/.style={font=\small}]
+  \begin{scope}[xshift=0cm]
+    \node at (3.3,2.9) {$G$};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (u) at (0.0,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (x) at (1.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!20,label=above:$a$] (a) at (2.9,2.2) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$t$] (t) at (3.2,1.2) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$b$] (b) at (3.0,0.2) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (y) at (4.9,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (w) at (6.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (z) at (5.2,0.0) {};
+    \draw[very thick,red!70!black] (u)--(x);
+    \draw (x)--(a)--(t)--(b)--(y);
+    \draw[very thick,red!70!black] (y)--(w);
+    \draw (y)--(z);
+    \node[draw,dashed,rounded corners,fit=(a)(t)(b),inner sep=7pt,label=left:{$N[t]$}] {};
+    \node[align=center] at (3.2,-1.0)
+      {$t\in T\setminus V[F]$\\[2pt] $F=\{\{u,x\},\{y,w\}\}$};
+  \end{scope}
+
+  \draw[-{Latex[length=3mm]},thick] (7.4,1.2) -- (8.8,1.2);
+  \node at (8.1,1.65) {\small contraction of $N[t]$};
+
+  \begin{scope}[xshift=9.7cm]
+    \node at (2.5,2.9) {$G^\prime=G/N[t]$};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (up) at (0.0,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (xp) at (1.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!45,label=below:$t^\prime$] (tp) at (2.9,1.0) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (yp) at (4.4,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (wp) at (5.8,1.5) {};
+    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (zp) at (4.7,0.0) {};
+    \draw[very thick,red!70!black] (up)--(xp);
+    \draw (xp)--(tp)--(yp);
+    \draw[very thick,red!70!black] (yp)--(wp);
+    \draw (yp)--(zp);
+    \node[align=center] at (2.9,-1.0)
+      {$T^\prime=(T\setminus\{t\})\cup\{t^\prime\}$\\[2pt] $F^\prime=F/N[t]$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Case~1 in the proof of Theorem~\ref{thm:main}: contraction of the closed neighborhood of a terminal $t\in T\setminus V[F]$. Since no edges from the set $F$ are incident to $t$, after contraction they pass to the image $F^\prime=F/N[t]$, and the semi-cutting property is preserved by virtue of Proposition~\ref{prop:contraction}.}
+\label{fig:main-contraction}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=below:$u$] (u) at (0,0) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white] (x) at (1.6,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=below:$t$] (t) at (3.2,0) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white] (y) at (4.8,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=below:$w$] (w) at (6.4,0) {};
+  \draw[very thick,blue!70!black] (u)--(x)--(t)--(y)--(w);
+  \draw[very thick,red!70!black] (x)--(t);
+  \draw[very thick,green!50!black] (t)--(y);
+  \node at (1.6,0.6) {$P_u$};
+  \node at (4.8,0.6) {$P_w$};
+  \node at (2.4,-0.65) {$e$};
+  \node at (4.0,-0.65) {$f$};
+\end{tikzpicture}
+\caption{Splitting the shortest path $P$ at vertex $t$ into subpaths $P_u$ and $P_w$ in Case~2 of the proof of Theorem~\ref{thm:main}. The figure shows the subcase $e\in E(P_u)$; then $f\in E(P_w)\cap(F\setminus\{e\})$. The symmetric case is analogous.}
+\label{fig:split-path}
+\end{figure}
+
+\begin{proof}
+We will prove a slightly stronger formulation: for every pair of non-negative integers $(k,n)$, every simple graph $H$ on $n$ vertices, every terminal set $X\subseteq V(H)$ of size $k$, and every edge set $M\subseteq E(H)$, if $M$ is a semi-cutting set for $X$ in $H$, then the inequality $|M|\ge k-1$ holds. In our application, there appear exclusively pairs $(k,n)$ satisfying $k\le n$, since we always have $X\subseteq V(H)$. The proof proceeds by induction with respect to the lexicographical order
+\[
+  (k_1,n_1)\prec (k_2,n_2)
+  \quad\Longleftrightarrow\quad
+  k_1<k_2
+  \ \text{or}\
+  \bigl(k_1=k_2\ \text{and}\ n_1<n_2\bigr).
+\]
+This order is well-founded on the set
+\[
+  \bigl\{(a,b)\in\mathbb{N}_0^2:\ a\le b\bigr\}.
+\]
+Indeed, in every non-empty subset of this set, one can first select the pairs with the smallest first coordinate, and then from among them the pair with the smallest second coordinate. Induction on $|T|$ alone is not sufficient, because the contraction operation preserves the number of terminals and decreases only the number of vertices.
+
+\medskip\noindent
+\textbf{Base case.} Let $k\le 1$. Then the set of pairs of distinct vertices from $X$ is empty, so $|M|\ge 0\ge k-1$, which concludes the base of the induction.
+
+\medskip\noindent
+\textbf{Inductive step.} Let us fix a pair $(k,n)$ with $k\ge 2$ and assume that the considered thesis is true for every pair $(k',n')\prec (k,n)$. Let us consider a simple graph $G=(V,E)$ on $n$ vertices, a terminal set $T\subseteq V$ of size $k$, and an edge set $F\subseteq E$ which is a semi-cutting set for $T$ in $G$. We will show that $|F|\ge k-1$.
+If we find a terminal belonging to $T\setminus V[F]$, we will pass to a smaller graph by contracting its closed neighborhood. If on the other hand $T\subseteq V[F]$, we will keep the graph, but we will remove one terminal and one edge from the set $F$. We thus consider two cases.
+
+\medskip\noindent
+\textbf{Case 1: there exists a terminal $t\in T\setminus V[F]$.}
+Since $k\ge 2$, we can choose a vertex $u\in T\setminus\{t\}$. From Observation~\ref{obs:finite-terminal-distances} we have $\dist{G}{t}{u}<\infty$. There thus exists a path from $t$ to $u$. Since $u\neq t$, this path has a positive length, and therefore its first edge is incident to $t$. In particular, the vertex $t$ has at least one neighbor, that is $N(t)\neq\emptyset$ and $|N[t]|\ge 2$. Let $t^\prime\notin V$ be a new vertex and let
+\[
+  G^\prime\coloneqq G/N[t],
+  \qquad
+  T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\},
+  \qquad
+  F^\prime\coloneqq F/N[t].
+\]
+This situation is illustrated in Figure~\ref{fig:main-contraction}.
+Since from the assumption of this case we have $t\in T\setminus V[F]$, by virtue of Proposition~\ref{prop:contraction} the set $F^\prime$ is a semi-cutting set for $T^\prime$ in $G^\prime$. Since $t^\prime\notin V$ and $T\subseteq V$, we have $t^\prime\notin T$, and so $|T^\prime|=|T|=k$. Moreover $|V(G^\prime)|=|V|-|N[t]|+1\le n-1<n$. From the inclusion $T^\prime\subseteq V(G^\prime)$ it also follows that $|T^\prime|=k\le |V(G^\prime)|$. Since $|T^\prime|=k$ and $|V(G^\prime)|<n$, the strict lexicographical inequality $(|T^\prime|,|V(G^\prime)|)\prec (k,n)$ thus holds. From the inductive hypothesis we obtain $|F^\prime|\ge |T^\prime|-1=k-1$. Lemma~\ref{lem:contraction-image-size} gives $|F^\prime|\le |F|$, and therefore $|F|\ge k-1$.
+
+\medskip\noindent
+\textbf{Case 2: $T\subseteq V[F]$.}
+Since $T\subseteq V[F]$, every terminal is incident to at least one edge from the set $F$. Let us therefore choose $t\in T$ and an edge $e\in F$ incident to $t$. Let us denote $T^-\coloneqq T\setminus\{t\}$ and $F^-\coloneqq F\setminus\{e\}$. We will first show that for every pair of distinct vertices $u,w\in T^-$ and every shortest path $P$ from $u$ to $w$ in $G$, $E(P)\cap F^-\neq\emptyset$ holds. Together with Observation~\ref{obs:finite-terminal-distances} this will yield, by virtue of Observation~\ref{obs:shortest-paths}, that $F^-$ is a semi-cutting set for $T^-$ in $G$.
+
+Let us take any distinct vertices $u,w\in T^-$. Since $T^-\subseteq T$ and $F$ is a semi-cutting set for $T$, from Observation~\ref{obs:finite-terminal-distances} we have $\dist{G}{u}{w}<\infty$. Let $P$ be any shortest path from $u$ to $w$ in $G$. From Observation~\ref{obs:shortest-paths} we get $E(P)\cap F\neq\emptyset$. If $e\notin E(P)$, then immediately $E(P)\cap F^-\neq\emptyset$.
+The remaining case is $e\in E(P)$. Since $e$ is incident to $t$, there exists a vertex $s\in V$ such that $e=\{t,s\}$. From the assumption $e\in E(P)$ it therefore follows that both endpoints of the edge $e$ belong to $V(P)$, and in particular $t\in V(P)$. Let us write $P=(v_0,\dots,v_m)$. There exists exactly one index $j\in\{0,\dots,m\}$ such that $v_j=t$, because $P$ is a path. We define $P_u\coloneqq (v_0,\dots,v_j)$ and $P_w\coloneqq (v_j,\dots,v_m)$. Since $v_0=u\neq t$ and $v_m=w\neq t$, $0<j<m$ holds. Then $P_u$ is a subpath from $u$ to $t$, $P_w$ is a subpath from $t$ to $w$, and moreover $P=P_u\cdot P_w$. By virtue of Lemma~\ref{lem:subpath}, $P_u$ and $P_w$ are shortest paths between the pairs $(u,t)$ and $(t,w)$, respectively. This situation is illustrated in Figure~\ref{fig:split-path}. Hence both these subpaths have a positive length.
+
+Since $P$ is a path, the subpaths $P_u$ and $P_w$ have only the vertex $t$ in common. In particular,
+\[
+  E(P)=E(P_u)\cup E(P_w)
+  \qquad\text{and}\qquad
+  E(P_u)\cap E(P_w)=\emptyset,
+\]
+because if an edge $g$ belonged to $E(P_u)\cap E(P_w)$, then both its endpoints would belong to the set
+\[
+  V(P_u)\cap V(P_w)=\{t\},
+\]
+and so we would have $g=\{t,t\}$, which is impossible in a simple graph. The edge $e$ therefore belongs to exactly one of these two subpaths.
+
+If $e\in E(P_u)$, then from the disjointness of the sets $E(P_u)$ and $E(P_w)$ we have $e\notin E(P_w)$. Since $t,w\in T$ and $P_w$ is a shortest path from $t$ to $w$ in $G$, Observation~\ref{obs:shortest-paths} implies the existence of an edge $f\in E(P_w)\cap F$. Then $f\neq e$, and so $f\in F^-$. If on the other hand $e\in E(P_w)$, then analogously, using the fact that $u,t\in T$ and $P_u$ is a shortest path from $u$ to $t$ in $G$, we obtain an edge $f\in E(P_u)\cap F$. Again $f\neq e$ holds, and so $f\in F^-$. In both subcases we get $E(P)\cap F^-\neq\emptyset$.
+
+We have thus shown that the removal of a single edge $e$ incident to the removed terminal $t$ does not destroy the property of intersecting all shortest paths between pairs from $T^-$. Since moreover for every pair of distinct $u,w\in T^-$ we have $\dist{G}{u}{w}<\infty$, from Observation~\ref{obs:shortest-paths} it follows that $F^-$ is a semi-cutting set for $T^-$ in $G$. Since $|T^-|=k-1$ and $|V(G)|=n$, $(|T^-|,|V(G)|)\prec (k,n)$ holds. From the inductive hypothesis we obtain $|F^-|\ge |T^-|-1=(k-1)-1=k-2$. Since $F^-=F\setminus\{e\}$ and $e\in F$, we have $|F|=|F^-|+1\ge k-1$.
+
+Thereby the inductive step has been shown, and thus the proof of the theorem is concluded.
+\end{proof}
+
+\section{Concluding remarks and related problems}
+
+Theorem~\ref{thm:main} is sharp, which is shown by the family of path examples described in the Introduction and illustrated in Figure~\ref{fig:semi-cut-example}. A natural further problem remains to describe all triples $(G,T,F)$ for which the equality $|F|=|T|-1$ holds in Theorem~\ref{thm:main}.
+
+From the point of view of the literature, this problem can be treated as a multiterminal counterpart of shortest-path vulnerability issues. In the paper by Dahlhaus and co-authors~\cite{dahlhaus1994}, the goal is the complete separation of all terminals, and thus the transition of the corresponding distances to the value $\infty$. In this paper, we only require a strict increase of every terminal--terminal distance; this increase may, but does not have to, lead to disconnection. On the other hand, in Corley and Sha~\cite{corley-sha} and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}, a single pair of endpoints is distinguished, whereas here all pairs from the set $T$ are treated simultaneously. Moreover, those papers consider weighted, and sometimes also directed networks, while this article concerns only finite simple undirected graphs. The obtained inequality $|F|\ge |T|-1$ therefore has the interpretation of a purely structural lower bound for an intermediate class of phenomena, lying between the complete separation of terminals and the shortest-path vulnerability for one distinguished pair.
+
+\begin{thebibliography}{9}
+
+\bibitem{bondy-murty}
+J.~A. Bondy, U.~S.~R. Murty,
+\emph{Graph Theory},
+Graduate Texts in Mathematics, vol.~244, Springer, New York, 2008.
+
+\bibitem{diestel}
+R.~Diestel,
+\emph{Graph Theory},
+5th ed., Graduate Texts in Mathematics, vol.~173, Springer, Berlin, 2017.
+
+\bibitem{corley-sha}
+H.~W. Corley, D.~Y. Sha,
+\emph{Most vital links and nodes in weighted networks},
+Operations Research Letters 1(4) (1982), 157--160.
+
+\bibitem{dahlhaus1994}
+E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
+\emph{The complexity of multiterminal cuts},
+SIAM Journal on Computing 23(4) (1994), 864--894.
+
+\bibitem{nardelli-proietti-widmayer}
+E.~Nardelli, G.~Proietti, P.~Widmayer,
+\emph{A faster computation of the most vital edge of a shortest path},
+Information Processing Letters 79(2) (2001), 81--85.
+
+\end{thebibliography}
+
+\end{document}

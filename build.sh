@@ -27,14 +27,14 @@ echo "Zakończono kopiowanie!"
 
 mkdir -p "${OWNPATH}/input"
 
-cp -v "${OWNPATH}/main-pl.txt" "${OWNPATH}/input/main-pl.txt"
+cp -v "${OWNPATH}/main-en.txt" "${OWNPATH}/input/main-en.txt"
 # cp -v "${OWNPATH}/dvorak.txt" "${OWNPATH}/input/dvorak.txt"
 # cp -v "${OWNPATH}/lemma-restore-by-sampling-explicite.txt" "${OWNPATH}/input/lemma-restore-by-sampling-explicite.txt"
 
 
-pdflatex main-pl.tex
-pdflatex main-pl.tex
+pdflatex main-en.tex
+pdflatex main-en.tex
 
-cp -v "${OWNPATH}/main-pl.pdf" "${OWNPATH}/input/main-pl.pdf"
+cp -v "${OWNPATH}/main-en.pdf" "${OWNPATH}/input/main-en.pdf"
 
 rm *.aux *.out *.toc
