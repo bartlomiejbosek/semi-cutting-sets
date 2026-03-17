@@ -1,18 +1,73 @@
-Dokładnie tak! To jest absolutnie kluczowy punkt, na którym wykłada się wiele nieformalnych dowodów z teorii grafów.
+### KRYTYCZNE BŁĘDY I NARUSZENIA ZASAD
 
-Jeśli Twoje główne twierdzenie zakłada, że $G$ jest **grafem prostym** (simple graph), to aby krok indukcyjny był w ogóle poprawny logicznie, graf po operacji ściągnięcia (tzw. mniejsza instancja problemu) **musi bezwzględnie należeć do tej samej klasy obiektów** – czyli również musi być grafem prostym.
+**1. Nieuprawnione założenie o spójności grafu (Złamanie zasady nr 11)**
+Wprowadzenie oraz sekcja 2  jawnie zakładają: *"Let $G=(V,E)$ be a finite simple connected undirected graph"*. To jest **ABSOLUTNIE NIEDOPUSZCZALNE**.
+*Zarzut logiczny:* Twierdzenie jest prawdziwe dla grafów niespójnych. Jeśli $G$ jest niespójny i wierzchołki $T$ leżą w różnych komponentach, to $d_G(u,w) = \infty$. Wtedy warunek $d_G(u,w) < d_{G \setminus F}(u,w)$ daje $\infty < \infty$, co jest fałszem. Oznacza to jedynie, że dla takiego zbioru $T$ zbiór na wpół-tnący w ogóle nie istnieje (implikacja jest pusta, więc twierdzenie formalnie zachodzi). Zakładanie z góry spójności to matematyczne lenistwo.
 
-W standardowej definicji (np. u Diestela) ściągnięcie krawędzi lub zbioru wierzchołków naturalnie generuje multigraf (powstają pętle wewnątrz ściąganego zbioru oraz krawędzie wielokrotne, jeśli dwa wierzchołki ze ściąganego zbioru miały wspólnego sąsiada na zewnątrz).
+**2. Przerost formy i elementarne dowody (Złamanie zasady nr 6, 9 i 15)**
+Udowadnianie, że z każdego spaceru można wyciąć ścieżkę (Lemat 3.2) oraz że podścieżka najkrótszej ścieżki jest najkrótsza (Lemat 3.3) , to absurd w publikacji aspirującej do *Combinatorica*. Szanujący się recenzent uzna to za obrazę inteligencji czytelnika.
+*Błąd:* Brak bezpośredniego odwołania do standardowej literatury (np. Diestela ) dla tak trywialnych własności.
 
-Dlatego w Twoim artykule musisz zdefiniować tzw. **prostą kontrakcję (simple contraction)**.
+**3. Nadużywanie środowisk blokowych dla wzorów (Złamanie zasady nr 20)**
+Autor notorycznie używa środowiska blokowego (np. `\[ ... \]`) dla krótkich definicji i przypisań, które powinny być wkomponowane w tekst (inline).
 
-Oto idealne, w pełni sformalizowane zdanie (po angielsku), które powinieneś wpleść do definicji operacji ściągania, aby uciąć wszelkie wątpliwości recenzentów:
+* Definicja 2.2: Przypisanie $\pi_W(v)$ zajmuje niepotrzebnie tyle miejsca, co kluczowe równania.
 
-> "Let $G/N[t]$ denote the graph obtained from $G$ by contracting the closed neighborhood $N[t]$ into a single new vertex $t'$. To ensure that the resulting graph remains within the class of simple graphs (and thus satisfies the inductive hypothesis), we perform a simple contraction: we explicitly delete any loops formed at $t'$ and replace any multiple edges incident to $t'$ with single edges. Note that this simplification process preserves the property that for any $x, y \notin N[t]$, the distance satisfies $d_{G/N[t]}(x,y) \le d_G(x,y)$, since any shortest path in $G$ projects to a valid walk in the contracted multigraph, and removing loops or parallel edges does not increase the length of the shortest path in the underlying simple graph."
 
-**Dlaczego to sformułowanie jest "kuloodporne"?**
+* Konkatenacja ścieżek: Trywialna nierówność rozpisana w bloku.
 
-1. **Zabezpiecza indukcję:** Wyraźnie stwierdza, że celowo redukujemy graf do prostego, aby móc powołać się na założenie indukcyjne.
-2. **Uzasadnia metrykę:** Tłumaczy, dlaczego usunięcie tych krawędzi wielokrotnych i pętli nie psuje nierówności dystansów, która jest sercem Twojego dowodu (bo najkrótsza ścieżka i tak nie używa pętli ani zduplikowanych krawędzi).
 
-Zastosowanie tego rygoru zamyka jedną z największych luk w pierwotnej wersji tekstu.
+* Propozycja 4.2 i Twierdzenie 5.1: Definiowanie porządku leksykograficznego i zbiorów $G', T', F'$ w osobnych blokach rozbija spójność czytania.
+
+
+
+---
+
+### LUKI LOGICZNE I BRAKI W DOWODACH (Propozycja 4.2 i Twierdzenie 5.1)
+
+**1. Niewyjaśniony przypadek pustego $F$ w indukcji (Twierdzenie 5.1)**
+W Przypadku 2 (Case 2)  dowód zakłada: *"Since $T\subseteq V[F]$, every terminal is incident to at least one edge from the set $F$. Let us therefore choose $t\in T$ and an edge $e\in F$ incident to $t$."*
+Brakuje jednego kroku logicznego: skąd wiemy, że $F$ nie jest puste? Dla $k \ge 2$, jeśli $F = \emptyset$, to $G \setminus F = G$. Wtedy $d_G(u,w) < d_{G \setminus F}(u,w)$ sprowadza się do $d_G(u,w) < d_G(u,w)$, co jest sprzecznością. Należy to zaznaczyć *przed* wyborem krawędzi $e$, inaczej przejście zakłada tezę lub nie obejmuje przypadku brzegowego.
+
+**2. Zbędne odwracanie ścieżek w Propozycji 4.2**
+W Case 2, autor argumentuje o odwracaniu ścieżki $\overleftarrow{P^\prime}$, jeśli $t'$ jest jej ostatnim wierzchołkiem. Jest to rozwlekłe i algorytmiczne w duchu (czego miało nie być – zasada 12). Matematyk napisałby po prostu: "Bez straty ogólności, niech $t'$ pojawia się jako wierzchołek $y_r$ dla $r < m$, w przeciwnym razie zamieniamy rolami $u$ i $w$."
+
+**3. Formalizm rzutowania ścieżek**
+W dowodzie Lematów 3.4 (Observation) oraz w samej definicji kontrakcji, autor tłumaczy się, że "warunek gwarantuje brak pętli". Artykuł powinien zakładać rygorystyczną algebraiczną definicję grafu prostego po kontrakcji: zachowujemy tylko krawędzie między różnymi wierzchołkami.
+
+---
+
+### STYL, PREZENTACJA I LITERATURA
+
+**1. Styl "wykładowy" zamiast "badawczego"**
+Wyrażenia takie jak *"We will first show that..."* , *"Let us consider..."* czy robienie długich wstępów do dowodów  rozwlekają tekst. Abstrakty i wstępy powinny być zwięzłe i uderzać w sedno: "The proof bounds $|F|$ by..."
+
+**2. TikZ i wizualizacje (Zasada 16)**
+Rysunki są poprawne (np. Rysunek 4 i Rysunek 5 ), ale podpisy pod nimi są przegadane. Rysunek powinien wspierać intuicję geometryczną, nie stanowić powtórzenia całych akapitów dowodu.
+
+**3. Szerszy kontekst problemów powiązanych (Zasada 21)**
+W zakończeniu odwołano się do prac Corleya i Dahlhausa. To krok w dobrą stronę, ale brakuje matematycznego "mięsa". Zamiast pisać luźno o "nearby direction", należy wskazać dokładne parametry: dlaczego semi-cutting sets łączą zbiory multicięć ($k$-terminal cuts) z uderzaniem w witalne krawędzie (most vital links). Czy złożoność tych problemów rzuca światło na trudność obliczania zbiorów na wpół-tnących? Brak tego elementu zuboża pracę.
+
+---
+
+### PROPOZYCJE KOREKTY (JAK OSIĄGNĄĆ IDEAŁ NASTĘPNYM RAZEM)
+
+Aby tekst spełniał standardy najwyższej klasy i był zgodny ze wszystkimi Twoimi instrukcjami, musisz przyjąć następujący rygor przy generowaniu nowej wersji:
+
+1. **Usuń założenie o spójności na samym wstępie.** Zdefiniuj graf po prostu jako $G=(V,E)$ – skończony, prosty. Dodaj krótką uwagę (Observation): *Jeżeli dla jakiejkolwiek pary $u,w \in T$, wierzchołki te leżą w różnych komponentach spójności $G$, to zbiór na wpół-tnący z definicji nie może istnieć, ponieważ nierówność $\infty < \infty$ jest fałszywa. Wystarczy zatem analizować pary leżące w jednym komponencie.*
+2. **Zabij Lemat 3.2 i Lemat 3.3.** Usuń je całkowicie. Zastąp je jednym krótkim akapitem z powołaniem się na literaturę: Podstawowe własności najkrótszych ścieżek, w tym fakt, że podścieżka najkrótszej ścieżki jest najkrótsza oraz że każdy spacer zawiera ścieżkę, przyjmujemy za klasycznymi podręcznikami (np. Diestel ).
+
+
+3. 
+**Spłaszcz formatowanie wzorów.** Zmień zapisy definicyjne typu `\[ G^\prime\coloneqq G/N[t] ... \]`  na wstawki wewnątrz tekstu (np. `$G^\prime\coloneqq G/N[t]$`, `$T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\}$`). Oszczędzaj środowiska wieloliniowe (
+
+
+$$...$$
+
+
+) wyłącznie do skomplikowanych ciągów nierówności.
+4. **Zacieśnij logikę indukcji.** W dowodzie Twierdzenia 5.1 od razu odpraw przypadek pustego zbioru krawędzi: *Jeśli $F = \emptyset$, to dystanse nie ulegają zmianie, co przeczy istnieniu co najmniej dwóch terminali. Zatem $F \neq \emptyset$ i przy założeniu $T \subseteq V[F]$ możemy bezpiecznie wybrać $t \in T$ oraz krawędź $e \in F$ incydentną z $t$.*
+5. **Skondensuj Propozycję 4.2.** Przestań rozwlekać trywialne przypadki (tzw. "Step 1, Step 2, Step 3"). Udowodnij przecięcie ścieżek czysto topologicznie, wykorzystując jednoznaczną notację matematyczną bez pseudokodowego dzielenia.
+6. 
+**Wzmocnij wnioski.** W sekcji 6 (Concluding remarks) połącz precyzyjniej parametry z artykułów Corleya (1982) i Dahlhausa (1994), wskazując np., że podczas gdy problem Dahlhausa dotyczy rozspójniania bez liczenia dystansów, wasz problem uogólnia "vital edges" na wszystkie pary z $T$ jednocześnie.
+
