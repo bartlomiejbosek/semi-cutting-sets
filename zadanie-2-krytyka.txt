@@ -68,7 +68,7 @@ C) Główne twierdzenie wraz z jednoznacznym, krok po kroku rozpisanym dowodem i
 13. Nie wolno prezentować żadnych tabelek.
 
 
-14. Wyjątkowo tekst powinien być po polsku. NIEWYKAZUJ TEGO JAKO BŁAD!!!
+14. Tekst powinien być po angielsku.
 
 
 15. Nie musisz szczegółowo wyprowadzać najbardziej elementarnych własności rzutowania ścieżek przy operacji ściągania wierzchołków - wystarczy precyzyjne stwierdzenie odpowiedniego wniosku logicznego z odwołaniem.
