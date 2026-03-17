@@ -29,11 +29,12 @@
 \date{}
 
 \begin{document}
-\maketitle
 
 \begin{abstract}
 Let $G=(V,E)$ be a finite simple undirected graph. For $T\subseteq V$ and $F\subseteq E$, we call $F$ a semi-cutting set for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every pair of distinct terminals $u,w\in T$. In this paper, we prove that every such set satisfies the inequality $|F|\ge |T|-1$. The proof is based on a shortest path characterization, the persistence of the semi-cutting property under the contraction of the closed neighborhood of a terminal not incident to $F$, and on lexicographical induction with respect to the pair $(|T|,|V|)$.
 \end{abstract}
+
+\maketitle
 
 \section{Introduction}
 
@@ -150,7 +151,7 @@ Let us take any distinct vertices $u,w\in T$. From Definition~\ref{def:semi-cut}
 
 \section{Auxiliary lemmas}
 
-In this section, we collect three properties that will be used in the part concerning contraction.
+In this section, we collect several auxiliary facts used in the part concerning contraction.
 
 \begin{lemma}\label{lem:contraction-image-size}
 Let $\emptyset\neq W\subseteq V$ and $F\subseteq E$. Then $|F/W|\le |F|$.
@@ -335,7 +336,7 @@ Let $u,w\in T^\prime$ be distinct. If $u,w\in T\setminus\{t\}$, then from Observ
 If one of the vertices $u,w$ is equal to $t^\prime$, then the other belongs to $T\setminus\{t\}$; let us denote it by $z$. From Observation~\ref{obs:finite-terminal-distances} we have $\dist{G}{t}{z}<\infty$, so there exists a path from $t$ to $z$ in $G$. Since $\pi_{N[t]}(t)=t^\prime$ and $\pi_{N[t]}(z)=z$, from Lemma~\ref{lem:projection-walk}, applied to this path, we obtain a walk from $t^\prime$ to $z$ in $G^\prime$, and then from Lemma~\ref{lem:walk-to-path} a path from $t^\prime$ to $z$ in $G^\prime$.
 
 \emph{Step 3: every shortest path between distinct terminals from $T^\prime$ intersects $F^\prime$.}
-Let $u,w\in T^\prime$ be distinct and let $P^\prime$ be any shortest path from $u$ to $w$ in $G^\prime$. Since the graph $G^\prime$ is simple, from Observation~\ref{obs:shortest-paths} it suffices to show that $E(P^\prime)\cap F^\prime\neq\emptyset$. We consider two cases.
+Let $u,w\in T^\prime$ be distinct and let $P^\prime$ be any shortest path from $u$ to $w$ in $G^\prime$. By Step~2 and Observation~\ref{obs:shortest-paths}, it suffices to show that $E(P^\prime)\cap F^\prime\neq\emptyset$. We consider two cases.
 
 \medskip\noindent
 \textbf{Case 1: $t^\prime\notin V(P^\prime)$.}
@@ -503,7 +504,7 @@ Thereby the inductive step has been shown, and thus the proof of the theorem is 
 
 Theorem~\ref{thm:main} is sharp, which is shown by the family of path examples described in the Introduction and illustrated in Figure~\ref{fig:semi-cut-example}. A natural further problem remains to describe all triples $(G,T,F)$ for which the equality $|F|=|T|-1$ holds in Theorem~\ref{thm:main}.
 
-From the point of view of the literature, this problem can be treated as a multiterminal counterpart of shortest-path vulnerability issues. In the paper by Dahlhaus and co-authors~\cite{dahlhaus1994}, the goal is the complete separation of all terminals, and thus the transition of the corresponding distances to the value $\infty$. In this paper, we only require a strict increase of every terminal--terminal distance; this increase may, but does not have to, lead to disconnection. On the other hand, in Corley and Sha~\cite{corley-sha} and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}, a single pair of endpoints is distinguished, whereas here all pairs from the set $T$ are treated simultaneously. Moreover, those papers consider weighted, and sometimes also directed networks, while this article concerns only finite simple undirected graphs. The obtained inequality $|F|\ge |T|-1$ therefore has the interpretation of a purely structural lower bound for an intermediate class of phenomena, lying between the complete separation of terminals and the shortest-path vulnerability for one distinguished pair.
+From the point of view of the literature, this problem can be treated as a multiterminal counterpart of shortest-path vulnerability issues. In the paper by Dahlhaus and co-authors~\cite{dahlhaus1994}, the goal is the complete separation of all terminals, and thus the transition of the corresponding distances to the value $\infty$. In this paper, we only require a strict increase of every terminal--terminal distance; this increase may, but does not have to, lead to disconnection. On the other hand, in Corley and Sha~\cite{corley-sha} and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}, a single pair of endpoints is distinguished, whereas here all pairs from the set $T$ are treated simultaneously. A further nearby direction is shortest-path network interdiction, where one studies budgeted perturbations that increase the distance between prescribed vertices; see Israeli and Wood~\cite{israeli-wood}. That direction is again fundamentally single-pair, while the present note remains purely structural and multiterminal. Moreover, those papers consider weighted, and sometimes also directed networks, while this article concerns only finite simple undirected graphs. The obtained inequality $|F|\ge |T|-1$ therefore has the interpretation of a purely structural lower bound for an intermediate class of phenomena, lying between the complete separation of terminals and the shortest-path vulnerability for one distinguished pair.
 
 \begin{thebibliography}{9}
 
@@ -531,6 +532,11 @@ SIAM Journal on Computing 23(4) (1994), 864--894.
 E.~Nardelli, G.~Proietti, P.~Widmayer,
 \emph{A faster computation of the most vital edge of a shortest path},
 Information Processing Letters 79(2) (2001), 81--85.
+
+\bibitem{israeli-wood}
+E.~Israeli, R.~K. Wood,
+\emph{Shortest-path network interdiction},
+Networks 40(2) (2002), 97--111.
 
 \end{thebibliography}
 
