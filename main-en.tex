@@ -497,14 +497,14 @@ If $e\in E(P_u)$, then from the disjointness of the sets $E(P_u)$ and $E(P_w)$ w
 
 We have thus shown that the removal of a single edge $e$ incident to the removed terminal $t$ does not destroy the property of intersecting all shortest paths between pairs from $T^-$. Since moreover for every pair of distinct $u,w\in T^-$ we have $\dist{G}{u}{w}<\infty$, from Observation~\ref{obs:shortest-paths} it follows that $F^-$ is a semi-cutting set for $T^-$ in $G$. Since $|T^-|=k-1$ and $|V(G)|=n$, $(|T^-|,|V(G)|)\prec (k,n)$ holds. From the inductive hypothesis we obtain $|F^-|\ge |T^-|-1=(k-1)-1=k-2$. Since $F^-=F\setminus\{e\}$ and $e\in F$, we have $|F|=|F^-|+1\ge k-1$.
 
-Thereby the inductive step has been shown, and thus the proof of the theorem is concluded.
+This completes the inductive step and hence the proof of the theorem.
 \end{proof}
 
 \section{Concluding remarks and related problems}
 
-Theorem~\ref{thm:main} is sharp, which is shown by the family of path examples described in the Introduction and illustrated in Figure~\ref{fig:semi-cut-example}. A natural further problem remains to describe all triples $(G,T,F)$ for which the equality $|F|=|T|-1$ holds in Theorem~\ref{thm:main}.
+Theorem~\ref{thm:main} is sharp, which is shown by the family of path examples described in the Introduction and illustrated in Figure~\ref{fig:semi-cut-example}. A natural further problem remains to describe all triples $(G,T,F)$ for which the equality $|F|=|T|-1$ holds in Theorem~\ref{thm:main}. Two further natural directions are weighted and vertex versions of semi-cutting sets, as well as pair-restricted variants in which the distance increase is required only for a prescribed family of terminal pairs.
 
-From the point of view of the literature, this problem can be treated as a multiterminal counterpart of shortest-path vulnerability issues. In the paper by Dahlhaus and co-authors~\cite{dahlhaus1994}, the goal is the complete separation of all terminals, and thus the transition of the corresponding distances to the value $\infty$. In this paper, we only require a strict increase of every terminal--terminal distance; this increase may, but does not have to, lead to disconnection. On the other hand, in Corley and Sha~\cite{corley-sha} and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}, a single pair of endpoints is distinguished, whereas here all pairs from the set $T$ are treated simultaneously. A further nearby direction is shortest-path network interdiction, where one studies budgeted perturbations that increase the distance between prescribed vertices; see Israeli and Wood~\cite{israeli-wood}. That direction is again fundamentally single-pair, while the present note remains purely structural and multiterminal. Moreover, those papers consider weighted, and sometimes also directed networks, while this article concerns only finite simple undirected graphs. The obtained inequality $|F|\ge |T|-1$ therefore has the interpretation of a purely structural lower bound for an intermediate class of phenomena, lying between the complete separation of terminals and the shortest-path vulnerability for one distinguished pair.
+From the point of view of the literature, this problem can be treated as a multiterminal counterpart of shortest-path vulnerability issues. In the paper by Dahlhaus and co-authors~\cite{dahlhaus1994}, the goal is the complete separation of all terminals, and thus the transition of the corresponding distances to the value $\infty$. In this paper, we only require a strict increase of every terminal--terminal distance; this increase may, but does not have to, lead to disconnection. On the other hand, in Corley and Sha~\cite{corley-sha}, Malik, Mittal, and Gupta~\cite{malik-mittal-gupta}, and Nardelli, Proietti, and Widmayer~\cite{nardelli-proietti-widmayer}, a single pair of endpoints is distinguished, whereas here all pairs from the set $T$ are treated simultaneously. A further nearby direction is shortest-path network interdiction, where one studies budgeted perturbations that increase the distance between prescribed vertices; see Israeli and Wood~\cite{israeli-wood}. That direction is again fundamentally single-pair, while the present note remains purely structural and multiterminal. Moreover, those papers consider weighted, and sometimes also directed networks, while this article concerns only finite simple undirected graphs. The obtained inequality $|F|\ge |T|-1$ therefore has the interpretation of a purely structural lower bound for an intermediate class of phenomena, lying between the complete separation of terminals and the shortest-path vulnerability for one distinguished pair.
 
 \begin{thebibliography}{9}
 
@@ -522,6 +522,11 @@ R.~Diestel,
 H.~W. Corley, D.~Y. Sha,
 \emph{Most vital links and nodes in weighted networks},
 Operations Research Letters 1(4) (1982), 157--160.
+
+\bibitem{malik-mittal-gupta}
+K.~Malik, A.~K. Mittal, S.~K. Gupta,
+\emph{The $k$ most vital arcs in the shortest path problem},
+Operations Research Letters 8(4) (1989), 223--227.
 
 \bibitem{dahlhaus1994}
 E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,

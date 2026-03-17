@@ -1,674 +1,118 @@
-Nie. To **nie jest jeszcze „najlepiej spisany” artykuł** w sensie, którego oczekujesz. Ale uczciwie: to też **nie jest chaotyczny raport**. To jest już **spójny, krótki artykuł dowodowy**, z poprawną architekturą: wprowadzenie problemu, ścisła notacja, lematy techniczne, kluczowa propozycja o ściąganiu i domknięcie indukcją leksykograficzną. Jawnie zapisano, że chodzi o **skończone grafy nieskierowane proste**, bez dodatkowych założeń typu spójność czy planarność, nie ma tabel, nie ma lokalnych odwołań do manuskryptów, i nie ma wtrętów algorytmicznych do samego dowodu. To są duże plusy. 
+Nie. To **nie jest jeszcze “najlepiej spisany artykuł”** w sensie topowego tekstu matematycznego. To jest **solidny, już dość dojrzały draft**, który ma wyraźną architekturę dowodu i — co ważne — po tej lekturze **nie widzę oczywistej, śmiertelnej luki logicznej** w rdzeniu argumentu: równoważność przez najkrótsze ścieżki jest sformułowana i udowodniona, własność po kontrakcji jest rozpisana krok po kroku, a dowód głównego twierdzenia rzeczywiście idzie przez indukcję leksykograficzną z dwoma przypadkami. Ale od tekstu na poziomie *Journal of Graph Theory / Combinatorica* wciąż dzieli go trochę pracy redakcyjnej i kompozycyjnej. 
 
-Najważniejsze: **nie widzę tu fatalnej luki, która obalałaby Twierdzenie 5.1**. Obserwacja 3.4 jest sformułowana poprawnie i dowiedziona domknięcie w obie strony. Propozycja 4.3 ma sens matematyczny i jej mechanika jest zgodna z planem dowodu. Twierdzenie 5.1 ma sensowną indukcję po porządku leksykograficznym i oba przypadki rzeczywiście zmniejszają parametr. Mój zarzut nie brzmi więc: „dowód jest zły”, tylko raczej: **„dowód jest już dobry, ale jeszcze nie jest dopracowany do standardu top-journal referee-proof”**. 
+Moja surowa ocena ogólna:
 
-Największa wada tekstu to nie logika głównego twierdzenia, lecz **standard cytowania i samoświadomość redakcyjna dowodów pomocniczych**. W sekcji 3 padają formuły typu „jest to standardowa własność spacerów” i odwołania ogólne do „[1, 2, rozdz. 1]” przy Lematach 3.2 i 3.3. To nie jest matematyczna katastrofa, ale względem Twojego własnego kryterium „albo pełen argument, albo jasna referencja” to jest jeszcze za miękkie. W wersji na topowe czasopismo trzeba albo dopisać 2–3 linie pełnego dowodu, albo podać znacznie ostrzejszy odsyłacz niż ogólne „rozdział 1”. 
+* **formalizm matematyczny:** 8/10,
+* **kompletność dowodów:** 8/10,
+* **przejrzystość prezentacji:** 7/10,
+* **eliminacja zbędnych rzeczy:** 6.5/10,
+* **gotowość do stylu top-journal:** 6.5/10.
+  To już nie jest chaotyczny raport, ale jeszcze nie jest tekst “idealny”. 
 
-**Obserwacja 3.4** jest akurat jednym z najlepszych fragmentów: jest dobrze ustawiona i naprawdę użyteczna, bo porządkuje całą dalszą argumentację przez przejście od wzrostu odległości do przecinania wszystkich ścieżek najkrótszych. Tu nie mam zarzutu merytorycznego. Mam tylko drobną uwagę redakcyjną: oznaczenia w ilustracji i opisie są trochę mniej zdyscyplinowane niż w samym stwierdzeniu, więc warto pilnować pełnej zgodności notacji między tekstem a rysunkiem. To detal, ale dokładnie takie detale odróżniają „dobry tekst” od „idealnego tekstu”. 
+## 1. Co jest naprawdę dobre
 
-**Propozycja 4.3** jest miejscem najbardziej narażonym na atak recenzenta. Nie dlatego, że jest fałszywa, tylko dlatego, że dowód jest **za bardzo skompresowany logicznie**. Kluczowy argument składa się tam z trzech osobnych ruchów: wykazania, że inne terminale nie leżą w (N[t]); wykazania skończoności odległości po ściągnięciu; oraz analizy każdej ścieżki najkrótszej (P') w (G') w dwóch przypadkach: bez (t') i z (t'). Wszystko to jest w tekście, ale recenzent musi sam poskładać sobie strukturę. W wersji idealnej ten dowód powinien być rozbity na **jawnie nazwane podroszczenia** albo mikrolematy wewnątrz dowodu. Obecnie jest poprawny, lecz zbyt „gęsty”, zwłaszcza na stronach odpowiadających Przypadkom 1–2. 
+Tekst spełnia najważniejsze warunki merytoryczne. Już w abstrakcie i wstępie jest jasno napisane, że chodzi o **skończone grafy proste, nieskierowane**, bez dokładania spójności, planarności czy innych dodatkowych założeń; te ograniczenia są potem spójne z treścią twierdzenia głównego. To jest duży plus, bo dokładnie odpowiada Twoim wymaganiom 11 i 18.  
 
-Dokładniej: w Przypadku 1 Propozycji 4.3 używasz projekcji krótszej ścieżki z (G) do (G') przez Lemat 3.5, a potem prostujesz spacer Lematem 3.2. To działa, ale w tekście brzmi trochę jak ciąg technicznych ruchów, a nie jak wyraźnie nazwany mechanizm: „każda ścieżka między wierzchołkami poza (N[t]) projekcyjnie daje spacer między tymi samymi końcami w (G') nie dłuższy”. Ten fakt jest używany wielokrotnie i powinien być wyeksponowany, zamiast za każdym razem składany z dwóch wcześniejszych lematów. To nie jest luka; to jest brak maksymalnej przejrzystości dowodu. 
+Struktura logiczna też jest poprawnie zaprojektowana: najpierw definicje i operacje na grafie, potem równoważność definicji przez najkrótsze ścieżki, potem techniczne lematy o rzutowaniu/liftingu ścieżek przy kontrakcji, potem propozycja o zachowaniu własności, a na końcu indukcja leksykograficzna w twierdzeniu głównym. To jest architektura sensowna i profesjonalna.
 
-W Przypadku 2 tej samej propozycji rdzeń argumentu jest dobry: bierzesz suffix (Q') od (t') do (z), podnosisz go Lematem 4.1 do najkrótszej ścieżki (Q) od (t) do (z), a potem przenosisz krawędź z (F\cap E(Q)) z powrotem do (F'\cap E(P')). To jest dokładnie właściwy pomysł. Ale z redakcyjnego punktu widzenia trzeba ten fragment zrobić bardziej odpornym: dziś kilka kluczowych obserwacji jest rozrzuconych po akapitach, zamiast zostać zapisanych jako dwa zwarte fakty: „suffix (Q') jest najkrótszy” oraz „każda krawędź (f\in E(Q)\cap F), poza ({t,v}), ma niezanikający obraz w (G')”. W tekście to jest, lecz za słabo wyodrębnione. 
+Najważniejsze: w tych miejscach, gdzie najłatwiej byłoby “przeskoczyć” argument, autor tego **nie robi**. Observation 3.4 nie jest pozostawione jako slogan, tylko ma pełny dowód w obie strony. Proposition 4.3 nie jest potraktowana hasłowo, tylko rozbita na kroki: terminale poza $N[t]$, skończoność dystansów w grafie po kontrakcji, i przecięcie wszystkich najkrótszych ścieżek z obrazem $F'$. Theorem 5.1 faktycznie ma dwa przypadki i oba są domknięte. 
 
-**Twierdzenie 5.1** oceniam wysoko merytorycznie. Indukcja po parze ((|T|,|V|)) jest dobrze motywowana; przypadek 1 rzeczywiście zmniejsza liczbę wierzchołków przy zachowaniu liczby terminali, a przypadek 2 zmniejsza liczbę terminali przez usunięcie jednego terminala i jednej krawędzi incydentnej. To jest sensowne i eleganckie. Najbardziej newralgiczny fragment, czyli pokazanie w Przypadku 2, że (F\setminus{e}) nadal przecina każdą ścieżkę najkrótszą między terminalami z (T\setminus{t}), jest przeprowadzony poprawnie przez rozcięcie ścieżki w (t) i użycie Obserwacji 3.4 na „drugiej połowie”. To naprawdę działa. Natomiast znów: argument jest **jedno kliknięcie za gęsty** jak na standard „nie pozostawiaj recenzentowi nic do domyślenia”. 
+## 2. Najpoważniejsze zastrzeżenia
 
-W szczególności w Przypadku 2 Twierdzenia 5.1 warto byłoby formalnie wyeksponować jedną rzecz, która dziś jest rozproszona po kilku zdaniach: skoro (P) jest ścieżką prostą i zawiera (t), to krawędź (e) incydentna z (t) leży dokładnie w jednej z podścieżek (P_u) albo (P_w), a druga podścieżka pozostaje nietknięta i nadal, jako ścieżka najkrótsza między parami terminali, musi przeciąć (F) w jakiejś innej krawędzi. To jest serce przypadku 2; ono zasługuje na jedno wyraźne, osobne sformułowanie w tekście. 
+### (a) Tekst jest **za bardzo dydaktyczny**, a za mało “journal-tight”
 
-Pod względem **przejrzystości prezentacji** tekst jest dobry, ale jeszcze nie wzorcowy. Sekcje 2–5 są zorganizowane bardzo rozsądnie. Rysunki TikZ nie są ozdobnikami, tylko realnie wspierają dowód, zwłaszcza ilustracje ściągania, podnoszenia suffixu i rozcięcia ścieżki w (t). To spełnia Twoje wymaganie o sensownych obrazkach. Natomiast sekcja 6 jest wyraźnie zbyt cienka jak na ambitną prezentację artykułu. Masz tam tylko krótkie domknięcie i dwa akapity komentarza, podczas gdy sam prosiłeś o szersze osadzenie w problemach pokrewnych. Na tym poziomie tekst wygląda bardziej jak **bardzo dobra research note** niż jak „pełnoprawny, szeroko osadzony artykuł” w stylu Combinatorica/JGT. 
+To nie jest błąd logiczny, ale jest to realna wada stylu naukowego. Artykuł miejscami brzmi bardziej jak **bardzo staranna notatka wykładowa** niż jak zwięzła, ostro przycięta publikacja. Widać to zwłaszcza w częściach elementarnych: Observation 2.5, Lemma 3.2, Lemma 3.3, a nawet uzasadnienie dobrze ufundowania porządku leksykograficznego w dowodzie Theorem 5.1 są rozpisane bardzo szeroko. Matematycznie jest to poprawne, ale z punktu widzenia topowego stylu — zbyt rozwlekłe.  
 
-I to jest realny brak względem punktu 21. Obecny tekst tylko sygnalizuje, że Twój problem leży „między” multiterminal cut a most vital links. Ale nie wyostrza tego wystarczająco. U Dahlhausa i współautorów problem dotyczy **separowania wszystkich terminali** przez zbiór krawędzi w grafie ważonym; to jest klasyczny multiterminal cut. U Corleya i Sha chodzi o **maksymalizację wzrostu odległości dla jednej wyróżnionej pary** w sieci ważonej, nawet skierowanej. U Nardellego i współautorów idzie jeszcze węższy wariant: **jedna para wierzchołków i jedna najkrótsza ścieżka**, dla której szuka się najbardziej „witalnej” krawędzi. Twój tekst powinien te trzy osie różnicy wypowiedzieć jawnie: „jedna para vs wiele terminali”, „wzrost odległości vs pełna separacja”, „grafy ważone/skierowane vs skończone grafy proste nieskierowane”. Tego teraz brakuje.    
+**Korekta:** nie zmieniać treści dowodu, tylko **skondensować** rutynowe fragmenty. Najbardziej elementarne fakty powinny zostać albo skrócone o 30–40%, albo scalone. W szczególności Lemma 3.2 + Lemma 3.3 + część komentarzy wokół nich da się podać znacznie ciaśniej bez utraty rygoru.
 
-Na plus trzeba bardzo wyraźnie zapisać, że kilka Twoich rygorystycznych wymagań jest już spełnionych. Tekst nie odwołuje się do lokalnych plików ani starszych wersji; bibliografia zawiera wyłącznie normalne źródła zewnętrzne. Jawnie zapisano, że grafy są proste, bez pętli i bez krawędzi równoległych. Nie ma też niedopuszczalnych założeń typu spójność „bez straty ogólności”. To jest dokładnie tak, jak chciałeś. 
+### (b) Zależności między lematami są poprawne, ale **za długie i zbyt kosztowne poznawczo**
 
-Mój ostry werdykt jest więc taki: **matematycznie tekst jest mocny i prawdopodobnie poprawny; redakcyjnie nie jest jeszcze idealny**. Najbardziej broni się część merytoryczna. Najbardziej odstaje: standard cytowania „standardowych faktów”, zbyt cienkie osadzenie w literaturze, oraz zbyt skondensowane prowadzenie Propozycji 4.3 i Przypadku 2 w Twierdzeniu 5.1. To nie są drobiazgi kosmetyczne, tylko dokładnie te miejsca, w których topowy recenzent powie: „dobry wynik, ale autor powinien uczynić dowód bardziej odpornym na nieporozumienia i lepiej umieścić go w literaturze”. 
+Proposition 4.3 jest poprawna w konstrukcji, ale czytelnik musi przejść przez bardzo długi łańcuch zależności: Observation 3.4, Lemma 3.5, Lemma 3.2, Lemma 4.1, Observation 4.2, a potem znowu Observation 3.4. To wszystko działa, ale jest ciężkie w audycie. W dobrym tekście journalowym taki proof pipeline powinien być bardziej “oznakowany”.
 
-**Obowiązkowe korekty, żebym następną wersję uznał za idealną:**
+**Korekta:** na początku Proposition 4.3 dodać **jedno krótkie zdanie mapujące dowód**, np. że skończoność dystansów w $G'$ pochodzi z projekcji ścieżek, a przecięcie najkrótszych ścieżek z $F'$ pochodzi z rozbicia na przypadki $t'\notin V(P')$ i $t'\in V(P')$ oraz z liftingu końcowego fragmentu ścieżki. Bez nowej matematyki — tylko lepsza nawigacja.
 
-1. **Uszczelnić wszystkie cytowania do standardowych faktów.** Przy Lematach 3.2 i 3.3 nie wystarczy ogólne „por. [1, 2, rozdz. 1]”. Albo dopisać pełne mini-dowody, albo wskazać konkretne twierdzenia/propozycje/strony. To jest konieczne. 
+### (c) Dowód głównego twierdzenia jest dobry, ale nadal ma miejscami **smak notatki roboczej**
 
-2. **Rozbić Propozycję 4.3 na jawne podkroki.** Nie zmieniam treści, ale wymagam, by w dowodzie były wyraźnie wyodrębnione:
-   a) terminale poza (t) nie leżą w (N[t]),
-   b) każda para terminali w (T') ma w (G') skończoną odległość,
-   c) każda ścieżka najkrótsza w (G') przecina (F'), z osobno sformatowanymi Przypadkami 1–2.
-   Teraz to wszystko jest poprawne, ale zbyt zbite. 
+Sam mechanizm indukcji jest sensowny: przypadek kontrakcyjny zachowuje liczbę terminali i zmniejsza liczbę wierzchołków, a przypadek $T\subseteq V[F]$ usuwa jeden terminal i jedną krawędź. To jest dokładnie ten typ struktury, który powinien tu być. Problemem nie jest logika, tylko redakcja: część Case 2 jest pisana poprawnie, lecz wciąż trochę “mikrokrokowo”. Czytelnik musi długo śledzić rozcięcie $P=P_u\cdot P_w$, rozłączność zbiorów krawędzi i wybór nowej krawędzi $f\neq e$ z drugiej części ścieżki.
 
-3. **Wyciągnąć na wierzch rdzeń Przypadku 2 w Twierdzeniu 5.1.** Chcę tam osobne, jednozdaniowe twierdzenie pomocnicze w stylu: usunięcie jednej krawędzi (e) incydentnej z usuwanym terminalem (t) nie niszczy własności przecinania wszystkich ścieżek najkrótszych między parami z (T\setminus{t}), bo „druga połowa” dowolnej ścieżki przez (t) nadal dostarcza krawędź z (F\setminus{e}). Bez tego ten przypadek pozostaje poprawny, ale zbyt skompresowany. 
+**Korekta:** w Case 2 trzeba wyraźniej wyeksponować **główny niezmiennik logiczny**:
+„jeżeli wybrana krawędź $e$ leży na jednej z dwóch najkrótszych podścieżek do/od $t$, to druga podścieżka — jako najkrótsza ścieżka między terminalami — nadal musi zawierać jakąś krawędź z $F$, a więc daje krawędź z $F\setminus{e}$.”
+To już w tekście jest, ale nie jest wystarczająco wybijane jako oś argumentu. 
 
-4. **Znacząco wzmocnić sekcję 6.** Obecne dwa akapity nie wystarczają. Trzeba wyraźnie porównać Twój problem z:
-   – multiterminal cut z Dahlhausa et al.,
-   – single-pair most vital links z Corleya–Sha,
-   – most vital edge / replacement shortest path z Nardellego–Proiettiego–Widmayera,
-   i wypowiedzieć precyzyjnie, co jest u Ciebie słabsze, co silniejsze, a co po prostu innego rodzaju.    
+### (d) Wstęp i zakończenie **powtarzają** podobne treści
 
-5. **Dopieścić standard „top-journal polish”.** To znaczy: mniej meta-komentarzy o strategii dowodu w środku argumentu, więcej formalnie wydzielonych claimów; pełna zgodność notacji między stwierdzeniami, dowodami i rysunkami; oraz mocniejsze zamknięcie artykułu, żeby tekst wyglądał nie jak bardzo dobry szkic noty, tylko jak finalny, samowystarczalny artykuł matematyczny. 
+Wstęp już tłumaczy relację do multiterminal cut oraz do most vital edge / shortest-path vulnerability. Zakończenie wraca do prawie tego samego kontrastu. To nie jest błąd, ale przy 10 stronach jest to marnowanie miejsca.  
 
-Tak. Będę brutalny i wąski: **tylko Propozycja 4.3 i Twierdzenie 5.1**, bez przepisywania tekstu na nowo.
+**Korekta:** albo skrócić wstępowy przegląd literatury, albo przenieść ciężar porównania do sekcji końcowej i tam zrobić go naprawdę treściwie.
 
-Najpierw werdykt ogólny: **nie widzę tu zdania, które byłoby jawnie fałszywe matematycznie**, ale widzę kilka zdań, które na poziomie top-journal referee są **za słabo zabezpieczone**, **za mało modularne** albo **redakcyjnie nieoptymalne**. Innymi słowy: to nie wygląda jak dowód błędny, ale w kilku miejscach wygląda jak dowód, który zmusza recenzenta do samodzielnego domykania mikroprzejść. Właśnie to będę punktował. 
+### (e) Sekcja “related problems” jest **za słaba względem Twojego wymagania 21**
 
-## Propozycja 4.3 — przegląd zdanie po zdaniu
+Masz tam jeden zwięzły akapit, który wspomina Dahlhausa, Corley–Sha, Nardelli–Proietti–Widmayer i Israeli–Wood. To jest sensowne, ale jeszcze zbyt cienkie, jeśli celem jest naprawdę dobre osadzenie problemu w krajobrazie. Sama literatura, którą załączyłeś, sugeruje znacznie bogatszy kontekst:
 
-**Stwierdzenie Propozycji 4.3.**
-Samo sformułowanie jest dobre: założenia są kompletne, obiekty (G',T',F') są jawnie zdefiniowane, a teza jest dokładnie tym, czego potrzeba do indukcji. Tu nie mam zarzutu merytorycznego. Jedyny minus: nie pada od razu krótkie przypomnienie, że (F/N[t]) może identyfikować różne krawędzie (F), co później będzie istotne dla kontroli liczności i dla tego, że wystarcza wykazać samo przecinanie ścieżek, a nie zachowanie „lokalizacji” krawędzi. To nie jest luka, tylko niewykorzystana okazja do uprzedzenia potencjalnego nieporozumienia. 
+* Corley–Sha badają **most vital links/nodes** w sieciach ważonych, czyli wersję single-pair z maksymalizacją wzrostu dystansu,
+* Dahlhaus et al. badają **multiterminal cut**, czyli pełne rozdzielenie terminali,
+* Nardelli et al. badają **most vital edge of a shortest path**, znów w wersji single-pair i na poziomie jednej najkrótszej ścieżki.   
 
-**„Dowód opiera się na dwóch mechanizmach.”**
-To zdanie jest redakcyjnie słabe. Nie szkodzi matematyce, ale w tekście formalnym taki meta-komentarz ma sens tylko wtedy, gdy potem dowód rzeczywiście zostaje rozpisany jako dwa jawne claimy. Tu tak nie jest. W efekcie to zdanie nie strukturyzuje dowodu, tylko zapowiada strukturę, której potem nie egzekwuje. Na poziomie surowej recenzji: stylistycznie dopuszczalne, formalnie mało warte. 
+Obecny tekst tylko sygnalizuje te związki, ale nie wydobywa ich intelektualnie. Nie mówi np. wyraźnie, że Twój wynik jest **czysto strukturalnym dolnym ograniczeniem** dla zjawiska pośredniego między “pairwise strict distance increase” a pełnym odcięciem wszystkich terminali, ani nie wyjaśnia, dlaczego taki bound jest naturalny właśnie z punktu widzenia tych trzech nurtów.
 
-**„Krawędzie o obu końcach poza (N[t]) przechodzą do (G') bez zmiany na mocy Obserwacji 4.2.”**
-To zdanie jest poprawne i potrzebne. Działa jako lokalny pomost między Propozycją 4.3 a Obserwacją 4.2. Nie mam zarzutu. 
+**Korekta:** rozbudować sekcję końcową o 2–3 zwarte akapity, każdy z jedną ostrą myślą porównawczą:
 
-**„Jeżeli natomiast ścieżka najkrótsza w (G') przechodzi przez (t'), to jej końcowy fragment wychodzący z (t') można, na mocy Lematu 4.1, podnieść do ścieżki najkrótszej wychodzącej z (t) w grafie (G).”**
-Matematycznie sensowne, ale redakcyjnie niedostateczne. To zdanie sugeruje automatyczne zastosowanie Lematu 4.1, choć faktycznie potrzeba jeszcze sprawdzić, że rozważany fragment ma koniec w (V\setminus N[t]) i że jest rzeczywiście ścieżką najkrótszą między (t') a tym końcem. Obie rzeczy są później pokazane, więc błędu nie ma. Problem jest taki, że to zdanie sprzedaje wniosek zanim zbuduje jego przesłanki. U topowego recenzenta to powoduje drobne „stop, jeszcze nie”. 
+1. semi-cutting vs multiterminal cut,
+2. semi-cutting vs most vital edge / most vital links,
+3. semi-cutting vs interdiction / budgeted perturbation.
+   Bez rozwlekania, ale konkretnie.
 
-**„Najpierw pokażemy, że (T\setminus{t}\subseteq V\setminus N[t]).”**
-Bardzo dobre zdanie organizacyjne. To jest właśnie ten rodzaj lokalnego celu, który powinien był pojawić się częściej. Bez zastrzeżeń. 
+### (f) Użycie display math jest trochę zbyt częste
 
-**„Weźmy dowolne (u\in T\setminus{t}) i przypuśćmy, że (u\in N(t)).”**
-Poprawny start subargumentu przez sprzeczność. Bez zarzutu. 
+Nie jest to katastrofa, ale przy Twoich własnych kryteriach ten tekst da się jeszcze “odchudzić”. W dowodzie Theorem 5.1 i w sekcjach technicznych pojawia się sporo krótkich bloków wzorów, które spokojnie mogłyby zostać inline. To trochę wzmacnia wrażenie “notatki technicznej”.
 
-**„Wtedy (d_G(t,u)=1), a jedyna ścieżka długości 1 z (t) do (u) jest równa ((t,u)).”**
-To jest poprawne, ale minimalnie za szybkie. W grafie prostym nieskierowanym rzeczywiście istnieje dokładnie jedna ścieżka długości 1 między sąsiadami, bo odpowiada jednej krawędzi ({t,u}). Zdanie jest prawdziwe. Tyle że skoro autor tak rygorystycznie buduje tekst, to tu aż prosi się o jedno dopowiedzenie, że używa prostoty grafu. Brak tego dopowiedzenia nie czyni zdania błędnym, ale osłabia jego dyscyplinę. 
+**Korekta:** zostawić display tylko tam, gdzie naprawdę poprawia czytelność ciągu logicznego: definicja kontrakcji, definicja porządku leksykograficznego, kluczowe przypisania w Case 1. Resztę wciągnąć do tekstu.
 
-**„Z Obserwacji 3.4 wynikałoby więc, że krawędź ({t,u}) należy do (F), co przeczy założeniu (t\notin V[F]).”**
-To zdanie jest poprawne i dobrze zamyka sprzeczność. Działa, bo jedyna ścieżka najkrótsza między (t) i (u) składa się dokładnie z tej krawędzi. Tu nie ma luki. 
+### (g) TikZ-y są sensowne, ale jest ich **lekko za dużo jak na krótki note**
 
-**„Otrzymana sprzeczność dowodzi żądanej inkluzji.”**
-Formalnie poprawne. Bez uwag. 
+Masz figurę ostrości boundu, figurę definicji kontrakcji, figurę do Observation 3.4, figurę projekcji/liftingu, figurę Case 1, figurę Case 2. To jest dydaktycznie dobre, ale w krótkim artykule może wyglądać trochę ciężko. Część z nich jest bardzo pomocna, lecz część można by połączyć lub ograniczyć.
 
-**„W szczególności (T'\subseteq V(G')).”**
-Poprawne, ale zbyt lakoniczne. Trzeba chwilę samemu rozpakować, że terminale z (T\setminus{t}) leżą poza (N[t]), a nowy terminal (t') z definicji należy do (V(G')). To nie jest problem matematyczny, tylko drobne przerzucenie pracy na czytelnika. 
+**Korekta:** zostawić bezwzględnie te figury, które niosą ideę dowodu, a nie tylko definicję. Na poziomie topowego note’u rozważyłbym redukcję o 1–2 rysunki albo scalenie figur technicznych.
 
-**„W następnym kroku pokażemy, że dla każdych różnych (u,w\in T') zachodzi (d_{G'}(u,w)<\infty).”**
-Dobre zdanie organizacyjne. Szkoda, że podobnej jawności brakuje później w części o przecinaniu ścieżek. 
+## 3. Czy są faktyczne luki logiczne?
 
-**Część „Jeżeli (u,w\in T\setminus{t})...”**
-Ten fragment jest poprawny, ale ma jedną wadę formalną: używa Lematu 3.5 i Lematu 3.2 jako czarnej skrzynki do przejścia „ścieżka w (G) (\to) ścieżka w (G')”, nie podkreślając, że uzyskana ścieżka może przechodzić przez (t'), co jest w porządku, ale warto byłoby to jasno zaakcentować. Inaczej recenzent przez pół sekundy zastanawia się, czy autor nie chce przypadkiem ścieżki całkowicie w (V\setminus N[t]). To jest drobiazg, ale w gęstym dowodzie właśnie takie półsekundy się kumulują. 
+Po tej lekturze moja odpowiedź brzmi: **nie widzę w tej chwili oczywistej luki śmiertelnej** w rdzeniu matematycznym.
 
-**Część „Jeżeli jeden z wierzchołków (u,w) jest równy (t')...”**
-Merytorycznie dobra. To jest poprawne użycie Obserwacji 2.5 i projekcji ścieżki z (t) do (z). Brak zarzutów logicznych. Jedynie redakcyjnie: ponieważ to jest pierwszy moment, gdy naprawdę wykorzystujesz rolę (t') jako „obrazu całego (N[t])”, można by to było wyeksponować mocniej. 
+* Observation 3.4 jest kompletna. 
+* Proposition 4.3 jest rozpisana w sposób audytowalny i domyka oba problemy: skończoność dystansów po kontrakcji oraz przecięcie wszystkich najkrótszych ścieżek z $F'$.
+* Theorem 5.1 ma poprawny schemat indukcji leksykograficznej i oba przypadki są doprowadzone do końca.
 
-**„Tym samym każda para różnych terminali z (T') ma w (G') skończoną odległość.”**
-Poprawne. Bez uwag. 
+To nie znaczy, że tekst jest idealny. To znaczy tylko tyle, że **największy problem nie leży już w samej matematyce, tylko w polerowaniu formy, hierarchii argumentów i ekonomii prezentacji**.
 
-**„Niech teraz (u,w\in T') będą różne i niech (P') będzie dowolną ścieżką najkrótszą...”**
-Dobry pivot. Od tego miejsca dowód przechodzi do właściwej części. Bez zarzutu. 
+## 4. Ocena względem Twoich 21 wymagań
 
-**„Ponieważ na mocy Definicji 2.3 graf (G') jest grafem prostym, możemy zastosować do niego Obserwację 3.4.”**
-Poprawne, ale trochę teatralne. Do zastosowania Obserwacji 3.4 wystarczy, że (G') mieści się w jej hipotezach; nie trzeba tego aż tak celebrować. Samo zdanie jest jednak prawdziwe i formalnie w porządku. 
+Spełnione albo prawie spełnione:
 
-**„Wystarczy więc wykazać, że (E(P')\cap F'\neq\emptyset). Rozpatrujemy dwa przypadki.”**
-To jest poprawny redukcyjny krok. Dobre zdanie. 
+* ścisłe wprowadzenie notacji i operacji na grafie — tak, wyraźnie.
+* pomocnicze lematy z dowodami — tak.
+* główne twierdzenie z indukcją krok po kroku — tak.
+* brak dodatkowych założeń strukturalnych — tak. 
+* brak algorytmiki / struktur danych / tabel — tak. 
+* angielski — tak. 
+* proste grafy bez pętli i wielokrotnych krawędzi — tak, jasno powiedziane.
+* brak odwołań do lokalnych plików i starszych wersji — tak, bibliografia zawiera tylko publikacje.
 
-### Przypadek 1 w Propozycji 4.3
+Częściowo spełnione:
 
-**„(t'\notin V(P')). Wtedy (V(P')\subseteq V\setminus N[t])...”**
-Poprawne i czyste. To jest dobry start przypadku. 
-
-**„Każda krawędź ścieżki (P') ma więc oba końce poza (N[t]), a zatem ... jest zarazem krawędzią grafu (G).”**
-Poprawne. Dobre użycie Obserwacji 4.2. 
-
-**„Wynika stąd, że (P') jest ścieżką z (u) do (w) również w (G).”**
-Poprawne. Bez zastrzeżeń. 
-
-**„Ponieważ końce ścieżki należą do (V(P')), mamy także (u,w\neq t')...”**
-Prawda, ale to zdanie jest trochę zbędne, bo wynika już z samego założenia przypadku. Nie przeszkadza, lecz rozwadnia tok argumentu. 
-
-**„Pokażemy, że (P') jest najkrótsza także w (G).”**
-Bardzo dobre zdanie. To jest dokładnie klucz tego przypadku. 
-
-**Kontrapozycyjny argument z (Q), Lematem 3.5 i Lematem 3.2.**
-Ten fragment jest matematycznie poprawny. Natomiast to jest pierwszy naprawdę newralgiczny punkt redakcyjny w całej propozycji. Autor nie zaznacza wyraźnie, że projekcja ścieżki (Q) może skrócić się o więcej niż 0, ale to działa na jego korzyść, bo potrzebuje jedynie ścieżki w (G') długości co najwyżej (\ell(Q)). Czyli logika jest dobra, ale prezentacja wymaga od czytelnika chwilowego odtworzenia celu nierówności. To nie jest luka, lecz jest to właśnie miejsce, gdzie recenzent może napisać „argument correct but unnecessarily compressed”. 
-
-**„Ponieważ (P') jest ścieżką z (u) do (w) w (G), zachodzi zarazem (d_G(u,w)\le \ell(P')), skąd (\ell(P')=d_G(u,w)).”**
-To zdanie jest poprawne, bo wcześniej wyeliminowano możliwość istnienia ścieżki krótszej w (G). Bez zarzutu. 
-
-**„Ponieważ (u,w\in T\setminus{t}), z Obserwacji 3.4 dostajemy (g\in E(P')\cap F).”**
-Poprawne. To jest dokładnie właściwy moment użycia Obserwacji 3.4. 
-
-**„Na mocy Obserwacji 4.2 mamy (g/N[t]=g), a zatem (g\in F').”**
-Poprawne, ale minimalnie za szybkie. Formalnie z (g\in F) i (g/N[t]=g) wynika (g\in F/N[t]=F'). To działa. Jednak tekst miesza trochę dwa fakty: niezmienność krawędzi i przynależność do obrazu zbioru. Mała rzecz, ale można to było oddzielić dla większej przejrzystości. 
-
-**„Otrzymujemy (E(P')\cap F'\neq\emptyset).”**
-Poprawne zamknięcie przypadku. 
-
-### Przypadek 2 w Propozycji 4.3
-
-**„(t'\in V(P')). Ponieważ (P') jest ścieżką, wierzchołek (t') występuje w niej dokładnie raz.”**
-Poprawne. Bez uwag. 
-
-**Fragment z odwracaniem (\overleftarrow{P'}).**
-To jest formalnie poprawne i dobrze pomyślane. Natomiast stylistycznie rozciągnięte. Trzy zdania poświęcone temu, że można odwrócić ścieżkę, to trochę dużo. W krótkim dowodzie takie rozwleczenie w jednym miejscu i kompresja w innym daje wrażenie nierównego pulsu tekstu. 
-
-**„Możemy zatem założyć, że (P'=(y_0,\dots,y_r,\dots,y_m)), (y_r=t'), gdzie (r<m); dopuszczamy również (r=0).”**
-Poprawne. Dobrze ustawia indeksację. 
-
-**Definicje (Q':=P'[y_r,y_m]) i (z:=y_m).**
-Poprawne i potrzebne. Bez zarzutu. 
-
-**„Ponieważ (P') jest ścieżką z (u) do (w), wierzchołek (z) jest jednym z końców...”**
-Poprawne, choć nieco przegadane. Kluczowa treść jest taka, że po ewentualnym odwróceniu (z\neq t'). Reszta jest kosmetyką. 
-
-**„Zatem (z\in T'\setminus{t'}=T\setminus{t}). W szczególności (z\notin N[t]).”**
-To jest bardzo ważne i poprawne. Tu autor dobrze domyka przesłanki Lematu 4.1. 
-
-**„Ponieważ (y_{r+1},\dots,y_m) są wierzchołkami grafu (G') różnymi od (t'), wszystkie one należą do (V\setminus N[t]).”**
-Poprawne i potrzebne. Bez zarzutu. 
-
-**„Ponieważ (P') jest ścieżką najkrótszą, zachodzi (\ell(P')=d_{G'}(u,w)). Ścieżka (Q') jest podścieżką ... więc z Lematu 3.3 ... (\ell(Q')=d_{G'}(t',z)).”**
-Matematycznie poprawne. To jest jedno z mocniejszych miejsc dowodu: wreszcie przesłanki Lematu 4.1 są ustawione starannie. 
-
-**„Możemy zatem zastosować Lemat 4.1.”**
-Tak. To jest w pełni uzasadnione. Bez uwag. 
-
-**„Istnieje wówczas (v\in N(t)) takie, że (Q=(t,v,y_{r+1},\dots,y_m)) jest ścieżką najkrótszą z (t) do (z) w (G).”**
-Poprawne zastosowanie Lematu 4.1. Bez zarzutu. 
-
-**„Ponieważ (t,z\in T), z Obserwacji 3.4 otrzymujemy (E(Q)\cap F\neq\emptyset).”**
-Poprawne i dobrze wykorzystane. 
-
-**„Z założenia (t\notin V[F])... żadna krawędź incydentna z (t) nie należy do (F).”**
-Poprawne. To jest kluczowe zdanie eliminujące pierwszą krawędź (Q). Bez niego dowód by się rozjechał. Dobre. 
-
-**„W szczególności pierwsza krawędź ścieżki (Q), to znaczy ({t,v}), nie należy do (F). Wybierzmy więc (f\in E(Q)\cap F).”**
-Poprawne. Silne i precyzyjne. 
-
-**„Wtedy (f) należy do zbioru krawędzi ścieżki ((v,y_{r+1},\dots,y_m))...”**
-Poprawne. Bez zarzutu. 
-
-**Podprzypadek (f={v,y_{r+1}}).**
-Poprawny, ale stylistycznie ciężki. Zdanie o obrazach końców i zdanie o tym, że jest to pierwsza krawędź (Q'), mogłyby być zredagowane czyściej. Matematycznie działa. 
-
-**Podprzypadek (f={y_i,y_{i+1}}).**
-Też poprawny. Tu nie ma luki. 
-
-**„W obu podprzypadkach (f/N[t]\in E(Q')\subseteq E(P')).”**
-Poprawne. Dobre zebranie obu gałęzi. 
-
-**„W obu podprzypadkach końce krawędzi (f) mają różne obrazy... więc (f/N[t]) jest krawędzią grafu (G').”**
-To zdanie jest formalnie poprawne, ale częściowo redundantne, bo w obu podprzypadkach zostało już de facto wykazane, że (f/N[t]\in E(Q')). Skoro coś należy do (E(Q')), to już jest krawędzią (G'). To jest więc zdanie nadmiarowe. Nie szkodzi, ale osłabia zwartość dowodu. 
-
-**„Ponieważ ponadto (f\in F), otrzymujemy (f/N[t]\in F'). Stąd (E(P')\cap F'\neq\emptyset).”**
-Poprawne i kończy przypadek. Bez zastrzeżeń. 
-
-**„Wykazaliśmy, że każda ścieżka najkrótsza... Wraz ze skończonością odpowiednich odległości daje to... ”**
-Poprawne domknięcie przez Obserwację 3.4. Bez zarzutu. 
-
-### Ostry werdykt dla Propozycji 4.3
-
-Merytorycznie: **broni się**.
-Redakcyjnie: **za gęsta w rdzeniu i za rozwlekła na obrzeżach**.
-Najbardziej narażone miejsca: meta-zapowiedź „dwóch mechanizmów”, kompresja w Przypadku 1 przy przenoszeniu najkrótszości z (G') do (G), oraz drobna redundancja pod koniec Przypadku 2. Fatalnej luki nie widzę. 
-
-## Twierdzenie 5.1 — przegląd zdanie po zdaniu
-
-**Stwierdzenie Twierdzenia 5.1.**
-Samo twierdzenie jest idealnie sformułowane: hipotezy pełne, teza jasna, żadnych ukrytych założeń. Bez zarzutu. 
-
-**„Udowodnimy nieco silniejsze sformułowanie...”**
-Bardzo dobra decyzja formalna. Umożliwia indukcję po ((k,n)). Bez tego dowód byłby znacznie słabszy konstrukcyjnie. 
-
-**„W naszym zastosowaniu występują wyłącznie pary ((k,n)) spełniające (k\le n)...”**
-Poprawne. Trochę techniczne, ale potrzebne, bo porządek indukcyjny jest ograniczany do sensownego obszaru. 
-
-**Definicja porządku leksykograficznego.**
-Dobra i konieczna. Bez uwag. 
-
-**„Porządek ten jest dobrze ufundowany...”**
-To zdanie jest prawdziwe, ale podane bez uzasadnienia. Tu akurat to nie jest grzech ciężki, bo chodzi o standardowy fakt o porządku leksykograficznym na (\mathbb N_0^2). Jednak według Twoich własnych rygorów to jest właśnie ten typ miejsca, gdzie tekst mógłby dostać drobne ostrzeżenie: autor używa faktu elementarnego bez dopowiedzenia. Nie rozwala to dowodu, ale jest asymetrią względem deklarowanego standardu. 
-
-**„Sama indukcja po (|T|) nie wystarcza...”**
-Bardzo dobre zdanie. Uzasadnia wybór techniki. Bez zarzutu. 
-
-**Baza: „Niech (k\le 1)...”**
-Poprawna i wystarczająca. Nie ma tu ukrytego problemu. 
-
-**„Krok indukcyjny. Ustalmy parę ((k,n))...”**
-Standardowy i poprawny start. Bez uwag. 
-
-**„Jeżeli znajdziemy terminal należący do (T\setminus V[F]), ... Jeżeli natomiast (T\subseteq V[F]), ...”**
-To jest dobre roadmap sentence. Klarowne i potrzebne. 
-
-### Przypadek 1 w Twierdzeniu 5.1
-
-**„Istnieje terminal (t\in T\setminus V[F]). Ponieważ (k\ge 2), możemy wybrać (u\in T\setminus{t}).”**
-Poprawne. Bez zarzutu. 
-
-**„Z Obserwacji 2.5 mamy (d_G(t,u)<\infty)...”**
-Poprawne. Bez uwag. 
-
-**„Ponieważ (u\neq t), ścieżka ta ma dodatnią długość...”**
-Poprawne, choć banalne. Da się obronić jako potrzebne do wywnioskowania (N(t)\neq\emptyset). 
-
-**„W szczególności (N(t)\neq\emptyset) oraz (|N[t]|\ge 2).”**
-Poprawne i ważne, bo później potrzebujesz ścisłego spadku liczby wierzchołków po ściągnięciu. To jest dobry detal dowodu. 
-
-**Definicje (G',T',F').**
-Standardowe i poprawne. Bez uwag. 
-
-**„Ponieważ ... (t\in T\setminus V[F]), na mocy Propozycji 4.3 zbiór (F') jest ...”**
-To jest dokładnie prawidłowe użycie Propozycji 4.3. Bez zarzutu. 
-
-**„Ponieważ (t'\notin V) oraz (T\subseteq V), mamy (t'\notin T), a więc (|T'|=|T|=k).”**
-Poprawne. Dobre. 
-
-**„Ponadto (|V(G')|=|V|-|N[t]|+1\le n-1<n).”**
-Poprawne i bardzo ważne. Dobrze wykorzystuje wcześniejsze (|N[t]|\ge 2). Bez zarzutu. 
-
-**„Z inkluzji (T'\subseteq V(G')) wynika także (|T'|=k\le |V(G')|).”**
-Formalnie poprawne, ale trochę techniczne. Rozumiem po co tu stoi: żeby nowa para należała do domeny indukcji. Nie mam zarzutu logicznego. 
-
-**„Skoro (|T'|=k) oraz (|V(G')|<n), zachodzi ... ((|T'|,|V(G')|)\prec (k,n)).”**
-Poprawne. Bez uwag. 
-
-**„Z założenia indukcyjnego otrzymujemy (|F'|\ge |T'|-1 = k-1). Lemat 3.1 daje (|F'|\le |F|), a zatem (|F|\ge k-1).”**
-To jest bardzo czyste domknięcie przypadku. Bez zarzutu. 
-
-### Przypadek 2 w Twierdzeniu 5.1
-
-To jest najbardziej ryzykowny fragment całego artykułu. I tu też, uczciwie: **on działa**, ale jest miejscami zbyt ciasno napisany. 
-
-**„(T\subseteq V[F]). Ponieważ (T\subseteq V[F]), każdy terminal jest incydentny z co najmniej jedną krawędzią ze zbioru (F).”**
-Poprawne. Bez zastrzeżeń. 
-
-**„Wybierzmy więc (t\in T) oraz krawędź (e\in F) incydentną z (t).”**
-Poprawne. Bez uwag. 
-
-**„Oznaczmy (T^-:=T\setminus{t}) oraz (F^-:=F\setminus{e}). Pokażemy, że (F^-) jest ...”**
-Dobre ustawienie celu. Bez zarzutu. 
-
-**„Weźmy dowolne różne (u,w\in T^-). Ponieważ (T^-\subseteq T)... z Obserwacji 2.5 mamy (d_G(u,w)<\infty).”**
-Poprawne. Bez uwag. 
-
-**„Niech (P) będzie dowolną ścieżką najkrótszą z (u) do (w) w (G). Z Obserwacji 3.4 dostajemy (E(P)\cap F\neq\emptyset).”**
-Poprawne. To jest właściwy punkt wyjścia. 
-
-**„Jeżeli (e\notin E(P)), to od razu (E(P)\cap F^-\neq\emptyset).”**
-To zdanie jest poprawne, ale minimalnie niedopisane: formalnie z (E(P)\cap F\neq\emptyset) oraz (e\notin E(P)) wynika, że każda krawędź z przecięcia leży w (F\setminus{e}=F^-). Logika jest oczywista, ale autor mógłby ją zapisać odrobinę czyściej. Nie jest to luka. 
-
-**„Pozostaje przypadek (e\in E(P)).”**
-Naturalne przejście. Bez uwag. 
-
-**„Ponieważ (e) jest incydentna z (t), istnieje (s\in V) takie, że (e={t,s}). Z założenia (e\in E(P)) wynika ... (t\in V(P)).”**
-Poprawne. Trochę rozwlekłe, ale formalnie czyste. 
-
-**„Zapiszmy (P=(v_0,\dots,v_m)). Istnieje dokładnie jeden indeks (j)...”**
-Poprawne. To jest ważne użycie prostoty ścieżki. Bez zarzutu. 
-
-**Definicje (P_u) i (P_w), oraz (0<j<m).**
-Poprawne. Dobrze ustawione. 
-
-**„Na mocy Lematu 3.3 (P_u) i (P_w) są ścieżkami najkrótszymi...”**
-Bardzo ważne i poprawne. Bez zarzutu. 
-
-**„Stąd obie te podścieżki mają dodatnią długość.”**
-Prawda, ale zbędne; już wynika z (0<j<m). To jest drobiazg redakcyjny, ale właśnie takie drobiazgi warto wycinać. 
-
-**„Ponieważ (P) jest ścieżką, podścieżki (P_u) i (P_w) mają wspólny jedynie wierzchołek (t).”**
-Poprawne. Dobre. 
-
-**Równość (E(P)=E(P_u)\cup E(P_w)) i rozłączność przecięcia.**
-To jest poprawne i bardzo ważne. W dodatku autor uczciwie uzasadnia rozłączność przez prostotę grafu, wykluczając hipotetyczne ({t,t}). To jest dobry moment dowodu. 
-
-**„Krawędź (e) należy więc dokładnie do jednej z tych dwóch podścieżek.”**
-Tak. W pełni poprawne. 
-
-**Podprzypadek (e\in E(P_u)).**
-Tutaj logika jest dobra: skoro (e\notin E(P_w)), a (P_w) jest najkrótszą ścieżką między terminalami (t,w), to Obserwacja 3.4 daje jakąś krawędź (f\in E(P_w)\cap F), automatycznie różną od (e), więc (f\in F^-). To działa. Ale to jest właśnie miejsce, które recenzent najchętniej zaatakuje, bo autor nie wypowiada osobno kluczowego faktu: „**cała praca wykonywana jest przez drugą połówkę ścieżki**”. Zamiast tego tekst od razu skacze do istnienia (f). Poprawność jest, ale ekspozycja rdzenia argumentu jest za słaba. 
-
-**Symetryczny podprzypadek (e\in E(P_w)).**
-To samo: poprawne, lecz zbyt skrócone. Nie ma luki, ale jest niedosyt modularności. 
-
-**„W obu podprzypadkach dostajemy (E(P)\cap F^-\neq\emptyset).”**
-Poprawne domknięcie. Bez uwag. 
-
-**„Wykazaliśmy, że dla każdych różnych (u,w\in T^-) odległość (d_G(u,w)) jest skończona i każda ścieżka najkrótsza ... przecina (F^-).”**
-Poprawne. To jest uczciwe podsumowanie tego, co rzeczywiście udowodniono. 
-
-**„Z Obserwacji 3.4 wynika więc, że (F^-) jest zbiorem na wpół-tnącym dla (T^-) w (G).”**
-Poprawne i eleganckie. Bez zarzutu. 
-
-**„Ponieważ (|T^-|=k-1) oraz (|V(G)|=n), zachodzi ((|T^-|,|V(G)|)\prec (k,n)).”**
-Poprawne. Bez uwag. 
-
-**Końcowe przejście przez indukcję: (|F^-|\ge k-2), więc (|F|\ge k-1).**
-Poprawne i czyste. Dobrze domknięte. 
-
-### Ostry werdykt dla Twierdzenia 5.1
-
-To jest **mocniejsza część tekstu niż można by się spodziewać po szkicu**. Konstrukcja indukcji jest dobra, parametry schodzą poprawnie, a oba przypadki faktycznie domykają krok. Najbardziej narażone miejsce to **Przypadek 2**, nie dlatego że jest błędny, tylko dlatego że jego serce jest pokazane zbyt mało „na tablicy”. Dla recenzenta przyjaznego to wystarczy. Dla recenzenta bezlitosnego: „proof likely correct, but the second case should be made more explicit at the point where the path is split at (t).” 
-
-## Najpoważniejsze zarzuty, które naprawdę bym wpisał do recenzji
-
-Po pierwsze, **Propozycja 4.3 jest poprawna, ale niedomodułowana**. Zamiast jednego długiego ciągu zdań powinna mieć wyraźniej wydzielone mikrocele: położenie terminali, skończoność odległości, przecinanie ścieżek najkrótszych bez (t'), przecinanie ścieżek najkrótszych z (t'). Dziś wszystko tam jest, ale w postaci zbyt zbitej. 
-
-Po drugie, **Twierdzenie 5.1 ma świetną architekturę globalną, ale jego Przypadek 2 jest za mało „samowyjaśniający się”**. Czytelnik musi sam nazwać sobie zasadę: jeśli jedna usuwana krawędź (e) leży po jednej stronie rozcięcia w (t), to druga strona nadal musi zawierać inną krawędź z (F). Autor to robi, ale nie eksponuje. To jest główny punkt do poprawy redakcyjnej. 
-
-Po trzecie, w obu dowodach widać nierówny poziom szczegółowości: czasem autor rozwija rzecz oczywistą, a czasem kompresuje rzecz delikatną. To nie jest błąd logiczny, ale to jest dokładnie ten rodzaj nierówności, który odbiera tekstowi wrażenie absolutnej elegancji. 
-
-Mój końcowy osąd, już naprawdę bezlitosny: **matematycznie oba fragmenty są prawdopodobnie poprawne; redakcyjnie oba są jeszcze o jeden poziom za nisko względem ideału, którego od nich wymagasz**. Propozycja 4.3 cierpi na nadmierną gęstość. Twierdzenie 5.1 cierpi na zbyt mało wyeksponowany rdzeń Przypadku 2. To są prawdziwe problemy, ale nie są to problemy typu „dowód się sypie”. 
-
-Tak. Tu będę jeszcze ostrzejszy, bo **Lemat 4.1 jest najbardziej delikatnym miejscem technicznym przed Propozycją 4.3**. Mój werdykt ogólny jest taki: **nie widzę błędu obalającego ani Lematu 4.1, ani Obserwacji 4.2**, ale oba fragmenty mają miejsca, w których autor zmusza czytelnika do samodzielnego „dopięcia” sensu, a przy Lema­cie 4.1 dodatkowo widać nierówny rytm szczegółowości: banalne rzeczy bywają rozwijane, a naprawdę istotne przejścia są podane zbyt ciasno. 
-
-## Lemat 4.1 — przegląd zdanie po zdaniu
-
-**Stwierdzenie Lematu 4.1.**
-Samo sformułowanie jest mocne i sensowne: z najkrótszej ścieżki od (t') do (z) w grafie po ściągnięciu chcesz odzyskać najkrótszą ścieżkę od (t) do (z) w grafie wyjściowym, z jednym dobrze dobranym sąsiadem (v\in N(t)). To jest dokładnie narzędzie, którego potem używasz w Propozycji 4.3. Zarzut nie dotyczy treści, tylko ekspozycji: stwierdzenie nie uprzedza czytelnika, że istotą dowodu nie jest „unikalność” takiego (v), lecz sama jego egzystencja. To drobiazg, ale przy pierwszym czytaniu ktoś może przez moment szukać własności kanoniczności, której tu nie ma i nie potrzeba. 
-
-**„Ponieważ (z\neq t'), mamy (k\ge 1).”**
-To jest poprawne i zupełnie elementarne. Nie mam zarzutu logicznego. Redakcyjnie to jest jedno z tych zdań, które jest tak oczywiste, że jego pełne wypowiadanie nie podnosi jakości dowodu. W tekście o takim stopniu ścisłości lepiej byłoby oszczędzać właśnie takie oczywistości, a doprecyzowywać miejsca naprawdę subtelne. 
-
-**„Z równości (V(G')=(V\setminus N[t])\cup{t'}) wynika, że (x_1), jako różny od (t'), należy do (V\setminus N[t]).”**
-To jest poprawne i potrzebne. To pierwsza rzeczywista przesłanka techniczna. Bez niej nie odróżnisz sytuacji „wejścia do zlanego wierzchołka” od sytuacji „wyjścia z niego”. Tu wszystko jest dobrze. 
-
-**„Krawędź ({t',x_1}) należy do (E(G')), więc z Definicji 2.3 istnieje pewien wierzchołek (v\in N[t]) oraz odpowiadająca mu krawędź ({v,x_1}\in E) taka, że ({v,x_1}/N[t]={t',x_1}).”**
-Matematycznie poprawne. To jest zasadniczy krok egzystencjalny. Ale redakcyjnie zdanie jest ciężkie: miesza istnienie preobrazu krawędzi z identyfikacją, gdzie leży jego koniec w (N[t]). Czytelnik musi sam sobie rozdzielić te dwa fakty. Przy dowodzie tej gęstości to już zaczyna uwierać. Nadal: nie błąd, lecz zbyt mała modularność. 
-
-**„Wybierzmy dowolny taki wierzchołek (v).”**
-To jest poprawne, ale właśnie tu aż prosi się o jedno zdanie uspokajające, że dowód najkrótszości zadziała dla każdego takiego wyboru. Autor tego nie mówi. Później rzeczywiście wychodzi, że wybór nie ma znaczenia, ale w tym momencie czytelnik jeszcze tego nie wie. To nie jest luka, ale jest to punkt lekkiego napięcia. 
-
-**„Gdyby (v=t), to z ({t,x_1}\in E) wynikałoby (x_1\in N(t)\subseteq N[t]), sprzecznie z (x_1\in V\setminus N[t]). Zatem (v\in N(t)).”**
-To jest bardzo dobre. Krótkie, czyste i dokładnie trafia w sedno. Ten fragment jest wzorcowy: żadnej mgły, żadnego przeskoku. 
-
-**„Ponieważ (v\in N(t)\subseteq N[t]) oraz (x_1,\dots,x_k\in V\setminus N[t]), żaden z wierzchołków (x_1,\dots,x_k) nie jest równy ani (t), ani (v).”**
-To zdanie jest poprawne. Jest potrzebne do sprawdzenia prostoty nowej ścieżki (P). Bez zarzutu. 
-
-**„Ponadto wierzchołki (x_1,\dots,x_k) są parami różne, gdyż (P') jest ścieżką.”**
-Prawda, ale to jest znowu poziom oczywistości, który można było skompresować. Nie szkodzi dowodowi, tylko zdradza nierówność stylu: autor dopowiada rzeczy trywialne, a zostawia czytelnikowi odtworzenie ważniejszych zależności metrycznych później. 
-
-**„Dla każdego (i\in{2,\dots,k}) krawędź ({x_{i-1},x_i}) należy do (E(G')) i ma oba końce poza (N[t]), a więc z Definicji 2.3 wynika ({x_{i-1},x_i}\in E).”**
-Treść jest poprawna. Natomiast tu pojawia się pierwszy poważniejszy zarzut redakcyjny: autor faktycznie korzysta z dokładnie tej treści, którą chwilę później formułuje jako Obserwację 4.2. Skoro ten fakt jest tak centralny i powtarzalny, to dowód Lematu 4.1 przez użycie samej definicji jest legalny, ale mniej przejrzysty niż powinien być. To jeszcze nie jest błąd, ale pokazuje brak pełnej dyscypliny kompozycyjnej sekcji. 
-
-**„Zatem (P=(t,v,x_1,\dots,x_k)) jest ścieżką w (G) i spełnia (\ell(P)=\ell(P')+1).”**
-To zdanie jest poprawne. Wszystkie warunki prostoty zostały sprawdzone. Bez zarzutu logicznego. 
-
-**„Ponieważ (P') jest ścieżką najkrótszą, mamy ponadto (d_{G'}(t',z)=\ell(P')<\infty).”**
-To jest prawda, ale zdanie jest trochę bezsilne redakcyjnie: nie wnosi nic nowego poza przypomnieniem definicji ścieżki najkrótszej. Używasz tego za moment, więc rozumiem intencję, ale zapis jest sztywny. Tu nie ma błędu, tylko stylistyczna toporność. 
-
-**„Niech teraz (Q=(q_0,\dots,q_\ell)) będzie dowolną ścieżką z (t) do (z) w (G).”**
-To jest właściwy start części metrycznej dowodu. Dobra decyzja: zamiast próbować konstruować bezpośrednio najkrótszość (P), autor daje dolne ograniczenie na długość każdej ścieżki (Q). To jest poprawna strategia. 
-
-**„Gdyby (\ell=1), to z ({t,z}\in E) wynikałoby (z\in N(t)\subseteq N[t]), wbrew założeniu (z\notin N[t]). Zatem (\ell\ge 2).”**
-To jest poprawne i potrzebne, bo później odcinasz pierwszy wierzchołek ścieżki. Bez zarzutu. 
-
-**„({q_0,q_1}={t,q_1}\in E), skąd (q_1\in N(t)\subseteq N[t]), a zatem (\pi_{N[t]}(q_1)=t').”**
-Bardzo dobry krok. Tu nic nie skrzypi. 
-
-**„Ciąg ((q_1,\dots,q_\ell)) jest końcowym fragmentem ścieżki (Q), a więc spacerem w (G).”**
-Poprawne, ale odrobinę rozwlekłe. To znowu ten sam problem stylu: rzecz kompletnie elementarna dostaje pełne zdanie formalne. Sama matematyka jest oczywiście w porządku. 
-
-**„Zastosowanie Lematu 3.5 do tego spaceru daje spacer z (t') do (z) w (G') o długości co najwyżej (\ell-1), gdyż (\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z).”**
-To jest poprawne i jest to ważny krok. Ale właśnie tutaj zaczyna się rdzeń dowodu, a autor nie eksponuje go dość mocno. To nie jest już rutynowe przepisanie definicji, tylko istotny mechanizm: każda ścieżka z (t) do (z) po odcięciu pierwszego kroku daje spacer z (t') do (z) krótszy o 1. To jest centralna idea lematu i powinna być bardziej „na wierzchu”. Obecnie jest poprawna, lecz schowana w środku ciągu zdań. 
-
-**„Z Lematu 3.2 otrzymujemy więc ścieżkę z (t') do (z) w (G') o długości co najwyżej (\ell-1).”**
-Poprawne. Standardowe przejście od spaceru do ścieżki. Bez zastrzeżeń. 
-
-**„Wobec tego (d_{G'}(t',z)\le \ell-1=\ell(Q)-1).”**
-Poprawne. Dobre. 
-
-**„Ponieważ ostatnia nierówność zachodzi dla każdej ścieżki (Q) z (t) do (z), wynika stąd (d_G(t,z)\ge d_{G'}(t',z)+1).”**
-To zdanie jest matematycznie poprawne, ale właśnie tutaj recenzent może wbić najostrzejszą szpilę redakcyjną: przejście od „dla każdej ścieżki (Q)” do dolnego ograniczenia na (d_G(t,z)) jest legalne, lecz zapisane zbyt telegranicznie. Autor liczy, że czytelnik sam dopowie sobie: „minimum długości ścieżek w (G) musi być co najmniej o 1 większe od (d_{G'}(t',z))”. To prawda. Problem nie jest logiczny, tylko ekspozycyjny: w najdelikatniejszym miejscu dowód nie zatrzymuje się na sekundę, żeby nazwać operację na minimach. 
-
-**„Z drugiej strony (P) jest ścieżką z (t) do (z), więc (d_G(t,z)\le \ell(P)=\ell(P')+1=d_{G'}(t',z)+1).”**
-To jest poprawne i eleganckie. Jest to dobra „druga strona” nierówności. Bez zarzutu. 
-
-**„Obie nierówności dają (d_G(t,z)=\ell(P)), czyli (P) jest ścieżką najkrótszą z (t) do (z).”**
-Tak, to jest poprawne zamknięcie lematu. Logika jest szczelna. 
-
-### Najostrzejsza ocena Lematu 4.1
-
-Lemat 4.1 **merytorycznie się broni**. Nie widzę w nim ukrytego kontrprzykładu ani miejsca, gdzie twierdzenie przestaje być prawdziwe. Natomiast jako fragment artykułu na najwyższy poziom jest on **nierówno napisany**: pierwsza połowa dowodu jest przesadnie drobiazgowa, a druga — ta naprawdę ważna, metryczna — jest zbyt skondensowana w jednym kluczowym przejściu „dla każdej ścieżki (Q) (\Rightarrow) dolne ograniczenie na (d_G(t,z))”. Do tego lemat korzysta z treści późniejszej Obserwacji 4.2 jeszcze „po definicji”, zamiast albo tę obserwację postawić wcześniej, albo przyznać jawnie, że to dokładnie ten sam mechanizm. To nie zabija lematu, ale obniża jego klasę redakcyjną. 
-
-## Obserwacja 4.2 — przegląd zdanie po zdaniu
-
-Tu będę jeszcze bardziej brutalny: **Obserwacja 4.2 jest prawie czystym rozpakowaniem definicji ściągania**. To nie jest wada sama w sobie — wręcz przeciwnie, jako narzędzie wielokrotnego użytku ma sens. Ale skoro jej treść jest tak elementarna, to jej zapis powinien być krystaliczny. I tu właśnie tekst jest poprawny, lecz chwilami niepotrzebnie ciężki. 
-
-**Stwierdzenie Obserwacji 4.2.**
-Samo sformułowanie jest bardzo dobre i bardzo użyteczne. Mówi dokładnie to, co potem wielokrotnie wykorzystujesz: poza (N[t]) ściąganie nic nie zmienia na poziomie krawędzi. To jest właściwy poziom lokalnej abstrakcji. Bez zarzutu merytorycznego. 
-
-**„Ponieważ (x,y\notin N[t]), mamy (\pi_{N[t]}(x)=x) oraz (\pi_{N[t]}(y)=y).”**
-Poprawne i naturalne. Bez uwag. 
-
-**„Jeżeli ({x,y}\in E(G)), to z Definicji 2.3 wynika, że ({x,y}\in E(G')) oraz ({x,y}/N[t]={x,y}).”**
-To jest absolutnie poprawne. Pierwsza implikacja jest trywialna i przedstawiona czysto. 
-
-**„Odwrotnie, jeżeli ({x,y}\in E(G')), to z tej samej definicji istnieje krawędź ({u,v}\in E(G)) taka, że ({\pi_{N[t]}(u),\pi_{N[t]}(v)}={x,y}).”**
-Też poprawne. To jest standardowy ruch „od obrazu do preobrazu” wynikający wprost z definicji zbioru krawędzi w grafie po ściągnięciu. Bez zarzutu. 
-
-**„Ponieważ jedynym wierzchołkiem grafu (G') leżącym poza zbiorem (V\setminus N[t]) jest (t'), z równości obrazów wynika, że (u,v\notin N[t]).”**
-To zdanie jest poprawne, ale stylistycznie niezgrabne. Autor argumentuje okrężnie: skoro ({\pi(u),\pi(v)}={x,y}) i oba elementy po prawej leżą poza (N[t]), to żaden z obrazów nie może być równy (t'). A skoro (\pi) wysyła dokładnie elementy (N[t]) na (t'), to (u,v\notin N[t]). Wszystko się zgadza. Problem polega na tym, że zdanie zapisano tak, jakby trzeba było prowadzić subtelną analizę zbioru wierzchołków (G'), choć tu wystarczy prostsza obserwacja o obrazach. To nie jest błąd, lecz przykład zbyt ciężkiego stylu przy bardzo prostym fakcie. 
-
-**„Stąd (\pi_{N[t]}(u)=u) oraz (\pi_{N[t]}(v)=v), a zatem ({u,v}={x,y}\in E(G)).”**
-Poprawne i domykające dowód. Bez zarzutu logicznego. 
-
-### Najostrzejsza ocena Obserwacji 4.2
-
-Obserwacja 4.2 jest **całkowicie poprawna**, ale niemal definicyjna. To akurat dobrze, bo później oszczędza powtarzanie technikaliów. Mój jedyny realny zarzut brzmi: skoro jest tak podstawowa, powinna być napisana maksymalnie lekko i przejrzyście, a w obecnym tekście druga implikacja brzmi ciężej niż sama idea. To znowu nie jest luka, tylko strata elegancji. 
-
-## Co naprawdę bym wbił w recenzji
-
-Po pierwsze: **Lemat 4.1 jest poprawny, ale nie jest napisany z równą starannością na całej długości**. Autor drobiazgowo sprawdza prostotę ścieżki (P), a potem zbyt szybko przechodzi przez najważniejszy krok metryczny. To wygląda tak, jakby większą wagę przywiązywał do lokalnej kombinatoryki wierzchołków niż do globalnej struktury argumentu odległościowego. 
-
-Po drugie: **Obserwacja 4.2 jest dobrze wybranym narzędziem, ale jej rola w architekturze sekcji nie jest w pełni wykorzystana**. W praktyce Lemat 4.1 już korzysta z dokładnie tej treści, tyle że „ręcznie z definicji”. To daje wrażenie, że sekcja nie została do końca zredagowana jako system wzajemnie wspierających się faktów, tylko raczej jako ciąg poprawnych, ale jeszcze nie w pełni doszlifowanych modułów. 
-
-Po trzecie: gdybym był naprawdę złośliwym recenzentem, napisałbym tak: **„Local claims are correct, but the proof of Lemma 4.1 still reads more like a verified derivation than like a polished mathematical argument.”** To znaczy: nic się nie wali, ale jeszcze nie ma tej lekkości i nieuchronności, które powinien mieć najlepszy dowód pomocniczy w artykule. 
-
-Końcowy werdykt: **Obserwacja 4.2 jest bezpieczna i czysta merytorycznie; Lemat 4.1 jest poprawny, ale stylistycznie wyraźnie słabszy niż jego matematyczna treść**. I właśnie dlatego to on „niesie techniczny ciężar” Propozycji 4.3, ale jeszcze nie robi tego z pełną klasą. 
-
-Tak. I tutaj będę naprawdę złośliwy, bo **Obserwacja 3.4 jest zawiasem całego tekstu**: spina definicję, Propozycję 4.3 i oba przypadki Twierdzenia 5.1. Jeżeli ona jest choćby minimalnie źle ustawiona, to potem cały artykuł zaczyna się opierać na „wygodnym skrócie myślowym”, a nie na twardej równoważności. Na szczęście: **merytorycznie ona się broni**. Ale jako narzędzie równoważności jest jeszcze **za mało wypolerowana jak na standard top-journal**.  
-
-## Werdykt ogólny
-
-Najpierw jasno: **nie widzę w Obserwacji 3.4 błędu logicznego, który czyniłby ją fałszywą**. Stwierdzenie jest trafne: definicja „semi-cutting” przez ścisły wzrost odległości jest równoważna warunkowi „wszystkie ścieżki najkrótsze między terminalami przecinają (M)”, przy równoczesnym dopisaniu skończoności odległości w grafie wyjściowym. To jest dokładnie właściwy most między definicją metryczną a późniejszą pracą na ścieżkach. 
-
-Ale jako **narzędzie równoważności** Obserwacja 3.4 ma trzy realne słabości. Po pierwsze, jest nazwana „obserwacją”, choć de facto pełni rolę **lematu fundamentalnego** dla całej dalszej części tekstu. Po drugie, dowód jest poprawny, lecz nie ma jeszcze tej nieuchronności i ostrości, jakiej oczekiwałbym od centralnej równoważności. Po trzecie, tekst trochę zaciera, że warunek „(\dist_H(u,w)<\infty)” nie jest kosmetyką, tylko **niezbędnym składnikiem równoważności**. Bez niego stwierdzenie byłoby źle skalibrowane.  
-
-## Samo sformułowanie — bezlitosna ocena
-
-Treść stwierdzenia jest dobra: dla każdego skończonego grafu prostego (H), zbioru wierzchołków (X) i zbioru krawędzi (M), warunek „(M) jest zbiorem na wpół-tnącym dla (X)” zostaje przepisany na dwa warunki: skończoność odległości między każdą parą różnych terminali oraz przecinanie przez (M) każdej ścieżki realizującej tę odległość. To jest bardzo dobrze dobrane i dokładnie odpowiada późniejszym zastosowaniom. 
-
-Natomiast już tutaj mam pierwszy ostry zarzut: tekst nie eksponuje, że to jest **równoważność asymetryczna w psychologii czytania**. Kierunek „semi-cutting (\Rightarrow) każde shortest path jest przecięte” jest niemal natychmiastowy. Kierunek odwrotny jest subtelniejszy, bo trzeba przejść z lokalnego warunku o ścieżkach najkrótszych do globalnej nierówności odległości w grafie po usunięciu (M). Obserwacja 3.4 traktuje oba kierunki jakby miały tę samą wagę. Formalnie wolno. Redakcyjnie: to spłaszcza prawdziwą strukturę argumentu.  
-
-Drugi zarzut jest bardziej zasadniczy. Autor nie mówi dostatecznie wyraźnie, że warunek „dla każdych różnych (u,w\in X)” działa **parami niezależnie**, a dopiero na końcu składa się w pełną własność dla całego (X). W dowodzie oczywiście to robi przez „Ustalmy różne (u,w\in X)” i końcowe „Ponieważ para (u,w) była dowolna...”, ale jako narzędzie używane później w sekcjach 4–5 dobrze byłoby mieć od razu w głowie, że to jest czysto parowy certyfikat globalnej własności. Tekst to zawiera, ale nie wyostrza.  
-
-## Dowód, kierunek pierwszy: „semi-cutting (\Rightarrow) przecięcie wszystkich shortest paths”
-
-To jest prostsza połowa i rzeczywiście wypada dobrze. Autor ustala różne (u,w\in X), z definicji ma (\dist_H(u,w)<\dist_{H\setminus M}(u,w)\le \infty), więc natychmiast dostaje (\dist_H(u,w)<\infty), a następnie bierze ścieżkę (P) długości (\dist_H(u,w)). Jeśli (P) nie przecina (M), to jest też ścieżką w (H\setminus M), co daje (\dist_{H\setminus M}(u,w)\le \len(P)=\dist_H(u,w)), sprzecznie z definicją zbioru na wpół-tnącego. To jest poprawne, krótkie i ostre.  
-
-Ale nawet tu mam dwa złośliwe zastrzeżenia. Pierwsze: autor pisze „Niech (P) będzie ścieżką ... o długości (\dist_H(u,w))”. To jest legalne, bo wcześniej już wydedukował skończoność odległości. Jednak właśnie dlatego, że to jest centralne narzędzie późniejszych sekcji, przydałoby się odrobinę mocniej zaznaczyć, że istnienie takiej ścieżki jest konsekwencją wcześniejszego wniosku o skończoności. Teraz jest to logicznie poprawne, ale przepływ myśli nie jest idealnie zaakcentowany. 
-
-Drugie: ta połowa dowodu jest tak krótka i gładka, że wręcz obnaża słabszy rytm drugiej połowy. To nie jest wada lokalna tego kierunku, lecz wada kompozycji całości: jeden kierunek ma niemal postać „jedna sprzeczność i po sprawie”, a drugi potrzebuje wyraźniejszej architektury, niż dostaje.  
-
-## Dowód, kierunek drugi: „przecięcie wszystkich shortest paths (\Rightarrow) semi-cutting”
-
-Tu zaczyna się prawdziwa ocena.
-
-Autor zakłada, że (\dist_H(u,w)<\infty) oraz każda ścieżka z (u) do (w) o długości (\dist_H(u,w)) przecina (M). Następnie rozważa dwa podprzypadki: w (H\setminus M) nie ma ścieżki z (u) do (w), albo taka ścieżka jest i wtedy bierze najkrótszą (Q) w (H\setminus M). To jest **właściwa architektura** dowodu. Nie mam tu zarzutu merytorycznego. 
-
-Jeżeli w (H\setminus M) nie istnieje ścieżka z (u) do (w), to (\dist_{H\setminus M}(u,w)=\infty>\dist_H(u,w)). To jest bezbłędne i dobrze zapisane. 
-
-Potem autor przechodzi do przypadku (\dist_{H\setminus M}(u,w)<\infty) i bierze ścieżkę (Q) w (H\setminus M) o długości (\dist_{H\setminus M}(u,w)). Ponieważ (E(H\setminus M)\subseteq E(H)), ścieżka (Q) jest też ścieżką w (H), więc (\len(Q)\ge \dist_H(u,w)). To jest poprawne. Następnie autor stwierdza, że równość nie może zachodzić, bo wtedy (Q) byłaby ścieżką najkrótszą w (H), która nie przecina (M). To również jest poprawne. Wniosek (\dist_{H\setminus M}(u,w)=\len(Q)>\dist_H(u,w)) jest więc legalny. 
-
-I teraz najostrzejsza uwaga: **to wszystko jest poprawne, ale zapisane zbyt „jednowarstwowo” jak na główną równoważność artykułu**. W istocie ten kierunek robi trzy rzeczy naraz:
-najpierw konwertuje warunek o wszystkich ścieżkach najkrótszych w (H) na zakaz istnienia shortest path bez (M),
-potem przenosi dowolną shortest path z (H\setminus M) do (H),
-a na końcu zamienia zakaz równości długości w ścisłą nierówność odległości.
-W tekście wszystko to jest prawdziwe, ale schowane w jednym ciągu zdań. Dla czytelnika wprawnego to wystarczy. Dla recenzenta złośliwego to jest właśnie miejsce, gdzie napisze: „core equivalence is correct, but the reverse implication is not presented with enough internal scaffolding.” 
-
-## Najpoważniejszy problem: ranga tego wyniku jest zaniżona
-
-To jest mój najostrzejszy zarzut redakcyjny wobec Obserwacji 3.4: **ona nie jest „obserwacją” w sensie pomocniczej uwagi na marginesie**. Ona jest centralnym interfejsem logicznym całej pracy. W Propozycji 4.3 autor nie pracuje już bezpośrednio z definicją przez nierówność odległości, tylko właśnie z wersją przez przecinanie wszystkich ścieżek najkrótszych. W Twierdzeniu 5.1 oba przypadki też są rozstrzygane przez pokazanie skończoności odległości i przecinania shortest paths, a dopiero potem autor odwołuje się z powrotem do Obserwacji 3.4. To znaczy, że cały argument główny traktuje Obserwację 3.4 jak **absolutnie podstawowy lemat ekwiwalencyjny**. Nazwanie jej „obserwacją” samo w sobie nie jest błędem, ale jest zbyt skromne i trochę mylące co do ciężaru logicznego tego miejsca.    
-
-Inaczej mówiąc: gdyby Obserwacja 3.4 zniknęła, to sekcje 4–5 musiałyby zostać napisane praktycznie od nowa. To nie jest status „observation”; to jest status „hinge lemma”. Sam fakt, że tekst tego nie sygnalizuje, obniża jego profesjonalny szlif.  
-
-## Najbardziej narażone miejsca logiczne — i dlaczego jednak się bronią
-
-Pierwsze potencjalne miejsce ataku to fragment z warunkiem (\dist_H(u,w)<\infty). Gdyby autor próbował sformułować równoważność tylko przez „każda ścieżka najkrótsza jest przecinana”, to powstałby kłopot przy parach terminali bez połączenia w (H), bo wtedy nie ma żadnej ścieżki najkrótszej do sprawdzania, a warunek byłby pusty. Tekst tego błędu **nie popełnia**: jawnie dopisuje skończoność odległości. To jest bardzo ważne i matematycznie ratujące pełną równoważność. 
-
-Drugie miejsce ataku to krok „(Q) jest ścieżką w (H\setminus M), więc też ścieżką w (H)”. To jest banalne, ale konieczne, bo bez niego nie można porównać (\len(Q)) z (\dist_H(u,w)). Autor robi to poprawnie. Nie ma tu żadnej luki. 
-
-Trzecie miejsce ataku to zdanie „Równość nie może zachodzić...”. Ono też jest poprawne: gdyby (\len(Q)=\dist_H(u,w)), to (Q) byłaby shortest path w (H), a zarazem jako ścieżka w (H\setminus M) miałaby (E(Q)\cap M=\emptyset), wprost sprzecznie z hipotezą. Ten krok jest szczelny. 
-
-Czyli znowu: **nie problem poprawności, tylko problem stopnia wyeksponowania mechanizmu równoważności**. Dowód działa. Po prostu nie jest jeszcze napisany tak dobrze, jak jego rola w artykule by wymagała.  
-
-## Jako narzędzie używane później — tu jestem najbardziej bezlitosny
-
-W sekcji 4 Obserwacja 3.4 jest używana do dwóch rodzajów ruchów: po pierwsze do wykazania, że pewna konkretna shortest path musi przeciąć (F); po drugie do końcowego przejścia od dwóch sprawdzonych warunków — skończoności odległości i przecinania shortest paths — do wniosku, że dany zbiór jest semi-cutting. Dokładnie to samo dzieje się potem w Twierdzeniu 5.1. To znaczy, że Obserwacja 3.4 jest używana zarówno **lokalnie**, jak i **globalnie**. Lokalnie dostarcza krawędzi z (F) na pojedynczej ścieżce najkrótszej; globalnie zamyka całą własność dla nowego zbioru terminali lub nowego zbioru krawędzi.  
-
-I właśnie dlatego jestem tak surowy: jeśli coś pełni obie te funkcje naraz, to powinno być absolutnie nieskazitelne stylistycznie. A nie jest. Jest poprawne, ale za mało „wybite w tekście”. Czytelnik ma sam zrozumieć, że od tego momentu definicja semicutting będzie praktycznie zastąpiona przez ten ekwiwalent shortest-pathowy. Topowy artykuł nie powinien zmuszać czytelnika do samodzielnego odkrywania hierarchii narzędzi.  
-
-## Rysunek do Obserwacji 3.4
-
-Rysunek sam w sobie jest sensowny: pokazuje, że (F) może przecinać wszystkie ścieżki najkrótsze między (u) i (w), a mimo to pozostawiać dłuższą ścieżkę omijającą (F); po usunięciu (F) odległość rośnie z 3 do 4. To jest dobry wybór ilustracyjny, bo trafia dokładnie w sens równoważności: nie chodzi o przecinanie wszystkich ścieżek, tylko wszystkich shortest paths. 
-
-Ale i tu mam drobną złośliwość: skoro to jest jedyna ilustracja najważniejszej równoważności w pracy, to podpis mógłby mocniej powiedzieć, **co rysunek obala jako możliwe nieporozumienie** — mianowicie błędną intuicję, że semi-cutting musi przecinać każdą ścieżkę między terminalami. Teraz rysunek to pokazuje, ale bardziej „przykładem” niż wyraźnym pedagogicznym ostrzem. To nie błąd, tylko niedowieziony potencjał. 
-
-## Najostrzejsze zarzuty, które rzeczywiście wpisałbym do recenzji
-
-Po pierwsze: **ranga wyniku jest błędnie skomunikowana**. Obserwacja 3.4 jest traktowana jak zwykła obserwacja, choć faktycznie jest główną równoważnością artykułu. To nie szkodzi logice, ale szkodzi architekturze prezentacji.  
-
-Po drugie: **kierunek odwrotny równoważności jest poprawny, lecz za mało rozczłonkowany**. Najbardziej fundamentalne przejście w sekcji 3 wygląda jak ciąg trzech oczywistych zdań, choć naprawdę niesie prawie całą semantyczną treść ekwiwalencji. 
-
-Po trzecie: **tekst nie podkreśla dostatecznie, że warunek skończoności odległości jest konieczny, a nie estetyczny**. To jest bardzo ważny komponent stwierdzenia i powinien być psychologicznie bardziej wyeksponowany. 
-
-Po czwarte: **ta obserwacja jest później używana wielokrotnie jako czarna skrzynka**, więc jej dowód powinien być jeszcze bardziej odporny na nieporozumienia niż jest obecnie. Dziś jest poprawny, ale jeszcze nie „idiotoodporny” w najlepszym sensie matematycznej redakcji.  
-
-## Końcowy osąd
-
-Najkrócej, ale bez litości: **Obserwacja 3.4 jest matematycznie trafna i fundamentalnie dobrze pomyślana, lecz redakcyjnie niedoszacowana i niedowyeksponowana**. Jako twierdzenie pomocnicze — bardzo dobra. Jako centralne narzędzie równoważności, na którym stoi reszta artykułu — jeszcze nie dość dopracowana. Nie dlatego, że ma lukę. Dlatego, że nie jest napisana z takim autorytetem i przejrzystością, na jakie zasługuje jej rzeczywista rola w dowodzie głównym.  
-
-Tak. Skupiam się **wyłącznie na warstwie redakcyjnej sekcji 3–5**: rytm, hierarchia, prowadzenie czytelnika, gęstość, rozmieszczenie figur, proporcje między formalizmem a czytelnością. Nie oceniam tu już poprawności matematycznej jako takiej. 
-
-## Werdykt ogólny
-
-Redakcyjnie te trzy sekcje są **wyraźnie lepsze niż przeciętny szkic**, ale **wciąż nie wyglądają jak finalna wersja artykułu do JGT/Combinatorica**. Największy problem nie polega na chaosie, tylko na **nierównym tempie narracji**: tekst raz rozwleka rzeczy elementarne, a raz kompresuje miejsca naprawdę delikatne. W efekcie czytelnik nie gubi się globalnie, ale zbyt często musi sam rekonstruować, które zdania są tylko technicznym łącznikiem, a które są właściwym rdzeniem argumentu. To jest klasyczny objaw tekstu matematycznie dojrzałego, ale jeszcze niedoredagowanego do poziomu publikacyjnej elegancji. 
-
-## Sekcja 3: najlepsza dyscyplina lokalna, ale zła hierarchia ważności
-
-Sekcja 3 jest redakcyjnie **najbardziej uporządkowana na poziomie mikro**: każdy obiekt ma własne stwierdzenie, własny krótki dowód lub odsyłacz, a kolejność 3.1–3.5 jest logiczna. Problem nie leży w bałaganie, lecz w **fałszywej skali ważności**. Sam tytuł „Lematy pomocnicze” oraz zdanie otwierające, że będą użyte standardowe własności i że pełne dowody pojawią się tylko tam, gdzie wiążą się ze ściąganiem, ustawia sekcję jako techniczny magazyn narzędzi. Tymczasem Obserwacja 3.4 nie jest technicznym drobiazgiem, tylko głównym interfejsem logicznym całej pracy. Redakcyjnie została zbyt mocno „schowana” między dwoma bardzo standardowymi lematami a projekcją spaceru. 
-
-Drugi problem sekcji 3 to **nierówny poziom szczegółowości**. Lemat 3.2 dostaje niemal wyłącznie odsyłacz do klasycznej własności spacerów, Lemat 3.3 ma krótki, samodzielny argument, a Obserwacja 3.4 dostaje pełny dowód i osobny rysunek. Każdy z tych wyborów da się obronić z osobna, ale razem tworzą wrażenie, że tekst nie ma jeszcze ustalonej jednej polityki redakcyjnej: albo minimalizujesz oczywistości i wzmacniasz tylko centralne miejsca, albo bardziej systematycznie rozwijasz cały rdzeń sekcji. Teraz sekcja oddycha nierówno. 
-
-Najbardziej kłuje tu **nazwa „Obserwacja 3.4”**. To nie jest drobna uwaga na marginesie; to jest zawias sekcji 4 i 5. Redakcyjnie to zaniża rangę wyniku. Czytelnik dostaje sygnał „to tylko uwaga porządkująca”, po czym później okazuje się, że połowa artykułu działa właśnie przez nią. To jest błąd komunikacji hierarchii, nie logiki. W topowym tekście taka asymetria między realną rolą wyniku a jego etykietą nie powinna się zdarzyć. 
-
-Rysunki w sekcji 3 są sensowne, ale ich rozmieszczenie dodatkowo wzmacnia wrażenie fragmentaryczności: po Obserwacji 3.4 dostajesz rysunek, potem od razu Lemat 3.5, potem znów rysunek. Każdy element jest sam w sobie uzasadniony, ale sekwencja „stwierdzenie–krótki dowód–rysunek–stwierdzenie–krótki dowód–rysunek” sprawia, że sekcja czyta się bardziej jak seria dobrze opracowanych fiszek niż jak płynny fragment artykułu. To nie jest chaos, ale to jeszcze nie jest wysoka płynność narracyjna. 
-
-## Sekcja 4: redakcyjnie najsłabsza, mimo że matematycznie najważniejsza
-
-Sekcja 4 ma bardzo dobry pierwszy akapit: od razu mówi, co jest kluczowym krokiem i jakie będą dwa mechanizmy. To jest wzorowa zapowiedź. Problem zaczyna się później: tekst **nie dotrzymuje własnej obietnicy kompozycyjnej**. Zamiast wyraźnie prowadzić czytelnika przez dwa jawnie wydzielone moduły i ich scalenie w Propozycji 4.3, sekcja przechodzi od Lematu 4.1 przez Obserwację 4.2 do Propozycji 4.3 w trybie coraz większej gęstości. Im ważniejszy fragment, tym trudniej go czytać. To jest dokładnie odwrotnie niż powinno być. 
-
-Lemat 4.1 jest redakcyjnie nierówny. Pierwsza połowa dowodu bardzo drobiazgowo sprawdza lokalne fakty o wierzchołkach i krawędziach, a druga połowa — ta naprawdę ważna, metryczna — przechodzi dość szybko przez mechanizm „każda ścieżka z (t) do (z) daje po odcięciu pierwszego kroku spacer z (t') do (z), więc odległość po ściągnięciu jest o co najwyżej 1 mniejsza”. To jest właśnie miejsce, które powinno być psychologicznie najjaśniejsze. Zamiast tego tekst redakcyjnie faworyzuje rzeczy prostsze. 
-
-Obserwacja 4.2 jest prawie definicyjna, a mimo to dostaje pełnoprawne opakowanie twierdzeniowe i osobny dowód. To samo w sobie nie jest wadą, bo później faktycznie wielokrotnie z niej korzystasz. Problem polega na tym, że po niej sekcja jeszcze bardziej spowalnia przed właściwą Propozycją 4.3. Czytelnik ma poczucie długiego rozbiegu: najpierw zapowiedź, potem lifting, potem zachowanie krawędzi poza (N[t]), dopiero potem właściwe twierdzenie sekcji. To jest architektura poprawna, ale **za mało skondensowana dramaturgicznie**. 
-
-Propozycja 4.3 jest redakcyjnie główną ofiarą tego wszystkiego. Dowód od linii odpowiadających „Dowód opiera się na dwóch mechanizmach” do końca jest **jednym długim blokiem z lokalnymi przełączeniami przypadków**, zamiast być wyraźnie rozpięty na kilka claimów. Masz tam naturalne punkty podziału: położenie terminali poza (N[t]), skończoność odległości w (G'), przypadek bez (t'), przypadek z (t'), i dopiero zamknięcie przez Obserwację 3.4. Wszystko to w tekście jest, ale redakcyjnie za słabo odseparowane. W efekcie czytelnik bardziej „przepycha się” przez dowód niż jest przez niego prowadzony. 
-
-Do tego dochodzi **monotonia łączników logicznych**. Sekcja 4 jest pełna ciągów typu „Ponieważ…, więc…, zatem…, na mocy…, stąd…”. Formalnie to jest nienaganne, ale stylistycznie zbyt jednorodne. W tekście matematycznym taka kadencja przez kilka stron z rzędu daje efekt „notarialny”, nie „artykułowy”. Właśnie dlatego sekcja 4 sprawia wrażenie cięższej niż jest naprawdę. 
-
-Rysunek wstawiony między Obserwację 4.2 a Propozycję 4.3 jest sensowny merytorycznie, ale redakcyjnie jeszcze bardziej rozciąga sekcję. Zamiast skracać dystans do głównej propozycji, dokłada kolejny przystanek. To dobry rysunek, ale w obecnym układzie bardziej rozbija puls sekcji, niż go stabilizuje. 
-
-## Sekcja 5: najlepsza architektura globalna, ale wciąż zbyt „rozszerzony szkic”
-
-Sekcja 5 ma najlepszy **szkielet redakcyjny** z całej trójki. Już pierwszy akapit wyjaśnia dwa sposoby zmniejszania parametru indukcyjnego, więc czytelnik dostaje plan dowodu zanim zobaczy formalne twierdzenie. To jest bardzo dobry ruch. Sam proof plan jest czytelny, a rozdział na bazę i krok indukcyjny oraz na dwa przypadki działa. Pod tym względem sekcja 5 jest najmocniejsza. 
-
-Ale właśnie tutaj najmocniej widać, że tekst jeszcze nie jest finalnie wypolerowany. Najpierw pojawia się twierdzenie, a potem **dwa duże rysunki jeszcze przed rozpoczęciem dowodu**. Pedagogicznie to jest zrozumiałe, ale redakcyjnie spowalnia start: czytelnik po stwierdzeniu twierdzenia czeka zbyt długo na pierwsze zdanie proofu. W gotowym artykule to zwykle działa gorzej niż autorowi się wydaje, bo rozrywa napięcie między tezą a argumentem. 
-
-Dowód Twierdzenia 5.1 ma też wyraźną skłonność do **nadmiernego ceremonializowania rzeczy formalnie prostych**. Definicja porządku leksykograficznego i następny blok z dobrze ufundowanym zbiorem dostają osobne displaye, choć to nie jest miejsce, gdzie warto budować wizualną wagę. Podobnie krótkie trójki definicji typu (G',T',F') są regularnie wyciągane do bloków. To nie jest błąd, ale z perspektywy czysto redakcyjnej spowalnia ruch tekstu i daje zbyt wiele „mikro-przystanków”. Zwłaszcza że sam wymagasz oszczędności w użyciu bloków matematycznych. 
-
-Przypadek 1 jest napisany sprawnie, ale wciąż trochę zbyt mechanicznie. Przypadek 2 jest redakcyjnie słabszy: jego rdzeń jest prosty — rozcięcie ścieżki w (t) i przeniesienie ciężaru na drugą połówkę — lecz tekst oplata go dodatkowymi zdaniami kontrolnymi o indeksie (j), o dodatniej długości, o rozłączności zbiorów krawędzi, o niemożliwości ({t,t}). Wszystko to jest poprawne, ale składa się na ton „udowadniam wszystko w jednakowym stylu”, zamiast hierarchizować, co jest naprawdę nośne. W rezultacie sekcja 5 ma dobrą architekturę, lecz słabszą ekonomię zdań. 
-
-## Najpoważniejsze grzechy redakcyjne sekcji 3–5
-
-Pierwszy: **zła hierarchia akcentów**. Obserwacja 3.4 jest za słabo wyeksponowana, sekcja 4 rozciąga rozbieg przed Propozycją 4.3, a sekcja 5 nadmiernie celebruje technikalia indukcyjne zamiast najmocniej wyostrzyć serca przypadków.
-
-Drugi: **nierówny rytm szczegółowości**. Miejsca łatwe bywają rozpisane szerzej niż trzeba, a miejsca naprawdę delikatne bywają zbyt skondensowane. To dotyczy zwłaszcza kontrastu między Lematem 4.1 a jego rolą w Propozycji 4.3 oraz między planem Przypadku 2 a jego wykonaniem w Twierdzeniu 5.1. 
-
-Trzeci: **nadmierna blokowość zapisu**. Krótkie definicje pomocnicze i niektóre czysto organizacyjne fragmenty są zbyt często wypychane do displayów, przez co tekst traci ciągłość prozatorską. To nie jest nadmiar katastrofalny, ale wystarczający, by artykuł czytał się bardziej jak „bardzo starannie zredagowane notatki” niż jak dojrzały tekst czasopismowy. 
-
-Czwarty: **monotonia łączników i tonu**. Dominacja konstrukcji „ponieważ / więc / zatem / na mocy / stąd” daje miejscami uczucie ciężkości i proceduralności. Przy takim materiale matematycznym trzeba jeszcze bardziej pilnować, by proza nie brzmiała jak protokół dowodowy. 
-
-## Ostateczny wyrok redakcyjny
-
-Sekcja 3 jest **porządna, ale źle skalibrowana hierarchicznie**. Sekcja 4 jest **najważniejsza matematycznie i najsłabsza redakcyjnie**. Sekcja 5 ma **najlepszy plan globalny**, lecz nadal cierpi na nadmiar formalnych przystanków i zbyt mało zróżnicowane tempo. Całość nie jest chaotyczna. Problem jest subtelniejszy i właśnie dlatego istotny: to wciąż wygląda jak tekst napisany przez autora, który już wie, że dowód działa, ale jeszcze nie przeszedł ostatniej, bezwzględnej rundy redakcji pod kątem rytmu, hierarchii i ekonomii ekspozycji.
-
-Tak. I tutaj będę naprawdę bezlitosny, bo **rysunki w sekcjach 3–5 nie są dodatkiem estetycznym**: one mają prowadzić czytelnika przez najtrudniejsze miejsca dowodu. Obecnie niektóre to robią, ale cały pakiet ilustracyjny jest jeszcze **nierówny redakcyjnie**: część figur realnie pomaga, część jest osadzona za późno albo za wcześnie, a jedna jest umieszczona w miejscu, które wręcz psuje rytm argumentu.
-
-## Werdykt ogólny
-
-Najkrócej: **same rysunki są sensowne, ale ich rozmieszczenie nie jest jeszcze na poziomie top-journal**. Nie masz tu problemu typu „zły TikZ” czy „rysunki nic nie pokazują”. Problem jest subtelniejszy: ilustracje są poprawne lokalnie, ale **nie tworzą dobrej dramaturgii sekcji 3–5**. Sekcja 3 wygląda jeszcze dobrze. Sekcja 4 cierpi przez rysunek osadzony zbyt luźno względem dowodu. Sekcja 5 ma najpoważniejszy błąd kompozycyjny: rysunek dla Twierdzenia 5.1 ląduje w praktyce jeszcze w końcówce Propozycji 4.3, przez co rozcina najgęstszy fragment całego artykułu.
-
-Drugi problem ogólny: **podpisy są poprawne informacyjnie, ale nierówne pod względem ambicji**. Jedne podpisy naprawdę interpretują figurę, inne tylko mówią, co na niej widać. W artykule tej klasy podpis nie powinien być tylko etykietą obrazka; powinien jeszcze mówić, **dlaczego ten obrazek jest tu potrzebny**. Czasem to robisz, czasem nie.
-
-## Sekcja 3
-
-### Rysunek 3 — najlepszy merytorycznie, ale jeszcze nie dość „ostry”
-
-Rysunek 3 ilustrujący Obserwację 3.4 jest dobry, bo trafia dokładnie w właściwą intuicję: zbiór (F) ma przecinać wszystkie **ścieżki najkrótsze**, a nie wszystkie ścieżki w ogóle. Podpis to uczciwie mówi. To jest trafny wybór przykładu i jedno z niewielu miejsc, gdzie figura naprawdę wspiera pojęciową treść, a nie tylko lokalną mechanikę dowodu. 
-
-Ale nawet tu mam ostry zarzut: ten rysunek jest **za mało agresywnie pedagogiczny**. Pokazuje konfigurację (u,w,p,q,a,b,c) i podpisuje nierówności odległości, ale nie wybija dostatecznie tego, co jest najważniejsze: że istnieje ścieżka dłuższa omijająca (F), więc semi-cutting **nie jest** tym samym co pełne rozcięcie wszystkich połączeń. Podpis mówi to półgębkiem. Na poziomie topowego tekstu figura przy centralnej równoważności powinna niemal uniemożliwiać błędną interpretację; tu tylko ją „sugeruje”. 
-
-Rozmieszczenie Rysunku 3 jest zasadniczo w porządku: pojawia się bezpośrednio po dowodzie Obserwacji 3.4. To jest defensywne, ale akceptowalne. Problem w tym, że skoro Obserwacja 3.4 jest faktycznym zawiasem sekcji 4–5, ta figura powinna psychologicznie wybrzmieć mocniej. Teraz działa bardziej jak zwykła ilustracja po fakcie niż jak wizualne uszczelnienie najważniejszego ekwiwalentu pracy. 
-
-### Rysunek 4 — poprawny, ale drugorzędny i trochę „szkolny”
-
-Rysunek 4 do Lematu 3.5 jest klarowny: pokazuje, że po ściągnięciu (W={a,t,b}) spacer (x!-!a!-!t!-!b!-!y) skraca się do (x!-!w^*!-!y), więc długość obrazu nie rośnie. To dokładnie odpowiada treści lematu. Jako czysta ilustracja mechanizmu projekcji spaceru — działa. 
-
-Natomiast redakcyjnie to jest rysunek **bardziej dydaktyczny niż artykułowy**. Sam lemat jest prosty, a figura pokazuje go w sposób niemal podręcznikowy. Gdyby sekcja 3 była bardzo lekka, można by to uznać za zaletę. Ale ponieważ obok masz Rysunek 3 dla centralnej równoważności, Rysunek 4 zaczyna wyglądać na ilustrację zbyt równorzędną wobec czegoś dużo ważniejszego. To zaburza hierarchię ilustracji: rysunek do pomocniczej projekcji jest prawie tak samo eksponowany jak rysunek do najważniejszej obserwacji logicznej sekcji. 
-
-Podpis jest poprawny, ale bardzo skromny: „po ściągnięciu zbioru (W) długość obrazu spaceru nie rośnie”. To nie jest fałsz, ale to tylko streszczenie twierdzenia. Podpis nic nie dodaje. W najlepszym tekście podpis powinien tu jeszcze podpowiedzieć, że chodzi o **usuwanie kolejnych identycznych obrazów wierzchołków** albo o to, że projekcja może skracać, ale nie może wydłużać. Teraz podpis jest po prostu techniczny. 
-
-## Sekcja 4
-
-### Rysunek 5 — dobry pomysł, ale słabo zakotwiczony w tekście
-
-Rysunek 5 przedstawia podniesienie końcowego fragmentu ścieżki z (G/N[t]) do (G): z (Q'=(t',y_{r+1},\dots,z)) do (Q=(t,v,y_{r+1},\dots,z)), z zaznaczeniem krawędzi ({v,y_{r+1}}) i jej obrazu ({t',y_{r+1}}). To jest dokładnie ten mechanizm, który niesie techniczny ciężar Lematu 4.1 i później Przypadku 2 Propozycji 4.3. Sam pomysł figury jest więc bardzo trafny. 
-
-Ale redakcyjnie ten rysunek jest **dziwnie osierocony**. Pojawia się między sformułowaniem Propozycji 4.3 a ciągiem jej argumentu, ale nie jest naprawdę wpięty w tok dowodu żadnym mocnym zdaniem typu „mechanizm z Rysunku 5 będzie teraz wykorzystany w Przypadku 2”. W efekcie czytelnik widzi obrazek, rozpoznaje temat, ale nie dostaje jasnego sygnału, czy to ilustracja Lematu 4.1, czy część intuicji do Propozycji 4.3. Figura jest dobra, **osadzenie słabe**. 
-
-Mam też złośliwszy zarzut: podpis „Podniesienie końcowego fragmentu ścieżki z (G/N[t]) do (G)” jest zbyt ogólny. Nie mówi, **po co** ten lifting jest potrzebny. A tu po co jest bardzo konkretne: żeby z najkrótszego fragmentu od (t') odzyskać najkrótszy fragment od (t), a następnie przenieść przecięcie przez (F) z powrotem do (F'). Bez tego figura wygląda bardziej jak obrazek do operacji grafowej niż jak instrument dowodowy. 
-
-Krótko: **to jest dobra figura, ale źle wprowadzona i za słabo zinterpretowana**. W obecnym układzie nie stabilizuje sekcji 4, tylko ją dodatkowo „rozluźnia”, bo dochodzi pomiędzy dwa bardzo gęste bloki tekstu bez dostatecznego zakotwiczenia. 
-
-## Sekcja 5
-
-### Rysunek 6 — największy problem całego pakietu ilustracyjnego
-
-To jest najpoważniejsza krytyka. Rysunek 6 dotyczy **Przypadku 1 w dowodzie Twierdzenia 5.1**: ściągnięcia (N[t]), przejścia do (G' = G/N[t]), terminali (T'=(T\setminus{t})\cup{t'}) i obrazu (F' = F/N[t]). Sam rysunek jest sensowny i podpis również nie jest zły. Problem nie leży w treści rysunku, tylko w jego **miejscu**. W PDF figura wpada jeszcze w końcówkę Propozycji 4.3, dokładnie zanim domkniesz Przypadek 2 i zanim formalnie przejdziesz do sekcji 5. To jest redakcyjnie bardzo niebezpieczne. 
-
-To nie jest drobny float issue. To jest realne uszkodzenie rytmu czytania. Czytelnik jest akurat w najtrudniejszym miejscu Propozycji 4.3 — w analizie przypadku (t'\in V(P')), z suffixem (Q'), liftingiem do (Q), przenoszeniem krawędzi (f/N[t]) — i nagle dostaje dużą figurę podpisaną jako „Przypadek 1 w dowodzie Twierdzenia 5.1”. To jest prawie najgorszy możliwy moment na zmianę wizualnego kontekstu. Zamiast pomagać, rysunek **rozbija koncentrację na złej sekcji**. 
-
-Sama figura jest też trochę zbyt „pełna”: zaznacza (u,x,a,t,b,y,w,z), (N[t]), oba grafy, nowy terminal (t'), nowe zbiory (T') i (F'), oraz opis słowny w podpisie. To jest dużo. Gdyby była umieszczona dokładnie w miejscu swojego użycia, można by to wybaczyć. Ale ponieważ pojawia się za wcześnie, ten nadmiar informacji jeszcze bardziej miesza poziomy dowodu. Czytelnik nie wie, czy ma właśnie myśleć o zamknięciu Propozycji 4.3, czy już o Przypadku 1 Twierdzenia 5.1. 
-
-Podpis jest przyzwoity, ale za długi i zbyt „wnioskujący”: mówi już, że własność na wpół-tnąca zostaje zachowana na mocy Propozycji 4.3. To jest prawie mini-komentarz do zastosowania narzędzia, nie zwykły podpis. Samo w sobie to mogłoby być zaletą, ale przy złym osadzeniu robi się z tego dodatkowy element zamieszania. **To jest najsłabszy punkt ilustracyjny całych sekcji 3–5.** 
-
-### Rysunek 7 — treściowo dobry, ale umieszczony za wcześnie
-
-Rysunek 7 pokazuje rozcięcie najkrótszej ścieżki (P) w wierzchołku (t) na podścieżki (P_u) i (P_w), z krawędziami (e) i (f), i w podpisie uczciwie dopowiada, że pokazano podprzypadek (e\in E(P_u)), zaś symetria daje drugi. To jest dobry wybór treści, bo dokładnie tu w Przypadku 2 Twierdzenia 5.1 czytelnik może stracić lokalną orientację: która połowa ścieżki niesie „rezerwową” krawędź z (F). Figura to porządkuje. 
-
-Ale znowu: **rozmieszczenie jest nieoptymalne**. Rysunek ląduje na początku strony 8, podczas gdy tekst, który się do niego naprawdę odnosi — zdanie „Sytuację tę ilustruje Rysunek 7” — pojawia się później, już po kilku dodatkowych liniach wprowadzających podścieżki (P_u,P_w), ich najkrótszość i dodatnią długość. Czyli figura jest trochę za wcześnie. To nie niszczy czytania tak brutalnie jak Rysunek 6, ale nadal daje efekt lekkiego poślizgu między tekstem a obrazem. 
-
-Mam też jeden złośliwy zarzut treściowy: rysunek jest może **zbyt schematyczny** jak na fragment, który naprawdę polega na rozłączności zbiorów krawędzi (E(P_u)) i (E(P_w)) oraz na tym, że (e) należy dokładnie do jednej z połówek. Figura to sugeruje, ale nie eksponuje najmocniej. Bardziej pokazuje „ścieżkę z trzema zaznaczonymi węzłami” niż logiczną strukturę rozcięcia. Podpis ratuje sytuację lepiej niż sam obrazek. 
-
-## Co działa najlepiej, a co najgorzej
-
-Najlepiej działa **Rysunek 3**, bo ilustruje autentycznie pojęciowe sedno, a nie tylko ruch techniczny. Potem **Rysunek 7**, bo pomaga w jedynym miejscu Twierdzenia 5.1, gdzie łatwo się pogubić w geometrii ścieżki. **Rysunek 4** jest poprawny, ale drugorzędny. **Rysunek 5** ma dobry pomysł, lecz słabe zakotwiczenie. **Rysunek 6** jest największym problemem, bo jego treść jest sensowna, ale rozmieszczenie psuje bardziej, niż pomaga.
-
-## Najostrzejsze zarzuty, które naprawdę wpisałbym do recenzji
-
-Po pierwsze: **pakiet figur nie ma jeszcze dobrej hierarchii ważności**. Rysunek do centralnej równoważności, rysunek do pomocniczej projekcji i rysunek do technicznego liftingu są eksponowane dość podobnie, choć ich rola w artykule jest bardzo nierówna.
-
-Po drugie: **przynajmniej jedna figura jest osadzona kompozycyjnie źle** — Rysunek 6 pojawia się w praktyce jeszcze w obrębie końcówki Propozycji 4.3, chociaż należy do Twierdzenia 5.1. To jest realna wada redakcyjna, a nie kosmetyka. 
-
-Po trzecie: **podpisy są zbyt nierówne**. Jedne tylko identyfikują obrazek, inne wykonują pół kroku dowodu za tekst. To daje wrażenie, że autor nie ustalił jednej funkcji podpisów: czy mają być czysto opisowe, czy interpretacyjne.
-
-Po czwarte: **rysunki częściej ilustrują „co się dzieje” niż „po co to jest teraz potrzebne”**. To wystarcza w notatce dydaktycznej, ale w profesjonalnym artykule dowodowym figura powinna być bardziej precyzyjnie wprzęgnięta w lokalny cel logiczny. Najbardziej cierpi na tym Rysunek 5. 
-
-## Ostateczny wyrok
-
-Rysunki w sekcjach 3–5 są **merytorycznie sensowne, ale redakcyjnie jeszcze niedopięte**. Nie są ozdobnikami i nie są złe. Problem polega na tym, że **nie współpracują jeszcze z tekstem tak dobrze, jak powinny**. Sekcja 3 ma rysunki przydatne, lecz nierówno hierarchiczne. Sekcja 4 ma dobrą figurę techniczną, ale źle osadzoną. Sekcja 5 ma figurę sensowną i jedną figurę wręcz pechowo umieszczoną. To jeszcze nie jest poziom „rysunki pracują dla dowodu z maksymalną precyzją”.
-
-
-
-
+* przejrzystość prezentacji — dobra, ale nie wybitna; za dużo drobiazgów technicznych.
+* niepisanie o zbędnych rzeczach — częściowo; zbędne nie są te rzeczy matematycznie, ale część jest zbyt rozwinięta.
+* ograniczenie display math — częściowo.
+* related problems — tylko częściowo; za mało treści wobec Twojego ambitnego oczekiwania.
+
+## 5. Co trzeba poprawić, żebym następnym razem uznał tekst za idealny
+
+1. **Skrócić część elementarną** bez utraty rygoru.
+2. **Dodać mini-roadmapy** na początku Proposition 4.3 i Case 2 w Theorem 5.1.
+3. **Usunąć powtórzenia** między wstępem a zakończeniem.
+4. **Uczynić sekcję related problems naprawdę merytoryczną**, a nie tylko sygnalizacyjną.
+5. **Zredukować liczbę krótkich display formulas**.
+6. **Lekko odchudzić warstwę ilustracyjną**, zostawiając tylko rysunki naprawdę nośne dla idei dowodu.
+7. **Zachować dokładnie obecną dyscyplinę formalną** w miejscach krytycznych — tu bym niczego nie upraszczał kosztem ścisłości.
+
+Najkrótszy uczciwy werdykt jest taki: **matematycznie ten tekst wygląda już poważnie i zasadniczo poprawnie, ale redakcyjnie wciąż jest bardziej “very polished proof note” niż “ideal top-journal article.”**
 
