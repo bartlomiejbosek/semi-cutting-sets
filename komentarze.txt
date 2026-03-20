@@ -1,184 +1,305 @@
-You are revising the current LaTeX manuscript `main-en.tex` only.
+You are revising the CURRENT LaTeX manuscript only.
 
-Your task is NOT to invent a new proof. Your task is to transform the current manuscript into a publication-level mathematical article, while preserving the current mathematical core, proof strategy, and main claims.
+Your task is NOT to write a new paper and NOT to redesign the proof.
+Your task is to polish the existing manuscript into a concise, publication-level graph theory article while preserving the current mathematical core, proof strategy, and theorem statements.
 
+The current manuscript is already mathematically strong. The remaining work is mostly expository, stylistic, and bibliographic.
+
+==================================================
 ABSOLUTE GLOBAL RULES
+==================================================
 
-1. Work only on the current manuscript. Do not mention older versions, alternative drafts, local files, or manuscript history.
-2. Keep the paper in English.
-3. Do not introduce any new assumptions on the graph class. In particular, do NOT assume connectivity, 2-connectivity, planarity, bounded degree, etc.
-4. The setting must remain: finite, simple, undirected graphs; no loops; no parallel edges.
-5. Do not introduce any algorithmic language, complexity statements, data structures, procedures, pseudocode, amortization, or computational claims.
-6. Do not use tables.
-7. Do not add references to local files or unpublished manuscripts.
-8. Do not weaken or strengthen the main theorem or auxiliary results.
-9. Do not change the proof architecture unless strictly necessary for exposition. The current backbone
-   - geodesic characterization,
-   - contraction proposition,
-   - terminal-deletion lemma,
-   - lexicographic induction
-   must remain intact.
-10. Do not hide any argument behind phrases such as “it is obvious”, “clearly”, “it follows routinely”, etc. Every nontrivial step must either be proved or attributed precisely.
+1. Work only on the current manuscript.
+2. Do not mention older versions, earlier drafts, local files, or manuscript history.
+3. Keep the paper in English.
+4. The setting must remain: finite, simple, undirected graphs; no loops; no multiple edges.
+5. Every contraction must remain explicitly in the simple-graph sense.
+6. Do NOT introduce any new assumptions on the graph class:
+   - no connectivity assumption,
+   - no 2-connectivity,
+   - no planarity,
+   - no bounded degree,
+   - no hidden structural restrictions of any kind.
+7. Do NOT introduce any algorithmic language:
+   - no procedures,
+   - no pseudocode,
+   - no complexity,
+   - no amortization,
+   - no data structures,
+   - no computational motivation.
+8. Do NOT add tables.
+9. Do NOT cite unpublished or local material.
+10. Do NOT change theorem statements.
+11. Do NOT replace the proof architecture:
+    - geodesic characterization,
+    - contraction proposition,
+    - terminal-deletion lemma,
+    - lexicographic induction on (|T|, |V|).
+12. Do NOT make the paper longer unless a change clearly improves precision or journal quality.
+13. When in doubt, compress exposition rather than alter mathematics.
 
-MAIN GOAL
+==================================================
+PRIMARY OBJECTIVE
+==================================================
 
-Upgrade the current text from a “safe formal draft” to a “tight, elegant, journal-style article” suitable in tone and structure for a strong graph-theory journal.
+Transform the current manuscript from a very careful, referee-safe draft into a clean, concise, journal-style graph theory article.
 
+The mathematics should remain essentially unchanged.
+The exposition should become:
+- tighter,
+- more economical,
+- more authoritative in tone,
+- better calibrated bibliographically.
+
+==================================================
 WHAT MUST BE PRESERVED
+==================================================
 
-A. The theorem statement: if F is semi-cutting for T in G, then |F| >= |T|-1.
-B. The overall proof strategy and the current case split in the main induction.
-C. The current simple-graph contraction convention.
-D. The core mathematical meaning of the current definitions, lemmas, proposition, and theorem.
-E. The fact that the article remains self-contained enough to be referee-safe.
+A. The abstract must continue to say that the proof is structural.
+B. The introduction must continue to state explicitly that no global connectivity assumption is imposed on G.
+C. The main theorem must remain:
+   every semi-cutting set F for T satisfies |F| >= |T|-1.
+D. The sharpness example must remain.
+E. The figure distinguishing semi-cutting from multiterminal cut must remain, unless replaced by a clearly cleaner version.
+F. The geodesic characterization / contraction / terminal-deletion / induction backbone must remain intact.
+G. The paper must remain self-contained enough to be referee-safe.
 
-HIGH-PRIORITY REVISIONS
+==================================================
+MAIN REVISION TASKS
+==================================================
 
-I. INTRODUCTION: MAKE IT SHARPER, MORE JOURNAL-LIKE
+I. INTRODUCTION: MAKE IT MORE JOURNAL-LIKE
 
-Rewrite the introduction so that it does all of the following in a compact and polished way:
+Revise the introduction so that it remains mathematically complete but becomes slightly sharper and less explanatory.
 
-1. State the model and the semi-cutting definition cleanly and early.
-2. Explain in 2–4 sentences why the lower bound |F| >= |T|-1 is natural and nontrivial.
-3. Keep the remark that no global connectivity assumption is imposed on G.
-4. Keep the sharpness example, but integrate it more elegantly into the narrative.
-5. Add one short motivational paragraph explaining why the two proof moves
-   - contracting N[t] when t is not incident with F,
-   - deleting one terminal together with one incident edge when every terminal touches F
-   are the two natural structural reductions.
+Do all of the following:
+1. Keep the model declaration early.
+2. Keep the definition of semi-cutting in the introduction.
+3. Keep the statement that distances lie in N_0 ∪ {∞}.
+4. Keep the sentence explaining why no global connectivity assumption is imposed.
+5. Keep the motivation for why a lower bound of order |T| is natural but nontrivial.
+6. Keep the sharp example.
+7. Keep the preview of the two structural reductions.
+8. However, reduce any remaining “guided tour” tone.
+9. Make the final introductory paragraph more compact and more forceful.
+10. Make the introduction sound decisive and mathematically mature, not pedagogical.
 
-IMPORTANT:
-Do not turn the introduction into a survey. It should motivate, position, and preview the proof — nothing more.
+Desired effect:
+The introduction should feel like a journal article, not like a narrated roadmap.
 
-II. SECTION 2: REDUCE THE “TEXTBOOK” FEEL
+--------------------------------------------------
+II. PRELIMINARIES: COMPRESS WITHOUT LOSING SAFETY
+--------------------------------------------------
 
-The current Section 2 is mathematically safe, but too pedagogical in tone.
+The preliminaries are correct but still somewhat too lecture-note-like.
 
-Revise it as follows:
+Revise that section under the following rules:
 
-1. Keep only those preliminary lemmas that are genuinely used later.
-2. Compress the exposition of the most elementary material.
-3. You may keep the lemmas
-   - walk-to-path,
-   - subpath of a shortest path,
+1. Keep all notions that are genuinely used later.
+2. Keep the key lemmas currently used by the later sections:
+   - walks can be shortened to paths,
+   - subpaths of shortest paths,
    - projection of walks under contraction,
-   but write them as tersely as possible without losing rigor.
-4. Avoid making the paper read like lecture notes.
-5. Reduce unnecessary display math where inline math is sufficient.
-6. Keep notation precise, but streamline prose.
+   - geodesic characterization.
+3. Keep the contraction definition and the semi-cutting definition.
+4. However, shorten the prose in this section.
+5. Reduce verbal padding.
+6. Prefer compact proofs over over-explained proofs.
+7. Reduce displayed formulas when inline notation would be equally readable.
+8. Keep notation precise, but do not over-elaborate elementary graph facts.
 
-Target style:
-self-contained, but economical.
+Important:
+Do NOT delete anything that later proofs rely on.
+Do NOT turn the section cryptic.
+The goal is elegant economy, not minimalism at all costs.
 
-III. MICRO-TIGHTEN THE PROOFS WITHOUT CHANGING THEIR LOGIC
+--------------------------------------------------
+III. STRUCTURAL REDUCTIONS: TIGHTEN PRESENTATION ONLY
+--------------------------------------------------
 
-Do NOT rewrite the proofs from scratch. Tighten them.
+Section 3 is mathematically in good shape.
+Do NOT rewrite its logic.
+Only improve presentation.
 
-A. In Proposition `prop:contraction`:
-1. Make explicit that because P' is a path, the contracted vertex t' appears on P' at most once.
-2. In Case 2, explicitly state that all vertices after t' on the chosen suffix lie outside N[t].
-3. Make the lifting argument read as a clean transfer from a shortest t'–z path in G' to a shortest t–z path in G.
-4. Keep the proof modular; do not introduce ad hoc notation beyond what is needed.
+A. For the lemma on contraction-image size:
+1. Keep it if it is used in the main theorem.
+2. Make it read as a quick technical observation, not as a dramatic standalone result.
 
-B. In Lemma `lem:terminal-deletion`:
-1. Make explicit why exactly one of the two subpaths P_u and P_w contains e:
-   because e is incident with t and t is an internal vertex of P.
-2. Make explicit that the other subpath has endpoints t and one of u,w, is shortest by the subpath lemma, and is disjoint from e.
-3. Keep the argument air-tight, but concise.
+B. For the lemmas around contraction:
+1. Keep them modular.
+2. Remove any repeated wording.
+3. Prefer short, assertive proofs.
 
-C. In the main theorem:
+C. In the proposition about contracting N[t]:
+1. Keep the current proof strategy unchanged.
+2. Make the argument read as a crisp transfer/lifting argument.
+3. State as economically as possible that, because the chosen path in the contracted graph is a path, the contracted vertex appears at most once.
+4. State equally economically that the relevant suffix/prefix after that vertex lies outside N[t].
+5. Keep the proof air-tight, but remove any sentence that merely repeats what is already established one line earlier.
+
+D. In the terminal-deletion lemma:
+1. Keep the current core argument unchanged.
+2. Make the sentence “exactly one of the two subpaths contains e” maximally crisp.
+3. Make the use of the shortest-subpath lemma equally crisp.
+4. Avoid over-explaining a simple path decomposition.
+
+Overall target for Section 3:
+It should read like a polished chain of structural lemmas, not like a defensive proof script.
+
+--------------------------------------------------
+IV. MAIN THEOREM: SHORT, SHARP, INEVITABLE
+--------------------------------------------------
+
+The theorem proof is already logically good.
+Revise only for style and flow.
+
 1. Keep the lexicographic induction.
-2. Make the exhaustion of the two cases read more cleanly:
-   either some terminal avoids V(F), or every terminal belongs to V(F).
-3. Keep the proof short and authoritative.
-4. Avoid repetitive phrases like “we prove that” unless they serve structure.
+2. State the induction setup as efficiently as possible.
+3. Introduce the two cases so that they feel exhaustive and natural, not merely procedural.
+4. Make the theorem read like the inevitable culmination of the previous reductions.
+5. Remove repetition where possible.
+6. Keep the tone authoritative and concise.
 
-IV. RELATED WORK: THIS SECTION MUST BE REWRITTEN CAREFULLY
+Desired effect:
+The proof should feel short because the paper prepared for it well.
 
-This is currently the weakest part in terms of journal polish and citation hygiene.
+--------------------------------------------------
+V. RELATED WORK: THIS IS THE MOST IMPORTANT REMAINING TASK
+--------------------------------------------------
 
-You must rewrite the “Related Problems and Further Directions” section so that:
+Rewrite the related-work / further-directions section very carefully.
 
-1. Every sentence cleanly separates:
-   (a) what the cited paper actually studies, from
-   (b) what is your comparison or interpretation.
-2. Do NOT blend literature facts with your own observations in one syntactic unit if that could blur attribution.
-3. Be explicit about the hierarchy of closeness:
+Core rule:
+Every sentence must clearly separate
+(a) what the cited paper actually studies,
+from
+(b) how the present paper compares to it.
 
-   a. Corley–Sha, Malik–Mittal–Gupta, Nardelli–Proietti–Widmayer:
-      these concern shortest-path disruption / most vital edges for one distinguished source-target pair (or weighted-network analogues).
-      They are motivationally related, but not the same framework.
+Never blur attribution.
 
-   b. Dahlhaus et al.:
-      multiterminal cuts require separation of each terminal from all others.
-      This is stronger than semi-cutting.
-      Semi-cutting only requires strict increase of terminal-terminal distances.
+You must calibrate the literature by closeness exactly as follows:
 
-   c. Harary–Loukakis–Tsouros:
-      this is broad geodesic background, but not the closest comparison.
-      Keep it brief and do not oversell the connection.
+1. Corley–Sha, Malik–Mittal–Gupta, Nardelli–Proietti–Widmayer:
+   - These concern shortest-path disruption / most vital links or arcs for one distinguished source-target pair, often in weighted or network settings.
+   - They are motivationally related.
+   - They are NOT the same framework as the present paper.
+   - Make that distinction explicit and clean.
 
-   d. Oellermann–Peters-Fransen:
-      mention this only via strong metric dimension / mutually maximally distant pairs, carefully and accurately.
+2. Dahlhaus et al.:
+   - This is the multiterminal cut problem.
+   - It requires separation of every terminal from all others.
+   - That requirement is stronger than semi-cutting.
+   - Semi-cutting requires only strict increase of terminal-terminal distances.
+   - Keep this distinction very explicit.
 
-   e. Peterin–Semanišin and Manuel–Brešar–Klavžar:
-      these are the closest conceptual relatives because they study covers/transversals/packings of maximal shortest paths / maximal geodesics.
-      Emphasize that your parameter differs because:
-      - it is edge-based rather than vertex-based,
-      - it is terminal-restricted rather than global over all maximal geodesics,
-      - it concerns all shortest paths between terminal pairs, not maximal geodesics as such.
+3. Harary–Loukakis–Tsouros:
+   - This is broad geodesic background.
+   - Do not oversell it as a close analogue.
+   - Keep this discussion brief.
 
-4. The final paragraph on future work should be brief and mathematically natural.
-   Two directions are enough:
-   - equality characterization for |F| = |T|-1,
-   - optimization/minimum semi-cutting sets as edge transversals of the terminal-geodesic family.
+4. Oellermann–Peters-Fransen:
+   - Mention only in a restrained way, via structural comparison with vertex-covering/geodesic-type phenomena related to strong metric dimension.
+   - Do not overclaim closeness.
 
-V. BIBLIOGRAPHY HYGIENE
+5. Peterin–Semanišin and Manuel–Brešar–Klavžar:
+   - These are the closest conceptual relatives.
+   - Explain clearly why:
+     * they involve covers / transversals / packings of maximal shortest paths or maximal geodesics,
+     * whereas the present parameter is edge-based,
+     * terminal-restricted,
+     * and built from all shortest terminal-terminal paths rather than maximal geodesics as such.
 
-You must clean the bibliography aggressively.
+Additional instructions for this section:
+6. Make the hierarchy of closeness sound stable and non-redundant.
+7. Avoid phrases that repeatedly say “closest” in slightly different senses.
+8. Avoid bibliography-dump style.
+9. Make the section shorter if possible, but more precise.
+10. Ensure that the figure distinguishing semi-cutting from multiterminal cut is referenced briefly and purposefully.
 
-1. Remove every bibitem that is not actually cited in the final text.
-   In particular, if Diestel is not explicitly used for a specific factual statement, remove it.
-2. Every remaining bibliographic entry must correspond to a real, verifiable work.
-3. Be conservative with bibliographic metadata:
-   if you are not fully certain about a final journal version from the provided material, do not invent polished metadata.
-4. Do not cite a source merely decoratively.
-5. Ensure that the in-text discussion matches what the cited paper actually contains.
-6. Do not attribute your own observations to cited works.
+--------------------------------------------------
+VI. FURTHER DIRECTIONS: SMALL BUT REAL UPGRADE
+--------------------------------------------------
 
-VI. FIGURES
+Keep the two current directions:
+1. characterizing the equality case |F| = |T| - 1;
+2. studying minimum semi-cutting sets as edge transversals of the terminal-geodesic family.
 
-Keep the existing proof-relevant TikZ figures if they compile cleanly.
+But improve the last paragraph so that:
+- it sounds slightly more mathematically motivated,
+- it is still brief,
+- it does not become vague,
+- it feels like a natural continuation of the theorem rather than an afterthought.
 
-Additionally:
-1. Add at most one new TikZ figure only if it materially improves understanding.
-2. The best candidate is a compact example of a semi-cutting set that is NOT a multiterminal cut.
+--------------------------------------------------
+VII. BIBLIOGRAPHY HYGIENE
+--------------------------------------------------
+
+Clean the bibliography aggressively.
+
+1. Every bibliography item must be actually cited in the final text.
+2. Every cited work must correspond to a real, verifiable publication.
+3. Do not keep decorative references.
+4. Do not attribute your own observations to cited papers.
+5. Make sure each in-text comparison is faithful to the cited work.
+6. If a source is only broad background, the prose around it must say so clearly.
+7. Keep the bibliography lean.
+
+--------------------------------------------------
+VIII. FIGURES
+--------------------------------------------------
+
+1. Keep the sharpness figure.
+2. Keep the figure showing a semi-cutting set that is not a multiterminal cut, unless a clearly cleaner version is available.
 3. Do not add decorative figures.
-4. Every figure must be referenced in the text and must support a concrete conceptual point.
+4. Every figure caption should be concise and informative.
+5. Every figure should support a concrete conceptual point in the text.
 
-VII. STYLE REQUIREMENTS
+--------------------------------------------------
+IX. STYLE REQUIREMENTS
+--------------------------------------------------
 
-1. Prefer polished prose over bullet-heavy exposition.
-2. Avoid excessive theorem fragmentation.
-3. Avoid overusing displayed equations.
-4. Keep notation stable.
-5. Favor short, authoritative paragraphs over chatty explanations.
-6. Make the paper feel like a mathematical article, not lecture notes and not a referee report.
+1. Prefer polished prose over lists inside the paper.
+2. Do not over-fragment the article into too many tiny theorem-like units.
+3. Avoid “clearly”, “obviously”, “it is easy to see”, unless followed immediately by a real argument.
+4. Avoid display math when inline math is equally readable.
+5. Keep notation stable.
+6. Remove any sentence whose only function is to reassure the reader about something already proved.
+7. Aim for the tone of a concise graph theory journal article.
+8. Keep the paper elegant, but never at the expense of correctness.
 
-NON-NEGOTIABLE ACCEPTANCE CRITERIA
+==================================================
+THINGS YOU MUST NOT DO
+==================================================
+
+1. Do not invent a different proof.
+2. Do not add new global assumptions.
+3. Do not introduce new algorithmic ideas or computational framing.
+4. Do not turn the introduction into a survey.
+5. Do not turn the related-work section into a long literature review.
+6. Do not add new lemmas unless absolutely necessary for exposition.
+7. Do not weaken the self-contained nature of the manuscript so much that a referee must fill in missing steps.
+8. Do not make the paper longer merely to sound more formal.
+
+==================================================
+FINAL ACCEPTANCE TEST
+==================================================
 
 Your revision is acceptable only if all of the following hold simultaneously:
 
-1. The mathematics remains fully correct and self-contained.
-2. No hidden assumptions are added.
-3. No algorithmic content appears.
-4. No local/unpublished references appear.
-5. The related work section is citation-clean and accurately calibrated.
-6. The bibliography contains only justified entries.
-7. The exposition is visibly more concise and more journal-like than the current version.
-8. The proof of the main theorem still reads as a natural culmination of the contraction proposition and the terminal-deletion lemma.
+1. The mathematics remains correct.
+2. The proof architecture is unchanged.
+3. The preliminaries are visibly leaner and less lecture-note-like.
+4. The related-work section is visibly more precise and better calibrated.
+5. The bibliography is clean and justified.
+6. The introduction is slightly sharper and more journal-like.
+7. The ending is slightly stronger and better motivated.
+8. No hidden assumptions were added.
+9. No algorithmic material appears.
+10. The result is more concise and more publication-ready than the current manuscript.
 
-OUTPUT FORMAT
+==================================================
+OUTPUT RULE
+==================================================
 
-Return only the revised LaTeX manuscript, ready to compile.
-Do not include commentary, explanations, change logs, or comparisons to earlier versions.
+Return only the revised LaTeX source, ready to compile.
+Do not include commentary, explanations, change logs, summaries, or meta-discussion.
