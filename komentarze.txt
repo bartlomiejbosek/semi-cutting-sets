@@ -1,39 +1,184 @@
-Przeczytałem uważnie obecną wersję `main-en.txt` . Mój surowy werdykt jest taki: to **jest już porządny, zwarty szkic matematyczny**, a nie chaotyczny raport, ale **nadal nie jest to tekst idealny ani jeszcze nie brzmi jak w pełni „finished paper” do topowego czasopisma teorii grafów**. Najważniejsze: **nie widzę w obecnej wersji fatalnej luki, która obalałaby Proposition 3.4 albo Theorem 4.1**; słabości leżą raczej w sposobie opakowania argumentu, w zbyt skompresowanym imporcie „standard facts”, w klasyfikacji twierdzeń/obserwacji i w zbyt cienkim osadzeniu w literaturze. Struktura tekstu jest już bardzo dobra: wstęp, ścisłe definicje, krok kontrakcyjny, dowód głównego twierdzenia, a potem krótka sekcja o problemach pokrewnych.
+You are revising the current LaTeX manuscript `main-en.tex` only.
 
-Na plus trzeba uczciwie zapisać kilka rzeczy. Tekst **jasno ogranicza się do grafów skończonych, prostych, nieskierowanych**, bez pętli i wielokrotnych krawędzi; **nie dokłada żadnych niedopuszczalnych założeń** typu spójność czy planarność; **nie wpada w język algorytmiczny**; **nie cytuje lokalnych manuskryptów ani starszych wersji**; jest po angielsku; nie nadużywa display math; ma ilustracje w TikZ; i formalnie wprowadza wszystkie najważniejsze operacje, zwłaszcza kontrakcję zbioru wierzchołków oraz definicję semi-cutting set.
+Your task is NOT to invent a new proof. Your task is to transform the current manuscript into a publication-level mathematical article, while preserving the current mathematical core, proof strategy, and main claims.
 
-Gdybym miał wystawić bardzo ostre oceny, to dałbym mniej więcej tak: formalizm matematyczny 7.5/10, kompletność dowodów 8/10, przejrzystość prezentacji 7/10, dyscyplina tematyczna 9/10, osadzenie w literaturze 6/10, gotowość do wysłania bez poprawek do bardzo mocnego czasopisma 6.5/10. To nie są złe noty — ale to też nie jest „idealny” tekst według standardu, który narzuciłeś.
+ABSOLUTE GLOBAL RULES
 
-Najważniejsza rzecz merytoryczna: **Observation 2.5, Proposition 3.4 i Theorem 4.1 są zasadniczo poprawne**, ale tekst nadal nie jest maksymalnie dopracowany formalnie. Observation 2.5 daje dokładną charakterystykę semi-cutting przez przecinanie wszystkich terminal-terminal geodesics; dowód jest czysty. Proposition 3.4 naprawdę pokazuje zachowanie własności po kontrakcji `N[t]`, z osobnym rozbiciem na przypadek `t' \notin V(P')` i `t' \in V(P')`. Theorem 4.1 ma pełny indukcyjny podział na dwa przypadki, a w Case 2 zawiera dokładnie ten brakujący w wielu słabszych wersjach krok: jeśli usuwasz z `F` krawędź incydentną z usuwanym terminalem `t`, to każda najkrótsza ścieżka między pozostałymi terminalami dalej spotyka `F^-`, bo jeśli zawierała usuniętą krawędź `e`, to druga z dwóch podścieżek do `t` dostarcza innej krawędzi z `F`. To jest dobry i logicznie ciągły argument.
+1. Work only on the current manuscript. Do not mention older versions, alternative drafts, local files, or manuscript history.
+2. Keep the paper in English.
+3. Do not introduce any new assumptions on the graph class. In particular, do NOT assume connectivity, 2-connectivity, planarity, bounded degree, etc.
+4. The setting must remain: finite, simple, undirected graphs; no loops; no parallel edges.
+5. Do not introduce any algorithmic language, complexity statements, data structures, procedures, pseudocode, amortization, or computational claims.
+6. Do not use tables.
+7. Do not add references to local files or unpublished manuscripts.
+8. Do not weaken or strengthen the main theorem or auxiliary results.
+9. Do not change the proof architecture unless strictly necessary for exposition. The current backbone
+   - geodesic characterization,
+   - contraction proposition,
+   - terminal-deletion lemma,
+   - lexicographic induction
+   must remain intact.
+10. Do not hide any argument behind phrases such as “it is obvious”, “clearly”, “it follows routinely”, etc. Every nontrivial step must either be proved or attributed precisely.
 
-Ale właśnie tutaj zaczyna się moja krytyka. **Observation 2.5 nie powinna być nazwana „Observation”.** To jest centralna, dwukierunkowa charakterystyka całego pojęcia, z pełnym dowodem, od której zależy zarówno Proposition 3.4, jak i Theorem 4.1. W artykule aspirującym do bardzo wysokiego poziomu to powinno być nazwane `Lemma` albo nawet `Proposition`, a nie zdegradowane do „obserwacji”. To samo, choć słabiej, dotyczy Observation 3.3: to nie jest dekoracyjna uwaga, tylko realny element techniczny używany w Prop. 3.4. Taka klasyfikacja jest drobiazgiem redakcyjnym, ale bardzo wpływa na odbiór profesjonalizmu tekstu.
+MAIN GOAL
 
-Druga słabość: **linia z „We shall use without further proof the following standard facts…” jest zbyt skondensowana jak na Twój absolutystyczny standard samowystarczalności**. Autor wprawdzie nie pisze „obvious”, tylko daje referencję do Diestela, więc formalnie nie łamie rygoru tak rażąco jak wcześniejsze szkice; mimo to to nadal jest za grube pakowanie trzech osobnych narzędzi do jednego worka: (i) skracanie walk do ścieżki, (ii) własność podścieżek geodezyjnych, (iii) kontrola długości po projekcji pod kontrakcją. Dla bardzo wymagającego recenzenta to powinno być albo rozbite na osobne nazwane lemata z krótkim dowodem, albo podparte dokładniejszym odwołaniem niż samo „Sections 1.3 and 1.7”. W obecnej postaci matematyka jest poprawna, ale autoportret tekstu jako całkowicie samonośnego jest jeszcze trochę za optymistyczny.
+Upgrade the current text from a “safe formal draft” to a “tight, elegant, journal-style article” suitable in tone and structure for a strong graph-theory journal.
 
-Trzecia słabość jest bardziej strukturalna: **w Theorem 4.1 siedzi ukryty pomocniczy lemat, który nie został wyodrębniony**. Mianowicie cały blok z Case 2 dowodzi realnego twierdzenia pomocniczego: jeśli `T ⊆ V[F]`, wybierzesz terminal `t` i krawędź `e ∈ F` incydentną z `t`, to `F \ {e}` pozostaje semi-cutting dla `T \ {t}`. To jest wystarczająco ważny i nienatychmiastowy fakt, że powinien stać przed twierdzeniem głównym jako osobne Lemma z własnym numerem. Obecnie tekst jest poprawny, ale mniej modularny niż powinien być; główny dowód wygląda przez to jak miejsce, gdzie „załatwia się po drodze” jeszcze jedną niebanalną własność. Dla top-journal polish to jest realna wada kompozycyjna.
+WHAT MUST BE PRESERVED
 
-Czwarta uwaga: **Proposition 3.4 jest logicznie zamknięta, ale stylistycznie wciąż lekko „ściśnięta”**. Najbardziej delikatny jest przeskok w Case 2: autor słusznie bierze tylko końcowy fragment `Q'` od `t'` do `z`, podnosi go przez Lemma 3.2 do najkrótszej ścieżki `Q` od `t` do `z`, a potem przenosi trafienie w `F` z `Q` do `F'` na `Q'`. To działa. Jednak tekst przydałby się jeszcze jedno zdanie meta-logiczne w rodzaju: „to suffices because `Q'` is a subpath of `P'`, hence any edge of `F'` on `Q'` lies already on `P'`.” Autor de facto to robi, ale dopiero na końcu dwóch podprzypadków. To nie jest błąd, tylko brak ostatniego szlifu w prowadzeniu czytelnika przez argument.
+A. The theorem statement: if F is semi-cutting for T in G, then |F| >= |T|-1.
+B. The overall proof strategy and the current case split in the main induction.
+C. The current simple-graph contraction convention.
+D. The core mathematical meaning of the current definitions, lemmas, proposition, and theorem.
+E. The fact that the article remains self-contained enough to be referee-safe.
 
-Piąta uwaga dotyczy notacji i mikroprecyzji. **`V[F]` jest notacją legalną, ale niefortunną**, bo bardzo łatwo myli się wizualnie z notacją typu closed neighborhood. Przy jednoczesnym użyciu `N[t]` taki zapis wygląda zbyt podobnie i spowalnia lekturę. W topowym tekście wolałbym `V(F)` albo od razu opisowe `\operatorname{ends}(F)`. Drugi drobiazg: podpis Figure 4 mówi o „removed terminal `t`”, chociaż w dowodzie `t` nie jest usuwany z grafu, tylko z rozważanego zbioru terminali `T^-`. To niby detal, ale dokładnie takie detale odróżniają świetny artykuł od tylko dobrego draftu.
+HIGH-PRIORITY REVISIONS
 
-Szósta i moim zdaniem **największa obecnie słabość**: sekcja `Related problems and further directions` jest zbyt krótka i zbyt mało analityczna. Tekst słusznie zestawia semi-cutting z literaturą o most vital links / most vital edges oraz z multiterminal cut, ale robi to tylko w kilku zdaniach. Tymczasem Corley–Sha badają „most vital links and nodes” w ważonych sieciach dla jednej wyróżnionej pary źródło–cel, a Dahlhaus i współautorzy badają ważone multiterminal cuts, czyli pełne rozseparowanie terminali; to są bardzo konkretne, ale różne punkty odniesienia. W obecnym tekście to rozróżnienie jest za mało ostre i za mało technicznie wyeksponowane.  
+I. INTRODUCTION: MAKE IT SHARPER, MORE JOURNAL-LIKE
 
-Siódma uwaga: dobór literatury po stronie „geodesic” jest dobry, ale jeszcze nieoptymalny. Tekst cytuje Harary–Loukakis–Tsouros, Peterin–Semanišin oraz Manuel–Brešar–Klavžar, więc punkt 21 jest **częściowo** spełniony. Problem w tym, że **geodetic number** Harary’ego jest tu relacją raczej luźną, podczas gdy **maximal shortest paths cover** i **geodesic transversal** są znacznie bliższymi analogami. Co więcej, Peterin–Semanišin sami ustawiają swój parametr w relacji do strong metric dimension, a to jest właśnie jeszcze bardziej naturalny punkt odniesienia dla Twojego tematu niż sam geodetic number.    Oellermann i Peters‑Fransen wprowadzają strong metric dimension i wiążą ją z vertex cover; Manuel–Brešar–Klavžar formalizują geodesic-transversal problem jako trafianie wszystkich maximal geodesics; ich późniejsza praca o geodesic packing daje też naturalną oś „transversal vs packing”, bardzo pasującą do Twoich pytań o ekstremalne przypadki i sztywność minimów. ([ScienceDirect][1])
+Rewrite the introduction so that it does all of the following in a compact and polished way:
 
-Ósma uwaga: **tekst jest już bardzo oszczędny i prawie nic w nim nie jest zbędne**, więc pod tym względem jest dobrze. Nie ma tabel, nie ma algorytmiki, nie ma dygresji o złożoności, nie ma sztucznego „without loss of generality, assume connected”, nie ma chaotycznych wyliczanek. To wszystko jest duży plus. Ale przez tę oszczędność sekcja końcowa sprawia wrażenie trochę doklejonej: zamiast naprawdę domykać obraz literaturowy, ona tylko sygnalizuje kilka kierunków i od razu się urywa. To właśnie dlatego tekst bardziej przypomina świetnie wyczyszczoną notę niż w pełni „domknięty” artykuł czasopismowy.
+1. State the model and the semi-cutting definition cleanly and early.
+2. Explain in 2–4 sentences why the lower bound |F| >= |T|-1 is natural and nontrivial.
+3. Keep the remark that no global connectivity assumption is imposed on G.
+4. Keep the sharpness example, but integrate it more elegantly into the narrative.
+5. Add one short motivational paragraph explaining why the two proof moves
+   - contracting N[t] when t is not incident with F,
+   - deleting one terminal together with one incident edge when every terminal touches F
+   are the two natural structural reductions.
 
-Teraz najważniejsze: **co konkretnie trzeba poprawić, żebym następnym razem uznał tekst za idealny**.
+IMPORTANT:
+Do not turn the introduction into a survey. It should motivate, position, and preview the proof — nothing more.
 
-Po pierwsze, **przemianować i przepakować aparat pomocniczy**. Observation 2.5 ma zostać Lemma. Observation 3.3 także powinno zostać Lemma albo wchłonięte do poprzedniego lematu z kontrakcji. Z kolei Case 2 z dowodu Theorem 4.1 trzeba wyciągnąć przed twierdzenie jako osobny lemat o usunięciu terminala i jednej incydentnej krawędzi. Wtedy artykuł będzie miał naprawdę czystą strukturę: definicje → geodesic characterization → contraction lemmas → terminal-deletion lemma → main induction. To jest dokładnie ten porządek, którego wymaga bardzo mocny referee.
+II. SECTION 2: REDUCE THE “TEXTBOOK” FEEL
 
-Po drugie, **rozbić linię 124–125 na precyzyjniejsze elementy**. Albo autor ma jawnie sformułować trzy krótkie lemata standardowe i odesłać do Diestela jako źródła, albo ma podać dokładniejsze miejsce w literaturze niż same sekcje. W tej chwili to jest formalnie akceptowalne, ale jeszcze nie „bezdyskusyjne” przy Twoim rygorze. Najbardziej chodzi o fakt projekcji ścieżek po kontrakcji — to jest punkt, w którym recenzent nie lubi mgły.
+The current Section 2 is mathematically safe, but too pedagogical in tone.
 
-Po trzecie, **dopracować notację i podpisy figur**. Zamienić `V[F]` na mniej mylące oznaczenie. Poprawić podpis Figure 4 tak, by nie sugerował usuwania wierzchołka z grafu. W Figure 2 albo trzeba wyraźnie uzasadnić, czemu ogólna ilustracja kontrakcji jest potrzebna w tak krótkim tekście, albo ją mocniej związać z operacją `N[t]` z dowodu. Obecnie Figure 3 i Figure 4 są naprawdę pomocne; Figure 2 jest najbardziej „podręcznikowa” i najmniej specyficzna dla argumentu.
+Revise it as follows:
 
-Po czwarte, **wzmocnić sekcję końcową o problemy pokrewne**. Nie przez dosypywanie wielu referencji, tylko przez trzy ostre, krótkie paragrafy. Jeden ma rozróżnić „strict distance increase for all terminal pairs” od „maximize distance increase for one distinguished pair” i odwołać się do Corley–Sha, Malik–Mittal–Gupta, Nardelli–Proietti–Widmayer. Drugi ma rozróżnić semi-cutting od multiterminal cut w sensie strukturalnym, nie tylko sloganowym, i osadzić to obok Dahlhausa et al. Trzeci ma wyjaśnić vertex-side analogues: maximal shortest paths cover, geodesic transversal, geodesic packing, a najlepiej także strong metric dimension jako jeszcze bliższy sąsiad pojęciowy. Wtedy końcówka przestanie być „listą skojarzeń”, a zacznie być prawdziwym positioning section.      ([ScienceDirect][1])
+1. Keep only those preliminary lemmas that are genuinely used later.
+2. Compress the exposition of the most elementary material.
+3. You may keep the lemmas
+   - walk-to-path,
+   - subpath of a shortest path,
+   - projection of walks under contraction,
+   but write them as tersely as possible without losing rigor.
+4. Avoid making the paper read like lecture notes.
+5. Reduce unnecessary display math where inline math is sufficient.
+6. Keep notation precise, but streamline prose.
 
-Po piąte, **lekko podnieść poziom redakcyjnego „finish”**. Dodać `keywords`, `MSC`, ewentualnie jedno zdanie w introdukcji, które bardzo jasno powie, co jest nowością matematyczną względem samego ujęcia „hit all terminal geodesics”. W tej chwili abstrakt i wstęp są sensowne, ale jeszcze trochę „note-like”, a trochę za mało „journal-ready statement of contribution”. To nie jest wada dowodu, tylko standardu prezentacji.
+Target style:
+self-contained, but economical.
 
-Podsumowując najuczciwiej: **to nie jest tekst z fatalnymi błędami matematycznymi**. Proposition 3.4 i Theorem 4.1 w obecnej postaci wyglądają na logicznie domknięte. Natomiast **to jeszcze nie jest wersja idealna według Twojego standardu**, bo aparat pomocniczy nie jest do końca dobrze wyodrębniony, niektóre rzeczy są zbyt skompresowane pod etykietą „standard facts”, a sekcja o problemach pokrewnych nadal jest za cienka i nie wykorzystuje najbliższych analogii tak dobrze, jak powinna. Matematycznie: blisko. Redakcyjnie i pozycjonująco: jeszcze nie doszlifowane do maksimum.
+III. MICRO-TIGHTEN THE PROOFS WITHOUT CHANGING THEIR LOGIC
 
-[1]: https://www.sciencedirect.com/science/article/pii/S0166218X06003015?utm_source=chatgpt.com "The strong metric dimension of graphs and digraphs"
+Do NOT rewrite the proofs from scratch. Tighten them.
+
+A. In Proposition `prop:contraction`:
+1. Make explicit that because P' is a path, the contracted vertex t' appears on P' at most once.
+2. In Case 2, explicitly state that all vertices after t' on the chosen suffix lie outside N[t].
+3. Make the lifting argument read as a clean transfer from a shortest t'–z path in G' to a shortest t–z path in G.
+4. Keep the proof modular; do not introduce ad hoc notation beyond what is needed.
+
+B. In Lemma `lem:terminal-deletion`:
+1. Make explicit why exactly one of the two subpaths P_u and P_w contains e:
+   because e is incident with t and t is an internal vertex of P.
+2. Make explicit that the other subpath has endpoints t and one of u,w, is shortest by the subpath lemma, and is disjoint from e.
+3. Keep the argument air-tight, but concise.
+
+C. In the main theorem:
+1. Keep the lexicographic induction.
+2. Make the exhaustion of the two cases read more cleanly:
+   either some terminal avoids V(F), or every terminal belongs to V(F).
+3. Keep the proof short and authoritative.
+4. Avoid repetitive phrases like “we prove that” unless they serve structure.
+
+IV. RELATED WORK: THIS SECTION MUST BE REWRITTEN CAREFULLY
+
+This is currently the weakest part in terms of journal polish and citation hygiene.
+
+You must rewrite the “Related Problems and Further Directions” section so that:
+
+1. Every sentence cleanly separates:
+   (a) what the cited paper actually studies, from
+   (b) what is your comparison or interpretation.
+2. Do NOT blend literature facts with your own observations in one syntactic unit if that could blur attribution.
+3. Be explicit about the hierarchy of closeness:
+
+   a. Corley–Sha, Malik–Mittal–Gupta, Nardelli–Proietti–Widmayer:
+      these concern shortest-path disruption / most vital edges for one distinguished source-target pair (or weighted-network analogues).
+      They are motivationally related, but not the same framework.
+
+   b. Dahlhaus et al.:
+      multiterminal cuts require separation of each terminal from all others.
+      This is stronger than semi-cutting.
+      Semi-cutting only requires strict increase of terminal-terminal distances.
+
+   c. Harary–Loukakis–Tsouros:
+      this is broad geodesic background, but not the closest comparison.
+      Keep it brief and do not oversell the connection.
+
+   d. Oellermann–Peters-Fransen:
+      mention this only via strong metric dimension / mutually maximally distant pairs, carefully and accurately.
+
+   e. Peterin–Semanišin and Manuel–Brešar–Klavžar:
+      these are the closest conceptual relatives because they study covers/transversals/packings of maximal shortest paths / maximal geodesics.
+      Emphasize that your parameter differs because:
+      - it is edge-based rather than vertex-based,
+      - it is terminal-restricted rather than global over all maximal geodesics,
+      - it concerns all shortest paths between terminal pairs, not maximal geodesics as such.
+
+4. The final paragraph on future work should be brief and mathematically natural.
+   Two directions are enough:
+   - equality characterization for |F| = |T|-1,
+   - optimization/minimum semi-cutting sets as edge transversals of the terminal-geodesic family.
+
+V. BIBLIOGRAPHY HYGIENE
+
+You must clean the bibliography aggressively.
+
+1. Remove every bibitem that is not actually cited in the final text.
+   In particular, if Diestel is not explicitly used for a specific factual statement, remove it.
+2. Every remaining bibliographic entry must correspond to a real, verifiable work.
+3. Be conservative with bibliographic metadata:
+   if you are not fully certain about a final journal version from the provided material, do not invent polished metadata.
+4. Do not cite a source merely decoratively.
+5. Ensure that the in-text discussion matches what the cited paper actually contains.
+6. Do not attribute your own observations to cited works.
+
+VI. FIGURES
+
+Keep the existing proof-relevant TikZ figures if they compile cleanly.
+
+Additionally:
+1. Add at most one new TikZ figure only if it materially improves understanding.
+2. The best candidate is a compact example of a semi-cutting set that is NOT a multiterminal cut.
+3. Do not add decorative figures.
+4. Every figure must be referenced in the text and must support a concrete conceptual point.
+
+VII. STYLE REQUIREMENTS
+
+1. Prefer polished prose over bullet-heavy exposition.
+2. Avoid excessive theorem fragmentation.
+3. Avoid overusing displayed equations.
+4. Keep notation stable.
+5. Favor short, authoritative paragraphs over chatty explanations.
+6. Make the paper feel like a mathematical article, not lecture notes and not a referee report.
+
+NON-NEGOTIABLE ACCEPTANCE CRITERIA
+
+Your revision is acceptable only if all of the following hold simultaneously:
+
+1. The mathematics remains fully correct and self-contained.
+2. No hidden assumptions are added.
+3. No algorithmic content appears.
+4. No local/unpublished references appear.
+5. The related work section is citation-clean and accurately calibrated.
+6. The bibliography contains only justified entries.
+7. The exposition is visibly more concise and more journal-like than the current version.
+8. The proof of the main theorem still reads as a natural culmination of the contraction proposition and the terminal-deletion lemma.
+
+OUTPUT FORMAT
+
+Return only the revised LaTeX manuscript, ready to compile.
+Do not include commentary, explanations, change logs, or comparisons to earlier versions.
