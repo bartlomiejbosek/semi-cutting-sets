@@ -1,282 +1,129 @@
-Masz poprawić wyłącznie istniejący manuskrypt `main-en.tex`.
-Masz zachować jego zasadniczą tezę, strukturę dowodu i charakter matematyczny.
-Nie wolno Ci przepisywać tekstu na nowo od zera.
-Nie wolno Ci dodawać nowych założeń strukturalnych o grafach.
-Nie wolno Ci wprowadzać algorytmiki, złożoności, procedur, struktur danych, tabel ani komentarzy implementacyjnych.
-Masz uzyskać wersję, która brzmi jak artykuł matematyczny gotowy do zgłoszenia, a nie jak rozszerzona notatka dowodowa. Obecna wersja już explicite pracuje na grafach skończonych, prostych, nieskierowanych i poprawnie definiuje kontrakcję w sensie grafów prostych; to należy zachować bez rozmiękczania i bez żadnych nowych hipotez typu spójność grafu. 
-
-### 1. Cele główne poprawy
-
-Masz osiągnąć cztery rzeczy naraz.
-
-Po pierwsze, **usunąć wszystkie miejsca, w których recenzent może napisać „the argument is correct but too compressed”**. Dotyczy to zwłaszcza Propozycji 3.4 i początku dowodu Twierdzenia 4.1. Sama logika wygląda dziś spójnie, ale kilka półkroków powinno być wypowiedzianych explicite. 
-
-Po drugie, **przekształcić tekst z „proof note” w „journal article”**. To oznacza lepsze pozycjonowanie problemu, lepszy rytm narracji i mniej szkolnych elementów. Introduction i Section 5 są dziś za cienkie jak na ambicję stylu JGT/Combinatorica.  
-
-Po trzecie, **wygładzić typografię i styl LaTeX**. Obecny tekst nadużywa krótkich bloków display math w definicjach i prostych przypisaniach, a pierwszy rysunek ma tekst, który wizualnie zachowuje się bardziej jak slajd niż jak figura w artykule. 
-
-Po czwarte, **przepisać sekcję related work tak, aby była porównawcza, a nie katalogowa**. Obecna sekcja 5 mówi poprawne rzeczy, ale zbyt często ma formę: „X studied Y, Z studied W”. To trzeba zastąpić zwartą analizą podobieństw i różnic.  
-
----
-
-## 2. Rzeczy, których nie wolno ruszać merytorycznie
-
-Nie zmieniaj podstawowej definicji semi-cutting set.
-Nie zmieniaj stwierdzenia Twierdzenia 4.1.
-Nie zastępuj obecnej strategii dowodu inną strategią.
-Nie usuwaj kontrakcji jako centralnego narzędzia.
-Nie usuwaj Lematu 2.6; to jest centralny pivot całego artykułu.
-Nie zmieniaj faktu, że pracujemy na grafach prostych i że po kontrakcji pętle są usuwane, a krawędzie równoległe identyfikowane. To jest już zapisane poprawnie i trzeba to zachować. 
-
-Nie wolno też dopisywać żadnych nowych założeń typu „assume without loss of generality that G is connected”. Obecny tekst słusznie mówi, że nie zakłada globalnej spójności, i ten punkt masz zachować. 
-
----
-
-## 3. Poprawki obowiązkowe: Introduction
-
-### 3.1. Wzmocnij pozycjonowanie problemu
-
-Introduction jest obecnie poprawne, ale zbyt skondensowane. Po definicji semi-cutting i po sharp example dodaj **jeden zwarty akapit**, który jasno wyjaśni:
-
-* że problem dotyczy **edge-hittingu wszystkich shortest terminal-terminal paths**,
-* że przy (|T|=2) jest to rodzina problemów typu shortest-path disruption dla jednej pary terminali,
-* że przy (|T|>2) problem nie jest ani klasycznym multiterminal cut, ani vertexowym pokrywaniem maksymalnych geodezyjnych, lecz czymś pośrednim i własnym.
-
-Ten akapit ma ustawić artykuł koncepcyjnie, zanim czytelnik wejdzie w szczegóły dowodu. Obecny Introduction zapowiada kontrakcję i usuwanie terminala, ale za słabo mówi, dlaczego parametr jest naturalny w krajobrazie znanych problemów. 
-
-### 3.2. Doprecyzuj termin „terminal geodesics”
-
-W abstrakcie i we wstępie pojawia się język typu „terminal geodesics”. To jest intuicyjnie zrozumiałe, ale zbyt skrótowe jak na tekst bardzo formalny. Albo jawnie zdefiniuj ten termin przy pierwszym użyciu jako „shortest paths with endpoints in (T)”, albo przestań go używać jako nieformalnej etykiety i za każdym razem pisz pełny opis. 
-
-### 3.3. Uporządkuj Figure 1
-
-Nie zmieniaj przykładu ani jego funkcji. Zmień tylko prezentację.
-Blok z trzema równaniami pod rysunkiem nie powinien siedzieć „w ciele obrazka”. Przenieś informację o odległościach do `\caption` albo do krótkiego zdania bezpośrednio przed figurą. Obecna forma działa merytorycznie, ale wizualnie obniża klasę tekstu. 
-
----
-
-## 4. Poprawki obowiązkowe: Section 2 (Preliminaries)
-
-### 4.1. Odetnij szkolny ton
-
-Lematy 2.3 i 2.4 są standardowe i ich obecność jest jeszcze do obrony, bo później służą jako lokalne odwołania, ale ich pełne dowody dają tekstowi zbyt podręcznikowy ton. Obecnie są rozpisane całkowicie elementarnie. 
-
-Masz zrobić jedną z dwóch rzeczy:
-
-* albo zostawić te lematy, ale maksymalnie skrócić dowody do jednego zdania i poprzeć je standardową referencją do klasycznego podręcznika teorii grafów,
-* albo zostawić same stwierdzenia, a dowody usunąć całkowicie i zastąpić jednym zdaniem typu „we use these standard facts repeatedly”.
-
-Ważne: **nie usuwaj samych faktów z aparatu formalnego**, bo są później cytowane w dowodzie kontrakcji i w indukcji. Usuń tylko wrażenie „student handout”. 
-
-### 4.2. Wygładź definicję kontrakcji
-
-Definicja 2.1 jest merytorycznie dobra, ale jest typograficznie zbyt ciężka.
-Nie zmieniaj treści definicji, tylko:
-
-* zinline’uj prostsze fragmenty,
-* zostaw blok display wyłącznie dla naprawdę centralnego wzoru na (E(G/W)),
-* dopilnuj, by zdanie o usuwaniu pętli i identyfikowaniu równoległych krawędzi było jednym zwartym zdaniem interpretacyjnym.
-
-Kluczowe: nie wolno rozmywać faktu, że po kontrakcji nadal pracujemy w klasie grafów prostych. 
-
-### 4.3. Mocniej wyeksponuj Lemat 2.6
-
-Lemat 2.6 to najważniejsza obserwacja artykułu: semi-cutting jest równoważne temu, że każda najkrótsza ścieżka między terminalami przecina dany zbiór krawędzi. To jest właściwy „conceptual turning point” tekstu. Obecnie lemat jest poprawny, ale redakcyjnie potraktowany zbyt zwyczajnie. 
-
-Masz:
-
-* dodać jedno zdanie po dowodzie Lematu 2.6 albo na końcu preliminaries, że odtąd będziemy wielokrotnie używać tego lemmatu jako geodesic reformulation of semi-cutting,
-* zapowiedzieć już we wstępie, że ten lemat jest kluczowy dla obu redukcji.
-
-Nie zmieniaj treści samego lematu, tylko jego rolę ekspozycyjną.
-
----
-
-## 5. Poprawki obowiązkowe: Propozycja 3.4
-
-To jest najbardziej wrażliwe miejsce redakcyjnie. Nie dlatego, że dowód jest błędny, lecz dlatego, że jest zbyt skondensowany i przez to wygląda na potencjalnie podejrzany. Masz go **uszczelnić ekspozycyjnie**, ale bez zmiany strategii. Obecna wersja robi trzy rzeczy: pokazuje poprawność terminali po kontrakcji, pokazuje skończoność odległości w (G'), a potem przez dwa przypadki dowodzi przecięcia przez (F'). To jest dobry szkielet i ma zostać. 
-
-### 5.1. Dopowiedz status innych terminali względem (N[t])
-
-Pierwszy akapit dowodu jest dobry, ale można go wygładzić.
-Wyraźniej zaznacz, że dla każdego (u\in T\setminus{t}) nie tylko (u\notin N[t]), ale też dlatego (u) przeżywa kontrakcję jako ten sam wierzchołek i (T') jest dobrze zdefiniowane bez kolizji nazw i identyfikacji. To dziś wynika, ale za mało wyraźnie. 
-
-### 5.2. W Case 1 dopisz pół kroku o projekcji ścieżki krótszej
-
-W zdaniu „otherwise a shorter (u)-(w) path in (G) would project … to a shorter path in (G')” dopisz jedno zdanie, które explicite mówi:
-
-* że po projekcji długość nie rośnie,
-* że po skróceniu spaceru do ścieżki nadal dostajemy ścieżkę o długości ściśle mniejszej niż (\ell(P')),
-* więc sprzeczność dotyczy shortestness of (P') in (G').
-
-Ten krok jest poprawny, ale dziś recenzent musi sam go sobie dopowiedzieć. 
-
-### 5.3. W Case 2 dopisz jawne zdanie o obrazie (F) po identyfikacji krawędzi
-
-To jest najważniejsza redakcyjna poprawka w całym artykule.
-Nie zmieniaj logiki dowodu, ale po przejściu od (f\in E(Q)\cap F) do (f/N[t]\in E(Q')) dopisz jedno krótkie formalne zdanie, które explicite mówi:
-
-* po kontrakcji pracujemy w grafie prostym,
-* różne krawędzie przed kontrakcją mogą mieć ten sam obraz,
-* definicja (F/N[t]) gwarantuje, że jeśli **jakaś** krawędź z (F) ma dany obraz, to ten obraz należy do (F'),
-* więc obecność innych preobrazów spoza (F) nie szkodzi.
-
-To nie ma być długi excursus o multigrafach. To ma być jedno precyzyjne zdanie uszczelniające. Sama definicja (F/W) już to zawiera, ale w tym miejscu trzeba to powiedzieć wprost, żeby uciąć potencjalny zarzut recenzencki.  
-
-### 5.4. Nie rozbudowuj niepotrzebnie Lematu 3.3
-
-Lemat 3.3 jest dobry i domyka lifting shortest path po kontrakcji. Nie rozbijaj go na podlematy. Co najwyżej wygładź przejście od dowolnej ścieżki (R) do nierówności (d_G(t,z)\ge d_{G'}(t',z)+1), ale nie zwiększaj objętości nadmiernie. To ma zostać zwarte. 
-
----
-
-## 6. Poprawki obowiązkowe: Lemat 3.5
-
-Lemat 3.5 jest merytorycznie dobry i stanowi bardzo elegancką drugą redukcję. Nie zmieniaj idei „if the chosen edge (e) lies on a shortest (u)-(w) path, then the opposite subpath still contains another edge of (F)”. 
-
-Masz jednak poprawić dwie rzeczy:
-
-* dopisać jedno zdanie podkreślające, że ponieważ (t) jest wewnętrznym wierzchołkiem ścieżki (P), krawędź (e) może należeć dokładnie do jednej z dwóch subścieżek (P_u,P_w), co uzasadnia wybór „the other subpath” bez żadnej niejawnej alternatywy;
-* wygładzić końcówkę dowodu tak, by brzmiała mniej mechanicznie i bardziej artykułowo.
-
-Nie zmieniaj Figury 3; ona realnie pomaga. 
-
----
-
-## 7. Poprawki obowiązkowe: Twierdzenie 4.1
-
-Dowód indukcyjny jest w obecnej wersji zasadniczo dobry. Nie zmieniaj jego szkieletu: baza (k\le 1), potem dwa rozłączne przypadki. 
-
-### 7.1. Dodaj jedno zdanie porządkujące na wejściu do indukcji
-
-Na początku części indukcyjnej dopisz zdanie przypominające, że na mocy Lematu 2.6 wszystkie rozważane pary terminali w semi-cutting instance mają skończone odległości w grafie wyjściowym, więc przejścia w obu redukcjach są metrycznie sensowne nawet bez założenia spójności całego grafu. To nie jest naprawa luki, tylko poprawa odporności recenzenckiej.  
-
-### 7.2. Jawnie powiedz, że rozbicie na przypadki jest wyczerpujące
-
-Po zdaniu „Either some terminal avoids (V(F)), or every terminal belongs to (V(F))” dopisz, że są to przypadki rozłączne i wyczerpujące. To drobiazg, ale dobrze ustawia rytm dowodu. 
-
-### 7.3. Zinline’uj przypisania w Case 1
-
-Przypisanie
-(G':=G/N[t],\ T':=(T\setminus{t})\cup{t'},\ F':=F/N[t])
-nie musi siedzieć w osobnym dużym displayu. Wstaw to do tekstu ciągłego. To samo dotyczy podobnych krótkich przypisań w innych miejscach. 
-
-### 7.4. Uspójnij ton końcówki
-
-Końcówka dowodu jest obecnie poprawna, ale trochę zbyt notatkowa. Po zakończeniu Case 2 dopisz jedno zdanie spinające: oba redukcyjne kroki domykają indukcję i dlatego lower bound is proved. To ma brzmieć jak świadome domknięcie paperowego theorem proof, nie jak mechaniczne „This completes the induction”. 
-
----
-
-## 8. Poprawki obowiązkowe: Section 5 (Related Problems and Further Directions)
-
-To jest obecnie najsłabsza część artykułu i wymaga największego przepisania stylistycznego. Nie chodzi o dodawanie wielu nowych cytatów, lecz o **radykalnie lepsze zorganizowanie już obecnych**. Sekcja 5 dziś trafnie wymienia Corley, Malik, Nardelli, Dahlhaus, Harary, Oellermann, Peterin oraz Manuela, ale robi to za bardzo w trybie katalogowym. Dodatkowo sama przyznaje, że związek z Harary i Oellermann jest „limited”, co brzmi słabo i autodemaskująco. 
-
-Masz przepisać Section 5 na **trzy zwarte akapity porównawcze**, bez wyliczanki autor-po-autor.
-
-### 8.1. Akapit pierwszy: jedna para terminali
-
-Pierwszy akapit ma porównywać semi-cutting przy (|T|=2) z problemami shortest-path disruption / most vital links.
-
-Musisz wyraźnie powiedzieć, że:
-
-* Corley i Sha rozważają usunięcie (n) krawędzi lub wierzchołków, które maksymalizuje wzrost shortest distance między **dwoma wskazanymi węzłami** w sieci ważonej; to jest single-pair interdiction. 
-* Nardelli et al. rozważają „most vital edge” względem shortest path między ustalonym źródłem i celem oraz replacement shortest paths po usunięciu jednej krawędzi tej ścieżki; to także single-pair setting.  
-* Twój parametr jest inny, bo nawet przy (|T|=2) mówisz o **hitting all shortest paths between the terminal pair**, a dla większego (T) o rodzinie shortest paths dla wszystkich par terminali.
-
-Nie wolno pisać, że te prace są „only motivationally related” bez dalszego rozwinięcia. Trzeba pokazać, **na czym dokładnie polega różnica**.
-
-### 8.2. Akapit drugi: multiterminal cut
-
-Drugi akapit ma skontrastować semi-cutting z multiterminal cut.
-
-Masz wyraźnie powiedzieć, że:
-
-* w problemie Dahlhausa celem jest oddzielenie każdego terminala od pozostałych przez usunięcie krawędzi, czyli de facto wymuszenie rozłączenia terminali; autorzy wprost definiują isolating cuts i multiterminal cuts w tym sensie. 
-* semi-cutting jest warunkiem **ściśle słabszym topologicznie, lecz subtelnym metrycznie**: wymaga tylko ścisłego wzrostu wszystkich odległości terminal-terminal i dopuszcza, że terminale pozostaną w tej samej składowej po usunięciu (F). To właśnie pokazuje obecna Figure 4 i ten przykład koniecznie zachowaj. 
-
-Tutaj trzeba mówić bardziej stanowczo i analitycznie niż obecnie.
-
-### 8.3. Akapit trzeci: geodesic hitting / cover / transversal
-
-Trzeci akapit ma skupić się na najbliższych koncepcyjnie pracach, czyli tych o vertexowym pokrywaniu geodezyjnych.
-
-Masz wyraźnie powiedzieć, że:
-
-* Harary et al. definiują geodetic closure i geodetic number, czyli pokrywanie wierzchołków poprzez geodezyjną domkniętość zbiorów; to jest odleglejsze, ale nadal należy do rodziny problemów geodesic-based vertex selection. 
-* Oellermann–Peters-Fransen pracują z interwałami (I[u,v]) i strong metric dimension, czyli znowu z vertexowym wykorzystaniem shortest-path structure; to jest związek pojęciowy, nie bezpośredni. 
-* Peterin–Semanišin badają minimalny zbiór **wierzchołków**, który przecina wszystkie **maksymalne shortest paths**; to jest już naprawdę bliska analogia. 
-* Manuel–Brešar–Klavžar badają geodesic-transversal number jako minimalny zbiór wierzchołków trafiający wszystkie **maksymalne geodezyjne** i łączą to z hitting-set language; w 2023 pojawia się także dualny geodesic packing. To są najbliższe literaturowe sąsiedztwa Twojego problemu.    
-
-Na końcu tego akapitu jasno wskaż trzy różnice obecnego parametru względem tej linii prac:
-
-* edge-based zamiast vertex-based,
-* restricted to terminal-defined geodesic family,
-* all shortest terminal-terminal paths, a nie maximal geodesics in the whole graph.
-
-To częściowo jest już dziś zapisane i trzeba to zachować, ale napisać mocniej i czyściej. 
-
-### 8.4. Nie cytuj prac „na siłę”
-
-Jeśli po poprawkach związek z Harary albo Oellermann nadal brzmi zbyt odlegle, lepiej skrócić ich rolę do jednego eleganckiego zdania niż utrzymywać niezręczne sformułowania typu „we cite only as broad background”. 
-
----
-
-## 9. Poprawki obowiązkowe: open problems / ending
-
-Obecne dwa open problems są sensowne, ale końcówka jest za krótka jak na artykuł, który chce wyglądać poważnie. 
-
-Masz zostawić oba obecne pytania:
-
-* characterize equality case (|F|=|T|-1),
-* study minimum semi-cutting sets as edge transversals of shortest (T)-paths.
-
-Ale masz dodać **krótki domykający akapit**, który powie, że Theorem 4.1 ujawnia czysto strukturalny fenomen niezależny od algorytmiki i że dalszym kierunkiem są characterizations rather than procedures. Nie wolno wchodzić w complexity, algorithms ani data structures. To ma być czysto matematyczne domknięcie.
-
----
-
-## 10. Poprawki obowiązkowe: styl i typografia
-
-### 10.1. Ogranicz display math
-
-Masz przejrzeć cały tekst i zamienić na inline wszystkie krótkie przypisania, krótkie definicje i proste nierówności, które nie wymagają osobnej ekspozycji. Dotyczy to szczególnie:
-
-* definicji pomocniczych w Section 2,
-* przypisań w Propozycji 3.4 i Twierdzeniu 4.1,
-* krótkich obliczeń typu (|V(G')|=|V|-|N[t]|+1\le n-1).  
-
-### 10.2. Ogranicz ton „obvious”
-
-Nie używaj sformułowań typu „obviously”, „clearly”, „it is immediate”, chyba że są absolutnie niezbędne i dotyczą czegoś naprawdę elementarnego. Obecna wersja na szczęście prawie tego nie robi; utrzymaj tę dyscyplinę. 
-
-### 10.3. Nie przesadzaj z enumeracjami
-
-Nie rozbijaj dowodów i related work na sztuczne listy punktowane. Ten tekst ma być płynny, akapitowy. Przypadki w Propozycji 3.4 i Twierdzeniu 4.1 są uzasadnione, ale nie dokładaj dodatkowych zagnieżdżonych list.
-
-### 10.4. Zachowaj język angielski journal-style
-
-Utrzymaj obecny angielski, ale wygładź go w stronę bardziej zwartego stylu matematycznego. Nie używaj języka konwersacyjnego ani „narration of thought”.
-
----
-
-## 11. Priorytety realizacji
-
-Jeśli musisz priorytetyzować poprawki, kolejność ma być taka:
-
-1. uszczelnienie Propozycji 3.4,
-2. przepisanie Section 5,
-3. wygładzenie Introduction,
-4. skrócenie szkolnych dowodów w preliminariach,
-5. redukcja zbędnych display math,
-6. kosmetyczne poprawki figur i końcówki.  
-
----
-
-## 12. Kryterium sukcesu
-
-Po poprawkach tekst ma spełniać następujący standard:
-
-* recenzent nie powinien już móc napisać, że w Propozycji 3.4 jest niejasność wokół identyfikacji krawędzi przy kontrakcji;
-* nikt nie powinien mieć wrażenia, że to „lecture notes”, zwłaszcza po Section 2;
-* related work ma wyglądać jak świadome pozycjonowanie problemu, a nie bibliograficzna wyliczanka;
-* cały artykuł ma sprawiać wrażenie zwartej pracy o jednym czystym zjawisku strukturalnym w teorii grafów.
-
-Jednym zdaniem: **nie zmieniaj matematycznego serca pracy; zmień jej poziom wykończenia na bezdyskusyjnie profesjonalny**.
+Masz poprawić WYŁĄCZNIE istniejący plik LaTeX `main-en.tex`. Nie pisz nowego artykułu od zera. Zachowaj główną tezę, strukturę dowodu, numerację twierdzeń/lematów/propozycji, ogólny układ sekcji oraz charakter czysto matematyczny pracy.
+
+CEL:
+Doprowadź tekst z poziomu „bardzo dobrej, już zasadniczo poprawnej wersji” do poziomu „journal-ready final polish” dla czasopisma z teorii grafów. Obecny tekst ma już dobry szkielet i nie wymaga zmiany strategii dowodu. Twoim zadaniem jest dopracowanie stylu, ekspozycji, proporcji i ostatnich szczegółów formalnych.
+
+BEZWZGLĘDNE OGRANICZENIA:
+1. Nie wolno zmieniać głównego twierdzenia ani jego sensu.
+2. Nie wolno zmieniać strategii dowodu opartej na:
+   - geodesic characterization,
+   - contraction step,
+   - terminal-deletion lemma,
+   - lexicographic induction on (|T|,|V|).
+3. Nie wolno dodawać żadnych nowych założeń o grafie, w szczególności:
+   - żadnej spójności,
+   - żadnej planarności,
+   - żadnej regularności,
+   - żadnych założeń typu “without loss of generality G is connected”.
+4. Nie wolno wprowadzać algorytmiki, złożoności, procedur, struktur danych ani tabel.
+5. Nie wolno odwoływać się do lokalnych plików, starszych wersji tekstu ani manuskryptów.
+6. Tekst ma pozostać po angielsku.
+7. Nie wolno rozbijać tekstu na nadmierne wyliczenia. Artykuł ma pozostać płynny i paper-like.
+8. Nie wolno usuwać rysunków TikZ, jeśli niosą realną wartość wyjaśniającą.
+
+NAJWAŻNIEJSZA ZASADA:
+Masz wykonywać tylko poprawki lokalne i jakościowe. Jeśli jakiś fragment jest już dobry, nie przepisuj go dla samego przepisania. Zmieniaj tylko to, co realnie poprawia poziom artykułu.
+
+CO JUŻ DZIAŁA I CZEGO NIE WOLNO „POPRAWIAĆ NA SIŁĘ”:
+- Wstęp dobrze ustawia problem jako edge transversal of shortest paths with endpoints in T.
+- Proposition 3.4 została już sensownie uszczelniona; nie rozwlekaj jej bardziej.
+- Theorem 4.1 ma już sensowne domknięcie indukcji; nie zmieniaj szkicu dowodu.
+- Section 5 jest dużo lepsza niż wcześniej; traktuj ją jako bazę do delikatnego dopracowania, nie do wywracania.
+- Końcowy akapit o structural phenomenon independent of algorithmic considerations jest dobry w sensie ideowym.
+
+ZADANIA OBOWIĄZKOWE:
+
+A. NAPRAW OSTATNI PROBLEM W PRELIMINARIACH
+W obecnej wersji przy Lematach 2.3 i 2.4 jest zdanie, że ich dowody są standardowe i pominięte. To jest nadal zbyt luźne jak na standard recenzencki.
+Masz zrobić dokładnie jedną z dwóch rzeczy:
+- albo dodać wyraźną, normalną, istniejącą referencję do standardowego podręcznika z teorii grafów i zostawić te fakty bez dowodów,
+- albo zamiast tego dopisać bardzo krótkie, jedno- lub dwuzdaniowe dowody tych dwóch lematów.
+Wybierz rozwiązanie bardziej eleganckie i bardziej paper-like.
+Nie wolno zostawić samego „standard and omitted” bez żadnego podparcia.
+
+B. USUŃ OSTATNIE ŚLADY TONU „NOTE-LIKE”
+Przejrzyj cały tekst i usuń wszystkie miejsca, które brzmią jak notatka techniczna zamiast artykułu.
+Szczególnie:
+- unikaj zbędnej metanarracji,
+- unikaj zdań zbyt szkolnych,
+- wygładź przejścia między akapitami dowodów tak, by były naturalne, ale krótkie,
+- zachowaj rzeczowy, oszczędny styl matematyczny.
+
+C. DELIKATNIE DOSZLIFUJ INTRODUCTION
+Introduction jest już dobra, ale ma być jeszcze bardziej paper-like.
+Sprawdź:
+- czy pierwsza definicja semi-cutting nie używa zbyt ciężkiego display math tam, gdzie można by użyć inline lub lżejszej składni,
+- czy akapit o edge transversal of all shortest paths with endpoints in T jest maksymalnie klarowny i zwarty,
+- czy nie da się delikatnie poprawić rytmu akapitów bez zmiany treści.
+Nie skracaj Introduction agresywnie. Chodzi o polishing, nie o amputację.
+
+D. ZREDUKUJ ZBĘDNE DISPLAY MATH, ALE Z UMIAREM
+Przejrzyj cały tekst i zamień na inline te wzory, które są krótkie i nie muszą być eksponowane.
+Dotyczy to szczególnie:
+- krótkich przypisań,
+- prostych równości i nierówności,
+- krótkich definicji pomocniczych.
+Jednocześnie:
+- nie usuwaj display math tam, gdzie naprawdę poprawia czytelność,
+- nie rób z tekstu „ściany inline’ów”.
+Masz znaleźć dobry journal-style balance.
+
+E. DOPRACUJ SECTION 5 BEZ ZMIANY JEJ SZKIELETU
+Section 5 jest już znacznie lepsza niż wcześniejsze wersje, ale ma być jeszcze bardziej elegancka i proporcjonalna.
+Zadbaj o to, aby:
+1. Część o Corley / Malik / Nardelli jasno mówiła, że chodzi o shortest-path disruption / most vital edges-arcs for a prescribed source-target pair, a więc o setting single-pair.
+2. Część o Dahlhaus jasno kontrastowała total separation of terminals z subtler metric requirement in semi-cutting.
+3. Część o Harary / Oellermann / Peterin / Manuel miała dobrą hierarchię:
+   - Harary i Oellermann jako szersze tło geodesic/shortest-path-based vertex parameters,
+   - Peterin i Manuel jako closest conceptual neighbors.
+4. Końcowe trzy różnice obecnego parametru były maksymalnie czyste i mocne:
+   - edge-based vs vertex-based,
+   - terminal-defined family vs whole-graph maximal geodesics,
+   - all shortest terminal-terminal paths vs maximal geodesics.
+Nie rozbudowuj tej sekcji o nowe dygresje. Chodzi o lepszą proporcję i język, nie o zwiększanie objętości.
+
+F. SPRAWDŹ, CZY FIGURY SĄ OPISANE MOŻLIWIE ELEGANCKO
+Nie usuwaj figur.
+Sprawdź jedynie:
+- czy podpisy są wystarczająco informacyjne,
+- czy nie ma zbędnego tekstu „slajdowego” wewnątrz rysunków,
+- czy opisy figur brzmią paper-like.
+Nie przerabiaj rysunków, jeśli nie ma takiej potrzeby.
+
+G. ZADBaj O JEDNORODNOŚĆ SŁOWNICTWA
+Sprawdź, czy w całym tekście konsekwentnie używane są te same określenia:
+- shortest path,
+- geodesic characterization,
+- terminal-terminal paths,
+- terminal-defined family,
+- contraction,
+- semi-cutting.
+Usuń drobne niespójności terminologiczne, jeśli gdziekolwiek występują.
+
+H. DOPRACUJ OSTATNI AKAPIT
+Końcowy akapit jest dobry koncepcyjnie, ale ma brzmieć jak naprawdę mocne domknięcie artykułu.
+Popraw go tylko stylistycznie:
+- bez dodawania algorytmiki,
+- bez nowych twierdzeń,
+- bez pustego patosu.
+Ma zostać krótki, rzeczowy i elegancki.
+
+CZEGO NIE ROBIĆ:
+- Nie dopisuj nowych twierdzeń, definicji ani open problems, chyba że to absolutnie konieczne dla spójności.
+- Nie rozbudowuj Proposition 3.4 ani Theorem 4.1 bardziej, niż to potrzebne.
+- Nie wprowadzaj nowych przykładów.
+- Nie przepisuj bibliografii, jeśli nie dodajesz jednej potrzebnej standardowej referencji do Lematów 2.3–2.4.
+- Nie twórz nowego stylu pracy. Masz tylko doszlifować obecny.
+
+PRIORYTETY:
+1. naprawa Lematów 2.3–2.4 (reference or micro-proofs),
+2. final polish stylu i tonacji,
+3. delikatne doszlifowanie Section 5,
+4. redukcja zbędnych display math,
+5. kosmetyczna poprawa spójności terminologicznej i końcówki.
+
+FORMAT ODPOWIEDZI:
+Zwróć wyłącznie poprawiony LaTeX gotowy do wklejenia zamiast obecnej wersji `main-en.tex`.
+Nie dołączaj komentarzy, wyjaśnień, changelogu ani listy poprawek.
+Nie pisz, co zrobiłeś.
+Po prostu zwróć finalny LaTeX.

@@ -37,11 +37,7 @@ Let $G=(V,E)$ be a finite simple undirected graph, let $T\subseteq V$, and let $
 
 \section{Introduction}
 
-All graphs in this paper are finite, simple, and undirected. In particular, loops and parallel edges are excluded, and every contraction is understood in the simple-graph sense: loops are deleted and parallel edges are identified. For a graph $G=(V,E)$, a terminal set $T\subseteq V$, and an edge set $F\subseteq E$, we say that $F$ is \emph{semi-cutting} for $T$ if
-\[
-\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}
-\]
-for every two distinct terminals $u,w\in T$, where distances take values in $\mathbb{N}_0\cup\{\infty\}$. No global connectivity assumption is imposed on $G$. Indeed, if some terminal pair already had infinite distance in $G$, then the defining inequality would read $\infty<\infty$ and could not hold.
+All graphs in this paper are finite, simple, and undirected. In particular, loops and parallel edges are excluded, and every contraction is understood in the simple-graph sense: loops are deleted and parallel edges are identified. For a graph $G=(V,E)$, a terminal set $T\subseteq V$, and an edge set $F\subseteq E$, we say that $F$ is \emph{semi-cutting} for $T$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every two distinct terminals $u,w\in T$, where distances take values in $\mathbb{N}_0\cup\{\infty\}$. No global connectivity assumption is imposed on $G$. Indeed, if some terminal pair already had infinite distance in $G$, then the defining inequality would read $\infty<\infty$ and could not hold.
 
 The condition says that every shortest path whose endpoints lie in $T$ must lose at least one edge after the deletion of $F$. A lower bound of order $|T|$ is therefore natural. It is also nontrivial: one edge may lie on shortest paths for many terminal pairs, so a direct count over pairs gives no useful control. Our main result is that every semi-cutting set satisfies $|F|\ge |T|-1$.
 
@@ -84,15 +80,23 @@ Thus $G/W$ is obtained by contracting $W$ to $w^\ast$; since we remain in the ca
 Let $T\subseteq V$. An edge set $F\subseteq E$ is a \emph{semi-cutting set} for $T$ in $G$ if $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ for every two distinct vertices $u,w\in T$.
 \end{definition}
 
-\noindent We shall use the next two standard facts about walks and shortest paths repeatedly; their proofs are standard and omitted.
+\noindent We record two routine facts about walks and shortest paths that will be used repeatedly.
 
 \begin{lemma}[Walks can be shortened to paths]\label{lem:walk-to-path}
 Every walk from $u$ to $w$ contains a $u$--$w$ path of length at most the length of the walk.
 \end{lemma}
 
+\begin{proof}
+Whenever the walk visits some vertex twice, deleting the closed subwalk between the two occurrences preserves the endpoints and does not increase the length. Iterating this operation yields a walk with no repeated vertices, hence a path.
+\end{proof}
+
 \begin{lemma}[Subpaths of shortest paths]\label{lem:subpath-shortest}
 If $P=(v_0,\dots,v_k)$ is a shortest path in $G$ and $0\le i<j\le k$, then $P[v_i,v_j]$ is a shortest path from $v_i$ to $v_j$.
 \end{lemma}
+
+\begin{proof}
+If $P[v_i,v_j]$ were not shortest, replacing it with a shorter $v_i$--$v_j$ path would produce a $v_0$--$v_k$ walk shorter than $P$. Lemma~\ref{lem:walk-to-path} would then give a shorter $v_0$--$v_k$ path, contrary to the choice of $P$.
+\end{proof}
 
 \begin{lemma}[Projection of walks under contraction]\label{lem:projected-walk}
 Let $\emptyset\neq W\subseteq V$, and let $P=(v_0,\dots,v_k)$ be a walk in $G$. Apply $\pi_W$ to each vertex of $P$ and then delete every consecutive repetition. The resulting sequence is a walk in $G/W$ from $\pi_W(v_0)$ to $\pi_W(v_k)$, and its length is at most $k$.
@@ -179,7 +183,7 @@ Hence $\len{P}=\dist{G}{t}{z}$, and $P$ is shortest.
     \node at (2.25,1.75) {$G/N[t]$};
   \end{scope}
 \end{tikzpicture}
-\caption{The lifting step in Proposition~\ref{prop:contraction}.}
+\caption{Lifting a shortest $t^\prime$--$z$ path through the contraction in Proposition~\ref{prop:contraction}.}
 \label{fig:contraction}
 \end{figure}
 
@@ -248,7 +252,7 @@ Let $G=(V,E)$ be a finite simple undirected graph, let $T\subseteq V$, and let $
 \begin{proof}
 For $(k,n)\in \mathbb{N}_0^2$, let $\mathcal{S}(k,n)$ denote the statement that every simple graph $H$ on $n$ vertices, every terminal set $X\subseteq V(H)$ with $|X|=k$, and every semi-cutting set $M\subseteq E(H)$ for $X$ satisfy $|M|\ge k-1$. We prove $\mathcal{S}(k,n)$ for all $(k,n)$ by induction on $(k,n)$ in the lexicographic order.
 
-The statement is vacuous when $k\le 1$. Fix $(k,n)$ with $k\ge 2$, assume that $\mathcal{S}(k',n')$ holds for every $(k',n')\prec (k,n)$, and let $G=(V,E)$ be a simple graph on $n$ vertices with a terminal set $T$ of size $k$ and a semi-cutting set $F\subseteq E$. By Lemma~\ref{lem:geodesic-characterization}, every terminal pair in $T$ has finite distance in $G$, so both reductions below are metrically meaningful even without any assumption that $G$ be connected.
+There is nothing to prove when $k\le 1$. Fix $(k,n)$ with $k\ge 2$, assume that $\mathcal{S}(k',n')$ holds for every $(k',n')\prec (k,n)$, and let $G=(V,E)$ be a simple graph on $n$ vertices with a terminal set $T$ of size $k$ and a semi-cutting set $F\subseteq E$. By Lemma~\ref{lem:geodesic-characterization}, every terminal pair in $T$ has finite distance in $G$, so both reductions below are metrically meaningful even without any assumption that $G$ be connected.
 
 Either some terminal avoids $V(F)$, or every terminal belongs to $V(F)$; these two cases are disjoint and exhaustive.
 
@@ -266,15 +270,15 @@ Together, the contraction step in Case~1 and the terminal-deletion step in Case~
 
 \section{Related Problems and Further Directions}\label{sec:related}
 
-When $|T|=2$, Lemma~\ref{lem:geodesic-characterization} turns semi-cutting into the problem of hitting all shortest paths between one prescribed pair of terminals. This places the parameter near shortest-path disruption and most-vital-edge questions. Corley and Sha, and also Malik, Mittal, and Gupta, study the deletion of a prescribed number of edges, vertices, or arcs so as to maximize the increase of the shortest distance between one fixed source-target pair in a weighted network~\cite{corley-sha,malik-mittal-gupta}, while Nardelli, Proietti, and Widmayer analyze the most vital edge of a shortest source-target path together with the corresponding replacement shortest paths after removing one edge of that path~\cite{nardelli-proietti-widmayer}. Our parameter is different even in this two-terminal regime: it does not optimize a distance increase, but asks whether a given edge set meets \emph{all} shortest paths between the prescribed terminals; for larger $T$, the relevant family simultaneously includes the shortest paths for every terminal pair.
+When $|T|=2$, Lemma~\ref{lem:geodesic-characterization} turns semi-cutting into the problem of hitting all shortest paths between one prescribed pair of terminals. This places the parameter near single-pair shortest-path disruption and most-vital-edge or most-vital-arc questions. Corley and Sha, and also Malik, Mittal, and Gupta, study the deletion of a prescribed number of edges, vertices, or arcs so as to maximize the increase of the shortest distance between one fixed source-target pair in a weighted network~\cite{corley-sha,malik-mittal-gupta}, while Nardelli, Proietti, and Widmayer analyze the most vital edge of a shortest source-target path together with the corresponding replacement shortest paths after removing one edge of that path~\cite{nardelli-proietti-widmayer}. Our parameter is different even in this two-terminal regime: it does not optimize a distance increase, but asks whether a given edge set meets \emph{all} shortest paths between the prescribed terminals; for larger $T$, the relevant family comprises the shortest paths for every terminal pair.
 
-For larger terminal sets, the closest classical separation problem is the multiterminal cut problem of Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994}. There the aim is to delete edges so that each terminal is separated from all the others, and isolating cuts and multiterminal cuts are defined precisely in that sense. Semi-cutting imposes a strictly weaker topological requirement but a subtler metric one: every terminal-terminal distance must increase, yet the terminals may remain in the same connected component after deleting $F$. Figure~\ref{fig:not-multiterminal} exhibits exactly this phenomenon, showing that semi-cutting is not reducible to multiterminal separation.
+For larger terminal sets, the closest classical separation problem is the multiterminal cut problem of Dahlhaus, Johnson, Papadimitriou, Seymour, and Yannakakis~\cite{dahlhaus1994}. There the aim is to delete edges so that each terminal is separated from all the others, and isolating cuts and multiterminal cuts are defined precisely in that sense. Semi-cutting imposes a strictly weaker topological requirement but a subtler metric one: every terminal-terminal distance must increase, yet the terminals may remain in the same connected component after deleting $F$. Figure~\ref{fig:not-multiterminal} illustrates exactly this phenomenon, showing that semi-cutting is not reducible to multiterminal separation.
 
-The closest conceptual neighbors are vertex parameters defined by geodesic families. Harary, Loukakis, and Tsouros introduce geodetic closure and the geodetic number~\cite{harary-loukakis-tsouros}, while Oellermann and Peters-Fransen use intervals $I[u,v]$ in their study of strong metric dimension~\cite{oellermann-peters-fransen}; both belong to the broader tradition of selecting vertices through shortest-path structure. Closer to the present setting, Peterin and Semani\v{s}in study a minimum vertex set meeting all maximal shortest paths~\cite{peterin-semanisin}, and Manuel, Bre\v{s}ar, and Klav\v{z}ar define the geodesic-transversal number as a minimum vertex set hitting all maximal geodesics and later introduce the dual geodesic packing parameter~\cite{manuel-bresar-klavzar-transversal,manuel-bresar-klavzar-packing}. Semi-cutting differs from this line in three ways: it is edge-based rather than vertex-based, it is restricted to the terminal-defined family of shortest paths, and it requires hitting all shortest terminal-terminal paths rather than all maximal geodesics of the graph.
+The closest conceptual neighbors are vertex parameters defined by geodesic families. Harary, Loukakis, and Tsouros introduce geodetic closure and the geodetic number~\cite{harary-loukakis-tsouros}, while Oellermann and Peters-Fransen use intervals $I[u,v]$ in their study of strong metric dimension~\cite{oellermann-peters-fransen}; both belong to the broader tradition of shortest-path-based vertex parameters. Closer to the present setting, Peterin and Semani\v{s}in study a minimum vertex set meeting all maximal shortest paths~\cite{peterin-semanisin}, and Manuel, Bre\v{s}ar, and Klav\v{z}ar define the geodesic-transversal number as a minimum vertex set hitting all maximal geodesics and later introduce the dual geodesic packing parameter~\cite{manuel-bresar-klavzar-transversal,manuel-bresar-klavzar-packing}. Semi-cutting differs from this line in three respects: it is edge-based rather than vertex-based; it concerns the terminal-defined family rather than maximal geodesics of the whole graph; and it requires hitting all shortest terminal-terminal paths rather than maximal geodesics.
 
 Two problems arise naturally from Theorem~\ref{thm:main}. One is to characterize the equality case $|F|=|T|-1$. The other is to study minimum semi-cutting sets as edge transversals of the family of shortest paths with endpoints in $T$.
 
-Theorem~\ref{thm:main} thus isolates a structural phenomenon that is independent of algorithmic considerations: once semi-cutting is viewed through the restricted geodesic family determined by $T$, contraction and terminal deletion force a universal lower bound. Further progress therefore seems likely to come from structural characterizations of extremal configurations rather than from procedures.
+Theorem~\ref{thm:main} thus isolates a purely structural phenomenon, independent of algorithmic considerations: once semi-cutting is viewed through the terminal-defined family of shortest terminal-terminal paths, contraction and terminal deletion force a universal lower bound. Further progress therefore seems likely to come from structural characterizations of extremal configurations rather than from procedures.
 
 \begin{figure}[t]
 \centering
