@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{amsart}
+\documentclass[11pt,a4paper]{amsart}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -13,65 +13,44 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definicja}[section]
-\newtheorem{notation}[definition]{Notacja}
 
 \theoremstyle{plain}
 \newtheorem{lemma}[definition]{Lemat}
-\newtheorem{observation}[definition]{Obserwacja}
-\newtheorem{proposition}[definition]{Propozycja}
+\newtheorem{proposition}[definition]{Stwierdzenie}
 \newtheorem{theorem}[definition]{Twierdzenie}
 
 \newcommand{\len}[1]{\ell(#1)}
 \newcommand{\dist}[3]{d_{#1}(#2,#3)}
 
-\title{\textbf{O rozmiarze zbiorów na wpół-tnących w grafach}}
+\title{Własności strukturalne zbiorów półrozcinających}
 \author{}
 \date{}
+\keywords{zbiory półrozcinające, najkrótsze ścieżki, kontrakcja grafu, odległości między terminalami, transwersale geodezyjne}
 
 \begin{document}
-\maketitle
 
 \begin{abstract}
-Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym. Dla $T\subseteq V$ oraz $F\subseteq E$ nazywamy $F$
-zbiorem na wpół-tnącym dla~$T$, jeżeli $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla każdej pary różnych terminali
-$u,w\in T$. W pracy dowodzimy, że każdy taki zbiór spełnia nierówność $|F|\ge |T|-1$.
-Dowód opiera się na charakterystyce przez ścieżki najkrótsze, na trwałości własności
-na wpół-tnącej przy ściąganiu domkniętego sąsiedztwa terminala nieincydentnego z~$F$ oraz na indukcji leksykograficznej
-względem pary $(|T|,|V|)$.
+Niech $G=(V,E)$ będzie skończonym prostym grafem nieskierowanym, niech $T\subseteq V$ i niech $F\subseteq E$. Nazywamy $F$ zbiorem \emph{półrozcinającym} dla $T$, jeśli $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla każdych dwóch różnych terminali $u,w\in T$. Dowodzimy ostrego ograniczenia $|F|\ge |T|-1$. Argument jest strukturalny: zbiory półrozcinające są najpierw utożsamiane z transwersalami krawędziowymi wszystkich najkrótszych ścieżek między terminalami, a ograniczenie to wynika następnie z kroku kontrakcji, lematu o usunięciu terminala i indukcji leksykograficznej względem $(|T|,|V|)$.
 \end{abstract}
+
+\maketitle
 
 \section{Wprowadzenie}
 
-Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym oraz niech $T\subseteq V$. Dla zbioru krawędzi
-$F\subseteq E$ mówimy, że $F$ jest zbiorem na wpół-tnącym dla~$T$, jeżeli po usunięciu krawędzi z~$F$ odległość między
-każdą parą różnych terminali ściśle wzrasta, to znaczy
-$\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla wszystkich różnych $u,w\in T$.
-Rozważamy wyłącznie grafy proste; nie zakładamy natomiast spójności, planarności ani żadnej innej dodatkowej własności
-strukturalnej. Używana w~pracy terminologia grafowa jest standardowa; por.~\cite{bondy-murty,diestel}.
+Wszystkie grafy w tej pracy są skończone, proste i nieskierowane. W szczególności wykluczone są pętle i krawędzie wielokrotne, a każda kontrakcja jest rozumiana w sensie grafów prostych: pętle są usuwane, a krawędzie wielokrotne utożsamiane.
+Dla grafu $G=(V,E)$, zbioru terminali $T\subseteq V$ i zbioru krawędzi $F\subseteq E$, mówimy, że $F$ jest \emph{półrozcinający} dla $T$, jeśli $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla każdych dwóch różnych terminali $u,w\in T$, gdzie odległości przyjmują wartości w $\mathbb{N}_0\cup\{\infty\}$.
+Nie nakłada się żadnego globalnego założenia o spójności na $G$. Rzeczywiście, gdyby jakaś para terminali miała już nieskończoną odległość w $G$, to definiująca nierówność miałaby postać $\infty<\infty$ i nie mogłaby być spełniona. Warunek ten mówi, że każda najkrótsza ścieżka, której końce leżą w $T$, musi stracić co najmniej jedną krawędź po usunięciu $F$.
+Dolne ograniczenie rzędu $|T|$ jest zatem naturalne. Jest ono również nietrywialne: jedna krawędź może leżeć na najkrótszych ścieżkach dla wielu par terminali, więc bezpośrednie zliczanie po parach nie daje użytecznej kontroli. Naszym głównym wynikiem jest to, że każdy zbiór półrozcinający spełnia $|F|\ge |T|-1$.
 
-Rozważany tu warunek leży między dwoma klasycznymi rodzinami problemów. Z~jednej strony problem \emph{multiterminal cut}
-wymaga usunięcia zbioru krawędzi rozdzielającego wszystkie terminale, a~jego podstawowym punktem odniesienia jest praca
-Dahlhausa, Johnsona, Papadimitriou, Seymoura i~Yannakakisa~\cite{dahlhaus1994}. Z~drugiej strony, w~problemach
-\emph{most vital links and nodes} bada się usunięcia powodujące możliwie największy wzrost odległości między wyróżnioną
-parą wierzchołków; nurt ten zapoczątkowali Corley i~Sha~\cite{corley-sha}, a~wariant dotyczący pojedynczej krawędzi na
-ścieżce najkrótszej analizowali później Nardelli, Proietti i~Widmayer~\cite{nardelli-proietti-widmayer}. Zbiory
-na wpół-tnące nie wymagają całkowitego rozspójnienia terminali, ale wymuszają jednoczesny ścisły wzrost wszystkich
-odległości między parami terminali, co nadaje badanemu tu pojęciu wyraźnie wieloterminalny charakter.
+Ograniczenie to jest ostre. Dla $k\ge 2$, niech $G$ będzie ścieżką o wierzchołkach $v_0,v_1,\dots,v_{2k-2}$, niech $T=\{v_0,v_2,\dots,v_{2k-2}\}$ i niech $F=\bigl\{\{v_{2i},v_{2i+1}\}: 0\le i\le k-2\bigr\}$. Wtedy $|F|=|T|-1$, a każda składowa spójności $G\setminus F$ zawiera dokładnie jeden terminal. Stąd odległość między każdą parą terminali jest skończona w $G$ i nieskończona w $G\setminus F$. Rysunek~\ref{fig:semi-cut-example} przedstawia przypadek $k=3$.
 
-Celem pracy jest wykazanie czysto strukturalnego ograniczenia dolnego $|F|\ge |T|-1$ obowiązującego dla każdego zbioru
-na wpół-tnącego. Najpierw zapisujemy definicję tego
-zbioru w~równoważnej postaci wymagającej przecinania wszystkich ścieżek najkrótszych między terminalami. Następnie dowodzimy,
-że własność ta zachowuje się po ściągnięciu domkniętego otoczenia terminala $t\in T\setminus V[F]$. Ostatni etap stanowi
-indukcja leksykograficzna względem pary $(|T|,|V|)$.
+Patrząc przez pryzmat najkrótszych ścieżek, problem sprowadza się do znalezienia transwersali krawędziowej rodziny wszystkich najkrótszych ścieżek o końcach w $T$.
+Gdy $|T|=2$, jest to problem przerwania najkrótszej ścieżki dla jednej z góry ustalonej pary terminali. Gdy jednak $|T|>2$, nie jest to ani klasyczny problem wieloterminalowego przekroju, który dąży do całkowitego odseparowania terminali, ani problem pokrycia wierzchołkowego dla maksymalnych geodezyjnych w całym grafie. Zajmuje on raczej odrębną, pośrednią pozycję: rodzina jest zdefiniowana metrycznie przez pary terminali, ale transwersalę bierze się po krawędziach.
 
-Oszacowanie jest ostre. Dla każdego $k\ge 2$ niech $G$ będzie grafem ścieżkowym o~zbiorze wierzchołków
-$V(G)=\{v_0,v_1,\dots,v_{2k-2}\}$ i~zbiorze krawędzi
-$E(G)=\bigl\{\{v_i,v_{i+1}\}: i=0,\dots,2k-3\bigr\}$. Jeżeli weźmiemy zbiór terminali
-$T=\{v_0,v_2,\dots,v_{2k-2}\}$ oraz zbiór krawędzi
-$F=\bigl\{\{v_{2i},v_{2i+1}\}: i=0,\dots,k-2\bigr\}$,
-to zachodzi równość $|F|=|T|-1$. Po usunięciu krawędzi z~$F$ każda składowa grafu $G\setminus F$ zawiera dokładnie jeden terminal,
-więc dwa różne terminale trafiają do różnych składowych i~ich odległość rośnie z~wartości skończonej do~$\infty$. Przykład
-dla $k=3$ przedstawia Rysunek~\ref{fig:semi-cut-example}.
+Kluczowym przeformułowaniem jest Lemat~\ref{lem:geodesic-characterization} poniżej, który utożsamia bycie zbiorem półrozcinającym z przecinaniem wszystkich najkrótszych ścieżek, których końce leżą w $T$, i służy jako punkt odniesienia dla obu redukcji.
+Jeśli terminal $t$ nie jest incydentny z $F$, to przeszkoda leży poza $N[t]$, a zakontraktowanie $N[t]$ do nowego terminala zachowuje tę własność, jednocześnie zmniejszając liczbę wierzchołków.
+Jeśli każdy terminal jest incydentny z $F$, to usuwa się jeden terminal wraz z jedną wybraną krawędzią incydentną;
+każda najkrótsza ścieżka między pozostałymi terminalami, która korzysta z tej krawędzi, nadal zawiera inną krawędź z $F$. Ta dychotomia prowadzi do indukcji leksykograficznej po $(|T|,|V|)$.
 
 \begin{figure}[htbp]
 \centering
@@ -85,335 +64,99 @@ dla $k=3$ przedstawia Rysunek~\ref{fig:semi-cut-example}.
   \draw (a) -- (v);
   \draw[very thick,red!70!black] (v) -- node[above]{$e_2$} (b);
   \draw (b) -- (w);
-  \node[align=center] at (3.6,-1.3)
-    {$\dist{G}{u}{v}=2,\quad \dist{G\setminus F}{u}{v}=\infty$\\[2pt]
-     $\dist{G}{v}{w}=2,\quad \dist{G\setminus F}{v}{w}=\infty$\\[2pt]
-     $\dist{G}{u}{w}=4,\quad \dist{G\setminus F}{u}{w}=\infty$};
 \end{tikzpicture}
-\caption{Przykład ostrości oszacowania $|F|\ge |T|-1$. Graf $G$ jest ścieżką
-$u$--$a$--$v$--$b$--$w$; terminale $T=\{u,v,w\}$ oznaczono kolorem szarym, a~zbiór
-$F=\{e_1,e_2\}$ kolorem czerwonym.}
+\caption{Ostry przykład z $T=\{u,v,w\}$ i $F=\{e_1,e_2\}$. Tutaj $\dist{G}{u}{v}=\dist{G}{v}{w}=2$, $\dist{G}{u}{w}=4$, a wszystkie trzy odległości między terminalami stają się nieskończone w $G\setminus F$.}
 \label{fig:semi-cut-example}
 \end{figure}
 
-\section{Notacja i definicje}
+\section{Pojęcia wstępne}
 
-W~tej sekcji i~w dalszych sformułowaniach przez $G=(V,E)$ oznaczamy dowolny skończony graf nieskierowany prosty, to znaczy
-graf bez pętli i~bez krawędzi równoległych. Każdą krawędź utożsamiamy zatem z~dwuelementowym podzbiorem zbioru wierzchołków.
-Odległości traktujemy jako elementy zbioru $\mathbb{N}_0\cup\{\infty\}$, gdzie $\mathbb{N}_0=\{0,1,2,\dots\}$, z~porządkiem
-rozszerzonym przez relacje $n<\infty$ dla każdego $n\in\mathbb{N}_0$.
+Niech $G=(V,E)$ będzie skończonym grafem prostym. \emph{Spacer} od $u$ do $w$ to ciąg $P=(v_0,\dots,v_k)$ gdzie $v_0=u$, $v_k=w$ oraz $\{v_{i-1},v_i\}\in E$ dla $1\le i\le k$; jego długość to $\len{P}\coloneqq k$. \emph{Ścieżka} to spacer o parami różnych wierzchołkach.
+Odległość $\dist{G}{u}{w}$ to minimalna długość ścieżki od $u$ do $w$, jeśli taka ścieżka istnieje, oraz $\infty$ w przeciwnym razie. Ścieżka o długości $\dist{G}{u}{w}$ jest \emph{najkrótsza}. Dla ścieżki $P=(v_0,\dots,v_k)$, piszemy $V(P)\coloneqq \{v_0,\dots,v_k\}$, $E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: 1\le i\le k\bigr\}$ oraz $P[v_i,v_j]\coloneqq (v_i,\dots,v_j)$ dla $0\le i\le j\le k$.
+Dla $F\subseteq E$, niech $G\setminus F\coloneqq (V,E\setminus F)$ oraz $V(F)\coloneqq \{v\in V:\ v\in e \text{ dla pewnego } e\in F\}$. Dla $v\in V$, niech $N(v)\coloneqq \{w\in V:\ \{v,w\}\in E\}$ oraz $N[v]\coloneqq N(v)\cup\{v\}$.
 
-\begin{definition}[Spacery, ścieżki i~odległość]\label{def:paths-distance}
-Niech $u,w\in V$. Spacerem z~$u$ do~$w$ nazywamy ciąg wierzchołków $P=(v_0,v_1,\dots,v_k)$, gdzie $k\in\mathbb{N}_0$,
-$v_0=u$, $v_k=w$ oraz $\{v_{i-1},v_i\}\in E$ dla każdego $i\in\{1,\dots,k\}$. Długość spaceru definiujemy przez
-$\len{P}\coloneqq k$. Ścieżką nazywamy spacer, w~którym wierzchołki są parami różne. Dla ścieżki
-$P=(v_0,\dots,v_k)$ piszemy $V(P)\coloneqq \{v_0,\dots,v_k\}$ oraz
-$E(P)\coloneqq \bigl\{\{v_{i-1},v_i\}: i=1,\dots,k\bigr\}$.
-
-Jeżeli $P=(v_0,\dots,v_k)$ oraz $Q=(w_0,\dots,w_\ell)$ są spacerami takimi, że $v_k=w_0$, to ich konkatenację definiujemy
-przez $P\cdot Q\coloneqq (v_0,\dots,v_k,w_1,\dots,w_\ell)$.
-
-Odległość $\dist{G}{u}{w}$ definiujemy jako minimum długości ścieżek z~$u$ do~$w$ w~$G$, jeżeli taka ścieżka istnieje;
-w~przeciwnym razie kładziemy $\dist{G}{u}{w}\coloneqq \infty$. Ponieważ $G$ jest skończony, każda ścieżka w~$G$ ma długość
-co najwyżej $|V|-1$, a~więc jeżeli choć jedna ścieżka z~$u$ do~$w$ istnieje, to wspomniane minimum jest dobrze określone.
-Ścieżkę $P$ z~$u$ do~$w$ nazywamy ścieżką najkrótszą, jeżeli $\len{P}=\dist{G}{u}{w}$.
-\end{definition}
-
-\begin{notation}[Podstawowe operacje na grafie]\label{not:basic-operations}
-Jeżeli $F\subseteq E$, to przez $G\setminus F$ oznaczamy graf $(V,E\setminus F)$, a~przez
-$V[F]\coloneqq \{v\in V:\ \exists\, e\in F\ \text{ takie, że } v\in e\}$ zbiór końców krawędzi ze zbioru $F$.
-Jeżeli $v\in V$, to jego otoczenie i~domknięte otoczenie oznaczamy odpowiednio przez
-$N(v)\coloneqq \{w\in V:\ \{v,w\}\in E\}$ oraz $N[v]\coloneqq N(v)\cup\{v\}$.
-Jeżeli $P=(v_0,\dots,v_k)$ jest ścieżką i~$0\le i\le j\le k$, to piszemy $P[v_i,v_j]\coloneqq (v_i,\dots,v_j)$.
-Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem, to przez $\overleftarrow{P}\coloneqq (v_k,\dots,v_0)$ oznaczamy spacer otrzymany
-przez odwrócenie kolejności wierzchołków. Ponieważ graf jest nieskierowany, zachodzi $\len{\overleftarrow{P}}=\len{P}$;
-jeżeli $P$ jest ścieżką, to $\overleftarrow{P}$ jest ścieżką i~$E(\overleftarrow{P})=E(P)$.
-\end{notation}
-
-\begin{definition}[Ściąganie niepustego zbioru wierzchołków]\label{def:contraction}
-Niech $\emptyset\neq W\subseteq V$ oraz niech $w^\ast\notin V$ będzie nowym wierzchołkiem. Definiujemy odwzorowanie
+\begin{definition}[Kontrakcja]\label{def:contraction}
+Niech $\emptyset\neq W\subseteq V$ i niech $w^\ast\notin V$ będzie nowym wierzchołkiem.
+Zdefiniujmy $\pi_W\colon V\to (V\setminus W)\cup\{w^\ast\}$ jako $\pi_W(v)=w^\ast$ dla $v\in W$ oraz $\pi_W(v)=v$ dla $v\notin W$.
+Zakontraktowany graf $G/W$ ma zbiór wierzchołków $(V\setminus W)\cup\{w^\ast\}$ i zbiór krawędzi
 \[
-  \pi_W\colon V\to (V\setminus W)\cup\{w^\ast\},
-  \qquad
-  \pi_W(v)\coloneqq
-  \begin{cases}
-    w^\ast & \text{dla } v\in W,\\
-    v & \text{dla } v\notin W.
-  \end{cases}
+E(G/W)=\bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
 \]
-Przez $G/W$ oznaczamy graf prosty $(V',E')$, gdzie
-\[
-\begin{aligned}
-  V' &\coloneqq (V\setminus W)\cup\{w^\ast\},\\
-  E' &\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in E,\ \pi_W(x)\neq \pi_W(y)\bigr\}.
-\end{aligned}
-\]
-Warunek $\pi_W(x)\neq \pi_W(y)$ gwarantuje, że w~$G/W$ nie powstają pętle, a~opis zbiorowy krawędzi utożsamia ewentualne
-krawędzie równoległe; w~szczególności $G/W$ pozostaje grafem prostym.
-Jeżeli $e=\{x,y\}\in E$ oraz $\pi_W(x)\neq \pi_W(y)$, to obraz tej krawędzi oznaczamy przez
-$e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E'$.
-Dla $F\subseteq E$ definiujemy obraz zbioru krawędzi przez
-$F/W\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in F,\ \pi_W(x)\neq \pi_W(y)\bigr\}\subseteq E'$.
+Zatem $G/W$ otrzymuje się przez zakontraktowanie $W$ do $w^\ast$; ponieważ pozostajemy w kategorii grafów prostych, pętle są usuwane, a krawędzie wielokrotne utożsamiane.
+Jeśli $e=\{x,y\}\in E$ i $\pi_W(x)\neq \pi_W(y)$, piszemy $e/W\coloneqq \{\pi_W(x),\pi_W(y)\}\in E(G/W)$.
+Dla $F\subseteq E$, kładziemy również $F/W\coloneqq \bigl\{\{\pi_W(x),\pi_W(y)\}: \{x,y\}\in F,\ \pi_W(x)\neq \pi_W(y)\bigr\}\subseteq E(G/W)$.
 \end{definition}
 
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
-  %% Lewa strona: graf G z wyróżnionym W = {a,b,c}
-  \begin{scope}[xshift=0cm]
-    \node at (2.2,3.0) {$G$};
-    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]    (x)  at (0,1.5)   {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]   (y)  at (4.4,2.2)  {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]   (z)  at (4.4,0.8)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$a$] (a)  at (1.5,2.3)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=right:$b$] (b)  at (2.8,1.5)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$c$] (c)  at (1.5,0.7)  {};
-    %% Krawędzie wewnątrz W znikają po ściągnięciu
-    \draw[gray!50] (a)--(b)--(c)--(a);
-    %% Krawędzie między W a resztą grafu
-    \draw (x)--(a)  (x)--(c);
-    \draw (b)--(y)  (b)--(z);
-    \draw (y)--(z);
-    %% Obrys zbioru W
-    \node[draw,dashed,rounded corners,fit=(a)(b)(c),inner sep=7pt,
-          label={[font=\small]above right:$W$}] {};
-  \end{scope}
-  %% Strzałka ściągania
-  \draw[-{Latex[length=3mm]},thick] (5.4,1.5) -- (6.8,1.5)
-    node[midway,above,font=\small] {$/W$};
-  %% Prawa strona: G/W
-  \begin{scope}[xshift=7.4cm]
-    \node at (1.8,3.0) {$G/W$};
-    \node[circle,draw,inner sep=2pt,fill=white,label=left:$x$]       (xp) at (0,1.5)   {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$y$]      (yp) at (3.6,2.2)  {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=right:$z$]      (zp) at (3.6,0.8)  {};
-    \node[circle,draw,inner sep=2pt,fill=gray!50,label=above:$w^*$]  (wp) at (1.8,1.5)  {};
-    \draw (xp)--(wp)  (wp)--(yp)  (wp)--(zp)  (yp)--(zp);
-  \end{scope}
-\end{tikzpicture}
-\caption{Ściąganie $W=\{a,b,c\}$ do wierzchołka $w^*$ (Definicja~\ref{def:contraction}).
-Krawędzie wewnętrzne zbioru $W$ znikają, a~krawędzie wychodzące z~$W$ przechodzą
-na krawędzie incydentne z~$w^*$.}
-\label{fig:contraction-def}
-\end{figure}
-
-\begin{definition}[Zbiór na wpół-tnący]\label{def:semi-cut}
-Niech $T\subseteq V$. Mówimy, że $F\subseteq E$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, jeżeli dla każdej pary różnych
-wierzchołków $u,w\in T$ zachodzi nierówność $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$.
-Wierzchołki ze zbioru $T$ nazywamy terminalami.
+\begin{definition}[Zbiór półrozcinający]\label{def:semi-cut}
+Niech $T\subseteq V$. Zbiór krawędzi $F\subseteq E$ jest \emph{zbiorem półrozcinającym} dla $T$ w $G$, jeśli $\dist{G}{u}{w}<\dist{G\setminus F}{u}{w}$ dla każdych dwóch różnych wierzchołków $u,w\in T$.
 \end{definition}
 
-\begin{observation}\label{obs:finite-terminal-distances}
-Niech $T\subseteq V$ oraz $F\subseteq E$. Jeżeli $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$, to dla każdej pary różnych
-terminali $u,w\in T$ zachodzi $\dist{G}{u}{w}<\infty$.
-W~szczególności wszystkie terminale należą do jednej składowej spójności grafu $G$.
-\end{observation}
+\noindent Odnotowujemy dwa standardowe fakty o spacerach i najkrótszych ścieżkach, które będą wielokrotnie wykorzystywane.
+
+\begin{lemma}[Spacery można skracać do ścieżek]\label{lem:walk-to-path}
+Każdy spacer od $u$ do $w$ zawiera ścieżkę $u$--$w$ o długości równej co najwyżej długości tego spaceru.
+\end{lemma}
 
 \begin{proof}
-Weźmy dowolne różne wierzchołki $u,w\in T$. Z~Definicji~\ref{def:semi-cut} wynika, że po usunięciu krawędzi z~$F$
-odległość między $u$ i~$w$ ściśle rośnie. W~szczególności odległość $\dist{G}{u}{w}$ jest skończona. Istnienie skończonej
-odległości między każdą parą terminali oznacza, że między dowolnymi dwoma terminalami istnieje ścieżka w~$G$. Zatem
-wszystkie terminale należą do jednej składowej spójności grafu $G$.
+Ilekroć spacer odwiedza jakiś wierzchołek dwukrotnie, usunięcie zamkniętego podspaceru między tymi dwoma wystąpieniami zachowuje końce i nie zwiększa długości. Powtarzanie tej operacji daje spacer bez powtarzających się wierzchołków, czyli ścieżkę.
 \end{proof}
 
-\section{Lematy pomocnicze}
+\begin{lemma}[Podścieżki najkrótszych ścieżek]\label{lem:subpath-shortest}
+Jeśli $P=(v_0,\dots,v_k)$ jest najkrótszą ścieżką w $G$ i $0\le i<j\le k$, to $P[v_i,v_j]$ jest najkrótszą ścieżką od $v_i$ do $v_j$.
+\end{lemma}
 
-W~tej sekcji zbieramy trzy własności, które będą wykorzystywane w~części dotyczącej ściągania.
+\begin{proof}
+Gdyby $P[v_i,v_j]$ nie była najkrótsza, zastąpienie jej krótszą ścieżką $v_i$--$v_j$ dałoby spacer $v_0$--$v_k$ krótszy niż $P$. Lemat~\ref{lem:walk-to-path} dałby wtedy krótszą ścieżkę $v_0$--$v_k$, co przeczy wyborowi $P$.
+\end{proof}
+
+\begin{lemma}[Rzutowanie spacerów przy kontrakcji]\label{lem:projected-walk}
+Niech $\emptyset\neq W\subseteq V$ i niech $P=(v_0,\dots,v_k)$ będzie spacerem w $G$. Zastosujmy $\pi_W$ do każdego wierzchołka $P$, a następnie usuńmy każde kolejne powtórzenie. Wynikowy ciąg jest spacerem w $G/W$ od $\pi_W(v_0)$ do $\pi_W(v_k)$, a jego długość wynosi co najwyżej $k$.
+\end{lemma}
+
+\begin{proof}
+Oznaczmy $z_i=\pi_W(v_i)$ dla $0\le i\le k$. Ilekroć $z_{i-1}\neq z_i$, Definicja~\ref{def:contraction} daje $\{z_{i-1},z_i\}\in E(G/W)$. Usunięcie powtórzeń z $(z_0,\dots,z_k)$ daje zatem spacer w $G/W$ o tych samych końcach. Wykonywane są tylko usunięcia, więc długość nie wzrasta.
+\end{proof}
+
+\begin{lemma}[Charakteryzacja geodezyjna]\label{lem:geodesic-characterization}
+Niech $X\subseteq V$ i $M\subseteq E$. Wtedy $M$ jest zbiorem półrozcinającym dla $X$ w $G$ wtedy i tylko wtedy, gdy dla każdych dwóch różnych wierzchołków $u,w\in X$, odległość $\dist{G}{u}{w}$ jest skończona i każda najkrótsza ścieżka $u$--$w$ w $G$ zawiera krawędź z $M$.
+\end{lemma}
+
+\begin{proof}
+Załóżmy najpierw, że $M$ jest zbiorem półrozcinającym dla $X$. Dla różnych $u,w\in X$, odległość $\dist{G}{u}{w}$ nie może być nieskończona, ponieważ Definicja~\ref{def:semi-cut} dałaby wtedy $\infty<\dist{G\setminus M}{u}{w}$. Gdyby najkrótsza ścieżka $u$--$w$ w $G$ była rozłączna z $M$, pozostałaby ścieżką $u$--$w$ w $G\setminus M$, co przeczy ostrej nierówności w Definicji~\ref{def:semi-cut}.
+
+Odwrotnie, załóżmy, że dla każdych różnych $u,w\in X$ odległość w $G$ jest skończona, a każda najkrótsza ścieżka $u$--$w$ w $G$ zawiera krawędź z $M$. Ustalmy taką parę $u,w$. Jeśli $u$ i $w$ są niespójne w $G\setminus M$, to $\dist{G\setminus M}{u}{w}=\infty>\dist{G}{u}{w}$. W przeciwnym razie najkrótsza ścieżka $Q$ w $G\setminus M$ jest również ścieżką $u$--$w$ w $G$, a równość $\len{Q}=\dist{G}{u}{w}$ jest niemożliwa, ponieważ $Q$ jest rozłączne z $M$. Stąd $\dist{G\setminus M}{u}{w}=\len{Q}>\dist{G}{u}{w}$.
+\end{proof}
+
+Lemat~\ref{lem:geodesic-characterization} będzie wielokrotnie używany jako geodezyjne przeformułowanie pojęcia zbioru półrozcinającego i jest wspólnym punktem wyjścia dla obu redukcji w następnej sekcji.
+
+\section{Redukcje strukturalne}
 
 \begin{lemma}\label{lem:contraction-image-size}
-Niech $\emptyset\neq W\subseteq V$ oraz $F\subseteq E$. Wówczas $|F/W|\le |F|$.
+Niech $\emptyset\neq W\subseteq V$ i niech $F\subseteq E$. Wtedy $|F/W|\le |F|$.
 \end{lemma}
 
 \begin{proof}
-Niech $D\coloneqq \bigl\{\{x,y\}\in F:\ \pi_W(x)\neq \pi_W(y)\bigr\}$.
-Z~Definicji~\ref{def:contraction} wynika, że odwzorowanie
-\[
-  \varphi\colon D\to F/W,
-  \qquad
-  \varphi(\{x,y\})\coloneqq \{\pi_W(x),\pi_W(y)\},
-\]
-jest surjekcją. Zatem $|F/W|\le |D|\le |F|$.
+Odwzorowanie $e\mapsto e/W$ z tych krawędzi $F$, których obraz jest dobrze zdefiniowany, na zbiór $F/W$ jest surjektywne.
 \end{proof}
 
-\begin{lemma}\label{lem:walk-to-path}
-Niech $H$ będzie skończonym grafem prostym. Jeżeli w~$H$ istnieje spacer z~$u$ do~$w$, to istnieje również ścieżka z~$u$ do~$w$
-o~długości nie większej niż długość tego spaceru.
+\begin{lemma}\label{lem:outside-edges}
+Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem i niech $G^\prime\coloneqq G/N[t]$. Jeśli $x,y\in V\setminus N[t]$ są różne, to $\{x,y\}\in E(G^\prime)$ wtedy i tylko wtedy, gdy $\{x,y\}\in E(G)$; w takim przypadku $\{x,y\}/N[t]=\{x,y\}$.
 \end{lemma}
 
 \begin{proof}
-Niech $P=(v_0,\dots,v_k)$ będzie spacerem z~$u$ do~$w$ w~$H$. Jeżeli wszystkie wierzchołki $v_0,\dots,v_k$ są parami różne,
-to $P$ jest ścieżką i~nie ma czego dowodzić. Załóżmy więc, że istnieją indeksy $i<j$ takie, że $v_i=v_j$. Wówczas ciąg
-$P'\coloneqq (v_0,\dots,v_i,v_{j+1},\dots,v_k)$ jest znów spacerem z~$u$ do~$w$: jedyną nową parą kolejnych wierzchołków
-jest para $v_i,v_{j+1}$, lecz $v_i=v_j$, a~więc z~faktu, że $P$ jest spacerem, wynika
-$\{v_i,v_{j+1}\}=\{v_j,v_{j+1}\}\in E(H)$. Ponadto $\len{P'}=k-(j-i)\le k=\len{P}$ oraz liczba wyrazów ciągu $P'$
-jest mniejsza niż liczba wyrazów ciągu $P$.
-
-Powtarzając powyższą operację zawsze wtedy, gdy w~otrzymanym spacerze pojawią się dwa równe wierzchołki, po skończonej
-liczbie kroków otrzymujemy spacer z~$u$ do~$w$ bez powtórzeń wierzchołków. Jest to ścieżka, a~na każdym kroku długość
-nie rośnie. Ostateczna ścieżka ma więc długość nie większą niż długość wyjściowego spaceru $P$.
+Jeśli $\{x,y\}\in E(G)$, to Definicja~\ref{def:contraction} daje $\{x,y\}\in E(G^\prime)$ i $\{x,y\}/N[t]=\{x,y\}$. Odwrotnie, jeśli $\{x,y\}\in E(G^\prime)$, to pewna krawędź $\{u,v\}\in E(G)$ spełnia warunek $\{\pi_{N[t]}(u),\pi_{N[t]}(v)\}=\{x,y\}$. Ponieważ żaden z końców nie jest równy $t^\prime$, zarówno $u$, jak i $v$ leżą poza $N[t]$, stąd $\{u,v\}=\{x,y\}$.
 \end{proof}
 
-\begin{lemma}\label{lem:subpath}
-Niech $H$ będzie skończonym grafem prostym oraz niech $P=(v_0,\dots,v_k)$ będzie ścieżką z~$u$ do~$w$ w~$H$ o~długości
-$\len{P}=\dist{H}{u}{w}$. Wówczas dla każdych indeksów $0\le i\le j\le k$ zachodzi
-$\len{P[v_i,v_j]}=\dist{H}{v_i}{v_j}$.
+\begin{lemma}[Podnoszenie punktu końcowego]\label{lem:lifting-endpoint}
+Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem i niech $G^\prime\coloneqq G/N[t]$. Niech $z\in V\setminus N[t]$, i niech $P^\prime=(t^\prime,x_1,\dots,x_k)$ będzie najkrótszą ścieżką od $t^\prime$ do $z$ w $G^\prime$. Wtedy istnieje wierzchołek $v\in N(t)$ taki, że $P=(t,v,x_1,\dots,x_k)$ jest najkrótszą ścieżką od $t$ do $z$ w $G$.
 \end{lemma}
 
 \begin{proof}
-Gdyby istniała ścieżka z~$v_i$ do~$v_j$ krótsza niż $P[v_i,v_j]$, to zastąpienie nią fragmentu $P[v_i,v_j]$ dawałoby ścieżkę
-z~$u$ do~$w$ krótszą niż $P$, wbrew równości $\len{P}=\dist{H}{u}{w}$.
-\end{proof}
+Ponieważ $P^\prime$ jest ścieżką, żaden z wierzchołków $x_1,\dots,x_k$ nie jest równy $t^\prime$; równoważnie, wszystkie one leżą poza $N[t]$. Krawędź $\{t^\prime,x_1\}$ grafu $G^\prime$ pochodzi zatem od krawędzi $\{v,x_1\}\in E(G)$ z $v\in N[t]$. Ponieważ $x_1\notin N[t]$, musimy mieć $v\in N(t)$. Lemat~\ref{lem:outside-edges} pokazuje, że każda krawędź $\{x_{i-1},x_i\}$ również należy do $G$, więc $P=(t,v,x_1,\dots,x_k)$ jest ścieżką $t$--$z$ w $G$ o długości $\len{P^\prime}+1$.
 
-\begin{observation}\label{obs:shortest-paths}
-Niech $H$ będzie skończonym grafem prostym, niech $X\subseteq V(H)$ oraz niech $M\subseteq E(H)$. Wówczas $M$ jest zbiorem
-na wpół-tnącym dla~$X$ w~$H$ wtedy i~tylko wtedy, gdy dla każdych różnych $u,w\in X$ zachodzi $\dist{H}{u}{w}<\infty$ oraz każda
-ścieżka $P$ z~$u$ do~$w$ o~długości $\len{P}=\dist{H}{u}{w}$ spełnia $E(P)\cap M\neq\emptyset$.
-Sytuację tę ilustruje Rysunek~\ref{fig:shortest-path-condition}.
-\end{observation}
+Teraz niech $R=(r_0,\dots,r_\ell)$ będzie dowolną ścieżką $t$--$z$ w $G$. Ponieważ $z\notin N[t]$, mamy $\ell\ge 2$ i $r_1\in N(t)$. Zastosowanie Lematu~\ref{lem:projected-walk} do ogona $(r_1,\dots,r_\ell)$ daje spacer $t^\prime$--$z$ w $G^\prime$ o długości równej co najwyżej $\ell-1$, a zatem ścieżkę $t^\prime$--$z$ o długości równej co najwyżej $\ell-1$ na mocy Lematu~\ref{lem:walk-to-path}. Stąd $\dist{G^\prime}{t^\prime}{z}\le \ell-1=\len{R}-1$. Ponieważ $R$ było dowolne, każda ścieżka $t$--$z$ w $G$ ma długość co najmniej $\dist{G^\prime}{t^\prime}{z}+1$, więc $\dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1$.
 
-\begin{proof}
-Ustalmy różne wierzchołki $u,w\in X$.
-
-Załóżmy najpierw, że $M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$. Wtedy
-$\dist{H}{u}{w}<\dist{H\setminus M}{u}{w}\le \infty$, więc $\dist{H}{u}{w}<\infty$. Niech $P$ będzie ścieżką z~$u$ do~$w$
-o~długości $\dist{H}{u}{w}$. Gdyby $E(P)\cap M=\emptyset$,
-to $P$ byłaby także ścieżką w~$H\setminus M$, a~więc
-$\dist{H\setminus M}{u}{w}\le \len{P}=\dist{H}{u}{w}$, co przeczy założeniu.
-
-Załóżmy teraz, że $\dist{H}{u}{w}<\infty$ oraz każda ścieżka z~$u$ do~$w$ o~długości $\dist{H}{u}{w}$ przecina zbiór $M$.
-Jeżeli w~$H\setminus M$ nie istnieje ścieżka z~$u$ do~$w$, to $\dist{H\setminus M}{u}{w}=\infty>\dist{H}{u}{w}$.
-Pozostaje przypadek $\dist{H\setminus M}{u}{w}<\infty$. Niech $Q$ będzie ścieżką z~$u$ do~$w$ w~$H\setminus M$ o~długości
-$\len{Q}=\dist{H\setminus M}{u}{w}$.
-Ponieważ $E(H\setminus M)\subseteq E(H)$, ścieżka $Q$ jest także ścieżką w~$H$, a~zatem
-$\len{Q}\ge \dist{H}{u}{w}$. Równość nie może zachodzić, gdyż wtedy $Q$ byłaby ścieżką najkrótszą w~$H$
-nieprzecinającą zbioru $M$. Zatem $\dist{H\setminus M}{u}{w}=\len{Q}>\dist{H}{u}{w}$.
-Ponieważ para $u,w$ była dowolna, zbiór $M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$.
-\end{proof}
-
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize}]
-  %% Terminale
-  \node[circle,draw,inner sep=3pt,fill=gray!30,label=left:$u$]  (u) at (0,0)   {};
-  \node[circle,draw,inner sep=3pt,fill=gray!30,label=right:$w$] (w) at (7.2,0) {};
-  %% Ścieżka najkrótsza (długość 3): u--p--q--w, z krawędzią z F
-  \node[circle,draw,inner sep=2pt,fill=white,label=above:$p$] (p) at (2.2,1.1) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=above:$q$] (q) at (5.0,1.1) {};
-  \draw[thick,blue!70!black] (u)--(p);
-  \draw[very thick,red!70!black] (p)--node[above]{$e\in F$}(q);
-  \draw[thick,blue!70!black] (q)--(w);
-  %% Dłuższa ścieżka (długość 4): u--a--b--c--w, omijająca F
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$a$] (a) at (1.8,-1.1) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$b$] (b) at (3.6,-1.1) {};
-  \node[circle,draw,inner sep=2pt,fill=white,label=below:$c$] (c) at (5.4,-1.1) {};
-  \draw[thick,black!35] (u)--(a)--(b)--(c)--(w);
-  %% Adnotacja odległości
-  \node[align=center] at (3.6,0)
-    {$\dist{G}{u}{w}=3$\\$\dist{G\setminus F}{u}{w}=4$};
-\end{tikzpicture}
-\caption{Ilustracja Obserwacji~\ref{obs:shortest-paths}: zbiór $F$ przecina wszystkie ścieżki najkrótsze między
-$u$ i~$w$, choć nie musi przecinać ścieżek dłuższych.}
-\label{fig:shortest-path-condition}
-\end{figure}
-
-\begin{lemma}\label{lem:projection-walk}
-Niech $\emptyset\neq W\subseteq V$. Jeżeli $P=(v_0,\dots,v_k)$ jest spacerem w~$G$, to w~$G/W$ istnieje spacer
-$P'=(w_0,\dots,w_m)$ taki, że $w_0=\pi_W(v_0)$, $w_m=\pi_W(v_k)$ oraz $m\le k$.
-\end{lemma}
-
-\begin{proof}
-Rozważmy obrazy kolejnych wierzchołków spaceru $P$ pod odwzorowaniem $\pi_W$ i~usuńmy z~otrzymanego ciągu wszystkie wyrazy
-równe bezpośrednio poprzedniemu. W ten sposób dostajemy ciąg $P'=(w_0,\dots,w_m)$, dla którego $w_0=\pi_W(v_0)$,
-$w_m=\pi_W(v_k)$ oraz $m\le k$. Jeśli $w_r$ i~$w_{r+1}$ są kolejnymi zachowanymi wyrazami, to istnieje indeks
-$j\in\{1,\dots,k\}$ taki, że $w_r=\pi_W(v_{j-1})$, $w_{r+1}=\pi_W(v_j)$ oraz $\pi_W(v_{j-1})\neq \pi_W(v_j)$. Ponieważ
-$\{v_{j-1},v_j\}\in E$, z~Definicji~\ref{def:contraction} wynika $\{w_r,w_{r+1}\}\in E(G/W)$. Zatem $P'$ jest spacerem
-o~żądanych własnościach.
-\end{proof}
-
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
-  %% Lewa strona: graf G z zaznaczonym W = N[t]
-  \begin{scope}[xshift=0cm]
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$x$]  (x)  at (0,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$a$] (a)  at (1.8,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$t$] (t)  at (3.2,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$b$] (b)  at (4.6,0) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$y$]  (y)  at (6.4,0) {};
-    \draw[very thick,blue!70!black] (x)--(a)--(t)--(b)--(y);
-    \node[draw,dashed,rounded corners,fit=(a)(t)(b),inner sep=5pt,label=above:$W$] {};
-    \node at (3.2,-1.1) {spacer $P$: $x$–$a$–$t$–$b$–$y$ (dł.\ 4)};
-    \node at (3.2,1.9) {$G$};
-  \end{scope}
-  %% Strzałka
-  \draw[-{Latex[length=3mm]},thick] (7.2,0) -- (8.6,0);
-  \node at (7.9,0.45) {\small $/ W$};
-  %% Prawa strona: graf G/W z odwzorowanym spacerem
-  \begin{scope}[xshift=9.4cm]
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$x$]     (xp) at (0,0) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!40,label=below:$w^*$] (wp) at (1.8,0) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$y$]     (yp) at (3.6,0) {};
-    \draw[very thick,blue!70!black] (xp)--(wp)--(yp);
-    \node at (1.8,-1.1) {spacer $P'$: $x$–$w^*$–$y$ (dł.\ 2)};
-    \node at (1.8,1.9) {$G/W$};
-  \end{scope}
-\end{tikzpicture}
-\caption{Ilustracja Lematu~\ref{lem:projection-walk}: po ściągnięciu zbioru $W=\{a,t,b\}$ długość obrazu spaceru nie rośnie.}
-\label{fig:projection-walk}
-\end{figure}
-
-\section{Zachowanie własności przy ściąganiu}
-
-Kluczowy krok dowodu polega na wykazaniu, że ściągnięcie domkniętego otoczenia terminala $t\notin V[F]$ zachowuje własność
-na wpół-tnącą. Użyjemy do tego dwóch mechanizmów: projekcji ścieżek do grafu ściągniętego oraz podnoszenia najkrótszej
-ścieżki wychodzącej z~$t^\prime$ do najkrótszej ścieżki wychodzącej z~$t$.
-
-\begin{lemma}\label{lem:lifting-endpoint}
-Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech $G^\prime\coloneqq G/N[t]$, gdzie zbiór
-$N[t]$ został ściągnięty do~$t^\prime$. Niech $z\in V\setminus N[t]$ i~niech $P^\prime=(t^\prime,x_1,\dots,x_k)$ będzie
-ścieżką najkrótszą z~$t^\prime$ do~$z$ w~$G^\prime$. Wówczas istnieje wierzchołek $v\in N(t)$ taki, że
-$P=(t,v,x_1,\dots,x_k)$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
-\end{lemma}
-
-\begin{proof}
-Ponieważ $z\neq t^\prime$, mamy $k\ge 1$. Z~równości $V(G^\prime)=(V\setminus N[t])\cup\{t^\prime\}$ wynika, że wierzchołek
-$x_1$, jako różny od~$t^\prime$, należy do~$V\setminus N[t]$.
-Krawędź $\{t^\prime,x_1\}$ należy do~$E(G^\prime)$, więc z~Definicji~\ref{def:contraction} istnieje pewien wierzchołek
-$v\in N[t]$ oraz odpowiadająca mu krawędź $\{v,x_1\}\in E$ taka, że $\{v,x_1\}/N[t]=\{t^\prime,x_1\}$.
-Wybierzmy dowolny taki wierzchołek $v$. Gdyby $v=t$, to z~$\{t,x_1\}\in E$ wynikałoby $x_1\in N(t)\subseteq N[t]$, sprzecznie
-z~$x_1\in V\setminus N[t]$. Zatem $v\in N(t)$.
-
-Ponieważ $v\in N(t)\subseteq N[t]$ oraz $x_1,\dots,x_k\in V\setminus N[t]$, żaden z~wierzchołków $x_1,\dots,x_k$ nie jest równy
-ani~$t$, ani~$v$. Ponadto wierzchołki $x_1,\dots,x_k$ są parami różne, gdyż $P^\prime$ jest ścieżką. Dla każdego $i\in\{2,\dots,k\}$ krawędź $\{x_{i-1},x_i\}$ należy
-do~$E(G^\prime)$ i~ma oba końce poza $N[t]$, a~więc z~Definicji~\ref{def:contraction} wynika $\{x_{i-1},x_i\}\in E$. Zatem
-$P=(t,v,x_1,\dots,x_k)$ jest ścieżką w~$G$ i~spełnia $\len{P}=\len{P^\prime}+1$. Ponieważ $P^\prime$ jest ścieżką najkrótszą,
-mamy ponadto $\dist{G^\prime}{t^\prime}{z}=\len{P^\prime}<\infty$.
-
-Niech teraz $Q=(q_0,\dots,q_\ell)$ będzie dowolną ścieżką z~$t$ do~$z$ w~$G$. Gdyby $\ell=1$, to z~$\{t,z\}\in E$
-wynikałoby $z\in N(t)\subseteq N[t]$, wbrew założeniu $z\notin N[t]$. Zatem $\ell\ge 2$ oraz
-$\{q_0,q_1\}=\{t,q_1\}\in E$, skąd $q_1\in N(t)\subseteq N[t]$, a~zatem $\pi_{N[t]}(q_1)=t^\prime$. Ciąg $(q_1,\dots,q_\ell)$
-jest końcowym fragmentem ścieżki $Q$, a~więc spacerem w~$G$. Zastosowanie Lematu~\ref{lem:projection-walk} do tego spaceru
-daje spacer z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$, gdyż
-$\pi_{N[t]}(q_\ell)=\pi_{N[t]}(z)=z$.
-Z~Lematu~\ref{lem:walk-to-path} otrzymujemy więc ścieżkę z~$t^\prime$ do~$z$ w~$G^\prime$ o~długości co najwyżej $\ell-1$.
-Wobec tego $\dist{G^\prime}{t^\prime}{z}\le \ell-1=\len{Q}-1$. Ponieważ ostatnia nierówność zachodzi dla każdej ścieżki $Q$
-z~$t$ do~$z$, wynika stąd $\dist{G}{t}{z}\ge \dist{G^\prime}{t^\prime}{z}+1$. Z~drugiej strony $P$ jest ścieżką z~$t$ do~$z$,
-więc $\dist{G}{t}{z}\le \len{P}=\len{P^\prime}+1=\dist{G^\prime}{t^\prime}{z}+1$. Obie nierówności dają
-$\dist{G}{t}{z}=\len{P}$, czyli $P$ jest ścieżką najkrótszą z~$t$ do~$z$.
-\end{proof}
-
-\begin{observation}\label{obs:outside-edges}
-Niech $t\in V$, niech $t^\prime\notin V$ będzie nowym wierzchołkiem oraz niech $G^\prime\coloneqq G/N[t]$. Jeżeli
-$x,y\in V\setminus N[t]$ są różne, to $\{x,y\}\in E(G^\prime)$ wtedy i~tylko wtedy, gdy $\{x,y\}\in E(G)$, a~w tym przypadku
-$\{x,y\}/N[t]=\{x,y\}$.
-\end{observation}
-
-\begin{proof}
-Ponieważ $x,y\notin N[t]$, mamy $\pi_{N[t]}(x)=x$ oraz $\pi_{N[t]}(y)=y$. Jeżeli $\{x,y\}\in E(G)$, to z~Definicji~\ref{def:contraction}
-wynika, że $\{x,y\}\in E(G^\prime)$ oraz $\{x,y\}/N[t]=\{x,y\}$. Odwrotnie, jeżeli $\{x,y\}\in E(G^\prime)$, to z~tej samej
-definicji istnieje krawędź $\{u,v\}\in E(G)$ taka, że $\{\pi_{N[t]}(u),\pi_{N[t]}(v)\}=\{x,y\}$.
-Ponieważ jedynym wierzchołkiem grafu $G^\prime$ leżącym poza zbiorem $V\setminus N[t]$ jest $t^\prime$, z~równości obrazów
-wynika, że $u,v\notin N[t]$. Stąd $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(v)=v$, a~zatem $\{u,v\}=\{x,y\}\in E(G)$.
+Ponieważ $P$ jest ścieżką $t$--$z$, mamy również $\dist{G}{t}{z}\le \len{P}=\len{P^\prime}+1=\dist{G^\prime}{t^\prime}{z}+1$. Zatem $\len{P}=\dist{G}{t}{z}$, a $P$ jest najkrótsza.
 \end{proof}
 
 \begin{figure}[t]
@@ -438,8 +181,7 @@ wynika, że $u,v\notin N[t]$. Stąd $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(v)=v$, a~
   \end{scope}
 
   \draw[-{Latex[length=3mm]},thick] (7.4,0) -- (8.8,0);
-  \node at (8.1,0.45) {\small ściągnięcie $N[t]$};
-
+  \node at (8.1,0.45) {\small kontrakcja $N[t]$};
   \begin{scope}[xshift=9.8cm]
     \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$t^\prime$] (tp) at (0.0,0.0) {};
     \node[circle,draw,inner sep=1.8pt,fill=white,label=below:$y_{r+1}$] (yp1) at (2.0,0.0) {};
@@ -452,173 +194,35 @@ wynika, że $u,v\notin N[t]$. Stąd $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(v)=v$, a~
     \node at (2.25,1.75) {$G/N[t]$};
   \end{scope}
 \end{tikzpicture}
-\caption{Podniesienie końcowego fragmentu ścieżki z~$G/N[t]$ do~$G$.}
+\caption{Podnoszenie najkrótszej ścieżki $t^\prime$--$z$ poprzez kontrakcję w Stwierdzeniu~\ref{prop:contraction}.}
 \label{fig:contraction}
 \end{figure}
 
 \begin{proposition}\label{prop:contraction}
-Niech $T\subseteq V$ oraz $F\subseteq E$. Załóżmy, że $F$ jest zbiorem na wpół-tnącym dla~$T$ w~$G$. Niech
-$t\in T\setminus V[F]$ oraz niech $t^\prime\notin V$ będzie nowym wierzchołkiem. Oznaczmy
-\[
-  G^\prime\coloneqq G/N[t],
-  \qquad
-  T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\},
-  \qquad
-  F^\prime\coloneqq F/N[t].
-\]
-Wówczas $F^\prime$ jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
+Niech $T\subseteq V$ i $F\subseteq E$. Załóżmy, że $F$ jest zbiorem półrozcinającym dla $T$ w $G$. Niech $t\in T\setminus V(F)$ i niech $t^\prime\notin V$ będzie nowym wierzchołkiem. Przyjmijmy $G^\prime\coloneqq G/N[t]$, $T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\}$ oraz $F^\prime\coloneqq F/N[t]$. Wtedy $F^\prime$ jest zbiorem półrozcinającym dla $T^\prime$ w $G^\prime$.
 \end{proposition}
 
 \begin{proof}
-\emph{Krok 1: terminale z~$T\setminus\{t\}$ leżą poza $N[t]$.}
-Weźmy dowolne $u\in T\setminus\{t\}$ i~przypuśćmy, że $u\in N(t)$. Wtedy $\dist{G}{t}{u}=1$, a~jedyna ścieżka długości~$1$
-z~$t$ do~$u$ jest równa $(t,u)$. Z~Obserwacji~\ref{obs:shortest-paths} wynikałoby więc, że krawędź $\{t,u\}$ należy do~$F$,
-co przeczy założeniu $t\notin V[F]$. Otrzymana sprzeczność dowodzi inkluzji $T\setminus\{t\}\subseteq V\setminus N[t]$.
-W~szczególności $T^\prime\subseteq V(G^\prime)$.
+Żaden terminal z $T\setminus\{t\}$ nie leży w $N[t]$. Rzeczywiście, gdyby $u\in T\setminus\{t\}$ należało do $N[t]$, to $\{t,u\}$ byłaby unikalną najkrótszą ścieżką $t$--$u$ w $G$, więc Lemat~\ref{lem:geodesic-characterization} wymusiłby $\{t,u\}\in F$, co przeczy $t\notin V(F)$. Zatem $T\setminus\{t\}\subseteq V\setminus N[t]$. W szczególności każdy terminal w $T\setminus\{t\}$ przetrwa kontrakcję jako ten sam wierzchołek, żadne dwa terminale nie są utożsamiane, a zbiór $T^\prime$ jest dobrze zdefiniowany.
 
-\emph{Krok 2: każda para różnych terminali z~$T^\prime$ ma w~$G^\prime$ skończoną odległość.}
-Niech $u,w\in T^\prime$ będą różne. Jeżeli $u,w\in T\setminus\{t\}$, to z~Obserwacji~\ref{obs:finite-terminal-distances}
-mamy $\dist{G}{u}{w}<\infty$. Istnieje więc ścieżka z~$u$ do~$w$ w~$G$. Ponieważ $u,w\notin N[t]$, mamy
-$\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(w)=w$, więc z~Lematów~\ref{lem:projection-walk} i~\ref{lem:walk-to-path}
-otrzymujemy ścieżkę z~$u$ do~$w$ w~$G^\prime$.
+Każde dwa różne terminale z $T^\prime$ mają skończoną odległość w $G^\prime$. Jeśli $u,w\in T\setminus\{t\}$, weźmy ścieżkę $u$--$w$ w $G$; jeśli jednym terminalem jest $t^\prime$, a drugim $z\in T\setminus\{t\}$, weźmy ścieżkę $t$--$z$ w $G$. W obu przypadkach Lematy~\ref{lem:projected-walk} i~\ref{lem:walk-to-path} dają ścieżkę w $G^\prime$ łączącą odpowiednie terminale. Na mocy Lematu~\ref{lem:geodesic-characterization} wystarczy pokazać, że każda najkrótsza ścieżka w $G^\prime$ między różnymi terminalami z $T^\prime$ przecina $F^\prime$.
 
-Jeżeli jeden z~wierzchołków $u,w$ jest równy $t^\prime$, to drugi należy do~$T\setminus\{t\}$; oznaczmy go przez $z$.
-Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy $\dist{G}{t}{z}<\infty$, więc w~$G$ istnieje ścieżka z~$t$ do~$z$.
-Ponieważ $\pi_{N[t]}(t)=t^\prime$ oraz $\pi_{N[t]}(z)=z$, z~Lematu~\ref{lem:projection-walk}, zastosowanego do tej ścieżki,
-otrzymujemy spacer z~$t^\prime$ do~$z$ w~$G^\prime$, a~następnie z~Lematu~\ref{lem:walk-to-path} ścieżkę z~$t^\prime$ do~$z$
-w~$G^\prime$.
-
-\emph{Krok 3: każda ścieżka najkrótsza między różnymi terminalami z~$T^\prime$ przecina $F^\prime$.}
-Niech $u,w\in T^\prime$ będą różne i~niech $P^\prime$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G^\prime$.
-Ponieważ graf $G^\prime$ jest prosty, z~Obserwacji~\ref{obs:shortest-paths} wystarczy wykazać, że
-$E(P^\prime)\cap F^\prime\neq\emptyset$. Rozpatrujemy dwa przypadki.
-
-\medskip\noindent
-\textbf{Przypadek 1: $t^\prime\notin V(P^\prime)$.}
-Wtedy $V(P^\prime)\subseteq V\setminus N[t]$,
-bo jedynym wierzchołkiem grafu $G^\prime$ spoza zbioru $V\setminus N[t]$ jest właśnie $t^\prime$. Każda krawędź ścieżki
-$P^\prime$ ma więc oba końce poza $N[t]$, a~zatem na mocy Obserwacji~\ref{obs:outside-edges} jest zarazem krawędzią grafu
-$G$. Wynika stąd, że $P^\prime$ jest ścieżką z~$u$ do~$w$ również w~$G$. Ponieważ końce ścieżki należą do~$V(P^\prime)$,
-mamy także $u,w\neq t^\prime$, a~zatem $u,w\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$.
-
-Pokażemy, że $P^\prime$ jest najkrótsza także w~$G$. Gdyby istniała w~$G$ ścieżka $Q$ z~$u$ do~$w$ o~długości
-$\len{Q}<\len{P^\prime}$, to z~Lematu~\ref{lem:projection-walk} otrzymalibyśmy spacer z~$u$ do~$w$ w~$G^\prime$ o~długości
-co najwyżej $\len{Q}$, gdyż $\pi_{N[t]}(u)=u$ oraz $\pi_{N[t]}(w)=w$. Następnie z~Lematu~\ref{lem:walk-to-path}
-otrzymalibyśmy ścieżkę z~$u$ do~$w$ w~$G^\prime$ o~długości co najwyżej $\len{Q}$. Otrzymalibyśmy więc ścieżkę krótszą niż
-$P^\prime$, sprzeczną z~minimalnością $P^\prime$.
-Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$ w~$G$, zachodzi zarazem $\dist{G}{u}{w}\le \len{P^\prime}$, skąd
-$\len{P^\prime}=\dist{G}{u}{w}$. Ponieważ $u,w\in T\setminus\{t\}$, z~Obserwacji~\ref{obs:shortest-paths} dostajemy krawędź
-$g\in E(P^\prime)\cap F$.
-Na mocy Obserwacji~\ref{obs:outside-edges} mamy $g/N[t]=g$, a~więc z~definicji $F^\prime=F/N[t]$ dostajemy $g\in F^\prime$. Otrzymujemy
-$E(P^\prime)\cap F^\prime\neq\emptyset$.
-
-\medskip\noindent
-\textbf{Przypadek 2: $t^\prime\in V(P^\prime)$.}
-Ponieważ $P^\prime$ jest ścieżką, wierzchołek $t^\prime$ występuje w~niej dokładnie raz. Jeżeli $t^\prime$ jest ostatnim
-wierzchołkiem ścieżki $P^\prime$, to zastępujemy $P^\prime$ ścieżką $\overleftarrow{P^\prime}$. Na mocy Notacji~\ref{not:basic-operations}
-otrzymujemy znów ścieżkę najkrótszą o~tym samym zbiorze krawędzi. Ponieważ
-$E(\overleftarrow{P^\prime})=E(P^\prime)$, warunek $E(P^\prime)\cap F^\prime\neq\emptyset$ jest równoważny warunkowi
-$E(\overleftarrow{P^\prime})\cap F^\prime\neq\emptyset$.
-Wystarczy więc rozpatrzyć tę nową ścieżkę. Możemy zatem
-założyć, że
-\[
-  P^\prime=(y_0,\dots,y_r,\dots,y_m),
-  \qquad
-  y_r=t^\prime,
-\]
-gdzie $r<m$; dopuszczamy przy tym również przypadek $r=0$. Oznaczmy
-$Q^\prime\coloneqq P^\prime[y_r,y_m]$ oraz $z\coloneqq y_m$.
-Ponieważ $P^\prime$ jest ścieżką z~$u$ do~$w$, wierzchołek $z=y_m$ jest jednym z~końców tej ścieżki; po ewentualnym
-odwróceniu ścieżki jest to koniec różny od~$t^\prime$. Zatem
-$z\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$.
-W~szczególności $z\notin N[t]$. Ponieważ $y_{r+1},\dots,y_m$ są wierzchołkami grafu $G^\prime$ różnymi od~$t^\prime$, wszystkie
-one należą do~$V\setminus N[t]$. Ponieważ $P^\prime$ jest ścieżką najkrótszą, zachodzi
-$\len{P^\prime}=\dist{G^\prime}{u}{w}$.
-Ścieżka $Q^\prime$ jest podścieżką ścieżki $P^\prime$ o~końcach $t^\prime$ i~$z$, więc z~Lematu~\ref{lem:subpath},
-zastosowanego w~grafie prostym $G^\prime$, wynika $\len{Q^\prime}=\dist{G^\prime}{t^\prime}{z}$. Możemy zatem zastosować
-Lemat~\ref{lem:lifting-endpoint}. Istnieje wówczas wierzchołek $v\in N(t)$ taki, że
-$Q=(t,v,y_{r+1},\dots,y_m)$ jest ścieżką najkrótszą z~$t$ do~$z$ w~$G$.
+Niech $u,w\in T^\prime$ będą różne, i niech $P^\prime$ będzie najkrótszą ścieżką $u$--$w$ w $G^\prime$.
 
 \smallskip\noindent
-Przenosimy teraz z~$G$ do~$G^\prime$ odpowiednią krawędź ze zbioru $F$.
-Ponieważ $t,z\in T$, z~Obserwacji~\ref{obs:shortest-paths} otrzymujemy $E(Q)\cap F\neq\emptyset$.
-Z~założenia $t\notin V[F]$ oraz z~definicji zbioru $V[F]$ wynika, że żadna krawędź incydentna z~$t$ nie należy do~$F$.
-W~szczególności pierwsza krawędź ścieżki $Q$, to znaczy $\{t,v\}$, nie należy do~$F$. Wybierzmy więc
-$f\in E(Q)\cap F$.
-Wtedy $f$ należy do~zbioru krawędzi ścieżki $(v,y_{r+1},\dots,y_m)$, będącej końcowym fragmentem ścieżki $Q$. Jeżeli
-$f=\{v,y_{r+1}\}$, to $f/N[t]=\{t^\prime,y_{r+1}\}$,
-gdyż $v\in N[t]$ oraz $y_{r+1}\in V\setminus N[t]$, a~więc obrazy końców tej krawędzi są różne. Zatem $f/N[t]$ jest pierwszą
-krawędzią ścieżki $Q^\prime$. Jeżeli natomiast
-$f=\{y_i,y_{i+1}\}$ dla pewnego
-$i\in\{r+1,\dots,m-1\}$, to oba końce krawędzi $f$ leżą poza $N[t]$, więc na mocy Obserwacji~\ref{obs:outside-edges}
-zachodzi $f/N[t]=f\in E(Q^\prime)$.
-W~obu podprzypadkach $f/N[t]\in E(Q^\prime)\subseteq E(P^\prime)$.
-Ponieważ ponadto $f\in F$, z~definicji $F^\prime=F/N[t]$ otrzymujemy $f/N[t]\in F^\prime$. Stąd
-$E(P^\prime)\cap F^\prime\neq\emptyset$.
+\textbf{Przypadek 1: $t^\prime\notin V(P^\prime)$.}
+Wtedy każdy wierzchołek z $P^\prime$ leży poza $N[t]$, więc $P^\prime$ jest również ścieżką w $G$ na mocy Lematu~\ref{lem:outside-edges}. Jest to najkrótsza ścieżka w $G$. Rzeczywiście, gdyby $R$ było krótszą ścieżką $u$--$w$ w $G$, to Lemat~\ref{lem:projected-walk} zrzutowałby $R$ na spacer $u$--$w$ w $G^\prime$ o długości wynoszącej co najwyżej $\len{R}<\len{P^\prime}$. Skrócenie tego spaceru do ścieżki za pomocą Lematu~\ref{lem:walk-to-path} wciąż dałoby ścieżkę $u$--$w$ w $G^\prime$ o długości ostro mniejszej niż $\len{P^\prime}$, wbrew wyborowi $P^\prime$. Ponieważ teraz $u,w\in T\setminus\{t\}\subseteq T$, Lemat~\ref{lem:geodesic-characterization} daje krawędź $g\in E(P^\prime)\cap F$. Oba końce $g$ leżą poza $N[t]$, stąd $g/N[t]=g\in F^\prime$ z Lematu~\ref{lem:outside-edges}.
 
-Wykazaliśmy, że każda ścieżka najkrótsza między różnymi wierzchołkami z~$T^\prime$ przecina zbiór $F^\prime$. Wraz ze
-skończonością odpowiednich odległości daje to, na mocy Obserwacji~\ref{obs:shortest-paths}, że $F^\prime$ jest zbiorem
-na wpół-tnącym dla~$T^\prime$ w~$G^\prime$.
+\smallskip\noindent
+\textbf{Przypadek 2: $t^\prime\in V(P^\prime)$.}
+Ponieważ $P^\prime$ jest ścieżką, wierzchołek $t^\prime$ pojawia się na niej co najwyżej raz. Z uwagi na symetrię możemy zapisać $P^\prime=(y_0,\dots,y_m)$, gdzie $y_r=t^\prime$ dla pewnego $r<m$. Niech $z\coloneqq y_m\in T^\prime\setminus\{t^\prime\}=T\setminus\{t\}$ i $Q^\prime\coloneqq P^\prime[y_r,y_m]$. Ponieważ $Q^\prime$ jest ścieżką, wszystkie wierzchołki $y_{r+1},\dots,y_m$ leżą poza $N[t]$. Na podstawie Lematu~\ref{lem:subpath-shortest}, $Q^\prime$ jest najkrótszą ścieżką $t^\prime$--$z$ w $G^\prime$. Lemat~\ref{lem:lifting-endpoint} zapewnia zatem istnienie wierzchołka $v\in N(t)$ takiego, że $Q=(t,v,y_{r+1},\dots,y_m)$ jest najkrótszą ścieżką $t$--$z$ w $G$; zobacz Rysunek~\ref{fig:contraction}.
+
+Ponieważ $t,z\in T$, Lemat~\ref{lem:geodesic-characterization} implikuje $E(Q)\cap F\neq\emptyset$. Pierwsza krawędź $\{t,v\}$ nie należy do $F$, ponieważ $t\notin V(F)$. Stąd pewna krawędź $f\in E(Q)\cap F$ znajduje się po pierwszym kroku $Q$. Jeśli $f=\{v,y_{r+1}\}$, to $f/N[t]=\{t^\prime,y_{r+1}\}$ jest pierwszą krawędzią $Q^\prime$. W przeciwnym razie $f=\{y_i,y_{i+1}\}$ dla pewnego $i\in\{r+1,\dots,m-1\}$, a oba końce $f$ leżą poza $N[t]$, więc Lemat~\ref{lem:outside-edges} daje $f/N[t]=f\in E(Q^\prime)$.
+
+Ponieważ $G^\prime$ jest grafem prostym, różne krawędzie $G$ mogą zyskać ten sam obraz po zakontraktowaniu $N[t]$; jednakże definicja $F^\prime=F/N[t]$ gwarantuje, że każda krawędź z $G^\prime$, która jest obrazem pewnej krawędzi z $F$, należy do $F^\prime$, niezależnie od ewentualnych dodatkowych przeciwobrazów spoza $F$. Zatem obraz krawędzi $f$ leży w $E(Q^\prime)\cap F^\prime\subseteq E(P^\prime)\cap F^\prime$.
+
+Podsumowując, każda najkrótsza ścieżka w $G^\prime$ między różnymi terminalami z $T^\prime$ przecina $F^\prime$. Lemat~\ref{lem:geodesic-characterization} kończy dowód.
 \end{proof}
-
-\section{Twierdzenie główne}
-
-W~dowodzie głównego twierdzenia będziemy zmniejszać parametr indukcyjny na dwa sposoby. Jeżeli istnieje terminal
-$t\in T\setminus V[F]$, to ściągniemy jego domknięte otoczenie i~zachowamy liczbę terminali przy mniejszej liczbie
-wierzchołków. W~przeciwnym razie zachodzi $T\subseteq V[F]$; wtedy usuniemy jeden terminal oraz jedną incydentną z~nim
-krawędź, co zmniejszy liczbę terminali.
-
-\begin{theorem}\label{thm:main}
-Niech $G=(V,E)$ będzie skończonym grafem nieskierowanym prostym, niech $T\subseteq V$ oraz niech $F\subseteq E$. Jeżeli $F$ jest
-zbiorem na wpół-tnącym dla~$T$ w~$G$, to zachodzi $|F|\ge |T|-1$.
-\end{theorem}
-
-\begin{figure}[t]
-\centering
-\begin{tikzpicture}[scale=0.98, every node/.style={font=\small}]
-  \begin{scope}[xshift=0cm]
-    \node at (3.3,2.9) {$G$};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (u) at (0.0,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (x) at (1.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=above:$a$] (a) at (2.9,2.2) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=below:$t$] (t) at (3.2,1.2) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!20,label=below:$b$] (b) at (3.0,0.2) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (y) at (4.9,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (w) at (6.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (z) at (5.2,0.0) {};
-    \draw[very thick,red!70!black] (u)--(x);
-    \draw (x)--(a)--(t)--(b)--(y);
-    \draw[very thick,red!70!black] (y)--(w);
-    \draw (y)--(z);
-    \node[draw,dashed,rounded corners,fit=(a)(t)(b),inner sep=7pt,label=left:{$N[t]$}] {};
-    \node[align=center] at (3.2,-1.0)
-      {$t\in T\setminus V[F]$\\[2pt] $F=\{\{u,x\},\{y,w\}\}$};
-  \end{scope}
-
-  \draw[-{Latex[length=3mm]},thick] (7.4,1.2) -- (8.8,1.2);
-  \node at (8.1,1.65) {\small ściągnięcie $N[t]$};
-
-  \begin{scope}[xshift=9.7cm]
-    \node at (2.5,2.9) {$G^\prime=G/N[t]$};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$u$] (up) at (0.0,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$x$] (xp) at (1.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!45,label=below:$t^\prime$] (tp) at (2.9,1.0) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=above:$y$] (yp) at (4.4,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=gray!30,label=above:$w$] (wp) at (5.8,1.5) {};
-    \node[circle,draw,inner sep=2pt,fill=white,label=below:$z$] (zp) at (4.7,0.0) {};
-    \draw[very thick,red!70!black] (up)--(xp);
-    \draw (xp)--(tp)--(yp);
-    \draw[very thick,red!70!black] (yp)--(wp);
-    \draw (yp)--(zp);
-    \node[align=center] at (2.9,-1.0)
-      {$T^\prime=(T\setminus\{t\})\cup\{t^\prime\}$\\[2pt] $F^\prime=F/N[t]$};
-  \end{scope}
-\end{tikzpicture}
-\caption{Przypadek~1 w~dowodzie Twierdzenia~\ref{thm:main}: ściągnięcie domkniętego otoczenia terminala
-$t\in T\setminus V[F]$. Ponieważ żadne krawędzie ze zbioru $F$ nie są incydentne z~$t$, po ściągnięciu przechodzą one
-do obrazu $F^\prime=F/N[t]$, a~własność na wpół-tnąca zostaje zachowana na mocy Propozycji~\ref{prop:contraction}.}
-\label{fig:main-contraction}
-\end{figure}
 
 \begin{figure}[t]
 \centering
@@ -636,167 +240,127 @@ do obrazu $F^\prime=F/N[t]$, a~własność na wpół-tnąca zostaje zachowana na
   \node at (2.4,-0.65) {$e$};
   \node at (4.0,-0.65) {$f$};
 \end{tikzpicture}
-\caption{Rozcięcie ścieżki najkrótszej $P$ w~wierzchołku $t$ na podścieżki $P_u$ i~$P_w$
-w~Przypadku~2 dowodu Twierdzenia~\ref{thm:main}. Na rysunku pokazano podprzypadek $e\in E(P_u)$; wówczas
-$f\in E(P_w)\cap(F\setminus\{e\})$. Przypadek symetryczny jest analogiczny.}
+\caption{W Lemacie~\ref{lem:terminal-deletion}, jeśli najkrótsza ścieżka $u$--$w$ używa krawędzi $e$ incydentnej z $t$, to przeciwległa podścieżka nadal zawiera krawędź z $F\setminus\{e\}$.}
 \label{fig:split-path}
 \end{figure}
 
+\begin{lemma}[Usunięcie jednego terminala wraz z jedną incydentną krawędzią]\label{lem:terminal-deletion}
+Niech $T\subseteq V$ i $F\subseteq E$. Załóżmy, że $F$ jest zbiorem półrozcinającym dla $T$ w $G$. Niech $t\in T$, a $e\in F$ będzie krawędzią incydentną z $t$. Przyjmijmy $T^-\coloneqq T\setminus\{t\}$ i $F^-\coloneqq F\setminus\{e\}$. Wtedy $F^-$ jest zbiorem półrozcinającym dla $T^-$ w $G$.
+\end{lemma}
+
 \begin{proof}
-Udowodnimy nieco silniejsze sformułowanie: dla każdej pary liczb nieujemnych $(k,n)$, każdego grafu prostego $H$ o~$n$
-wierzchołkach, każdego zbioru terminali $X\subseteq V(H)$ o~mocy $k$ oraz każdego zbioru krawędzi $M\subseteq E(H)$, jeżeli
-$M$ jest zbiorem na wpół-tnącym dla~$X$ w~$H$, to zachodzi nierówność $|M|\ge k-1$. W~naszym zastosowaniu występują wyłącznie
-pary $(k,n)$ spełniające $k\le n$, gdyż zawsze mamy $X\subseteq V(H)$. Dowód prowadzimy przez indukcję względem porządku
-leksykograficznego
-\[
-  (k_1,n_1)\prec (k_2,n_2)
-  \quad\Longleftrightarrow\quad
-  k_1<k_2
-  \ \text{lub}\
-  \bigl(k_1=k_2\ \text{i}\ n_1<n_2\bigr).
-\]
-Porządek ten jest dobrze ufundowany na zbiorze
-\[
-  \bigl\{(a,b)\in\mathbb{N}_0^2:\ a\le b\bigr\}.
-\]
-Rzeczywiście, w~każdym niepustym podzbiorze tego zbioru można najpierw wybrać pary o~najmniejszej pierwszej współrzędnej,
-a~następnie spośród nich parę o~najmniejszej drugiej współrzędnej.
-Sama indukcja po~$|T|$ nie wystarcza, ponieważ operacja ściągania zachowuje liczbę terminali i~zmniejsza jedynie liczbę
-wierzchołków.
+Jeśli $|T^-|\le 1$, nie ma czego dowodzić. Załóżmy, że $|T^-|\ge 2$. Na mocy Lematu~\ref{lem:geodesic-characterization}, każde dwa różne wierzchołki z $T^-$ mają skończoną odległość w $G$. Wystarczy zatem pokazać, że każda najkrótsza ścieżka między dwoma różnymi wierzchołkami z $T^-$ zawiera krawędź z $F^-$.
 
-\medskip\noindent
-\textbf{Baza indukcji.} Niech $k\le 1$. Wtedy zbiór par różnych wierzchołków z~$X$ jest pusty, więc
-$|M|\ge 0\ge k-1$, co kończy bazę indukcji.
+Weźmy różne $u,w\in T^-$ i niech $P$ będzie najkrótszą ścieżką $u$--$w$ w $G$. Ponieważ $u,w\in T$, z Lematu~\ref{lem:geodesic-characterization} otrzymujemy $E(P)\cap F\neq\emptyset$. Jeśli $e\notin E(P)$, to od razu $E(P)\cap F^-\neq\emptyset$. Załóżmy teraz, że $e\in E(P)$. Zapiszmy $P=(v_0,\dots,v_m)$ i niech $v_j=t$. Ponieważ $u,w\neq t$, mamy $0<j<m$. Niech $P_u\coloneqq (v_0,\dots,v_j)$ i $P_w\coloneqq (v_j,\dots,v_m)$. Na mocy Lematu~\ref{lem:subpath-shortest} są to najkrótsze ścieżki odpowiednio dla par $(u,t)$ i $(t,w)$. Ponieważ $e$ jest incydentne z $t$, a $t$ jest wewnętrznym wierzchołkiem ścieżki $P$, krawędź $e$ leży na dokładnie jednej ze ścieżek $P_u$ i $P_w$; stąd wybór drugiej podścieżki jest jednoznaczny. Oznaczmy tę drugą podścieżkę przez $R$. Wtedy $R$ jest najkrótszą ścieżką o końcach $t$ i jednym z wierzchołków $u,w$, przy czym $e\notin E(R)$.
 
-\medskip\noindent
-\textbf{Krok indukcyjny.} Ustalmy parę $(k,n)$ z~$k\ge 2$ i~załóżmy, że rozważana teza jest prawdziwa dla każdej pary
-$(k',n')\prec (k,n)$. Rozważmy graf prosty $G=(V,E)$ o~$n$ wierzchołkach, zbiór terminali $T\subseteq V$ o~mocy $k$ oraz zbiór
-krawędzi $F\subseteq E$, który jest na wpół-tnący dla~$T$ w~$G$. Pokażemy, że
-$|F|\ge k-1$.
-Jeżeli znajdziemy terminal należący do~$T\setminus V[F]$, przejdziemy do mniejszego grafu przez ściągnięcie jego
-domkniętego otoczenia. Jeżeli natomiast $T\subseteq V[F]$, zachowamy graf, lecz usuniemy jeden terminal i~jedną krawędź
-ze zbioru $F$. Rozpatrujemy więc dwa przypadki.
-
-\medskip\noindent
-\textbf{Przypadek 1: istnieje terminal $t\in T\setminus V[F]$.}
-Ponieważ $k\ge 2$, możemy wybrać wierzchołek $u\in T\setminus\{t\}$. Z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
-$\dist{G}{t}{u}<\infty$. Istnieje więc ścieżka z~$t$ do~$u$. Ponieważ $u\neq t$, ścieżka ta ma dodatnią długość, a~zatem jej
-pierwsza krawędź jest incydentna z~$t$. W~szczególności wierzchołek $t$ ma co najmniej jednego sąsiada, czyli
-$N(t)\neq\emptyset$ oraz $|N[t]|\ge 2$.
-
-Niech $t^\prime\notin V$ będzie nowym wierzchołkiem i~niech
-\[
-  G^\prime\coloneqq G/N[t],
-  \qquad
-  T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\},
-  \qquad
-  F^\prime\coloneqq F/N[t].
-\]
-Sytuację tę ilustruje Rysunek~\ref{fig:main-contraction}.
-Ponieważ z~założenia tego przypadku mamy $t\in T\setminus V[F]$, na mocy Propozycji~\ref{prop:contraction} zbiór $F^\prime$
-jest zbiorem na wpół-tnącym dla~$T^\prime$ w~$G^\prime$. Ponieważ
-$t^\prime\notin V$ oraz $T\subseteq V$, mamy $t^\prime\notin T$, a~więc $|T^\prime|=|T|=k$. Ponadto
-$|V(G^\prime)|=|V|-|N[t]|+1\le n-1<n$. Z~inkluzji $T^\prime\subseteq V(G^\prime)$ wynika także
-$|T^\prime|=k\le |V(G^\prime)|$. Skoro $|T^\prime|=k$ oraz $|V(G^\prime)|<n$, zachodzi zatem ostra nierówność leksykograficzna
-$(|T^\prime|,|V(G^\prime)|)\prec (k,n)$. Z~założenia indukcyjnego otrzymujemy
-$|F^\prime|\ge |T^\prime|-1=k-1$. Lemat~\ref{lem:contraction-image-size} daje $|F^\prime|\le |F|$, a~zatem $|F|\ge k-1$.
-
-\medskip\noindent
-\textbf{Przypadek 2: $T\subseteq V[F]$.}
-Ponieważ $T\subseteq V[F]$, każdy terminal jest incydentny z~co najmniej jedną krawędzią ze zbioru $F$. Wybierzmy więc
-$t\in T$ oraz krawędź $e\in F$ incydentną z~$t$. Oznaczmy $T^-\coloneqq T\setminus\{t\}$ oraz $F^-\coloneqq F\setminus\{e\}$.
-Pokażemy najpierw, że dla każdej pary różnych wierzchołków $u,w\in T^-$ oraz każdej ścieżki najkrótszej $P$ z~$u$ do~$w$
-w~$G$ zachodzi $E(P)\cap F^-\neq\emptyset$. Wraz z~Obserwacją~\ref{obs:finite-terminal-distances} da to, na mocy
-Obserwacji~\ref{obs:shortest-paths}, że $F^-$ jest zbiorem na wpół-tnącym dla~$T^-$ w~$G$.
-
-Weźmy dowolne różne wierzchołki $u,w\in T^-$. Ponieważ $T^-\subseteq T$ i~$F$ jest zbiorem na wpół-tnącym dla~$T$, z~Obserwacji~\ref{obs:finite-terminal-distances} mamy
-$\dist{G}{u}{w}<\infty$. Niech $P$ będzie dowolną ścieżką najkrótszą z~$u$ do~$w$ w~$G$. Z~Obserwacji~\ref{obs:shortest-paths}
-dostajemy $E(P)\cap F\neq\emptyset$. Jeżeli $e\notin E(P)$, to od razu $E(P)\cap F^-\neq\emptyset$.
-Pozostaje przypadek $e\in E(P)$.
-
-Ponieważ $e$ jest incydentna z~$t$, istnieje wierzchołek $s\in V$ taki, że $e=\{t,s\}$. Z~założenia $e\in E(P)$ wynika
-więc, że oba końce krawędzi $e$ należą do~$V(P)$, a~w szczególności $t\in V(P)$. Zapiszmy $P=(v_0,\dots,v_m)$. Istnieje
-dokładnie jeden indeks $j\in\{0,\dots,m\}$ taki, że $v_j=t$, gdyż $P$ jest ścieżką. Definiujemy
-$P_u\coloneqq (v_0,\dots,v_j)$ oraz $P_w\coloneqq (v_j,\dots,v_m)$. Ponieważ $v_0=u\neq t$ oraz $v_m=w\neq t$, zachodzi
-$0<j<m$. Wówczas $P_u$ jest podścieżką od~$u$ do~$t$, $P_w$ jest podścieżką od~$t$ do~$w$, a~ponadto $P=P_u\cdot P_w$.
-Na mocy Lematu~\ref{lem:subpath} $P_u$ i~$P_w$ są ścieżkami najkrótszymi odpowiednio między parami $(u,t)$ i~$(t,w)$.
-Sytuację tę ilustruje
-Rysunek~\ref{fig:split-path}.
-Stąd obie te podścieżki mają dodatnią długość.
-
-Ponieważ $P$ jest ścieżką, podścieżki $P_u$ i~$P_w$ mają wspólny jedynie wierzchołek $t$. W~szczególności
-\[
-  E(P)=E(P_u)\cup E(P_w)
-  \qquad\text{oraz}\qquad
-  E(P_u)\cap E(P_w)=\emptyset,
-\]
-gdyż gdyby krawędź $g$ należała do~$E(P_u)\cap E(P_w)$, to oba jej końce należałyby do~zbioru
-\[
-  V(P_u)\cap V(P_w)=\{t\},
-\]
-a~więc mielibyśmy $g=\{t,t\}$, co jest niemożliwe w~grafie prostym. Krawędź $e$ należy więc dokładnie do jednej z~tych
-dwóch podścieżek.
-
-Jeżeli $e\in E(P_u)$, to z~rozłączności zbiorów $E(P_u)$ i~$E(P_w)$ mamy $e\notin E(P_w)$. Ponieważ $t,w\in T$ oraz $P_w$
-jest ścieżką najkrótszą z~$t$ do~$w$ w~$G$, z~Obserwacji~\ref{obs:shortest-paths} wynika istnienie krawędzi
-$f\in E(P_w)\cap F$.
-Wtedy $f\neq e$, a~więc $f\in F^-$. Jeżeli natomiast $e\in E(P_w)$, to analogicznie, korzystając z~tego, że $u,t\in T$ oraz
-$P_u$ jest ścieżką najkrótszą z~$u$ do~$t$ w~$G$, otrzymujemy krawędź $f\in E(P_u)\cap F$.
-Znów zachodzi $f\neq e$, a~więc $f\in F^-$. W~obu podprzypadkach dostajemy $E(P)\cap F^-\neq\emptyset$.
-
-Wykazaliśmy więc, że usunięcie pojedynczej krawędzi $e$ incydentnej z~usuwanym terminalem $t$ nie niszczy własności
-przecinania wszystkich ścieżek najkrótszych między parami z~$T^-$. Ponieważ ponadto dla każdej pary różnych
-$u,w\in T^-$ zachodzi $\dist{G}{u}{w}<\infty$, z~Obserwacji~\ref{obs:shortest-paths} wynika, że $F^-$ jest zbiorem
-na wpół-tnącym dla~$T^-$ w~$G$.
-
-Ponieważ $|T^-|=k-1$ oraz $|V(G)|=n$, zachodzi $(|T^-|,|V(G)|)\prec (k,n)$. Z~założenia indukcyjnego otrzymujemy
-$|F^-|\ge |T^-|-1=(k-1)-1=k-2$. Ponieważ $F^-=F\setminus\{e\}$ oraz $e\in F$, mamy $|F|=|F^-|+1\ge k-1$.
-Tym samym wykazano krok indukcyjny, a~więc i~dowód twierdzenia.
+Ponieważ oba końce $R$ należą do $T$, Lemat~\ref{lem:geodesic-characterization} daje nam krawędź $f\in E(R)\cap F$. Jako że $e\notin E(R)$, zachodzi $f\neq e$, skąd $f\in F^-$. Ponieważ $E(R)\subseteq E(P)$, ścieżka $P$ zawiera krawędź z $F^-$. Zatem każda najkrótsza ścieżka między różnymi terminalami z $T^-$ przecina zbiór $F^-$, a Lemat~\ref{lem:geodesic-characterization} dowodzi tezy.
 \end{proof}
 
-\section{Uwagi końcowe i problemy pokrewne}
+\section{Ostre Dolne Ograniczenie}
 
-Twierdzenie~\ref{thm:main} jest ostre, co pokazuje rodzina przykładów ścieżkowych opisana we~Wprowadzeniu i~zilustrowana
-na Rysunku~\ref{fig:semi-cut-example}. Naturalnym dalszym problemem pozostaje opis wszystkich trójek $(G,T,F)$, dla których
-w~Twierdzeniu~\ref{thm:main} zachodzi równość $|F|=|T|-1$.
+\begin{theorem}\label{thm:main}
+Niech $G=(V,E)$ będzie skończonym prostym grafem nieskierowanym, niech $T\subseteq V$ i niech $F\subseteq E$. Jeśli $F$ jest zbiorem półrozcinającym dla $T$ w $G$, to $|F|\ge |T|-1$.
+\end{theorem}
 
-Z~punktu widzenia literatury problem ten można traktować jako wieloterminalny odpowiednik zagadnień o~wrażliwości
-najkrótszych ścieżek. W~pracy Dahlhausa i~współautorów~\cite{dahlhaus1994} celem jest pełne rozdzielenie wszystkich
-terminali, a~więc przejście odpowiednich odległości do~wartości $\infty$. W~niniejszej pracy wymagamy jedynie ścisłego
-wzrostu każdej odległości terminal--terminal; wzrost ten może, lecz nie musi, prowadzić do rozspójnienia. Z~kolei
-u~Corleya i~Sha~\cite{corley-sha} oraz u~Nardellego, Proiettiego i~Widmayera~\cite{nardelli-proietti-widmayer}
-wyróżniona jest pojedyncza para końców, natomiast tutaj wszystkie pary ze zbioru $T$ są traktowane jednocześnie.
-Ponadto tamte prace rozważają sieci ważone, a~miejscami także skierowane, podczas gdy niniejszy artykuł dotyczy
-wyłącznie skończonych grafów prostych nieskierowanych. Uzyskana nierówność $|F|\ge |T|-1$ ma zatem interpretację
-czysto strukturalnego ograniczenia dolnego dla pośredniej klasy zjawisk, leżącej między pełnym rozdzieleniem terminali
-a~wrażliwością najkrótszej drogi dla jednej wyróżnionej pary.
+\begin{proof}
+Dla $(k,n)\in \mathbb{N}_0^2$, niech $\mathcal{S}(k,n)$ oznacza zdanie stwierdzające, że każdy graf prosty $H$ o $n$ wierzchołkach, każdy zbiór terminali $X\subseteq V(H)$ o mocy $|X|=k$ oraz każdy zbiór półrozcinający $M\subseteq E(H)$ dla $X$ spełniają $|M|\ge k-1$. Dowodzimy $\mathcal{S}(k,n)$ dla wszystkich $(k,n)$ za pomocą indukcji względem $(k,n)$ w porządku leksykograficznym.
+
+Nie ma czego dowodzić, gdy $k\le 1$. Ustalmy $(k,n)$ dla $k\ge 2$, załóżmy, że $\mathcal{S}(k',n')$ zachodzi dla każdego $(k',n')\prec (k,n)$ i niech $G=(V,E)$ będzie grafem prostym o $n$ wierzchołkach ze zbiorem terminali $T$ rozmiaru $k$ oraz zbiorem półrozcinającym $F\subseteq E$. Z Lematu~\ref{lem:geodesic-characterization} wynika, że każda para terminali w $T$ ma w $G$ skończoną odległość, więc obie poniższe redukcje mają sens metryczny nawet bez założenia o spójności grafu $G$. Albo jakiś terminal nie należy do $V(F)$, albo wszystkie terminale należą do $V(F)$; te dwa przypadki są rozłączne i wyczerpujące.
+
+\smallskip\noindent
+\textbf{Przypadek 1: $T\setminus V(F)\neq\emptyset$.}
+Wybierzmy $t\in T\setminus V(F)$. Skoro $k\ge 2$, weźmy $u\in T\setminus\{t\}$. Lemat~\ref{lem:geodesic-characterization} daje $\dist{G}{t}{u}<\infty$, skąd $N(t)\neq\emptyset$, a co za tym idzie $|N[t]|\ge 2$. Niech $t^\prime\notin V$ będzie nowym wierzchołkiem, niech $G^\prime\coloneqq G/N[t]$, $T^\prime\coloneqq (T\setminus\{t\})\cup\{t^\prime\}$ oraz $F^\prime\coloneqq F/N[t]$. Zgodnie ze Stwierdzeniem~\ref{prop:contraction}, zbiór $F^\prime$ jest zbiorem półrozcinającym dla $T^\prime$ w $G^\prime$. Co więcej, $|T^\prime|=k$ oraz $|V(G^\prime)|=|V|-|N[t]|+1\le n-1$. Zatem $(|T^\prime|,|V(G^\prime)|)\prec (k,n)$, więc $|F^\prime|\ge k-1$ z założenia indukcyjnego. Lemat~\ref{lem:contraction-image-size} daje $|F^\prime|\le |F|$, stąd $|F|\ge k-1$.
+
+\smallskip\noindent
+\textbf{Przypadek 2: $T\subseteq V(F)$.}
+Wybierzmy $t\in T$. Ponieważ $t\in V(F)$, pewna krawędź $e\in F$ jest incydentna z $t$. Oznaczmy $T^-\coloneqq T\setminus\{t\}$ i $F^-\coloneqq F\setminus\{e\}$. Lemat~\ref{lem:terminal-deletion} pokazuje, że $F^-$ jest zbiorem półrozcinającym dla $T^-$ w $G$. Ponieważ $(|T^-|,|V(G)|)\prec (k,n)$, z indukcji wynika $|F^-|\ge k-2$, stąd $|F|=|F^-|+1\ge k-1$.
+
+Razem, krok kontrakcji w Przypadku 1 i krok usunięcia terminala w Przypadku 2 zamykają indukcję i dowodzą dolnego ograniczenia.
+\end{proof}
+
+\section{Powiązane Problemy i Dalsze Kierunki}\label{sec:related}
+
+Gdy $|T|=2$, Lemat~\ref{lem:geodesic-characterization} zamienia pojęcie zbioru półrozcinającego na problem przecinania wszystkich najkrótszych ścieżek między jedną wybraną parą terminali. Umiejscawia to badany parametr w pobliżu zagadnienia przerwania najkrótszej ścieżki dla pojedynczej pary oraz problemów najważniejszej krawędzi lub najważniejszego łuku.
+Corley i Sha, a także Malik, Mittal i Gupta badają usunięcie określonej liczby krawędzi, wierzchołków lub łuków w celu maksymalizacji przyrostu najkrótszej odległości między pojedynczą parą źródło-ujście w ważonej sieci~\cite{corley-sha,malik-mittal-gupta}, podczas gdy Nardelli, Proietti i Widmayer analizują najbardziej istotną krawędź najkrótszej ścieżki łączącej źródło z ujściem, w połączeniu z wyznaczeniem zastępczych najkrótszych ścieżek po usunięciu jednej z krawędzi z tejże ścieżki~\cite{nardelli-proietti-widmayer}. Nasz parametr różni się nawet w tym wariancie dwuterminalowym: nie optymalizuje on wzrostu odległości, ale określa, czy dany zbiór krawędzi przecina \emph{wszystkie} najkrótsze ścieżki między wyznaczonymi terminalami; dla większego zbioru $T$, odpowiednia rodzina obejmuje najkrótsze ścieżki dla każdej pary terminali.
+
+Dla większych zbiorów terminali najbliższym klasycznym problemem separacyjnym jest problem przekroju wieloterminalowego autorstwa Dahlhausa, Johnsona, Papadimitriou, Seymoura i Yannakakisa~\cite{dahlhaus1994}. Celem jest tam usunięcie krawędzi tak, aby każdy terminal został odseparowany od wszystkich pozostałych, i dokładnie w tym sensie definiowane są cięcia izolujące i wieloterminalowe. Zbiór półrozcinający nakłada ostro słabszy wymóg topologiczny, jednak subtelniejszy warunek metryczny: każda odległość między terminalami musi wzrosnąć, a jednak terminale mogą wciąż pozostać w tej samej składowej spójności po usunięciu $F$. Rysunek~\ref{fig:not-multiterminal} ilustruje dokładnie to zjawisko, pokazując, że zbioru półrozcinającego nie da się sprowadzić do wieloterminalowej separacji.
+
+Najbliższymi odpowiednikami pojęciowymi są parametry wierzchołkowe wyznaczane na podstawie rodzin geodezyjnych. Harary, Loukakis i Tsouros wprowadzili domknięcie geodezyjne i liczbę geodezyjną~\cite{harary-loukakis-tsouros}, podczas gdy Oellermann i Peters-Fransen badają interwały $I[u,v]$ w analizie silnego wymiaru metrycznego~\cite{oellermann-peters-fransen}; oba te zagadnienia wpisują się w szerszą tradycję wierzchołkowych parametrów opartych na najkrótszych ścieżkach. Bliżej obecnego kontekstu, Peterin i Semani\v{s}in badają minimalny zbiór wierzchołków pokrywający wszystkie maksymalne najkrótsze ścieżki~\cite{peterin-semanisin}, a Manuel, Bre\v{s}ar i Klav\v{z}ar definiują liczbę transwersali geodezyjnej jako najmniejszy zbiór wierzchołków przecinający wszystkie maksymalne ścieżki geodezyjne, wprowadzając później powiązany parametr pakowania geodezyjnego~\cite{manuel-bresar-klavzar-transversal,manuel-bresar-klavzar-packing}. Zbiór półrozcinający odróżnia się od tego nurtu pod trzema względami: oparty jest na krawędziach a nie wierzchołkach; dotyczy rodziny wyznaczonej przez terminale zamiast maksymalnych ścieżek geodezyjnych zdefiniowanych na całym grafie; wymaga też przecinania wszystkich najkrótszych ścieżek między terminalami a nie tylko geodezyjnych maksymalnych.
+
+Z Twierdzenia~\ref{thm:main} w naturalny sposób wynikają dwa zagadnienia. Jedno to scharakteryzowanie przypadku, gdy zachodzi równość $|F|=|T|-1$. Drugie to badanie minimalnych zbiorów półrozcinających jako krawędziowych transwersali rodziny najkrótszych ścieżek o końcach zdefiniowanych w zbiorze $T$.
+Twierdzenie~\ref{thm:main} wyodrębnia zatem wysoce strukturalne zjawisko, wolne od czynników algorytmicznych: jeśli zbiór półrozcinający postrzega się przez pryzmat wynikającej ze zbioru terminali rodziny najkrótszych ścieżek, relacje kontrakcji oraz usuwania terminala narzucają istnienie uniwersalnego dolnego ograniczenia. Dalszy rozwój tej dziedziny wydaje się polegać na dążeniu do odkrycia strukturalnych charakteryzacji skrajnych konfiguracji bardziej niż skupianiu się na rozwiązaniach algorytmicznych.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=left:$u$] (u) at (0,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=right:$v$] (v) at (4,0) {};
+  \node[circle,draw,inner sep=1.8pt,fill=gray!30,label=below:$w$] (w) at (1.1,-3) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white,label=above:$a$] (a) at (1.4,1.2) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white,label=right:$b$] (b) at (3.1,-1.6) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white,label=left:$c$] (c) at (-0.3,-1.5) {};
+  \node[circle,draw,inner sep=1.5pt,fill=white,label=below:$x$] (x) at (1.5,-1.0) {};
+
+  \draw (u)--(a);
+  \draw[very thick,red!70!black] (a)-- node[above right]{$e_1$} (v);
+  \draw (v)--(b);
+  \draw[very thick,red!70!black] (b)-- node[right]{$e_2$} (w);
+  \draw (w)--(c);
+  \draw[very thick,red!70!black] (c)-- node[left]{$e_3$} (u);
+  \draw (a)--(x);
+  \draw (b)--(x);
+  \draw (c)--(x);
+\end{tikzpicture}
+\caption{Zbiór półrozcinający, który nie jest przekrojem wieloterminalowym. Tutaj $T=\{u,v,w\}$ i $F=\{e_1,e_2,e_3\}$. W $G$ każda para terminali jest w odległości $2$; w $G\setminus F$ każda para terminali jest nadal połączona, ale teraz w odległości $4$.}
+\label{fig:not-multiterminal}
+\end{figure}
 
 \begin{thebibliography}{9}
-
-\bibitem{bondy-murty}
-J.~A. Bondy, U.~S.~R. Murty,
-\emph{Graph Theory},
-Graduate Texts in Mathematics, vol.~244, Springer, New York, 2008.
-
-\bibitem{diestel}
-R.~Diestel,
-\emph{Graph Theory},
-5th ed., Graduate Texts in Mathematics, vol.~173, Springer, Berlin, 2017.
 
 \bibitem{corley-sha}
 H.~W. Corley, D.~Y. Sha,
 \emph{Most vital links and nodes in weighted networks},
 Operations Research Letters 1(4) (1982), 157--160.
 
-\bibitem{dahlhaus1994}
-E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
-\emph{The complexity of multiterminal cuts},
-SIAM Journal on Computing 23(4) (1994), 864--894.
+\bibitem{malik-mittal-gupta}
+K.~Malik, A.~K. Mittal, S.~K. Gupta,
+\emph{The $k$ most vital arcs in the shortest path problem},
+Operations Research Letters 8(4) (1989), 223--227.
 
 \bibitem{nardelli-proietti-widmayer}
 E.~Nardelli, G.~Proietti, P.~Widmayer,
 \emph{A faster computation of the most vital edge of a shortest path},
 Information Processing Letters 79(2) (2001), 81--85.
+
+\bibitem{dahlhaus1994}
+E.~Dahlhaus, D.~S. Johnson, C.~H. Papadimitriou, P.~D. Seymour, M.~Yannakakis,
+\emph{The complexity of multiterminal cuts},
+SIAM Journal on Computing 23(4) (1994), 864--894.
+
+\bibitem{harary-loukakis-tsouros}
+F.~Harary, E.~Loukakis, C.~Tsouros,
+\emph{The geodetic number of a graph},
+Mathematical and Computer Modelling 17(11) (1993), 89--95.
+
+\bibitem{oellermann-peters-fransen}
+O.~R. Oellermann, J.~Peters-Fransen,
+\emph{The strong metric dimension of graphs and digraphs},
+Discrete Applied Mathematics 155(3) (2007), 356--364.
+
+\bibitem{peterin-semanisin}
+I.~Peterin, G.~Semani\v{s}in,
+\emph{On the maximal shortest paths cover number},
+Mathematics 9(14) (2021), Art.~1592.
+
+\bibitem{manuel-bresar-klavzar-transversal}
+P.~D. Manuel, B.~Bre\v{s}ar, S.~Klav\v{z}ar,
+\emph{The geodesic-transversal problem},
+Applied Mathematics and Computation 413 (2022), Art.~126621.
+
+\bibitem{manuel-bresar-klavzar-packing}
+P.~D. Manuel, B.~Bre\v{s}ar, S.~Klav\v{z}ar,
+\emph{Geodesic packing in graphs},
+Applied Mathematics and Computation 459 (2023), Art.~128277.
 
 \end{thebibliography}
 
