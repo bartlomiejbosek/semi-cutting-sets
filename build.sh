@@ -37,4 +37,7 @@ pdflatex main-en.tex
 
 cp -v "${OWNPATH}/main-en.pdf" "${OWNPATH}/input/main-en.pdf"
 
+cp -v "${OWNPATH}/main-en.tex" "${OWNPATH}/emails/semi-cutting-sets.tex"
+cp -v "${OWNPATH}/main-en.pdf" "${OWNPATH}/emails/semi-cutting-sets.pdf"
+
 rm *.aux *.out *.toc
