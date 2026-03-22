@@ -17,6 +17,8 @@
 **/*.pdf
 **/*.gz
 **/*.txt
+emails/semi-cutting-sets.tex
+emails/semi-cutting-sets.pdf
 
 !**/zadanie*.txt
 !**/main-lluis.pdf
