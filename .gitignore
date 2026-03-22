@@ -20,6 +20,7 @@
 emails/semi-cutting-sets.tex
 emails/semi-cutting-sets.pdf
 
+!emails/*.txt
 !**/zadanie*.txt
 !**/main-lluis.pdf
 !**/komentarze.txt

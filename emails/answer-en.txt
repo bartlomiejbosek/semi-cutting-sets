@@ -1,0 +1,17 @@
+Dear Oriol and Lluis,
+
+I have prepared an updated draft of the paper. The files are:
+
+* semi-cutting-sets.tex
+* semi-cutting-sets.pdf
+
+Oriol, maybe it would be a good idea to create an Overleaf repository for this project, since with your extended account you can add all of us as editors.
+
+I also wanted to ask where you think we should submit it. Very tentatively, I would like to suggest Information Processing Letters (IPL) as one possible option, but of course I am fully open to your thoughts.
+
+Regarding the author list, it seems that this is still open in the draft circulated earlier. I am of course happy to follow your judgment here.
+
+Let me also renew the invitation to Laskowa - it would be great if you could come.
+
+Best regards,
+Bartek
