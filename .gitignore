@@ -18,9 +18,8 @@
 **/*.gz
 **/*.txt
 
-!zadanie-2-krytyka.txt
-!zadanie-2-poprawa.txt
+!**/zadanie*.txt
 !**/main-lluis.pdf
 !**/komentarze.txt
 !**/stan.txt
-
+!**/emails*.txt
